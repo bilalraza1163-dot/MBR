@@ -372,4 +372,152 @@ let products = [
   {id:6,name:'Women Sports Top',cat:'shirt',gender:'women',price:1600,desc:'Stretchable performance top',badge:'new'},
   {id:7,name:'Varsity Jacket',cat:'jacket',gender:'men',price:5500,desc:'Classic letterman varsity jacket',badge:'hot'},
   {id:8,name:'Girls Varsity',cat:'jacket',gender:'girls',price:4800,desc:'Stylish varsity jacket for girls',badge:'new'},
-  {id:9,name:'Men Tracksuit
+  {id:9,name:'Men Tracksuit',cat:'tracksuit',gender:'men',price:4200,desc:'Full tracksuit set - top + bottom',badge:''},
+  {id:10,name:'Boys Tracksuit',cat:'tracksuit',gender:'boys',price:3200,desc:'Kids tracksuit set',badge:''},
+  {id:11,name:'Summer Dry-Fit',cat:'summer',gender:'men',price:1400,desc:'Breathable summer performance shirt',badge:''},
+  {id:12,name:'Women Tracksuit',cat:'tracksuit',gender:'women',price:3800,desc:'Full ladies tracksuit set',badge:'new'},
+  {id:13,name:'Boys Kit Set',cat:'kit',gender:'boys',price:2200,desc:'Complete sports kit for boys',badge:''},
+  {id:14,name:'Girls Summer Top',cat:'summer',gender:'girls',price:1100,desc:'Light summer sports top',badge:'new'},
+  {id:15,name:'Boys Trouser',cat:'trouser',gender:'boys',price:1100,desc:'Comfortable boys sports trouser',badge:''},
+  {id:16,name:'Women Jacket',cat:'jacket',gender:'women',price:5000,desc:'Elegant sports jacket for women',badge:''},
+];
+
+let nextId = 17;
+let activeCat = 'all', activeGender = 'all';
+
+function filterCat(cat, el){
+  activeCat = cat;
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderProducts();
+}
+
+function filterGender(g, el){
+  activeGender = g;
+  document.querySelectorAll('.gender-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderProducts();
+}
+
+function renderProducts(){
+  const grid = document.getElementById('productsGrid');
+  let filtered = products.filter(p=>{
+    const catOk = activeCat==='all' || p.cat===activeCat;
+    const gOk = activeGender==='all' || p.gender===activeGender;
+    return catOk && gOk;
+  });
+  if(!filtered.length){grid.innerHTML='<p style="color:var(--muted);font-size:14px;text-align:center;grid-column:1/-1;padding:40px">Is category mein koi product nahi hai abhi.</p>';return;}
+  grid.innerHTML = filtered.map(p=>`
+    <div class="product-card">
+      <div class="product-img">
+        <span class="product-emoji">${catEmojis[p.cat]}</span>
+        ${p.badge?`<span class="product-badge ${p.badge==='new'?'new':''}">${p.badge.toUpperCase()}</span>`:''}
+      </div>
+      <div class="product-body">
+        <div class="product-cat">${catNames[p.cat]} • ${p.gender.charAt(0).toUpperCase()+p.gender.slice(1)}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-footer">
+          <div class="product-price">PKR ${p.price.toLocaleString()} <span>/-</span></div>
+          <button class="btn-wa" onclick="orderProduct('${p.name}',${p.price})">💬 Order</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderManage(){
+  const tbody = document.getElementById('manageBody');
+  if(!tbody) return;
+  tbody.innerHTML = products.map(p=>`
+    <tr>
+      <td>${p.name}</td>
+      <td>${catNames[p.cat]}</td>
+      <td style="text-transform:capitalize">${p.gender}</td>
+      <td><input class="price-input" value="${p.price}" onchange="updatePrice(${p.id},this.value)"></td>
+      <td><button class="btn-danger" onclick="removeProduct(${p.id})">Delete</button></td>
+    </tr>
+  `).join('');
+}
+
+function updatePrice(id, val){
+  const p = products.find(x=>x.id===id);
+  if(p){p.price = parseInt(val)||p.price; renderProducts(); showToast('✅ Price update ho gai!');}
+}
+
+function removeProduct(id){
+  products = products.filter(p=>p.id!==id);
+  renderProducts(); renderManage(); showToast('🗑 Product delete ho gaya.');
+}
+
+function addProduct(){
+  const name = document.getElementById('pName').value.trim();
+  const price = parseInt(document.getElementById('pPrice').value);
+  const cat = document.getElementById('pCat').value;
+  const gender = document.getElementById('pGender').value;
+  const desc = document.getElementById('pDesc').value.trim();
+  const badge = document.getElementById('pBadge').value;
+  if(!name||!price){showToast('⚠ Name aur Price zaroor dalein!');return;}
+  products.push({id:nextId++,name,cat,gender,price,desc:desc||'Quality sportswear product',badge});
+  renderProducts(); renderManage();
+  document.getElementById('pName').value='';
+  document.getElementById('pPrice').value='';
+  document.getElementById('pDesc').value='';
+  showToast('✅ Product add ho gaya!');
+}
+
+function toggleAdminPanel() {
+  const passwordBox = document.getElementById('passwordBox');
+  const adminForm = document.getElementById('adminForm');
+  const icon = document.getElementById('adminIcon');
+  
+  if (adminForm.style.display === 'block' || (passwordBox && passwordBox.style.display === 'block')) {
+    // Close everything
+    if(passwordBox) passwordBox.style.display = 'none';
+    adminForm.style.display = 'none';
+    icon.textContent = '▼';
+    isAdminLoggedIn = false;
+  } else {
+    // Open password box
+    if(passwordBox) passwordBox.style.display = 'block';
+    adminForm.style.display = 'none';
+    icon.textContent = '▲';
+    const pwdInput = document.getElementById('adminPassword');
+    if(pwdInput) pwdInput.value = '';
+    const errorDiv = document.getElementById('passwordError');
+    if(errorDiv) errorDiv.style.display = 'none';
+  }
+}
+
+function checkPassword() {
+  const enteredPassword = document.getElementById('adminPassword').value;
+  if (enteredPassword === ADMIN_PASSWORD) {
+    isAdminLoggedIn = true;
+    document.getElementById('passwordBox').style.display = 'none';
+    document.getElementById('adminForm').style.display = 'block';
+    renderManage();
+    showToast('✅ Admin access granted!');
+  } else {
+    document.getElementById('passwordError').style.display = 'block';
+    document.getElementById('adminPassword').value = '';
+    showToast('❌ Wrong password!');
+  }
+}
+
+function openWA(msg){
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+function orderProduct(name, price){
+  openWA(`Hi! Main *${name}* (PKR ${price.toLocaleString()}/-) order karna chahta/chahti hoon. Please confirm karein.`);
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+renderProducts();
+</script>
