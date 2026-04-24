@@ -64,9 +64,9 @@
   .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
   .product-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:all 0.3s;position:relative}
   .product-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.5)}
-  .product-img{height:200px;display:flex;align-items:center;justify-content:center;background:var(--surface2);position:relative;overflow:hidden}
-  .product-img img{width:100%;height:100%;object-fit:cover}
-  .product-emoji{font-size:72px;opacity:0.85}
+  .product-img{height:200px;display:flex;align-items:center;justify-content:center;background:var(--surface2);position:relative;overflow:hidden;cursor:pointer}
+  .product-img img{width:100%;height:100%;object-fit:contain}
+  .product-emoji{font-size:72px;opacity:0.85;cursor:pointer}
   .product-badge{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;font-size:10px;letter-spacing:1px;padding:4px 10px;border-radius:2px;text-transform:uppercase;font-weight:600;z-index:1}
   .product-badge.new{background:var(--gold);color:#000}
   .product-body{padding:16px}
@@ -78,6 +78,13 @@
   .product-price span{font-size:13px;font-family:'Inter',sans-serif;font-weight:400;color:var(--muted)}
   .btn-wa{background:var(--whatsapp);color:#fff;border:none;padding:8px 14px;border-radius:3px;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-weight:600;font-family:'Rajdhani',sans-serif;transition:all 0.2s;display:flex;align-items:center;gap:5px}
   .btn-wa:hover{background:#1ebe5d;transform:scale(1.05)}
+
+  /* Lightbox / Image Enlarge */
+  .lightbox{display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.95);cursor:pointer;align-items:center;justify-content:center}
+  .lightbox img{max-width:90%;max-height:90%;object-fit:contain;border-radius:8px;box-shadow:0 0 30px rgba(0,0,0,0.5)}
+  .lightbox .close{position:absolute;top:20px;right:35px;color:#fff;font-size:40px;font-weight:bold;cursor:pointer;transition:0.3s}
+  .lightbox .close:hover{color:var(--gold)}
+  .lightbox-caption{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#fff;font-size:14px;padding:10px;background:rgba(0,0,0,0.7)}
 
   .admin-section{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:32px;margin-top:20px}
   .admin-toggle{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;cursor:pointer}
@@ -313,12 +320,11 @@
           </select>
         </div>
       </div>
-      <!-- NEW: Product Image URL Field -->
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Product Image URL</label>
-          <input class="form-input" id="pImage" placeholder="https://example.com/product-image.jpg">
-          <small style="font-size:10px; color:var(--muted);">Free image hosting: imgbb.com, postimages.org</small>
+          <input class="form-input" id="pImage" placeholder="https://example.com/image.jpg">
+          <small style="font-size:10px; color:var(--muted);">Free: imgbb.com → "URL (direct link)" copy karo</small>
         </div>
         <div class="form-group">
           <label class="form-label">&nbsp;</label>
@@ -369,6 +375,13 @@
 
 <div class="toast" id="toast"></div>
 
+<!-- Lightbox Modal for Image Enlarge -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <span class="close" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+  <div id="lightbox-caption" class="lightbox-caption"></div>
+</div>
+
 <script>
 const WHATSAPP_NUMBER = '923256054759';
 const ADMIN_PASSWORD = 'admin123';
@@ -377,7 +390,6 @@ let isAdminLoggedIn = false;
 
 const catEmojis = {kit:'⚽',trouser:'👖',shirt:'👕',jacket:'🧥',tracksuit:'🏃',summer:'☀️'};
 const catNames = {kit:'Sports Kit',trouser:'Trouser',shirt:'Shirt',jacket:'Varsity Jacket',tracksuit:'Tracksuit',summer:'Summer Shirt'};
-const defaultImages = {kit:'⚽',trouser:'👖',shirt:'👕',jacket:'🧥',tracksuit:'🏃',summer:'☀️'};
 
 let products = [
   {id:1, name:'Football Jersey Set', cat:'kit', gender:'men', price:2800, desc:'Premium dry-fit football kit', badge:'hot', image:'https://i.imgur.com/1nJEkNy.jpeg'},
@@ -425,7 +437,7 @@ function renderProducts(){
   if(!filtered.length){grid.innerHTML='<p style="color:var(--muted);font-size:14px;text-align:center;grid-column:1/-1;padding:40px">Is category mein koi product nahi hai abhi.</p>';return;}
   grid.innerHTML = filtered.map(p=>`
     <div class="product-card">
-      <div class="product-img">
+      <div class="product-img" onclick="${p.image ? `openLightbox('${p.image}', '${p.name}')` : ''}">
         ${p.image ? `<img src="${p.image}" alt="${p.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.8em%22 font-size=%2290%22%3E${catEmojis[p.cat]}%3C/text%3E%3C/svg%3E'">` : `<span class="product-emoji">${catEmojis[p.cat]}</span>`}
         ${p.badge?`<span class="product-badge ${p.badge==='new'?'new':''}">${p.badge.toUpperCase()}</span>`:''}
       </div>
@@ -522,6 +534,30 @@ function checkPassword() {
     showToast('❌ Wrong password!');
   }
 }
+
+// Lightbox / Image Enlarge Functions
+function openLightbox(imageUrl, productName) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const caption = document.getElementById('lightbox-caption');
+  
+  lightbox.style.display = 'flex';
+  lightboxImg.src = imageUrl;
+  caption.textContent = productName;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  lightbox.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeLightbox();
+  }
+});
 
 function openWA(msg){
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
