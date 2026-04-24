@@ -409,13 +409,8 @@ let activeCat = 'all', activeGender = 'all';
 
 // Load from localStorage
 function loadProducts() {
-  const saved = localStorage.getItem('zyron_products');
-  if(saved) {
-    products = JSON.parse(saved);
-    nextId = Math.max(...products.map(p=>p.id), 0) + 1;
-  } else {
-    products = JSON.parse(JSON.stringify(defaultProducts));
-  }
+  // Direct defaultProducts use karo - sabke liye same
+  products = JSON.parse(JSON.stringify(defaultProducts));
   renderProducts();
 }
 
