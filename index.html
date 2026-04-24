@@ -215,9 +215,7 @@
     <button class="cat-tab" onclick="filterCat('summer',this)">Summer Wear</button>
   </div>
 
-  <div class="products-grid" id="productsGrid">
-    <div class="loading">Loading products... ⏳</div>
-  </div>
+  <div class="products-grid" id="productsGrid"></div>
 </div>
 
 <div style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:60px 24px">
@@ -263,33 +261,33 @@
 <div class="section">
   <div class="admin-section">
     <div class="admin-toggle" onclick="toggleAdminPanel()">
-      <div class="admin-title">⚙ Admin Panel — Products Manage Karein (Global)</div>
+      <div class="admin-title">⚙ Admin Panel — Products Manage Karein</div>
       <span class="toggle-icon" id="adminIcon">▼</span>
     </div>
     
     <div id="passwordBox" class="password-box" style="display:none;">
       <h3 style="color:var(--gold);margin-bottom:10px;">🔐 Admin Access Required</h3>
       <p style="font-size:12px;color:var(--muted);margin-bottom:15px;">Please enter password to manage products</p>
-      <input type="password" id="adminPassword" placeholder="Enter Password" class="form-input" style="width:250px;margin:0 auto 15px auto;display:block;">
-      <button class="btn-primary" onclick="checkPassword()" style="padding:10px 25px;">Submit</button>
+      <input type="password" id="adminPassword" placeholder="Enter Password" class="form-input" style="width:250px;margin-bottom:15px;">
+      <button class="btn-primary" onclick="checkPassword()">Submit</button>
       <div id="passwordError" class="error-msg">❌ Wrong password! Access denied.</div>
     </div>
     
     <div class="admin-form" id="adminForm" style="display:none">
-      <h3 style="font-family:'Rajdhani',sans-serif;font-size:16px;letter-spacing:2px;color:var(--gold);margin-bottom:20px;text-transform:uppercase">Naya Product Add Karein</h3>
+      <h3>Naya Product Add Karein</h3>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Product Name</label>
+          <label>Product Name</label>
           <input class="form-input" id="pName" placeholder="e.g. Football Jersey">
         </div>
         <div class="form-group">
-          <label class="form-label">Price (PKR)</label>
+          <label>Price (PKR)</label>
           <input class="form-input" id="pPrice" type="number" placeholder="e.g. 2500">
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Category</label>
+          <label>Category</label>
           <select class="form-select" id="pCat">
             <option value="kit">Sports Kit</option>
             <option value="trouser">Trouser</option>
@@ -300,7 +298,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Gender</label>
+          <label>Gender</label>
           <select class="form-select" id="pGender">
             <option value="men">Men</option>
             <option value="women">Women</option>
@@ -311,11 +309,11 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Description</label>
+          <label>Description</label>
           <input class="form-input" id="pDesc" placeholder="Short description">
         </div>
         <div class="form-group">
-          <label class="form-label">Badge</label>
+          <label>Badge</label>
           <select class="form-select" id="pBadge">
             <option value="">No Badge</option>
             <option value="new">New</option>
@@ -325,29 +323,21 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label">Product Image URL</label>
+          <label>Product Image URL</label>
           <input class="form-input" id="pImage" placeholder="https://example.com/image.jpg">
-          <small style="font-size:10px; color:var(--muted);">Free: imgbb.com → "URL (direct link)" copy karo</small>
-        </div>
-        <div class="form-group">
-          <label class="form-label">&nbsp;</label>
-          <div style="height:40px;"></div>
+          <small>imgbb.com → "Direct link" copy karo</small>
         </div>
       </div>
-      <div class="admin-btns">
-        <button class="btn-add" onclick="addProduct()">+ Product Add Karein</button>
-      </div>
+      <button class="btn-add" onclick="addProduct()">+ Product Add Karein</button>
 
-      <h3 style="font-family:'Rajdhani',sans-serif;font-size:16px;letter-spacing:2px;color:var(--gold);margin:32px 0 16px;text-transform:uppercase">Products & Prices Manage Karein</h3>
+      <h3>Products & Prices Manage Karein</h3>
       <div style="overflow-x:auto">
         <table class="manage-table" id="manageTable">
-          <thead><tr><th>Image</th><th>Product</th><th>Category</th><th>Gender</th><th>Price (PKR)</th><th>Action</th></tr></thead>
+          <thead><tr><th>Image</th><th>Product</th><th>Category</th><th>Gender</th><th>Price</th><th>Action</th></tr></thead>
           <tbody id="manageBody"></tbody>
         </table>
       </div>
-      <div style="margin-top:20px; text-align:center;">
-        <button class="btn-danger" id="resetBtn" onclick="resetToDefaultProducts()" style="background:#8B1A1A; color:#fff; border:none;">🔄 Reset All Products to Default</button>
-      </div>
+      <button class="btn-danger" onclick="resetToDefault()" style="margin-top:20px;">Reset to Default Products</button>
     </div>
   </div>
 </div>
@@ -357,10 +347,10 @@
     <div class="section-eyebrow">Get In Touch</div>
     <h2 class="section-title">Direct WhatsApp</h2>
     <div class="section-line"></div>
-    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin:24px 0 32px">Order karne ke liye, customization ke liye, ya koi bhi sawaal ke liye — seedha WhatsApp karein!</p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-      <button class="btn-primary" style="font-size:14px;display:flex;align-items:center;gap:8px" onclick="openWA('Hi! I want to order from ZYRON Sportswear.')">💬 Order Karein</button>
-      <button class="btn-outline" style="font-size:14px" onclick="openWA('Hi! I need info about ZYRON Sportswear products and pricing.')">Price Poochein</button>
+    <p>Order karne ke liye, customization ke liye, ya koi bhi sawaal ke liye — seedha WhatsApp karein!</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:20px;">
+      <button class="btn-primary" onclick="openWA('Hi! I want to order from ZYRON Sportswear.')">💬 Order Karein</button>
+      <button class="btn-outline" onclick="openWA('Hi! I need info about ZYRON Sportswear products.')">Price Poochein</button>
     </div>
   </div>
 </div>
@@ -377,305 +367,242 @@
   <div class="footer-copy">© 2025 ZYRON Sportswear Manufacturing. All rights reserved.</div>
 </footer>
 
-<a class="wa-float" onclick="openWA('Hi! I am interested in ZYRON Sportswear products.')" title="WhatsApp par message karein">💬</a>
-
+<a class="wa-float" onclick="openWA('Hi! I am interested in ZYRON Sportswear products.')">💬</a>
 <div class="toast" id="toast"></div>
-
 <div id="lightbox" class="lightbox" onclick="closeLightbox()">
   <span class="close" onclick="closeLightbox()">&times;</span>
-  <img id="lightbox-img" src="" alt="">
+  <img id="lightbox-img" src="">
   <div id="lightbox-caption" class="lightbox-caption"></div>
 </div>
 
 <script>
-// ========== CONFIGURATION ==========
 const WHATSAPP_NUMBER = '923256054759';
 const ADMIN_PASSWORD = 'admin123';
-
-// 🔑 JSONBin Settings - YAHAN APNI VALUES DALO
-const JSONBIN_BIN_ID = '69ebd800856a6821896c742e';  // ✅ Tumhara Bin ID
-const JSONBIN_API_KEY = '$2a$10$.lBoO5PZYa8m3XT23ipZne9Zxn1kTHlRt8iAwZ55G5G7do7apw6.a';       // ⚠️ YAHAN APNI API KEY PASTE KARO
-
-// ========== GLOBAL VARIABLES ==========
-let products = [];
-let nextId = 1;
-let activeCat = 'all';
-let activeGender = 'all';
-let isAdminLoggedIn = false;
 
 const catEmojis = {kit:'⚽', trouser:'👖', shirt:'👕', jacket:'🧥', tracksuit:'🏃', summer:'☀️'};
 const catNames = {kit:'Sports Kit', trouser:'Trouser', shirt:'Shirt', jacket:'Varsity Jacket', tracksuit:'Tracksuit', summer:'Summer Shirt'};
 
-// ========== JSONBin API FUNCTIONS ==========
-async function loadProductsFromCloud() {
-    try {
-        const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
-            headers: {
-                'X-Master-Key': JSONBIN_API_KEY
-            }
-        });
-        const data = await response.json();
-        if (data.record && data.record.products) {
-            products = data.record.products;
-            nextId = Math.max(...products.map(p => p.id), 0) + 1;
-            renderProducts();
-            if (document.getElementById('manageBody')) renderManage();
-            showToast('✅ Products loaded from cloud!');
-        } else {
-            loadDefaultProducts();
-        }
-    } catch (error) {
-        console.error('Error loading from cloud:', error);
-        loadDefaultProducts();
-    }
+// Default Products
+const defaultProducts = [
+  {id:1, name:'Football Jersey Set', cat:'kit', gender:'men', price:2800, desc:'Premium dry-fit football kit', badge:'hot', image:'https://i.imgur.com/1nJEkNy.jpeg'},
+  {id:2, name:'Cricket Uniform', cat:'kit', gender:'men', price:3200, desc:'Full cricket uniform set', badge:'', image:'https://i.imgur.com/sGQqC1x.jpeg'},
+  {id:3, name:'Sports Trouser', cat:'trouser', gender:'men', price:1500, desc:'Comfortable elastic waist trouser', badge:'', image:'https://i.imgur.com/4XpMhLq.jpeg'},
+  {id:4, name:'Girls Sports Trouser', cat:'trouser', gender:'girls', price:1200, desc:'Lightweight sports trouser', badge:'new', image:'https://i.imgur.com/QZmYo0p.jpeg'},
+  {id:5, name:'Polo Sports Shirt', cat:'shirt', gender:'men', price:1800, desc:'Premium cotton polo shirt', badge:'', image:'https://i.imgur.com/9YhLkZc.jpeg'},
+  {id:6, name:'Women Sports Top', cat:'shirt', gender:'women', price:1600, desc:'Stretchable performance top', badge:'new', image:'https://i.imgur.com/fR5XqyP.jpeg'},
+  {id:7, name:'Varsity Jacket', cat:'jacket', gender:'men', price:5500, desc:'Classic letterman varsity jacket', badge:'hot', image:'https://i.imgur.com/XnLHKnM.jpeg'},
+  {id:8, name:'Girls Varsity', cat:'jacket', gender:'girls', price:4800, desc:'Stylish varsity jacket for girls', badge:'new', image:'https://i.imgur.com/JqLkPcR.jpeg'},
+  {id:9, name:'Men Tracksuit', cat:'tracksuit', gender:'men', price:4200, desc:'Full tracksuit set', badge:'', image:'https://i.imgur.com/HgJLmNp.jpeg'},
+  {id:10, name:'Boys Tracksuit', cat:'tracksuit', gender:'boys', price:3200, desc:'Kids tracksuit set', badge:'', image:'https://i.imgur.com/MDnbq7R.jpeg'},
+  {id:11, name:'Summer Dry-Fit', cat:'summer', gender:'men', price:1400, desc:'Breathable summer shirt', badge:'', image:'https://i.imgur.com/RvH3nQc.jpeg'},
+  {id:12, name:'Women Tracksuit', cat:'tracksuit', gender:'women', price:3800, desc:'Full ladies tracksuit', badge:'new', image:'https://i.imgur.com/XZqM9pL.jpeg'},
+  {id:13, name:'Boys Kit Set', cat:'kit', gender:'boys', price:2200, desc:'Complete sports kit', badge:'', image:'https://i.imgur.com/vNmHxVb.jpeg'},
+  {id:14, name:'Girls Summer Top', cat:'summer', gender:'girls', price:1100, desc:'Light summer top', badge:'new', image:'https://i.imgur.com/pQnYj8d.jpeg'},
+  {id:15, name:'Boys Trouser', cat:'trouser', gender:'boys', price:1100, desc:'Comfortable boys trouser', badge:'', image:'https://i.imgur.com/cZ4mNxV.jpeg'},
+  {id:16, name:'Women Jacket', cat:'jacket', gender:'women', price:5000, desc:'Elegant sports jacket', badge:'', image:'https://i.imgur.com/dWYnHkM.jpeg'}
+];
+
+let products = [];
+let nextId = 17;
+let activeCat = 'all', activeGender = 'all';
+
+// Load from localStorage
+function loadProducts() {
+  const saved = localStorage.getItem('zyron_products');
+  if(saved) {
+    products = JSON.parse(saved);
+    nextId = Math.max(...products.map(p=>p.id), 0) + 1;
+  } else {
+    products = JSON.parse(JSON.stringify(defaultProducts));
+  }
+  renderProducts();
 }
 
-async function saveProductsToCloud() {
-    try {
-        const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Master-Key': JSONBIN_API_KEY
-            },
-            body: JSON.stringify({ products: products })
-        });
-        if (response.ok) {
-            showToast('💾 Products saved to cloud!');
-        }
-    } catch (error) {
-        console.error('Error saving to cloud:', error);
-        showToast('⚠️ Error saving to cloud');
-    }
+// Save to localStorage
+function saveProducts() {
+  localStorage.setItem('zyron_products', JSON.stringify(products));
 }
 
-function loadDefaultProducts() {
-    products = [
-        {id:1, name:'Football Jersey Set', cat:'kit', gender:'men', price:2800, desc:'Premium dry-fit football kit', badge:'hot', image:'https://i.imgur.com/1nJEkNy.jpeg'},
-        {id:2, name:'Cricket Uniform', cat:'kit', gender:'men', price:3200, desc:'Full cricket uniform set', badge:'', image:'https://i.imgur.com/sGQqC1x.jpeg'},
-        {id:3, name:'Sports Trouser', cat:'trouser', gender:'men', price:1500, desc:'Comfortable elastic waist trouser', badge:'', image:'https://i.imgur.com/4XpMhLq.jpeg'},
-        {id:4, name:'Girls Sports Trouser', cat:'trouser', gender:'girls', price:1200, desc:'Lightweight sports trouser', badge:'new', image:'https://i.imgur.com/QZmYo0p.jpeg'},
-        {id:5, name:'Polo Sports Shirt', cat:'shirt', gender:'men', price:1800, desc:'Premium cotton polo shirt', badge:'', image:'https://i.imgur.com/9YhLkZc.jpeg'},
-        {id:6, name:'Women Sports Top', cat:'shirt', gender:'women', price:1600, desc:'Stretchable performance top', badge:'new', image:'https://i.imgur.com/fR5XqyP.jpeg'},
-        {id:7, name:'Varsity Jacket', cat:'jacket', gender:'men', price:5500, desc:'Classic letterman varsity jacket', badge:'hot', image:'https://i.imgur.com/XnLHKnM.jpeg'},
-        {id:8, name:'Girls Varsity', cat:'jacket', gender:'girls', price:4800, desc:'Stylish varsity jacket for girls', badge:'new', image:'https://i.imgur.com/JqLkPcR.jpeg'},
-        {id:9, name:'Men Tracksuit', cat:'tracksuit', gender:'men', price:4200, desc:'Full tracksuit set - top + bottom', badge:'', image:'https://i.imgur.com/HgJLmNp.jpeg'},
-        {id:10, name:'Boys Tracksuit', cat:'tracksuit', gender:'boys', price:3200, desc:'Kids tracksuit set', badge:'', image:'https://i.imgur.com/MDnbq7R.jpeg'},
-        {id:11, name:'Summer Dry-Fit', cat:'summer', gender:'men', price:1400, desc:'Breathable summer performance shirt', badge:'', image:'https://i.imgur.com/RvH3nQc.jpeg'},
-        {id:12, name:'Women Tracksuit', cat:'tracksuit', gender:'women', price:3800, desc:'Full ladies tracksuit set', badge:'new', image:'https://i.imgur.com/XZqM9pL.jpeg'},
-        {id:13, name:'Boys Kit Set', cat:'kit', gender:'boys', price:2200, desc:'Complete sports kit for boys', badge:'', image:'https://i.imgur.com/vNmHxVb.jpeg'},
-        {id:14, name:'Girls Summer Top', cat:'summer', gender:'girls', price:1100, desc:'Light summer sports top', badge:'new', image:'https://i.imgur.com/pQnYj8d.jpeg'},
-        {id:15, name:'Boys Trouser', cat:'trouser', gender:'boys', price:1100, desc:'Comfortable boys sports trouser', badge:'', image:'https://i.imgur.com/cZ4mNxV.jpeg'},
-        {id:16, name:'Women Jacket', cat:'jacket', gender:'women', price:5000, desc:'Elegant sports jacket for women', badge:'', image:'https://i.imgur.com/dWYnHkM.jpeg'},
-    ];
-    nextId = 17;
-    saveProductsToCloud();
-    renderProducts();
-    if (document.getElementById('manageBody')) renderManage();
-}
-
-async function resetToDefaultProducts() {
-    if(confirm('Kya aap saare products reset karna chahte hain?')) {
-        loadDefaultProducts();
-        showToast('✅ Products reset to default!');
-    }
-}
-
-// ========== RENDER FUNCTIONS ==========
 function renderProducts() {
-    const grid = document.getElementById('productsGrid');
-    let filtered = products.filter(p => {
-        const catOk = activeCat === 'all' || p.cat === activeCat;
-        const gOk = activeGender === 'all' || p.gender === activeGender;
-        return catOk && gOk;
-    });
-    if(!filtered.length) {
-        grid.innerHTML = '<p style="color:var(--muted);font-size:14px;text-align:center;grid-column:1/-1;padding:40px">Is category mein koi product nahi hai abhi.</p>';
-        return;
-    }
-    grid.innerHTML = filtered.map(p => `
-        <div class="product-card">
-            <div class="product-img" onclick="${p.image ? `openLightbox('${p.image.replace(/'/g, "\\'")}', '${p.name.replace(/'/g, "\\'")}')` : ''}">
-                ${p.image ? `<img src="${p.image}" alt="${p.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.8em%22 font-size=%2290%22%3E${catEmojis[p.cat]}%3C/text%3E%3C/svg%3E'">` : `<span class="product-emoji">${catEmojis[p.cat]}</span>`}
-                ${p.badge ? `<span class="product-badge ${p.badge === 'new' ? 'new' : ''}">${p.badge.toUpperCase()}</span>` : ''}
-            </div>
-            <div class="product-body">
-                <div class="product-cat">${catNames[p.cat]} • ${p.gender.charAt(0).toUpperCase()+p.gender.slice(1)}</div>
-                <div class="product-name">${p.name}</div>
-                <div class="product-desc">${p.desc}</div>
-                <div class="product-footer">
-                    <div class="product-price">PKR ${p.price.toLocaleString()} <span>/-</span></div>
-                    <button class="btn-wa" onclick="orderProduct('${p.name.replace(/'/g, "\\'")}', ${p.price})">💬 Order</button>
-                </div>
-            </div>
+  const grid = document.getElementById('productsGrid');
+  let filtered = products.filter(p => {
+    return (activeCat==='all' || p.cat===activeCat) && (activeGender==='all' || p.gender===activeGender);
+  });
+  if(!filtered.length) {
+    grid.innerHTML = '<p style="text-align:center;padding:40px;">Is category mein koi product nahi hai.</p>';
+    return;
+  }
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card">
+      <div class="product-img" onclick="${p.image ? `openLightbox('${p.image}', '${p.name}')` : ''}">
+        ${p.image ? `<img src="${p.image}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.8em%22 font-size=%2290%22%3E${catEmojis[p.cat]}%3C/text%3E%3C/svg%3E'">` : `<span class="product-emoji">${catEmojis[p.cat]}</span>`}
+        ${p.badge ? `<span class="product-badge ${p.badge==='new'?'new':''}">${p.badge.toUpperCase()}</span>` : ''}
+      </div>
+      <div class="product-body">
+        <div class="product-cat">${catNames[p.cat]} • ${p.gender}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-footer">
+          <div class="product-price">PKR ${p.price.toLocaleString()}</div>
+          <button class="btn-wa" onclick="orderProduct('${p.name}',${p.price})">💬 Order</button>
         </div>
-    `).join('');
+      </div>
+    </div>
+  `).join('');
 }
 
 function renderManage() {
-    const tbody = document.getElementById('manageBody');
-    if(!tbody) return;
-    tbody.innerHTML = products.map(p => `
-        <tr>
-            <td>${p.image ? `<img src="${p.image}" class="manage-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.8em%22 font-size=%2290%22%3E${catEmojis[p.cat]}%3C/text%3E%3C/svg%3E'">` : `<span style="font-size:30px;">${catEmojis[p.cat]}</span>`}</td>
-            <td>${p.name}</td>
-            <td>${catNames[p.cat]}</td>
-            <td style="text-transform:capitalize">${p.gender}</td>
-            <td><input class="price-input" value="${p.price}" onchange="updatePrice(${p.id}, this.value)"></td>
-            <td><button class="btn-danger" onclick="removeProduct(${p.id})">Delete</button></td>
-        </tr>
-    `).join('');
+  const tbody = document.getElementById('manageBody');
+  if(!tbody) return;
+  tbody.innerHTML = products.map(p => `
+    <tr>
+      <td>${p.image ? `<img src="${p.image}" class="manage-img" onerror="this.style.display='none'">` : catEmojis[p.cat]}</td>
+      <td>${p.name}</td>
+      <td>${catNames[p.cat]}</td>
+      <td>${p.gender}</td>
+      <td><input class="price-input" value="${p.price}" onchange="updatePrice(${p.id}, this.value)"></td>
+      <td><button class="btn-danger" onclick="removeProduct(${p.id})">Delete</button></td>
+    </tr>
+  `).join('');
 }
 
-// ========== PRODUCT CRUD ==========
-async function updatePrice(id, val) {
-    const p = products.find(x => x.id === id);
-    if(p) {
-        p.price = parseInt(val) || p.price;
-        renderProducts();
-        await saveProductsToCloud();
-        showToast('✅ Price update ho gai!');
-    }
+function updatePrice(id, val) {
+  const p = products.find(x=>x.id===id);
+  if(p) {
+    p.price = parseInt(val) || p.price;
+    renderProducts();
+    saveProducts();
+    showToast('Price updated!');
+  }
 }
 
-async function removeProduct(id) {
-    if(confirm('Kya aap ye product delete karna chahte hain?')) {
-        products = products.filter(p => p.id !== id);
-        renderProducts();
-        renderManage();
-        await saveProductsToCloud();
-        showToast('🗑 Product delete ho gaya!');
-    }
-}
-
-async function addProduct() {
-    const name = document.getElementById('pName').value.trim();
-    const price = parseInt(document.getElementById('pPrice').value);
-    const cat = document.getElementById('pCat').value;
-    const gender = document.getElementById('pGender').value;
-    const desc = document.getElementById('pDesc').value.trim();
-    const badge = document.getElementById('pBadge').value;
-    const image = document.getElementById('pImage').value.trim();
-    
-    if(!name || !price) {
-        showToast('⚠ Name aur Price zaroor dalein!');
-        return;
-    }
-    
-    products.push({
-        id: nextId++,
-        name: name,
-        cat: cat,
-        gender: gender,
-        price: price,
-        desc: desc || 'Quality sportswear product',
-        badge: badge,
-        image: image || null
-    });
-    
+function removeProduct(id) {
+  if(confirm('Delete this product?')) {
+    products = products.filter(p=>p.id!==id);
     renderProducts();
     renderManage();
-    await saveProductsToCloud();
-    
-    document.getElementById('pName').value = '';
-    document.getElementById('pPrice').value = '';
-    document.getElementById('pDesc').value = '';
-    document.getElementById('pImage').value = '';
-    showToast('✅ Product add ho gaya! (Sabhi customers ke liye visible)');
+    saveProducts();
+    showToast('Product deleted!');
+  }
 }
 
-// ========== FILTER FUNCTIONS ==========
-function filterCat(cat, el) {
-    activeCat = cat;
-    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
+function addProduct() {
+  const name = document.getElementById('pName').value.trim();
+  const price = parseInt(document.getElementById('pPrice').value);
+  const cat = document.getElementById('pCat').value;
+  const gender = document.getElementById('pGender').value;
+  const desc = document.getElementById('pDesc').value.trim();
+  const badge = document.getElementById('pBadge').value;
+  const image = document.getElementById('pImage').value.trim();
+  
+  if(!name || !price) {
+    showToast('Name and price required!');
+    return;
+  }
+  
+  products.push({
+    id: nextId++,
+    name, cat, gender, price,
+    desc: desc || 'Quality sportswear',
+    badge: badge,
+    image: image || null
+  });
+  
+  renderProducts();
+  renderManage();
+  saveProducts();
+  
+  document.getElementById('pName').value = '';
+  document.getElementById('pPrice').value = '';
+  document.getElementById('pDesc').value = '';
+  document.getElementById('pImage').value = '';
+  showToast('Product added!');
+}
+
+function resetToDefault() {
+  if(confirm('Reset all products to default?')) {
+    products = JSON.parse(JSON.stringify(defaultProducts));
+    nextId = 17;
     renderProducts();
+    renderManage();
+    saveProducts();
+    showToast('Reset to default products!');
+  }
+}
+
+function filterCat(cat, el) {
+  activeCat = cat;
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderProducts();
 }
 
 function filterGender(g, el) {
-    activeGender = g;
-    document.querySelectorAll('.gender-tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-    renderProducts();
+  activeGender = g;
+  document.querySelectorAll('.gender-tab').forEach(t=>t.classList.remove('active'));
+  if(el) el.classList.add('active');
+  renderProducts();
 }
 
-// ========== ADMIN PANEL ==========
 function toggleAdminPanel() {
-    const passwordBox = document.getElementById('passwordBox');
-    const adminForm = document.getElementById('adminForm');
-    const icon = document.getElementById('adminIcon');
-    
-    if (adminForm.style.display === 'block' || (passwordBox && passwordBox.style.display === 'block')) {
-        if(passwordBox) passwordBox.style.display = 'none';
-        adminForm.style.display = 'none';
-        icon.textContent = '▼';
-        isAdminLoggedIn = false;
-    } else {
-        if(passwordBox) passwordBox.style.display = 'block';
-        adminForm.style.display = 'none';
-        icon.textContent = '▲';
-        const pwdInput = document.getElementById('adminPassword');
-        if(pwdInput) pwdInput.value = '';
-        const errorDiv = document.getElementById('passwordError');
-        if(errorDiv) errorDiv.style.display = 'none';
-    }
+  const pwdBox = document.getElementById('passwordBox');
+  const adminForm = document.getElementById('adminForm');
+  const icon = document.getElementById('adminIcon');
+  
+  if(adminForm.style.display === 'block') {
+    adminForm.style.display = 'none';
+    pwdBox.style.display = 'none';
+    icon.textContent = '▼';
+  } else {
+    pwdBox.style.display = 'block';
+    adminForm.style.display = 'none';
+    icon.textContent = '▲';
+    document.getElementById('adminPassword').value = '';
+    document.getElementById('passwordError').style.display = 'none';
+  }
 }
 
 function checkPassword() {
-    const enteredPassword = document.getElementById('adminPassword').value;
-    if (enteredPassword === ADMIN_PASSWORD) {
-        isAdminLoggedIn = true;
-        document.getElementById('passwordBox').style.display = 'none';
-        document.getElementById('adminForm').style.display = 'block';
-        renderManage();
-        showToast('✅ Admin access granted!');
-    } else {
-        document.getElementById('passwordError').style.display = 'block';
-        document.getElementById('adminPassword').value = '';
-        showToast('❌ Wrong password!');
-    }
+  const pwd = document.getElementById('adminPassword').value;
+  if(pwd === ADMIN_PASSWORD) {
+    document.getElementById('passwordBox').style.display = 'none';
+    document.getElementById('adminForm').style.display = 'block';
+    renderManage();
+    showToast('Admin access granted!');
+  } else {
+    document.getElementById('passwordError').style.display = 'block';
+    showToast('Wrong password!');
+  }
 }
 
-// ========== LIGHTBOX ==========
-function openLightbox(imageUrl, productName) {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const caption = document.getElementById('lightbox-caption');
-    
-    lightbox.style.display = 'flex';
-    lightboxImg.src = imageUrl;
-    caption.textContent = productName;
-    document.body.style.overflow = 'hidden';
+function openLightbox(url, name) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src = url;
+  document.getElementById('lightbox-caption').textContent = name;
+  lb.style.display = 'flex';
 }
 
 function closeLightbox() {
-    const lightbox = document.getElementById('lightbox');
-    lightbox.style.display = 'none';
-    document.body.style.overflow = 'auto';
+  document.getElementById('lightbox').style.display = 'none';
 }
 
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeLightbox();
-});
-
-// ========== UTILITIES ==========
 function openWA(msg) {
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
 function orderProduct(name, price) {
-    openWA(`Hi! Main *${name}* (PKR ${price.toLocaleString()}/-) order karna chahta/chahti hoon. Please confirm karein.`);
+  openWA(`Hi! I want to order *${name}* for PKR ${price}.`);
 }
 
 function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-// ========== INITIALIZE ==========
-loadProductsFromCloud();
+// Initial load
+loadProducts();
 </script>
 </body>
 </html>
