@@ -61,12 +61,13 @@
   .gender-tab:last-child{border-right:none}
   .gender-tab.active{background:var(--gold);color:#000}
 
-  .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+  .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
   .product-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:all 0.3s;position:relative}
   .product-card:hover{border-color:var(--gold);transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.5)}
-  .product-img{height:220px;display:flex;align-items:center;justify-content:center;background:var(--surface2);position:relative;overflow:hidden}
+  .product-img{height:200px;display:flex;align-items:center;justify-content:center;background:var(--surface2);position:relative;overflow:hidden}
+  .product-img img{width:100%;height:100%;object-fit:cover}
   .product-emoji{font-size:72px;opacity:0.85}
-  .product-badge{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;font-size:10px;letter-spacing:1px;padding:4px 10px;border-radius:2px;text-transform:uppercase;font-weight:600}
+  .product-badge{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;font-size:10px;letter-spacing:1px;padding:4px 10px;border-radius:2px;text-transform:uppercase;font-weight:600;z-index:1}
   .product-badge.new{background:var(--gold);color:#000}
   .product-body{padding:16px}
   .product-cat{font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;font-weight:500}
@@ -100,10 +101,11 @@
   .password-box input{width:250px;margin:15px auto;display:block}
   .error-msg{color:#E24B4A;font-size:12px;margin-top:10px;display:none}
 
-  .manage-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px}
+  .manage-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px;overflow-x:auto}
   .manage-table th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600}
   .manage-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text)}
   .manage-table tr:hover td{background:rgba(201,168,76,0.04)}
+  .manage-img{width:40px;height:40px;object-fit:cover;border-radius:4px}
 
   .price-input{background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:5px 10px;color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:18px;width:110px;text-align:center;outline:none}
   .price-input:focus{border-color:var(--gold)}
@@ -139,6 +141,7 @@
     .models-row{grid-template-columns:1fr}
     .form-row{grid-template-columns:1fr}
     .nav-links{display:none}
+    .manage-table{display:block;overflow-x:scroll}
   }
 </style>
 </head>
@@ -310,6 +313,18 @@
           </select>
         </div>
       </div>
+      <!-- NEW: Product Image URL Field -->
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Product Image URL</label>
+          <input class="form-input" id="pImage" placeholder="https://example.com/product-image.jpg">
+          <small style="font-size:10px; color:var(--muted);">Free image hosting: imgbb.com, postimages.org</small>
+        </div>
+        <div class="form-group">
+          <label class="form-label">&nbsp;</label>
+          <div style="height:40px;"></div>
+        </div>
+      </div>
       <div class="admin-btns">
         <button class="btn-add" onclick="addProduct()">+ Product Add Karein</button>
       </div>
@@ -317,7 +332,7 @@
       <h3 style="font-family:'Rajdhani',sans-serif;font-size:16px;letter-spacing:2px;color:var(--gold);margin:32px 0 16px;text-transform:uppercase">Products & Prices Manage Karein</h3>
       <div style="overflow-x:auto">
         <table class="manage-table" id="manageTable">
-          <thead><tr><th>Product</th><th>Category</th><th>Gender</th><th>Price (PKR)</th><th>Action</th></tr></thead>
+          <thead><tr><th>Image</th><th>Product</th><th>Category</th><th>Gender</th><th>Price (PKR)</th><th>Action</th></tr></thead>
           <tbody id="manageBody"></tbody>
         </table>
       </div>
@@ -362,24 +377,25 @@ let isAdminLoggedIn = false;
 
 const catEmojis = {kit:'⚽',trouser:'👖',shirt:'👕',jacket:'🧥',tracksuit:'🏃',summer:'☀️'};
 const catNames = {kit:'Sports Kit',trouser:'Trouser',shirt:'Shirt',jacket:'Varsity Jacket',tracksuit:'Tracksuit',summer:'Summer Shirt'};
+const defaultImages = {kit:'⚽',trouser:'👖',shirt:'👕',jacket:'🧥',tracksuit:'🏃',summer:'☀️'};
 
 let products = [
-  {id:1,name:'Football Jersey Set',cat:'kit',gender:'men',price:2800,desc:'Premium dry-fit football kit',badge:'hot'},
-  {id:2,name:'Cricket Uniform',cat:'kit',gender:'men',price:3200,desc:'Full cricket uniform set',badge:''},
-  {id:3,name:'Sports Trouser',cat:'trouser',gender:'men',price:1500,desc:'Comfortable elastic waist trouser',badge:''},
-  {id:4,name:'Girls Sports Trouser',cat:'trouser',gender:'girls',price:1200,desc:'Lightweight sports trouser',badge:'new'},
-  {id:5,name:'Polo Sports Shirt',cat:'shirt',gender:'men',price:1800,desc:'Premium cotton polo shirt',badge:''},
-  {id:6,name:'Women Sports Top',cat:'shirt',gender:'women',price:1600,desc:'Stretchable performance top',badge:'new'},
-  {id:7,name:'Varsity Jacket',cat:'jacket',gender:'men',price:5500,desc:'Classic letterman varsity jacket',badge:'hot'},
-  {id:8,name:'Girls Varsity',cat:'jacket',gender:'girls',price:4800,desc:'Stylish varsity jacket for girls',badge:'new'},
-  {id:9,name:'Men Tracksuit',cat:'tracksuit',gender:'men',price:4200,desc:'Full tracksuit set - top + bottom',badge:''},
-  {id:10,name:'Boys Tracksuit',cat:'tracksuit',gender:'boys',price:3200,desc:'Kids tracksuit set',badge:''},
-  {id:11,name:'Summer Dry-Fit',cat:'summer',gender:'men',price:1400,desc:'Breathable summer performance shirt',badge:''},
-  {id:12,name:'Women Tracksuit',cat:'tracksuit',gender:'women',price:3800,desc:'Full ladies tracksuit set',badge:'new'},
-  {id:13,name:'Boys Kit Set',cat:'kit',gender:'boys',price:2200,desc:'Complete sports kit for boys',badge:''},
-  {id:14,name:'Girls Summer Top',cat:'summer',gender:'girls',price:1100,desc:'Light summer sports top',badge:'new'},
-  {id:15,name:'Boys Trouser',cat:'trouser',gender:'boys',price:1100,desc:'Comfortable boys sports trouser',badge:''},
-  {id:16,name:'Women Jacket',cat:'jacket',gender:'women',price:5000,desc:'Elegant sports jacket for women',badge:''},
+  {id:1, name:'Football Jersey Set', cat:'kit', gender:'men', price:2800, desc:'Premium dry-fit football kit', badge:'hot', image:'https://i.imgur.com/1nJEkNy.jpeg'},
+  {id:2, name:'Cricket Uniform', cat:'kit', gender:'men', price:3200, desc:'Full cricket uniform set', badge:'', image:'https://i.imgur.com/sGQqC1x.jpeg'},
+  {id:3, name:'Sports Trouser', cat:'trouser', gender:'men', price:1500, desc:'Comfortable elastic waist trouser', badge:'', image:'https://i.imgur.com/4XpMhLq.jpeg'},
+  {id:4, name:'Girls Sports Trouser', cat:'trouser', gender:'girls', price:1200, desc:'Lightweight sports trouser', badge:'new', image:'https://i.imgur.com/QZmYo0p.jpeg'},
+  {id:5, name:'Polo Sports Shirt', cat:'shirt', gender:'men', price:1800, desc:'Premium cotton polo shirt', badge:'', image:'https://i.imgur.com/9YhLkZc.jpeg'},
+  {id:6, name:'Women Sports Top', cat:'shirt', gender:'women', price:1600, desc:'Stretchable performance top', badge:'new', image:'https://i.imgur.com/fR5XqyP.jpeg'},
+  {id:7, name:'Varsity Jacket', cat:'jacket', gender:'men', price:5500, desc:'Classic letterman varsity jacket', badge:'hot', image:'https://i.imgur.com/XnLHKnM.jpeg'},
+  {id:8, name:'Girls Varsity', cat:'jacket', gender:'girls', price:4800, desc:'Stylish varsity jacket for girls', badge:'new', image:'https://i.imgur.com/JqLkPcR.jpeg'},
+  {id:9, name:'Men Tracksuit', cat:'tracksuit', gender:'men', price:4200, desc:'Full tracksuit set - top + bottom', badge:'', image:'https://i.imgur.com/HgJLmNp.jpeg'},
+  {id:10, name:'Boys Tracksuit', cat:'tracksuit', gender:'boys', price:3200, desc:'Kids tracksuit set', badge:'', image:'https://i.imgur.com/MDnbq7R.jpeg'},
+  {id:11, name:'Summer Dry-Fit', cat:'summer', gender:'men', price:1400, desc:'Breathable summer performance shirt', badge:'', image:'https://i.imgur.com/RvH3nQc.jpeg'},
+  {id:12, name:'Women Tracksuit', cat:'tracksuit', gender:'women', price:3800, desc:'Full ladies tracksuit set', badge:'new', image:'https://i.imgur.com/XZqM9pL.jpeg'},
+  {id:13, name:'Boys Kit Set', cat:'kit', gender:'boys', price:2200, desc:'Complete sports kit for boys', badge:'', image:'https://i.imgur.com/vNmHxVb.jpeg'},
+  {id:14, name:'Girls Summer Top', cat:'summer', gender:'girls', price:1100, desc:'Light summer sports top', badge:'new', image:'https://i.imgur.com/pQnYj8d.jpeg'},
+  {id:15, name:'Boys Trouser', cat:'trouser', gender:'boys', price:1100, desc:'Comfortable boys sports trouser', badge:'', image:'https://i.imgur.com/cZ4mNxV.jpeg'},
+  {id:16, name:'Women Jacket', cat:'jacket', gender:'women', price:5000, desc:'Elegant sports jacket for women', badge:'', image:'https://i.imgur.com/dWYnHkM.jpeg'},
 ];
 
 let nextId = 17;
@@ -410,7 +426,7 @@ function renderProducts(){
   grid.innerHTML = filtered.map(p=>`
     <div class="product-card">
       <div class="product-img">
-        <span class="product-emoji">${catEmojis[p.cat]}</span>
+        ${p.image ? `<img src="${p.image}" alt="${p.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.8em%22 font-size=%2290%22%3E${catEmojis[p.cat]}%3C/text%3E%3C/svg%3E'">` : `<span class="product-emoji">${catEmojis[p.cat]}</span>`}
         ${p.badge?`<span class="product-badge ${p.badge==='new'?'new':''}">${p.badge.toUpperCase()}</span>`:''}
       </div>
       <div class="product-body">
@@ -431,6 +447,7 @@ function renderManage(){
   if(!tbody) return;
   tbody.innerHTML = products.map(p=>`
     <tr>
+      <td>${p.image ? `<img src="${p.image}" class="manage-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.8em%22 font-size=%2290%22%3E${catEmojis[p.cat]}%3C/text%3E%3C/svg%3E'">` : `<span style="font-size:30px;">${catEmojis[p.cat]}</span>`}</td>
       <td>${p.name}</td>
       <td>${catNames[p.cat]}</td>
       <td style="text-transform:capitalize">${p.gender}</td>
@@ -446,8 +463,10 @@ function updatePrice(id, val){
 }
 
 function removeProduct(id){
-  products = products.filter(p=>p.id!==id);
-  renderProducts(); renderManage(); showToast('🗑 Product delete ho gaya.');
+  if(confirm('Kya aap ye product delete karna chahte hain?')){
+    products = products.filter(p=>p.id!==id);
+    renderProducts(); renderManage(); showToast('🗑 Product delete ho gaya.');
+  }
 }
 
 function addProduct(){
@@ -457,12 +476,14 @@ function addProduct(){
   const gender = document.getElementById('pGender').value;
   const desc = document.getElementById('pDesc').value.trim();
   const badge = document.getElementById('pBadge').value;
+  const image = document.getElementById('pImage').value.trim();
   if(!name||!price){showToast('⚠ Name aur Price zaroor dalein!');return;}
-  products.push({id:nextId++,name,cat,gender,price,desc:desc||'Quality sportswear product',badge});
+  products.push({id:nextId++, name, cat, gender, price, desc:desc||'Quality sportswear product', badge, image:image||null});
   renderProducts(); renderManage();
   document.getElementById('pName').value='';
   document.getElementById('pPrice').value='';
   document.getElementById('pDesc').value='';
+  document.getElementById('pImage').value='';
   showToast('✅ Product add ho gaya!');
 }
 
@@ -472,13 +493,11 @@ function toggleAdminPanel() {
   const icon = document.getElementById('adminIcon');
   
   if (adminForm.style.display === 'block' || (passwordBox && passwordBox.style.display === 'block')) {
-    // Close everything
     if(passwordBox) passwordBox.style.display = 'none';
     adminForm.style.display = 'none';
     icon.textContent = '▼';
     isAdminLoggedIn = false;
   } else {
-    // Open password box
     if(passwordBox) passwordBox.style.display = 'block';
     adminForm.style.display = 'none';
     icon.textContent = '▲';
@@ -521,3 +540,5 @@ function showToast(msg){
 
 renderProducts();
 </script>
+</body>
+</html>
