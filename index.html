@@ -391,7 +391,8 @@ let isAdminLoggedIn = false;
 const catEmojis = {kit:'⚽',trouser:'👖',shirt:'👕',jacket:'🧥',tracksuit:'🏃',summer:'☀️'};
 const catNames = {kit:'Sports Kit',trouser:'Trouser',shirt:'Shirt',jacket:'Varsity Jacket',tracksuit:'Tracksuit',summer:'Summer Shirt'};
 
-let products = [
+// Default Products
+const defaultProducts = [
   {id:1, name:'Football Jersey Set', cat:'kit', gender:'men', price:2800, desc:'Premium dry-fit football kit', badge:'hot', image:'https://i.imgur.com/1nJEkNy.jpeg'},
   {id:2, name:'Cricket Uniform', cat:'kit', gender:'men', price:3200, desc:'Full cricket uniform set', badge:'', image:'https://i.imgur.com/sGQqC1x.jpeg'},
   {id:3, name:'Sports Trouser', cat:'trouser', gender:'men', price:1500, desc:'Comfortable elastic waist trouser', badge:'', image:'https://i.imgur.com/4XpMhLq.jpeg'},
@@ -410,8 +411,42 @@ let products = [
   {id:16, name:'Women Jacket', cat:'jacket', gender:'women', price:5000, desc:'Elegant sports jacket for women', badge:'', image:'https://i.imgur.com/dWYnHkM.jpeg'},
 ];
 
+// Load products from localStorage or use default
+let products = [];
 let nextId = 17;
 let activeCat = 'all', activeGender = 'all';
+
+// Function to save products to localStorage
+function saveProductsToLocal() {
+  localStorage.setItem('zyron_products', JSON.stringify(products));
+  localStorage.setItem('zyron_nextId', nextId);
+}
+
+// Function to load products from localStorage
+function loadProductsFromLocal() {
+  const savedProducts = localStorage.getItem('zyron_products');
+  const savedNextId = localStorage.getItem('zyron_nextId');
+  
+  if (savedProducts) {
+    products = JSON.parse(savedProducts);
+    nextId = savedNextId ? parseInt(savedNextId) : 17;
+  } else {
+    products = JSON.parse(JSON.stringify(defaultProducts));
+    nextId = 17;
+  }
+}
+
+// Function to reset to default products
+function resetToDefaultProducts() {
+  if(confirm('Kya aap saare products reset karna chahte hain? (Default products restore honge)')) {
+    products = JSON.parse(JSON.stringify(defaultProducts));
+    nextId = 17;
+    saveProductsToLocal();
+    renderProducts();
+    renderManage();
+    showToast('✅ Products reset to default!');
+  }
+}
 
 function filterCat(cat, el){
   activeCat = cat;
@@ -437,7 +472,7 @@ function renderProducts(){
   if(!filtered.length){grid.innerHTML='<p style="color:var(--muted);font-size:14px;text-align:center;grid-column:1/-1;padding:40px">Is category mein koi product nahi hai abhi.</p>';return;}
   grid.innerHTML = filtered.map(p=>`
     <div class="product-card">
-      <div class="product-img" onclick="${p.image ? `openLightbox('${p.image}', '${p.name}')` : ''}">
+      <div class="product-img" onclick="${p.image ? `openLightbox('${p.image}', '${p.name.replace(/'/g, "\\'")}')` : ''}">
         ${p.image ? `<img src="${p.image}" alt="${p.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.8em%22 font-size=%2290%22%3E${catEmojis[p.cat]}%3C/text%3E%3C/svg%3E'">` : `<span class="product-emoji">${catEmojis[p.cat]}</span>`}
         ${p.badge?`<span class="product-badge ${p.badge==='new'?'new':''}">${p.badge.toUpperCase()}</span>`:''}
       </div>
@@ -447,7 +482,7 @@ function renderProducts(){
         <div class="product-desc">${p.desc}</div>
         <div class="product-footer">
           <div class="product-price">PKR ${p.price.toLocaleString()} <span>/-</span></div>
-          <button class="btn-wa" onclick="orderProduct('${p.name}',${p.price})">💬 Order</button>
+          <button class="btn-wa" onclick="orderProduct('${p.name.replace(/'/g, "\\'")}',${p.price})">💬 Order</button>
         </div>
       </div>
     </div>
@@ -467,17 +502,27 @@ function renderManage(){
       <td><button class="btn-danger" onclick="removeProduct(${p.id})">Delete</button></td>
     </tr>
   `).join('');
+  
+  // Add Reset Button at bottom of manage panel
+  const tableContainer = document.querySelector('.admin-form .manage-table');
+  if(tableContainer && !document.getElementById('resetBtn')) {
+    const resetDiv = document.createElement('div');
+    resetDiv.style.marginTop = '20px';
+    resetDiv.style.textAlign = 'center';
+    resetDiv.innerHTML = '<button class="btn-danger" id="resetBtn" onclick="resetToDefaultProducts()" style="background:#8B1A1A; color:#fff; border:none;">🔄 Reset All Products to Default</button>';
+    tableContainer.parentNode.appendChild(resetDiv);
+  }
 }
 
 function updatePrice(id, val){
   const p = products.find(x=>x.id===id);
-  if(p){p.price = parseInt(val)||p.price; renderProducts(); showToast('✅ Price update ho gai!');}
+  if(p){p.price = parseInt(val)||p.price; renderProducts(); saveProductsToLocal(); showToast('✅ Price update ho gai!');}
 }
 
 function removeProduct(id){
   if(confirm('Kya aap ye product delete karna chahte hain?')){
     products = products.filter(p=>p.id!==id);
-    renderProducts(); renderManage(); showToast('🗑 Product delete ho gaya.');
+    renderProducts(); renderManage(); saveProductsToLocal(); showToast('🗑 Product delete ho gaya.');
   }
 }
 
@@ -491,12 +536,12 @@ function addProduct(){
   const image = document.getElementById('pImage').value.trim();
   if(!name||!price){showToast('⚠ Name aur Price zaroor dalein!');return;}
   products.push({id:nextId++, name, cat, gender, price, desc:desc||'Quality sportswear product', badge, image:image||null});
-  renderProducts(); renderManage();
+  renderProducts(); renderManage(); saveProductsToLocal();
   document.getElementById('pName').value='';
   document.getElementById('pPrice').value='';
   document.getElementById('pDesc').value='';
   document.getElementById('pImage').value='';
-  showToast('✅ Product add ho gaya!');
+  showToast('✅ Product add ho gaya! (Sabhi customers ke liye visible)');
 }
 
 function toggleAdminPanel() {
@@ -574,6 +619,8 @@ function showToast(msg){
   setTimeout(()=>t.classList.remove('show'),3000);
 }
 
+// Initialize
+loadProductsFromLocal();
 renderProducts();
 </script>
 </body>
