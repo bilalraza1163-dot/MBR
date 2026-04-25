@@ -85,37 +85,6 @@
   .lightbox .close:hover{color:var(--gold)}
   .lightbox-caption{position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#fff;font-size:14px;padding:10px;background:rgba(0,0,0,0.7)}
 
-  .admin-section{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:32px;margin-top:20px}
-  .admin-toggle{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;cursor:pointer}
-  .admin-title{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:var(--gold);letter-spacing:2px}
-  .toggle-icon{font-size:20px;color:var(--gold);transition:transform 0.3s}
-  .admin-form{display:none}
-  .admin-form.open{display:block}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-  .form-group{display:flex;flex-direction:column;gap:6px}
-  .form-label{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;font-weight:500}
-  .form-input,.form-select{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:10px 14px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s}
-  .form-input:focus,.form-select:focus{border-color:var(--gold)}
-  .form-select option{background:var(--surface2)}
-  .admin-btns{display:flex;gap:12px;margin-top:20px}
-  .btn-add{background:linear-gradient(135deg,var(--gold),var(--dark-gold));color:#000;border:none;padding:12px 28px;border-radius:3px;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:700;font-family:'Rajdhani',sans-serif;transition:all 0.2s}
-  .btn-add:hover{opacity:0.9}
-  .btn-danger{background:transparent;color:#E24B4A;border:1px solid #E24B4A;padding:8px 18px;border-radius:3px;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-weight:600;font-family:'Rajdhani',sans-serif;transition:all 0.2s}
-  .btn-danger:hover{background:rgba(226,75,74,0.1)}
-
-  .password-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:30px;text-align:center;margin-bottom:20px}
-  .password-box input{width:250px;margin:15px auto;display:block}
-  .error-msg{color:#E24B4A;font-size:12px;margin-top:10px;display:none}
-
-  .manage-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px;overflow-x:auto}
-  .manage-table th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);color:var(--gold);font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600}
-  .manage-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text)}
-  .manage-table tr:hover td{background:rgba(201,168,76,0.04)}
-  .manage-img{width:40px;height:40px;object-fit:cover;border-radius:4px}
-
-  .price-input{background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:5px 10px;color:var(--gold);font-family:'Bebas Neue',sans-serif;font-size:18px;width:110px;text-align:center;outline:none}
-  .price-input:focus{border-color:var(--gold)}
-
   .custom-section{background:linear-gradient(135deg,var(--surface) 0%,rgba(201,168,76,0.05) 100%);border:1px solid var(--border);border-radius:8px;padding:48px 32px;text-align:center}
   .custom-title{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:3px;color:var(--gold);margin-bottom:12px}
   .custom-desc{color:var(--muted);font-size:14px;line-height:1.7;max-width:500px;margin:0 auto 28px}
@@ -142,14 +111,11 @@
   .model-name{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;letter-spacing:1px}
   .model-tag{font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
 
-  .loading{text-align:center;padding:50px;color:var(--gold);font-size:20px}
-
   @media(max-width:600px){
     .stats{grid-template-columns:repeat(2,1fr)}
     .models-row{grid-template-columns:1fr}
     .form-row{grid-template-columns:1fr}
     .nav-links{display:none}
-    .manage-table{display:block;overflow-x:scroll}
   }
 </style>
 </head>
@@ -257,100 +223,15 @@
   </div>
 </div>
 
-<!-- ADMIN PANEL -->
-<div class="section">
-  <div class="admin-section">
-    <div class="admin-toggle" onclick="toggleAdminPanel()">
-      <div class="admin-title">⚙ Admin Panel — Products Manage Karein</div>
-      <span class="toggle-icon" id="adminIcon">▼</span>
-    </div>
-    
-    <div id="passwordBox" class="password-box" style="display:none;">
-      <h3 style="color:var(--gold);margin-bottom:10px;">🔐 Admin Access Required</h3>
-      <p style="font-size:12px;color:var(--muted);margin-bottom:15px;">Please enter password to manage products</p>
-      <input type="password" id="adminPassword" placeholder="Enter Password" class="form-input" style="width:250px;margin-bottom:15px;">
-      <button class="btn-primary" onclick="checkPassword()">Submit</button>
-      <div id="passwordError" class="error-msg">❌ Wrong password! Access denied.</div>
-    </div>
-    
-    <div class="admin-form" id="adminForm" style="display:none">
-      <h3>Naya Product Add Karein</h3>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Product Name</label>
-          <input class="form-input" id="pName" placeholder="e.g. Football Jersey">
-        </div>
-        <div class="form-group">
-          <label>Price (PKR)</label>
-          <input class="form-input" id="pPrice" type="number" placeholder="e.g. 2500">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Category</label>
-          <select class="form-select" id="pCat">
-            <option value="kit">Sports Kit</option>
-            <option value="trouser">Trouser</option>
-            <option value="shirt">Shirt</option>
-            <option value="jacket">Varsity Jacket</option>
-            <option value="tracksuit">Tracksuit</option>
-            <option value="summer">Summer Shirt</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Gender</label>
-          <select class="form-select" id="pGender">
-            <option value="men">Men</option>
-            <option value="women">Women</option>
-            <option value="boys">Boys</option>
-            <option value="girls">Girls</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Description</label>
-          <input class="form-input" id="pDesc" placeholder="Short description">
-        </div>
-        <div class="form-group">
-          <label>Badge</label>
-          <select class="form-select" id="pBadge">
-            <option value="">No Badge</option>
-            <option value="new">New</option>
-            <option value="hot">Hot</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Product Image URL</label>
-          <input class="form-input" id="pImage" placeholder="https://example.com/image.jpg">
-          <small>imgbb.com → "Direct link" copy karo</small>
-        </div>
-      </div>
-      <button class="btn-add" onclick="addProduct()">+ Product Add Karein</button>
-
-      <h3>Products & Prices Manage Karein</h3>
-      <div style="overflow-x:auto">
-        <table class="manage-table" id="manageTable">
-          <thead><tr><th>Image</th><th>Product</th><th>Category</th><th>Gender</th><th>Price</th><th>Action</th></tr></thead>
-          <tbody id="manageBody"></tbody>
-        </table>
-      </div>
-      <button class="btn-danger" onclick="resetToDefault()" style="margin-top:20px;">Reset to Default Products</button>
-    </div>
-  </div>
-</div>
-
 <div style="background:var(--surface);border-top:1px solid var(--border);padding:60px 24px" id="contact">
   <div style="max-width:600px;margin:0 auto;text-align:center">
     <div class="section-eyebrow">Get In Touch</div>
     <h2 class="section-title">Direct WhatsApp</h2>
     <div class="section-line"></div>
-    <p>Order karne ke liye, customization ke liye, ya koi bhi sawaal ke liye — seedha WhatsApp karein!</p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:20px;">
-      <button class="btn-primary" onclick="openWA('Hi! I want to order from ZYRON Sportswear.')">💬 Order Karein</button>
-      <button class="btn-outline" onclick="openWA('Hi! I need info about ZYRON Sportswear products.')">Price Poochein</button>
+    <p style="color:var(--muted);font-size:14px;line-height:1.7;margin:24px 0 32px">Order karne ke liye, customization ke liye, ya koi bhi sawaal ke liye — seedha WhatsApp karein!</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <button class="btn-primary" style="font-size:14px;display:flex;align-items:center;gap:8px" onclick="openWA('Hi! I want to order from ZYRON Sportswear.')">💬 Order Karein</button>
+      <button class="btn-outline" style="font-size:14px" onclick="openWA('Hi! I need info about ZYRON Sportswear products and pricing.')">Price Poochein</button>
     </div>
   </div>
 </div>
@@ -367,7 +248,8 @@
   <div class="footer-copy">© 2025 ZYRON Sportswear Manufacturing. All rights reserved.</div>
 </footer>
 
-<a class="wa-float" onclick="openWA('Hi! I am interested in ZYRON Sportswear products.')">💬</a>
+<a class="wa-float" onclick="openWA('Hi! I am interested in ZYRON Sportswear products.')" title="WhatsApp par message karein">💬</a>
+
 <div class="toast" id="toast"></div>
 <div id="lightbox" class="lightbox" onclick="closeLightbox()">
   <span class="close" onclick="closeLightbox()">&times;</span>
@@ -377,13 +259,12 @@
 
 <script>
 const WHATSAPP_NUMBER = '923256054759';
-const ADMIN_PASSWORD = 'admin123';
 
 const catEmojis = {kit:'⚽', trouser:'👖', shirt:'👕', jacket:'🧥', tracksuit:'🏃', summer:'☀️'};
 const catNames = {kit:'Sports Kit', trouser:'Trouser', shirt:'Shirt', jacket:'Varsity Jacket', tracksuit:'Tracksuit', summer:'Summer Shirt'};
 
-// Default Products
-const defaultProducts = [
+// ✅ YAHAN APNE PRODUCTS ADD KARO - Sabhi Customers Ko Yahan se Products Milenge
+const products = [
   {id:1, name:'Football Jersey Set', cat:'kit', gender:'men', price:2800, desc:'Premium dry-fit football kit', badge:'hot', image:'https://i.imgur.com/1nJEkNy.jpeg'},
   {id:2, name:'Cricket Uniform', cat:'kit', gender:'men', price:3200, desc:'Full cricket uniform set', badge:'', image:'https://i.imgur.com/sGQqC1x.jpeg'},
   {id:3, name:'Sports Trouser', cat:'trouser', gender:'men', price:1500, desc:'Comfortable elastic waist trouser', badge:'', image:'https://i.imgur.com/4XpMhLq.jpeg'},
@@ -392,54 +273,53 @@ const defaultProducts = [
   {id:6, name:'Women Sports Top', cat:'shirt', gender:'women', price:1600, desc:'Stretchable performance top', badge:'new', image:'https://i.imgur.com/fR5XqyP.jpeg'},
   {id:7, name:'Varsity Jacket', cat:'jacket', gender:'men', price:5500, desc:'Classic letterman varsity jacket', badge:'hot', image:'https://i.imgur.com/XnLHKnM.jpeg'},
   {id:8, name:'Girls Varsity', cat:'jacket', gender:'girls', price:4800, desc:'Stylish varsity jacket for girls', badge:'new', image:'https://i.imgur.com/JqLkPcR.jpeg'},
-  {id:9, name:'Men Tracksuit', cat:'tracksuit', gender:'men', price:4200, desc:'Full tracksuit set', badge:'', image:'https://i.imgur.com/HgJLmNp.jpeg'},
+  {id:9, name:'Men Tracksuit', cat:'tracksuit', gender:'men', price:4200, desc:'Full tracksuit set - top + bottom', badge:'', image:'https://i.imgur.com/HgJLmNp.jpeg'},
   {id:10, name:'Boys Tracksuit', cat:'tracksuit', gender:'boys', price:3200, desc:'Kids tracksuit set', badge:'', image:'https://i.imgur.com/MDnbq7R.jpeg'},
-  {id:11, name:'Summer Dry-Fit', cat:'summer', gender:'men', price:1400, desc:'Breathable summer shirt', badge:'', image:'https://i.imgur.com/RvH3nQc.jpeg'},
-  {id:12, name:'Women Tracksuit', cat:'tracksuit', gender:'women', price:3800, desc:'Full ladies tracksuit', badge:'new', image:'https://i.imgur.com/XZqM9pL.jpeg'},
-  {id:13, name:'Boys Kit Set', cat:'kit', gender:'boys', price:2200, desc:'Complete sports kit', badge:'', image:'https://i.imgur.com/vNmHxVb.jpeg'},
-  {id:14, name:'Girls Summer Top', cat:'summer', gender:'girls', price:1100, desc:'Light summer top', badge:'new', image:'https://i.imgur.com/pQnYj8d.jpeg'},
-  {id:15, name:'Boys Trouser', cat:'trouser', gender:'boys', price:1100, desc:'Comfortable boys trouser', badge:'', image:'https://i.imgur.com/cZ4mNxV.jpeg'},
-  {id:17, name:'New Product', cat:'kit', gender:'men', price:2500, desc:'Product description', badge:'new', image:'https://i.postimg.cc/j2v4G5tt/Whats-App-Image-2026-04-15-at-8-07-02-PM.jpg'},
-  {id:16, name:'Women Jacket', cat:'jacket', gender:'women', price:5000, desc:'Elegant sports jacket', badge:'', image:'https://i.imgur.com/dWYnHkM.jpeg'}
+  {id:11, name:'Summer Dry-Fit', cat:'summer', gender:'men', price:1400, desc:'Breathable summer performance shirt', badge:'', image:'https://i.imgur.com/RvH3nQc.jpeg'},
+  {id:12, name:'Women Tracksuit', cat:'tracksuit', gender:'women', price:3800, desc:'Full ladies tracksuit set', badge:'new', image:'https://i.imgur.com/XZqM9pL.jpeg'},
+  {id:13, name:'Boys Kit Set', cat:'kit', gender:'boys', price:2200, desc:'Complete sports kit for boys', badge:'', image:'https://i.imgur.com/vNmHxVb.jpeg'},
+  {id:14, name:'Girls Summer Top', cat:'summer', gender:'girls', price:1100, desc:'Light summer sports top', badge:'new', image:'https://i.imgur.com/pQnYj8d.jpeg'},
+  {id:15, name:'Boys Trouser', cat:'trouser', gender:'boys', price:1100, desc:'Comfortable boys sports trouser', badge:'', image:'https://i.imgur.com/cZ4mNxV.jpeg'},
+  {id:16, name:'Women Jacket', cat:'jacket', gender:'women', price:5000, desc:'Elegant sports jacket for women', badge:'', image:'https://i.imgur.com/dWYnHkM.jpeg'},
+  {id:17, name:'Naya Product', cat:'kit', gender:'men', price:3000, desc:'Description', badge:'new', image:'https://i.postimg.cc/j2v4G5tt/Whats-App-Image-2026-04-15-at-8-07-02-PM.jpg'}
 ];
 
-let products = [];
-let nextId = 17;
 let activeCat = 'all', activeGender = 'all';
 
-// Load from localStorage
-function loadProducts() {
-  // Direct defaultProducts use karo - sabke liye same
-  products = JSON.parse(JSON.stringify(defaultProducts));
+function filterCat(cat, el){
+  activeCat = cat;
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
   renderProducts();
 }
 
-// Save to localStorage
-function saveProducts() {
-  localStorage.setItem('zyron_products', JSON.stringify(products));
+function filterGender(g, el){
+  activeGender = g;
+  document.querySelectorAll('.gender-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderProducts();
 }
 
-function renderProducts() {
+function renderProducts(){
   const grid = document.getElementById('productsGrid');
-  let filtered = products.filter(p => {
-    return (activeCat==='all' || p.cat===activeCat) && (activeGender==='all' || p.gender===activeGender);
+  let filtered = products.filter(p=>{
+    const catOk = activeCat==='all' || p.cat===activeCat;
+    const gOk = activeGender==='all' || p.gender===activeGender;
+    return catOk && gOk;
   });
-  if(!filtered.length) {
-    grid.innerHTML = '<p style="text-align:center;padding:40px;">Is category mein koi product nahi hai.</p>';
-    return;
-  }
-  grid.innerHTML = filtered.map(p => `
+  if(!filtered.length){grid.innerHTML='<p style="color:var(--muted);font-size:14px;text-align:center;grid-column:1/-1;padding:40px">Is category mein koi product nahi hai abhi.</p>';return;}
+  grid.innerHTML = filtered.map(p=>`
     <div class="product-card">
       <div class="product-img" onclick="${p.image ? `openLightbox('${p.image}', '${p.name}')` : ''}">
-        ${p.image ? `<img src="${p.image}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.8em%22 font-size=%2290%22%3E${catEmojis[p.cat]}%3C/text%3E%3C/svg%3E'">` : `<span class="product-emoji">${catEmojis[p.cat]}</span>`}
-        ${p.badge ? `<span class="product-badge ${p.badge==='new'?'new':''}">${p.badge.toUpperCase()}</span>` : ''}
+        ${p.image ? `<img src="${p.image}" alt="${p.name}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.8em%22 font-size=%2290%22%3E${catEmojis[p.cat]}%3C/text%3E%3C/svg%3E'">` : `<span class="product-emoji">${catEmojis[p.cat]}</span>`}
+        ${p.badge?`<span class="product-badge ${p.badge==='new'?'new':''}">${p.badge.toUpperCase()}</span>`:''}
       </div>
       <div class="product-body">
-        <div class="product-cat">${catNames[p.cat]} • ${p.gender}</div>
+        <div class="product-cat">${catNames[p.cat]} • ${p.gender.charAt(0).toUpperCase()+p.gender.slice(1)}</div>
         <div class="product-name">${p.name}</div>
         <div class="product-desc">${p.desc}</div>
         <div class="product-footer">
-          <div class="product-price">PKR ${p.price.toLocaleString()}</div>
+          <div class="product-price">PKR ${p.price.toLocaleString()} <span>/-</span></div>
           <button class="btn-wa" onclick="orderProduct('${p.name}',${p.price})">💬 Order</button>
         </div>
       </div>
@@ -447,158 +327,41 @@ function renderProducts() {
   `).join('');
 }
 
-function renderManage() {
-  const tbody = document.getElementById('manageBody');
-  if(!tbody) return;
-  tbody.innerHTML = products.map(p => `
-    <tr>
-      <td>${p.image ? `<img src="${p.image}" class="manage-img" onerror="this.style.display='none'">` : catEmojis[p.cat]}</td>
-      <td>${p.name}</td>
-      <td>${catNames[p.cat]}</td>
-      <td>${p.gender}</td>
-      <td><input class="price-input" value="${p.price}" onchange="updatePrice(${p.id}, this.value)"></td>
-      <td><button class="btn-danger" onclick="removeProduct(${p.id})">Delete</button></td>
-    </tr>
-  `).join('');
-}
-
-function updatePrice(id, val) {
-  const p = products.find(x=>x.id===id);
-  if(p) {
-    p.price = parseInt(val) || p.price;
-    renderProducts();
-    saveProducts();
-    showToast('Price updated!');
-  }
-}
-
-function removeProduct(id) {
-  if(confirm('Delete this product?')) {
-    products = products.filter(p=>p.id!==id);
-    renderProducts();
-    renderManage();
-    saveProducts();
-    showToast('Product deleted!');
-  }
-}
-
-function addProduct() {
-  const name = document.getElementById('pName').value.trim();
-  const price = parseInt(document.getElementById('pPrice').value);
-  const cat = document.getElementById('pCat').value;
-  const gender = document.getElementById('pGender').value;
-  const desc = document.getElementById('pDesc').value.trim();
-  const badge = document.getElementById('pBadge').value;
-  const image = document.getElementById('pImage').value.trim();
-  
-  if(!name || !price) {
-    showToast('Name and price required!');
-    return;
-  }
-  
-  products.push({
-    id: nextId++,
-    name, cat, gender, price,
-    desc: desc || 'Quality sportswear',
-    badge: badge,
-    image: image || null
-  });
-  
-  renderProducts();
-  renderManage();
-  saveProducts();
-  
-  document.getElementById('pName').value = '';
-  document.getElementById('pPrice').value = '';
-  document.getElementById('pDesc').value = '';
-  document.getElementById('pImage').value = '';
-  showToast('Product added!');
-}
-
-function resetToDefault() {
-  if(confirm('Reset all products to default?')) {
-    products = JSON.parse(JSON.stringify(defaultProducts));
-    nextId = 17;
-    renderProducts();
-    renderManage();
-    saveProducts();
-    showToast('Reset to default products!');
-  }
-}
-
-function filterCat(cat, el) {
-  activeCat = cat;
-  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  renderProducts();
-}
-
-function filterGender(g, el) {
-  activeGender = g;
-  document.querySelectorAll('.gender-tab').forEach(t=>t.classList.remove('active'));
-  if(el) el.classList.add('active');
-  renderProducts();
-}
-
-function toggleAdminPanel() {
-  const pwdBox = document.getElementById('passwordBox');
-  const adminForm = document.getElementById('adminForm');
-  const icon = document.getElementById('adminIcon');
-  
-  if(adminForm.style.display === 'block') {
-    adminForm.style.display = 'none';
-    pwdBox.style.display = 'none';
-    icon.textContent = '▼';
-  } else {
-    pwdBox.style.display = 'block';
-    adminForm.style.display = 'none';
-    icon.textContent = '▲';
-    document.getElementById('adminPassword').value = '';
-    document.getElementById('passwordError').style.display = 'none';
-  }
-}
-
-function checkPassword() {
-  const pwd = document.getElementById('adminPassword').value;
-  if(pwd === ADMIN_PASSWORD) {
-    document.getElementById('passwordBox').style.display = 'none';
-    document.getElementById('adminForm').style.display = 'block';
-    renderManage();
-    showToast('Admin access granted!');
-  } else {
-    document.getElementById('passwordError').style.display = 'block';
-    showToast('Wrong password!');
-  }
-}
-
-function openLightbox(url, name) {
-  const lb = document.getElementById('lightbox');
-  document.getElementById('lightbox-img').src = url;
-  document.getElementById('lightbox-caption').textContent = name;
-  lb.style.display = 'flex';
+function openLightbox(imageUrl, productName) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const caption = document.getElementById('lightbox-caption');
+  lightbox.style.display = 'flex';
+  lightboxImg.src = imageUrl;
+  caption.textContent = productName;
+  document.body.style.overflow = 'hidden';
 }
 
 function closeLightbox() {
   document.getElementById('lightbox').style.display = 'none';
+  document.body.style.overflow = 'auto';
 }
 
-function openWA(msg) {
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+function openWA(msg){
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
-function orderProduct(name, price) {
-  openWA(`Hi! I want to order *${name}* for PKR ${price}.`);
+function orderProduct(name, price){
+  openWA(`Hi! Main *${name}* (PKR ${price.toLocaleString()}/-) order karna chahta/chahti hoon. Please confirm karein.`);
 }
 
-function showToast(msg) {
+function showToast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
+  setTimeout(()=>t.classList.remove('show'),3000);
 }
 
-// Initial load
-loadProducts();
+renderProducts();
 </script>
 </body>
 </html>
