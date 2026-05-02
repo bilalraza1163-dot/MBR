@@ -36,7 +36,7 @@
   .slide-menu-overlay.active{display:block}
   .slide-menu h3{color:var(--gold);margin-bottom:20px;font-family:'Rajdhani';letter-spacing:2px}
   .slide-menu .cat-item{display:block;padding:12px 15px;color:var(--text);border-bottom:1px solid var(--border);cursor:pointer;transition:0.3s}
-  .slide-menu .cat-item:hover{background:bgba(201,168,76,0.1);color:var(--gold);padding-left:25px}
+  .slide-menu .cat-item:hover{background:rgba(201,168,76,0.1);color:var(--gold);padding-left:25px}
   .slide-menu .close-menu{position:absolute;top:15px;right:20px;font-size:24px;color:var(--gold);cursor:pointer}
 
   .hero{position:relative;min-height:75vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#050505 0%,#0f0a05 40%,#100505 100%)}
@@ -80,7 +80,7 @@
   .product-img{height:220px;display:flex;align-items:center;justify-content:center;background:var(--surface2);overflow:hidden;cursor:pointer}
   .product-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
   .product-card:hover .product-img img{transform:scale(1.08)}
-  .sale-badge{position:absolute;top:12px;right:12px;background:var(--sale);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,0.2)}
+  .sale-badge{position:absolute;top:12px;right:12px;background:var(--sale);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;z-index:2}
   .trending-badge{position:absolute;top:12px;left:12px;background:var(--gold);color:#000;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;z-index:2}
   .product-body{padding:16px}
   .product-cat{font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
@@ -113,7 +113,6 @@
   .remove-variant{background:var(--sale);color:#fff;border:none;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px}
   .btn-add-variant{background:transparent;border:1px dashed var(--gold);color:var(--gold);padding:10px;border-radius:4px;cursor:pointer;width:100%;margin:10px 0;font-size:12px}
   .btn-add{background:linear-gradient(135deg,var(--gold),var(--dark-gold));color:#000;border:none;padding:12px 28px;border-radius:3px;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:700}
-  .btn-add:disabled{opacity:0.5;cursor:not-allowed}
   .btn-danger{background:transparent;color:#E24B4A;border:1px solid #E24B4A;padding:8px 18px;border-radius:3px;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-weight:600}
   .manage-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px;display:block;overflow-x:auto}
   .manage-table th,.manage-table td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left}
@@ -169,7 +168,7 @@
     <a href="#custom">Customization</a>
     <a href="#contact">Contact</a>
     <a href="#" class="nav-wa" onclick="openWA('Hi! I want to inquire about ZYRON products.')">WhatsApp</a>
-    <button id="adminShowBtn" class="logout-btn" style="background:var(--gold);color:#000;padding:6px 15px;border-radius:4px;cursor:pointer;border:none;font-size:11px;font-weight:600">🔐 Admin Panel</button>
+    <button id="adminShowBtn" style="background:var(--gold);color:#000;padding:6px 15px;border-radius:4px;cursor:pointer;border:none;font-size:11px;font-weight:600">🔐 Admin Panel</button>
   </div>
   <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
 </nav>
@@ -266,7 +265,7 @@
   </div>
 </div>
 
-<!-- ADMIN PANEL - Fixed with Session Security -->
+<!-- ADMIN PANEL -->
 <div class="section" id="adminPanelSection" style="display:none">
   <div class="admin-section">
     <div class="admin-toggle" onclick="toggleAdminPanel()">
@@ -274,7 +273,7 @@
       <span class="toggle-icon" id="adminIcon">▼</span>
     </div>
     
-    <div id="adminPasswordBox" class="password-box" style="display:block; margin-bottom:20px">
+    <div id="adminPasswordBox" class="password-box" style="display:block;">
       <h3 style="color:var(--gold);margin-bottom:10px;">🔐 Admin Access Required</h3>
       <p style="font-size:12px;color:var(--muted);margin-bottom:15px;">Enter admin password to manage products</p>
       <input type="password" id="adminPasswordInput" placeholder="Enter Password" class="form-input" style="width:250px;margin:0 auto 15px auto;display:block;">
@@ -329,6 +328,7 @@ const firebaseConfig = {
   appId: "1:1055409343755:web:e6af16c4395772a9ac660e"
 };
 
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
@@ -339,36 +339,72 @@ let variantFields = [];
 let nextId = 1;
 let isAdminLoggedIn = false;
 
-// Admin Password
 const ADMIN_PASSWORD = 'zyronadmin123';
 
-function checkAdminPassword() {
-  const enteredPassword = document.getElementById('adminPasswordInput').value;
-  if (enteredPassword === ADMIN_PASSWORD) {
-    isAdminLoggedIn = true;
-    document.getElementById('adminPasswordBox').style.display = 'none';
-    document.getElementById('adminForm').style.display = 'block';
-    showToast('✅ Admin access granted!');
-  } else {
-    document.getElementById('adminPasswordError').style.display = 'block';
-    showToast('❌ Wrong password!');
+// Sample default products (agar database khaali hai toh ye dikhenge)
+const defaultProducts = [
+  {
+    id: 1,
+    name: 'Elite Strike Football Jersey',
+    cat: 'kit',
+    gender: 'men',
+    description: 'Premium moisture-wicking fabric for ultimate comfort',
+    originalPrice: 3500,
+    trending: true,
+    variants: {
+      '0': { color: 'Red', colorCode: '#DC2626', image: 'https://i.imgur.com/1nJEkNy.jpeg', sale: 25 },
+      '1': { color: 'Blue', colorCode: '#2563EB', image: 'https://i.imgur.com/sGQqC1x.jpeg', sale: 0 },
+      '2': { color: 'Black', colorCode: '#000000', image: 'https://i.imgur.com/vNmHxVb.jpeg', sale: 30 }
+    }
+  },
+  {
+    id: 2,
+    name: 'Pro Cricket Kit',
+    cat: 'kit',
+    gender: 'men',
+    description: 'Professional grade cricket uniform',
+    originalPrice: 4200,
+    trending: false,
+    variants: {
+      '0': { color: 'Blue', colorCode: '#2563EB', image: 'https://i.imgur.com/sGQqC1x.jpeg', sale: 15 },
+      '1': { color: 'Green', colorCode: '#16A34A', image: 'https://i.imgur.com/4XpMhLq.jpeg', sale: 0 },
+      '2': { color: 'Yellow', colorCode: '#EAB308', image: 'https://i.imgur.com/QZmYo0p.jpeg', sale: 20 }
+    }
   }
+];
+
+// Check if database has data, if not add default data
+function initializeDefaultData() {
+  database.ref('products').once('value', (snapshot) => {
+    if (!snapshot.exists()) {
+      console.log('No data found, adding default products...');
+      defaultProducts.forEach(product => {
+        database.ref(`products/${product.id}`).set(product);
+      });
+    }
+  });
 }
 
 // Load Products from Firebase
 function loadProductsFromFirebase() {
   database.ref('products').on('value', (snapshot) => {
     const data = snapshot.val();
-    if (data) {
+    if (data && Object.keys(data).length > 0) {
       products = Object.values(data);
       const maxId = Math.max(...products.map(p => p.id), 0);
       nextId = maxId + 1;
-      renderProducts();
-      if (isAdminLoggedIn) renderManage();
     } else {
-      products = [];
-      renderProducts();
+      products = [...defaultProducts];
+      nextId = defaultProducts.length + 1;
     }
+    renderProducts();
+    if (isAdminLoggedIn) renderManage();
+    showToast('✅ Products loaded from cloud!');
+  }, (error) => {
+    console.error('Error loading products:', error);
+    showToast('⚠️ Error loading products, using default data');
+    products = [...defaultProducts];
+    renderProducts();
   });
 }
 
@@ -378,6 +414,7 @@ async function saveProductToFirebase(product) {
     showToast('✅ Product saved to cloud!');
   } catch (error) {
     showToast('❌ Error saving product');
+    console.error(error);
   }
 }
 
@@ -392,6 +429,7 @@ async function deleteProductFromFirebase(productId) {
       showToast('🗑 Product deleted from cloud!');
     } catch (error) {
       showToast('❌ Error deleting product');
+      console.error(error);
     }
   }
 }
@@ -472,4 +510,149 @@ function renderManage() {
     <td><strong>${p.name}</strong></td>
     <td>${getCategoryName(p.cat)}</td>
     <td>${p.gender}</td>
-    <td>${p.variants ? Object.keys(p.variants).length : 0} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} —\n)\n\nfunction addVariantField() { variantFields.push({}); renderVariantFields(); }\n\nfunction renderVariantFields() {\n  const container = document.getElementById('variantsContainer');\n  if (!container) return;\n  container.innerHTML = variantFields.map((_, idx) => `<div class="variant-row">\n    <div class="variant-header"><span>🎨 Variant ${idx + 1}</span><button type="button" class="remove-variant" onclick="removeVariantField(${idx})">Remove</button></div>\n    <div class="form-row">\n      <div class="form-group"><label>Color Name</label><input class="form-input" id="varColor_${idx}" placeholder="e.g. Red"></div>\n      <div class="form-group"><label>Color Code</label><input class="form-input" id="varCode_${idx}" placeholder="#DC2626"></div>\n    </div>\n    <div class="form-row">\n      <div class="form-group"><label>Image URL</label><input class="form-input" id="varImage_${idx}" placeholder="https://i.imgur.com/xxx.jpg"></div>\n      <div class="form-group"><label>Sale %</label><input class="form-input" id="varSale_${idx}" type="number" placeholder="0"></div>\n    </div>\n  </div>`).join('');\n}\n\nfunction removeVariantField(idx) { variantFields.splice(idx, 1); renderVariantFields(); }\n\nasync function addProductToFirebase() {\n  if (!isAdminLoggedIn) {\n    showToast('❌ Admin login required! Please enter password first.');\n    return;\n  }\n  \n  const name = document.getElementById('pName').value.trim();\n  const price = parseInt(document.getElementById('pPrice').value);\n  const cat = document.getElementById('pCat').value;\n  const gender = document.getElementById('pGender').value;\n  const desc = document.getElementById('pDesc').value.trim();\n  \n  if (!name || !price) { showToast('⚠ Name and price required!'); return; }\n  if (variantFields.length === 0) { showToast('⚠ Add at least one color variant!'); return; }\n  \n  const variants = {};\n  for (let i = 0; i < variantFields.length; i++) {\n    const colorName = document.getElementById(`varColor_${i}`).value;\n    if (!colorName) {\n      showToast(`⚠ Variant ${i+1}: Color name required!`);\n      return;\n    }\n    variants[i] = {\n      color: colorName,\n      colorCode: document.getElementById(`varCode_${i}`).value || '#CCCCCC',\n      image: document.getElementById(`varImage_${i}`).value,\n      sale: parseInt(document.getElementById(`varSale_${i}`).value) || 0\n    };\n  }\n  \n  const newProduct = {\n    id: nextId++,\n    name: name,\n    cat: cat,\n    gender: gender,\n    description: desc || 'Premium quality sportswear',\n    originalPrice: price,\n    trending: false,\n    variants: variants\n  };\n  \n  await saveProductToFirebase(newProduct);\n  \n  document.getElementById('pName').value = '';\n  document.getElementById('pPrice').value = '';\n  document.getElementById('pDesc').value = '';\n  variantFields = [];\n  renderVariantFields();\n}\n\nfunction toggleAdminPanel() {\n  if (!isAdminLoggedIn) {\n    showToast('❌ Please login as admin first!');\n    return;\n  }\n  const adminForm = document.getElementById('adminForm');\n  const icon = document.getElementById('adminIcon');\n  if (adminForm.style.display === 'block') {\n    adminForm.style.display = 'none';\n    icon.textContent = '▼';\n  } else {\n    adminForm.style.display = 'block';\n    icon.textContent = '▲';\n    renderManage();\n  }\n}\n\nfunction openLightbox(imageUrl, productName) {\n  const lightbox = document.createElement('div');\n  lightbox.className = 'lightbox';\n  lightbox.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:10000;display:flex;align-items:center;justify-content:center;cursor:pointer;';\n  lightbox.onclick = () => lightbox.remove();\n  lightbox.innerHTML = `<div style="position:absolute;top:20px;right:35px;color:#fff;font-size:40px;cursor:pointer;">&times;</div>\n                        <img src="${imageUrl}" style="max-width:90%;max-height:90%;object-fit:contain;border-radius:8px;">\n                        <div style="position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#fff;background:rgba(0,0,0,0.7);padding:10px;">${productName}</div>`;\n  document.body.appendChild(lightbox);\n}\n\nfunction openWA(msg) { window.open(`https://wa.me/923256054759?text=${encodeURIComponent(msg)}`, '_blank'); }\nfunction orderProduct(name, price, color) { openWA(`Hi! I want to order *${name}* (${color} color) for PKR ${price.toLocaleString()}. Please confirm.`); }\nfunction showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }\n\nfunction openSlideMenu() { document.getElementById('slideMenu').classList.add('open'); document.getElementById('slideOverlay').classList.add('active'); }\nfunction closeSlideMenu() { document.getElementById('slideMenu').classList.remove('open'); document.getElementById('slideOverlay').classList.remove('active'); }\n\ndocument.getElementById('hamburger')?.addEventListener('click', openSlideMenu);\ndocument.getElementById('closeMenu')?.addEventListener('click', closeSlideMenu);\ndocument.getElementById('slideOverlay')?.addEventListener('click', closeSlideMenu);\ndocument.getElementById('adminShowBtn')?.addEventListener('click', () => { document.getElementById('adminPanelSection').style.display = 'block'; });\ndocument.querySelectorAll('.slide-menu .cat-item')?.forEach(item => {\n  item.addEventListener('click', () => {\n    const cat = item.getAttribute('data-cat');\n    const gender = item.getAttribute('data-gender');\n    if (cat) filterCat(cat, document.querySelector(`.cat-tab[onclick*="'${cat}'"]`));\n    if (gender) filterGender(gender, document.querySelector(`.gender-tab[onclick*="'${gender}'"]`));\n    closeSlideMenu();\n  });\n});\n\nloadProductsFromFirebase();\n</script>\n</body>\n</html>
+    <td>${p.variants ? Object.keys(p.variants).length : 0} colors</td>
+    <td><button class="btn-danger" onclick="deleteProductFromFirebase(${p.id})">Delete</button></td>
+  </tr>`).join('');
+}
+
+function addVariantField() { variantFields.push({}); renderVariantFields(); }
+
+function renderVariantFields() {
+  const container = document.getElementById('variantsContainer');
+  if (!container) return;
+  container.innerHTML = variantFields.map((_, idx) => `<div class="variant-row">
+    <div class="variant-header"><span>🎨 Variant ${idx + 1}</span><button type="button" class="remove-variant" onclick="removeVariantField(${idx})">Remove</button></div>
+    <div class="form-row">
+      <div class="form-group"><label>Color Name</label><input class="form-input" id="varColor_${idx}" placeholder="e.g. Red"></div>
+      <div class="form-group"><label>Color Code</label><input class="form-input" id="varCode_${idx}" placeholder="#DC2626"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Image URL</label><input class="form-input" id="varImage_${idx}" placeholder="https://i.imgur.com/xxx.jpg"></div>
+      <div class="form-group"><label>Sale %</label><input class="form-input" id="varSale_${idx}" type="number" placeholder="0"></div>
+    </div>
+  </div>`).join('');
+}
+
+function removeVariantField(idx) { variantFields.splice(idx, 1); renderVariantFields(); }
+
+async function addProductToFirebase() {
+  if (!isAdminLoggedIn) {
+    showToast('❌ Admin login required! Please enter password first.');
+    return;
+  }
+  
+  const name = document.getElementById('pName').value.trim();
+  const price = parseInt(document.getElementById('pPrice').value);
+  const cat = document.getElementById('pCat').value;
+  const gender = document.getElementById('pGender').value;
+  const desc = document.getElementById('pDesc').value.trim();
+  
+  if (!name || !price) { showToast('⚠ Name and price required!'); return; }
+  if (variantFields.length === 0) { showToast('⚠ Add at least one color variant!'); return; }
+  
+  const variants = {};
+  for (let i = 0; i < variantFields.length; i++) {
+    const colorName = document.getElementById(`varColor_${i}`).value;
+    if (!colorName) {
+      showToast(`⚠ Variant ${i+1}: Color name required!`);
+      return;
+    }
+    variants[i] = {
+      color: colorName,
+      colorCode: document.getElementById(`varCode_${i}`).value || '#CCCCCC',
+      image: document.getElementById(`varImage_${i}`).value,
+      sale: parseInt(document.getElementById(`varSale_${i}`).value) || 0
+    };
+  }
+  
+  const newProduct = {
+    id: nextId++,
+    name: name,
+    cat: cat,
+    gender: gender,
+    description: desc || 'Premium quality sportswear',
+    originalPrice: price,
+    trending: false,
+    variants: variants
+  };
+  
+  await saveProductToFirebase(newProduct);
+  
+  document.getElementById('pName').value = '';
+  document.getElementById('pPrice').value = '';
+  document.getElementById('pDesc').value = '';
+  variantFields = [];
+  renderVariantFields();
+}
+
+function checkAdminPassword() {
+  const enteredPassword = document.getElementById('adminPasswordInput').value;
+  if (enteredPassword === ADMIN_PASSWORD) {
+    isAdminLoggedIn = true;
+    document.getElementById('adminPasswordBox').style.display = 'none';
+    document.getElementById('adminForm').style.display = 'block';
+    renderManage();
+    showToast('✅ Admin access granted! You can now add/delete products.');
+  } else {
+    document.getElementById('adminPasswordError').style.display = 'block';
+    showToast('❌ Wrong password!');
+  }
+}
+
+function toggleAdminPanel() {
+  if (!isAdminLoggedIn) {
+    showToast('❌ Please login as admin first!');
+    return;
+  }
+  const adminForm = document.getElementById('adminForm');
+  const icon = document.getElementById('adminIcon');
+  if (adminForm.style.display === 'block') {
+    adminForm.style.display = 'none';
+    icon.textContent = '▼';
+  } else {
+    adminForm.style.display = 'block';
+    icon.textContent = '▲';
+    renderManage();
+  }
+}
+
+function openLightbox(imageUrl, productName) {
+  const lightbox = document.createElement('div');
+  lightbox.className = 'lightbox';
+  lightbox.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:10000;display:flex;align-items:center;justify-content:center;cursor:pointer;';
+  lightbox.onclick = () => lightbox.remove();
+  lightbox.innerHTML = `<div style="position:absolute;top:20px;right:35px;color:#fff;font-size:40px;cursor:pointer;">&times;</div>
+                        <img src="${imageUrl}" style="max-width:90%;max-height:90%;object-fit:contain;border-radius:8px;">
+                        <div style="position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#fff;background:rgba(0,0,0,0.7);padding:10px;">${productName}</div>`;
+  document.body.appendChild(lightbox);
+}
+
+function openWA(msg) { window.open(`https://wa.me/923256054759?text=${encodeURIComponent(msg)}`, '_blank'); }
+function orderProduct(name, price, color) { openWA(`Hi! I want to order *${name}* (${color} color) for PKR ${price.toLocaleString()}. Please confirm.`); }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+
+function openSlideMenu() { document.getElementById('slideMenu').classList.add('open'); document.getElementById('slideOverlay').classList.add('active'); }
+function closeSlideMenu() { document.getElementById('slideMenu').classList.remove('open'); document.getElementById('slideOverlay').classList.remove('active'); }
+
+// Event Listeners
+document.getElementById('hamburger')?.addEventListener('click', openSlideMenu);
+document.getElementById('closeMenu')?.addEventListener('click', closeSlideMenu);
+document.getElementById('slideOverlay')?.addEventListener('click', closeSlideMenu);
+document.getElementById('adminShowBtn')?.addEventListener('click', () => { document.getElementById('adminPanelSection').style.display = 'block'; });
+
+document.querySelectorAll('.slide-menu .cat-item')?.forEach(item => {
+  item.addEventListener('click', () => {
+    const cat = item.getAttribute('data-cat');
+    const gender = item.getAttribute('data-gender');
+    if (cat) filterCat(cat, document.querySelector(`.cat-tab[onclick*="'${cat}'"]`));
+    if (gender) filterGender(gender, document.querySelector(`.gender-tab[onclick*="'${gender}'"]`));
+    closeSlideMenu();
+  });
+});
+
+// Initialize
+initializeDefaultData();
+loadProductsFromFirebase();
+</script>
+</body>
+</html>
