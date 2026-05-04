@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ZYRON Sportswear - Premium Sportswear Pakistan</title>
-<!-- Firebase SDKs -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -12,7 +11,6 @@
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   :root{
-    /* NEW PROFESSIONAL LIGHT THEME */
     --gold:#C9A84C;
     --dark-gold:#B8942E;
     --red:#C62828;
@@ -28,202 +26,73 @@
   }
   body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
 
-  /* ========== PREMIUM PROFESSIONAL ANIMATIONS ========== */
+  .hero{position:relative;min-height:85vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#F8F9FA 0%,#F0F2F5 40%,#EAECEF 100%)}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(201,168,76,0.08) 0%,transparent 60%),radial-gradient(ellipse at 30% 80%,rgba(198,40,40,0.03) 0%,transparent 50%);animation:bgPulse 8s ease-in-out infinite}
+  @keyframes bgPulse{0%,100%{opacity:0.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
   
-  /* Subtle Shimmer - Professional */
-  @keyframes shimmerGold {
-    0% { background-position: -200% center; }
-    100% { background-position: 200% center; }
-  }
+  .hero-logo{width:130px;height:130px;margin-bottom:20px;filter:drop-shadow(0 0 10px rgba(201,168,76,0.3));animation:logoFloat 3s ease-in-out infinite,logoGlow 2s ease-in-out infinite}
+  @keyframes logoFloat{0%,100%{transform:translateY(0px)}50%{transform:translateY(-12px)}}
+  @keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 5px rgba(201,168,76,0.3))}50%{filter:drop-shadow(0 0 20px rgba(201,168,76,0.6))}}
   
-  /* Smooth Scroll Reveal */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  .hero-eyebrow{font-size:12px;letter-spacing:6px;color:var(--gold);text-transform:uppercase;margin-bottom:15px;animation:fadeInDown 0.8s ease-out}
+  @keyframes fadeInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
   
-  /* Gentle Float */
-  @keyframes gentleFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
-  }
+  .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,10vw,120px);line-height:0.95;letter-spacing:6px;color:var(--text);margin-bottom:15px;position:relative;display:inline-block;perspective:1000px}
+  .hero-title .title-letter{display:inline-block;animation:letterPop 0.5s cubic-bezier(0.34,1.2,0.64,1) forwards;opacity:0;transform:scale(0)}
+  .hero-title .title-letter:nth-child(1){animation-delay:0.1s}
+  .hero-title .title-letter:nth-child(2){animation-delay:0.2s}
+  .hero-title .title-letter:nth-child(3){animation-delay:0.3s}
+  .hero-title .title-letter:nth-child(4){animation-delay:0.4s}
+  .hero-title .title-letter:nth-child(5){animation-delay:0.5s}
+  @keyframes letterPop{0%{opacity:0;transform:scale(0) rotate(-180deg)}60%{transform:scale(1.1) rotate(0deg)}100%{opacity:1;transform:scale(1) rotate(0deg);text-shadow:0 0 20px rgba(201,168,76,0.5)}}
   
-  /* Soft Glow Pulse */
-  @keyframes softGlow {
-    0%, 100% { text-shadow: 0 0 5px rgba(201,168,76,0.2); }
-    50% { text-shadow: 0 0 15px rgba(201,168,76,0.4); }
-  }
-
-  /* Subtle Particles - Light Mode */
-  .particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
+  .hero-title span{background:linear-gradient(90deg,var(--gold),#E8D48B,#D4AF37,var(--gold));background-size:300% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradientFlow 4s linear infinite;display:inline-block}
+  @keyframes gradientFlow{0%{background-position:0% center}100%{background-position:200% center}}
   
-  .particle {
-    position: absolute;
-    background: radial-gradient(circle, var(--gold), transparent);
-    border-radius: 50%;
-    opacity: 0;
-    animation: floatParticle linear infinite;
-    opacity: 0.08;
-  }
+  .hero-sub{font-size:14px;letter-spacing:5px;color:var(--text-light);text-transform:uppercase;margin-bottom:35px;overflow:hidden;white-space:nowrap;border-right:2px solid var(--gold);width:0;animation:typewriter 3s steps(40,end) forwards,blink 0.75s step-end infinite;display:inline-block}
+  @keyframes typewriter{from{width:0}to{width:100%}}
+  @keyframes blink{50%{border-color:transparent}}
   
-  @keyframes floatParticle {
-    0% { transform: translateY(100vh) scale(0); opacity: 0; }
-    10% { opacity: 0.08; }
-    90% { opacity: 0.08; }
-    100% { transform: translateY(-100px) scale(1); opacity: 0; }
-  }
-
-  /* Hero Title - Professional */
-  .hero-title span {
-    background: linear-gradient(90deg, var(--gold), #E8D48B, var(--gold));
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: shimmerGold 3s linear infinite;
-  }
+  .hero-btns{animation:fadeInUp 1s ease-out 0.8s both}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
   
-  .hero-title {
-    animation: softGlow 3s ease-in-out infinite;
-  }
-
-  /* Hero Logo Float */
-  .hero-logo {
-    animation: gentleFloat 3s ease-in-out infinite;
-  }
-
-  /* Product Cards - Smooth Hover */
-  .product-card {
-    transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    background: var(--card);
-  }
+  .particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden}
+  .particle{position:absolute;background:radial-gradient(circle,var(--gold),transparent);border-radius:50%;opacity:0;animation:floatParticle linear infinite;opacity:0.08}
+  @keyframes floatParticle{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:0.08}90%{opacity:0.08}100%{transform:translateY(-100px) scale(1);opacity:0}}
   
-  .product-card:hover {
-    transform: translateY(-6px);
-    border-color: var(--gold);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-  }
-
-  /* Scroll Reveal */
-  .product-card, .stat, .model-card, .custom-section {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
+  .product-card{transition:all 0.4s cubic-bezier(0.2,0.9,0.4,1.1);background:var(--card);opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+  .product-card.revealed{opacity:1;transform:translateY(0)}
+  .product-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 15px 35px rgba(0,0,0,0.08)}
+  .product-img img{transition:transform 0.5s ease}
+  .product-card:hover .product-img img{transform:scale(1.05)}
   
-  .product-card.revealed, .stat.revealed, .model-card.revealed, .custom-section.revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Stagger Animation */
-  .product-card.revealed:nth-child(1) { transition-delay: 0.05s; }
-  .product-card.revealed:nth-child(2) { transition-delay: 0.1s; }
-  .product-card.revealed:nth-child(3) { transition-delay: 0.15s; }
-  .product-card.revealed:nth-child(4) { transition-delay: 0.2s; }
-  .product-card.revealed:nth-child(5) { transition-delay: 0.25s; }
-  .product-card.revealed:nth-child(6) { transition-delay: 0.3s; }
-
-  /* Image Zoom - Professional */
-  .product-img img {
-    transition: transform 0.5s ease;
-  }
+  .sale-badge{animation:softPulse 1.5s ease-in-out infinite}
+  @keyframes softPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.02);opacity:0.9}}
   
-  .product-card:hover .product-img img {
-    transform: scale(1.05);
-  }
-
-  /* Sale Badge - Pulse */
-  .sale-badge {
-    animation: softPulse 1.5s ease-in-out infinite;
-  }
+  .color-dot{transition:all 0.3s cubic-bezier(0.2,0.9,0.4,1.1)}
+  .color-dot:hover{transform:scale(1.15);box-shadow:0 0 8px var(--gold)}
   
-  @keyframes softPulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.02); opacity: 0.9; }
-  }
-
-  /* Button Hover */
-  .btn-primary, .btn-outline, .btn-wa {
-    transition: all 0.3s ease;
-  }
+  .stat,.model-card,.custom-section{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+  .stat.revealed,.model-card.revealed,.custom-section.revealed{opacity:1;transform:translateY(0)}
+  .stat.revealed:nth-child(1){transition-delay:0.05s}
+  .stat.revealed:nth-child(2){transition-delay:0.1s}
+  .stat.revealed:nth-child(3){transition-delay:0.15s}
+  .stat.revealed:nth-child(4){transition-delay:0.2s}
+  .product-card.revealed:nth-child(1){transition-delay:0.05s}
+  .product-card.revealed:nth-child(2){transition-delay:0.1s}
+  .product-card.revealed:nth-child(3){transition-delay:0.15s}
+  .product-card.revealed:nth-child(4){transition-delay:0.2s}
+  .product-card.revealed:nth-child(5){transition-delay:0.25s}
+  .product-card.revealed:nth-child(6){transition-delay:0.3s}
   
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,168,76,0.3); }
-  .btn-outline:hover { transform: translateY(-2px); background: rgba(201,168,76,0.08); }
-  .btn-wa:hover { transform: scale(1.02); }
-
-  /* Color Dot Transition */
-  .color-dot {
-    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  }
+  .section-line{transition:width 0.5s ease}
+  .section-header:hover .section-line{width:100px}
+  .custom-feat{transition:all 0.3s ease}
+  .custom-feat:hover{transform:translateY(-2px);background:rgba(201,168,76,0.08);border-color:var(--gold)}
+  .wa-float{transition:all 0.3s ease;animation:softPulse 2s infinite}
+  .wa-float:hover{transform:scale(1.08);animation:none}
   
-  .color-dot:hover {
-    transform: scale(1.15);
-    box-shadow: 0 0 8px var(--gold);
-  }
-
-  /* Section Line Animation */
-  .section-line {
-    transition: width 0.5s ease;
-  }
-  
-  .section-header:hover .section-line {
-    width: 100px;
-  }
-
-  /* Navbar Items */
-  .nav-links a {
-    transition: all 0.3s ease;
-  }
-  
-  .nav-links a:hover {
-    color: var(--gold);
-    transform: translateY(-1px);
-  }
-
-  /* Footer Links */
-  .footer-links a {
-    transition: all 0.3s ease;
-  }
-  
-  .footer-links a:hover {
-    color: var(--gold);
-    transform: translateY(-1px);
-  }
-
-  /* Custom Feature Hover */
-  .custom-feat {
-    transition: all 0.3s ease;
-  }
-  
-  .custom-feat:hover {
-    transform: translateY(-2px);
-    background: rgba(201,168,76,0.08);
-    border-color: var(--gold);
-  }
-
-  /* WhatsApp Float */
-  .wa-float {
-    transition: all 0.3s ease;
-    animation: softPulse 2s infinite;
-  }
-  
-  .wa-float:hover {
-    transform: scale(1.08);
-    animation: none;
-  }
-
-  /* Navbar - Light Theme */
-  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;box-shadow:0 2px 10px rgba(0,0,0,0.03);}
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;box-shadow:0 2px 10px rgba(0,0,0,0.03)}
   .nav-logo{display:flex;align-items:center;gap:10px}
   .nav-logo img{height:44px;width:44px;object-fit:contain}
   .nav-brand{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--text)}
@@ -233,9 +102,9 @@
   .nav-links a:hover{color:var(--gold);transform:translateY(-1px)}
   .nav-wa{background:var(--whatsapp);color:#fff!important;padding:8px 16px;border-radius:4px;font-size:12px!important}
   
-  .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;z-index:101;}
-  .hamburger span{width:25px;height:2px;background:var(--text);transition:0.3s;border-radius:2px;}
-  .slide-menu{position:fixed;top:0;right:-280px;width:280px;height:100%;z-index:1000;background:var(--card);border-left:1px solid var(--border);transition:right 0.3s ease;padding:70px 20px 20px;overflow-y:auto;box-shadow:-5px 0 20px rgba(0,0,0,0.05);}
+  .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;z-index:101}
+  .hamburger span{width:25px;height:2px;background:var(--text);transition:0.3s;border-radius:2px}
+  .slide-menu{position:fixed;top:0;right:-280px;width:280px;height:100%;z-index:1000;background:var(--card);border-left:1px solid var(--border);transition:right 0.3s ease;padding:70px 20px 20px;overflow-y:auto;box-shadow:-5px 0 20px rgba(0,0,0,0.05)}
   .slide-menu.open{right:0}
   .slide-menu-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999;display:none}
   .slide-menu-overlay.active{display:block}
@@ -243,36 +112,20 @@
   .slide-menu .cat-item{display:block;padding:12px 15px;color:var(--text);border-bottom:1px solid var(--border);cursor:pointer;transition:0.3s}
   .slide-menu .cat-item:hover{background:rgba(201,168,76,0.08);color:var(--gold);padding-left:25px}
   .slide-menu .close-menu{position:absolute;top:15px;right:20px;font-size:24px;color:var(--text);cursor:pointer}
-
-  /* Hero - Light Theme */
-  .hero{position:relative;min-height:75vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#F8F9FA 0%,#F0F2F5 40%,#EAECEF 100%)}
-  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(201,168,76,0.06) 0%,transparent 60%),radial-gradient(ellipse at 30% 80%,rgba(198,40,40,0.03) 0%,transparent 50%)}
+  
   .hero-content{position:relative;z-index:2;text-align:center;padding:40px 24px}
-  .hero-logo{width:120px;height:120px;object-fit:contain;margin-bottom:24px}
-  .hero-eyebrow{font-size:11px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
-  .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,8vw,80px);line-height:0.95;letter-spacing:4px;color:var(--text);margin-bottom:8px}
-  .hero-title span{color:var(--gold)}
-  .hero-sub{font-size:13px;letter-spacing:4px;color:var(--text-light);text-transform:uppercase;margin-bottom:32px}
-  .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
-  .btn-primary{background:linear-gradient(135deg,var(--gold),var(--dark-gold));color:#fff;padding:14px 32px;border-radius:3px;font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:700;transition:all 0.3s;border:none;cursor:pointer}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,0.3)}
-  .btn-outline{background:transparent;color:var(--gold);padding:14px 32px;border-radius:3px;font-size:12px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:700;border:1px solid var(--gold);transition:all 0.3s;cursor:pointer}
-  .btn-outline:hover{background:rgba(201,168,76,0.08);transform:translateY(-2px)}
-
-  /* Stats - Light Theme */
   .stats{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
   .stat{text-align:center;padding:20px;transition:all 0.3s}
   .stat:hover{background:rgba(201,168,76,0.03);transform:translateY(-2px)}
   .stat-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold);line-height:1}
   .stat-label{font-size:11px;letter-spacing:2px;color:var(--text-light);text-transform:uppercase;margin-top:4px}
-
+  
   .section{padding:60px 24px;max-width:1200px;margin:0 auto}
   .section-header{text-align:center;margin-bottom:48px}
   .section-eyebrow{font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
   .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,48px);letter-spacing:3px;color:var(--text)}
-  .section-line{width:60px;height:2px;background:linear-gradient(90deg,var(--gold),var(--red));margin:16px auto 0;transition:width 0.5s}
-
-  /* Filters - Light Theme */
+  .section-line{width:60px;height:2px;background:linear-gradient(90deg,var(--gold),var(--red));margin:16px auto 0}
+  
   .cat-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
   .cat-tab{padding:10px 24px;border-radius:3px;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:600;border:1px solid var(--border);background:var(--card);color:var(--text-light);transition:all 0.3s}
   .cat-tab.active,.cat-tab:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.05);transform:translateY(-1px)}
@@ -281,15 +134,12 @@
   .gender-tab:last-child{border-right:none}
   .gender-tab.active{background:var(--gold);color:#fff}
   .gender-tab:hover{background:rgba(201,168,76,0.08);transform:translateY(-1px)}
-
-  /* Products */
+  
   .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:25px}
-  .product-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:all 0.4s cubic-bezier(0.2,0.9,0.4,1.1);position:relative}
-  .product-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 15px 35px rgba(0,0,0,0.08)}
+  .product-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;position:relative}
   .product-img{height:220px;display:flex;align-items:center;justify-content:center;background:var(--surface2);overflow:hidden;cursor:pointer}
-  .product-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease}
-  .product-card:hover .product-img img{transform:scale(1.05)}
-  .sale-badge{position:absolute;top:12px;right:12px;background:var(--sale);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+  .product-img img{width:100%;height:100%;object-fit:cover}
+  .sale-badge{position:absolute;top:12px;right:12px;background:var(--sale);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;z-index:2}
   .trending-badge{position:absolute;top:12px;left:12px;background:var(--gold);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;z-index:2}
   .product-body{padding:16px}
   .product-cat{font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
@@ -300,12 +150,11 @@
   .sale-price{font-size:24px;font-weight:700;color:var(--sale);font-family:'Bebas Neue'}
   .normal-price{font-size:24px;font-weight:700;color:var(--text);font-family:'Bebas Neue'}
   .color-variants{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
-  .color-dot{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid var(--border);transition:all 0.3s cubic-bezier(0.2,0.9,0.4,1.1);box-shadow:0 1px 2px rgba(0,0,0,0.05)}
-  .color-dot:hover,.color-dot.active{transform:scale(1.12);border-color:var(--gold);box-shadow:0 0 8px rgba(201,168,76,0.4)}
+  .color-dot{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid var(--border);transition:all 0.3s}
+  .color-dot.active{transform:scale(1.12);border-color:var(--gold);box-shadow:0 0 8px rgba(201,168,76,0.4)}
   .btn-wa{background:var(--whatsapp);color:#fff;border:none;padding:8px 14px;border-radius:4px;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-weight:600;transition:all 0.3s;width:100%;display:flex;align-items:center;justify-content:center;gap:5px}
   .btn-wa:hover{background:#1ebe5d;transform:scale(1.02)}
-
-  /* Admin Panel - Light Theme */
+  
   .admin-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:32px;margin-top:40px}
   .admin-toggle{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;cursor:pointer}
   .admin-title{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:var(--text);letter-spacing:2px}
@@ -327,16 +176,13 @@
   .manage-table{width:100%;border-collapse:collapse;margin-top:20px;font-size:13px;display:block;overflow-x:auto}
   .manage-table th,.manage-table td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left}
   .manage-table th{color:var(--gold);font-size:10px;letter-spacing:2px}
-
-  /* Custom Section - Light Theme */
+  
   .custom-section{background:linear-gradient(135deg,var(--card) 0%,rgba(201,168,76,0.02) 100%);border:1px solid var(--border);border-radius:12px;padding:48px 32px;text-align:center;margin-top:40px}
   .custom-title{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:3px;color:var(--text);margin-bottom:12px}
   .custom-desc{color:var(--text-light);font-size:14px;line-height:1.7;max-width:500px;margin:0 auto 28px}
   .custom-features{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
   .custom-feat{background:var(--surface2);border:1px solid var(--border);border-radius:40px;padding:10px 20px;font-size:12px;color:var(--text-light);transition:all 0.3s}
-  .custom-feat:hover{transform:translateY(-2px);background:rgba(201,168,76,0.05);border-color:var(--gold);color:var(--text)}
-
-  /* Footer - Light Theme */
+  
   footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24px;text-align:center}
   .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;color:var(--text);margin-bottom:8px;transition:0.3s}
   .footer-logo:hover{opacity:0.8}
@@ -346,7 +192,6 @@
   .footer-links a:hover{color:var(--gold);transform:translateY(-1px)}
   .footer-copy{font-size:11px;color:var(--text-light)}
   .wa-float{position:fixed;bottom:24px;right:24px;z-index:200;background:var(--whatsapp);color:#fff;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,0.4);transition:all 0.3s;font-size:28px;text-decoration:none}
-  .wa-float:hover{transform:scale(1.08);box-shadow:0 8px 28px rgba(37,211,102,0.5)}
   .toast{position:fixed;bottom:90px;right:24px;background:var(--card);border:1px solid var(--gold);border-radius:6px;padding:12px 20px;font-size:13px;color:var(--text);z-index:300;transform:translateX(120%);transition:transform 0.3s;max-width:260px;box-shadow:0 4px 15px rgba(0,0,0,0.1)}
   .toast.show{transform:translateX(0)}
   .models-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:48px}
@@ -356,7 +201,7 @@
   .model-overlay{padding:20px;background:linear-gradient(transparent,rgba(0,0,0,0.85))}
   .model-name{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:#fff}
   .model-tag{font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
-
+  
   @media(max-width:768px){
     .nav-links{display:none}
     .hamburger{display:flex}
@@ -365,13 +210,13 @@
     .products-grid{grid-template-columns:1fr}
     .section{padding:40px 16px}
     .form-row{grid-template-columns:1fr}
-    .hero-title{font-size:clamp(36px,8vw,60px)}
+    .hero-sub{white-space:normal;border-right:none;animation:none;width:100%}
+    .hero-title .title-letter{animation:none;opacity:1;transform:scale(1)}
   }
 </style>
 </head>
 <body>
 
-<!-- Subtle Particles -->
 <div class="particles" id="particles"></div>
 
 <nav>
@@ -413,7 +258,9 @@
   <div class="hero-content">
     <img src="/mnt/user-data/uploads/zyron_logo.jpeg" alt="ZYRON Logo" class="hero-logo" onerror="this.style.display='none'">
     <div class="hero-eyebrow">Premium Quality Since Day One</div>
-    <h1 class="hero-title">ZYRON<br><span>Sportswear</span></h1>
+    <h1 class="hero-title" id="heroTitle">
+      ZYRON<br><span>Sportswear</span>
+    </h1>
     <p class="hero-sub">Crafted for Champions — Made in Pakistan</p>
     <div class="hero-btns">
       <a href="#products" class="btn-primary">Shop Now</a>
@@ -481,7 +328,6 @@
   </div>
 </div>
 
-<!-- ADMIN PANEL -->
 <div class="section" id="adminPanelSection" style="display:none">
   <div class="admin-section">
     <div class="admin-toggle" onclick="toggleAdminPanel()">
@@ -533,7 +379,6 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyB8bartyXpHSMzxpJXMO9bc7BQt0DT7ByU",
   authDomain: "zyron-sportswear.firebaseapp.com",
@@ -553,7 +398,6 @@ let selectedVariants = {};
 let variantFields = [];
 let nextId = 1;
 let isAdminLoggedIn = false;
-
 const ADMIN_PASSWORD = 'zyronadmin123';
 
 function createParticles() {
@@ -572,7 +416,6 @@ function createParticles() {
   }
 }
 
-// Scroll Reveal Observer
 const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -30px 0px' };
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -582,7 +425,6 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.product-card, .stat, .model-card, .custom-section').forEach(el => observer.observe(el));
 
-// Default products
 const defaultProducts = [
   { id: 1, name: 'Elite Strike Football Jersey', cat: 'kit', gender: 'men', description: 'Premium moisture-wicking fabric', originalPrice: 3500, trending: true, variants: { '0': { color: 'Red', colorCode: '#DC2626', image: 'https://i.imgur.com/1nJEkNy.jpeg', sale: 25 }, '1': { color: 'Blue', colorCode: '#2563EB', image: 'https://i.imgur.com/sGQqC1x.jpeg', sale: 0 }, '2': { color: 'Black', colorCode: '#000000', image: 'https://i.imgur.com/vNmHxVb.jpeg', sale: 30 } } },
   { id: 2, name: 'Pro Cricket Kit', cat: 'kit', gender: 'men', description: 'Professional grade cricket uniform', originalPrice: 4200, trending: false, variants: { '0': { color: 'Blue', colorCode: '#2563EB', image: 'https://i.imgur.com/sGQqC1x.jpeg', sale: 15 }, '1': { color: 'Green', colorCode: '#16A34A', image: 'https://i.imgur.com/4XpMhLq.jpeg', sale: 0 }, '2': { color: 'Yellow', colorCode: '#EAB308', image: 'https://i.imgur.com/QZmYo0p.jpeg', sale: 20 } } }
@@ -700,98 +542,7 @@ function renderManage() {
     <td><strong>${p.name}</strong></td>
     <td>${getCategoryName(p.cat)}</td>
     <td>${p.gender}</td>
-    <td>${p.variants ? Object.keys(p.variants).length : 0} colors</td>
-    <td><button class="btn-danger" onclick="deleteProductFromFirebase(${p.id})">Delete</button></td>
-  </tr>`).join('');
-}
-
-function addVariantField() { variantFields.push({}); renderVariantFields(); }
-function renderVariantFields() {
-  const container = document.getElementById('variantsContainer');
-  if (!container) return;
-  container.innerHTML = variantFields.map((_, i) => `<div class="variant-row"><div class="variant-header"><span>🎨 Variant ${i+1}</span><button type="button" class="remove-variant" onclick="removeVariantField(${i})">Remove</button></div><div class="form-row"><div class="form-group"><label>Color Name</label><input class="form-input" id="varColor_${i}" placeholder="e.g. Red"></div><div class="form-group"><label>Color Code</label><input class="form-input" id="varCode_${i}" placeholder="#DC2626"></div></div><div class="form-row"><div class="form-group"><label>Image URL</label><input class="form-input" id="varImage_${i}" placeholder="https://i.imgur.com/xxx.jpg"></div><div class="form-group"><label>Sale %</label><input class="form-input" id="varSale_${i}" type="number" placeholder="0"></div></div></div>`).join('');
-}
-function removeVariantField(i) { variantFields.splice(i,1); renderVariantFields(); }
-
-async function addProductToFirebase() {
-  if (!isAdminLoggedIn) { showToast('❌ Admin login required!'); return; }
-  const name = document.getElementById('pName').value.trim();
-  const price = parseInt(document.getElementById('pPrice').value);
-  const cat = document.getElementById('pCat').value;
-  const gender = document.getElementById('pGender').value;
-  const desc = document.getElementById('pDesc').value.trim();
-  if (!name || !price) { showToast('⚠ Name and price required!'); return; }
-  if (variantFields.length === 0) { showToast('⚠ Add at least one color variant!'); return; }
-  const variants = {};
-  for (let i = 0; i < variantFields.length; i++) {
-    const color = document.getElementById(`varColor_${i}`).value;
-    if (!color) { showToast(`⚠ Variant ${i+1}: Color name required!`); return; }
-    variants[i] = {
-      color: color,
-      colorCode: document.getElementById(`varCode_${i}`).value || '#CCCCCC',
-      image: document.getElementById(`varImage_${i}`).value,
-      sale: parseInt(document.getElementById(`varSale_${i}`).value) || 0
-    };
-  }
-  await saveProductToFirebase({ id: nextId++, name, cat, gender, description: desc || 'Premium quality sportswear', originalPrice: price, trending: false, variants });
-  document.getElementById('pName').value = ''; document.getElementById('pPrice').value = ''; document.getElementById('pDesc').value = '';
-  variantFields = []; renderVariantFields();
-}
-
-function checkAdminPassword() {
-  if (document.getElementById('adminPasswordInput').value === ADMIN_PASSWORD) {
-    isAdminLoggedIn = true;
-    document.getElementById('adminPasswordBox').style.display = 'none';
-    document.getElementById('adminForm').style.display = 'block';
-    renderManage();
-    showToast('✅ Admin access granted!');
-  } else {
-    document.getElementById('adminPasswordError').style.display = 'block';
-    showToast('❌ Wrong password!');
-  }
-}
-
-function toggleAdminPanel() {
-  if (!isAdminLoggedIn) { showToast('❌ Please login as admin first!'); return; }
-  const form = document.getElementById('adminForm');
-  const icon = document.getElementById('adminIcon');
-  if (form.style.display === 'block') { form.style.display = 'none'; icon.textContent = '▼'; }
-  else { form.style.display = 'block'; icon.textContent = '▲'; renderManage(); }
-}
-
-function openLightbox(url, name) {
-  const lb = document.createElement('div');
-  lb.className = 'lightbox';
-  lb.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:10000;display:flex;align-items:center;justify-content:center;cursor:pointer;';
-  lb.onclick = () => lb.remove();
-  lb.innerHTML = `<div style="position:absolute;top:20px;right:35px;color:#fff;font-size:40px;cursor:pointer;">&times;</div><img src="${url}" style="max-width:90%;max-height:90%;object-fit:contain;border-radius:8px;"><div style="position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#fff;background:rgba(0,0,0,0.7);padding:10px;">${name}</div>`;
-  document.body.appendChild(lb);
-}
-
-function openWA(msg) { window.open(`https://wa.me/923256054759?text=${encodeURIComponent(msg)}`, '_blank'); }
-function orderProduct(name, price, color) { openWA(`Hi! I want to order *${name}* (${color} color) for PKR ${price.toLocaleString()}. Please confirm.`); }
-function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
-
-function openSlideMenu() { document.getElementById('slideMenu').classList.add('open'); document.getElementById('slideOverlay').classList.add('active'); }
-function closeSlideMenu() { document.getElementById('slideMenu').classList.remove('open'); document.getElementById('slideOverlay').classList.remove('active'); }
-
-document.getElementById('hamburger')?.addEventListener('click', openSlideMenu);
-document.getElementById('closeMenu')?.addEventListener('click', closeSlideMenu);
-document.getElementById('slideOverlay')?.addEventListener('click', closeSlideMenu);
-document.getElementById('adminShowBtn')?.addEventListener('click', () => { document.getElementById('adminPanelSection').style.display = 'block'; });
-document.querySelectorAll('.slide-menu .cat-item')?.forEach(item => {
-  item.addEventListener('click', () => {
-    const cat = item.getAttribute('data-cat');
-    const gender = item.getAttribute('data-gender');
-    if (cat) filterCat(cat, document.querySelector(`.cat-tab[onclick*="'${cat}'"]`));
-    if (gender) filterGender(gender, document.querySelector(`.gender-tab[onclick*="'${gender}'"]`));
-    closeSlideMenu();
-  });
-});
-
-createParticles();
-initializeDefaultData();
-loadProductsFromFirebase();
-</script>
+    <td>${p.variants ? Object.keys(p.variants).length : 0} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors} colors] —\n)\n\nfunction addVariantField() { variantFields.push({}); renderVariantFields(); }\n\nfunction renderVariantFields() {\n  const container = document.getElementById('variantsContainer');\n  if (!container) return;\n  container.innerHTML = variantFields.map((_, i) => `<div class="variant-row"><div class="variant-header"><span>🎨 Variant ${i+1}</span><button type="button" class="remove-variant" onclick="removeVariantField(${i})">Remove</button></div><div class="form-row"><div class="form-group"><label>Color Name</label><input class="form-input" id="varColor_${i}" placeholder="e.g. Red"></div><div class="form-group"><label>Color Code</label><input class="form-input" id="varCode_${i}" placeholder="#DC2626"></div></div><div class="form-row"><div class="form-group"><label>Image URL</label><input class="form-input" id="varImage_${i}" placeholder="https://i.imgur.com/xxx.jpg"></div><div class="form-group"><label>Sale %</label><input class="form-input" id="varSale_${i}" type="number" placeholder="0"></div></div></div>`).join('');\n}\n\nfunction removeVariantField(i) { variantFields.splice(i,1); renderVariantFields(); }\n\nasync function addProductToFirebase() {\n  if (!isAdminLoggedIn) { showToast('❌ Admin login required!'); return; }\n  const name = document.getElementById('pName').value.trim();\n  const price = parseInt(document.getElementById('pPrice').value);\n  const cat = document.getElementById('pCat').value;\n  const gender = document.getElementById('pGender').value;\n  const desc = document.getElementById('pDesc').value.trim();\n  if (!name || !price) { showToast('⚠ Name and price required!'); return; }\n  if (variantFields.length === 0) { showToast('⚠ Add at least one color variant!'); return; }\n  const variants = {};\n  for (let i = 0; i < variantFields.length; i++) {\n    const color = document.getElementById(`varColor_${i}`).value;\n    if (!color) { showToast(`⚠ Variant ${i+1}: Color name required!`); return; }\n    variants[i] = {\n      color: color,\n      colorCode: document.getElementById(`varCode_${i}`).value || '#CCCCCC',\n      image: document.getElementById(`varImage_${i}`).value,\n      sale: parseInt(document.getElementById(`varSale_${i}`).value) || 0\n    };\n  }\n  await saveProductToFirebase({ id: nextId++, name, cat, gender, description: desc || 'Premium quality sportswear', originalPrice: price, trending: false, variants });\n  document.getElementById('pName').value = ''; document.getElementById('pPrice').value = ''; document.getElementById('pDesc').value = '';\n  variantFields = []; renderVariantFields();\n}\n\nfunction checkAdminPassword() {\n  if (document.getElementById('adminPasswordInput').value === ADMIN_PASSWORD) {\n    isAdminLoggedIn = true;\n    document.getElementById('adminPasswordBox').style.display = 'none';\n    document.getElementById('adminForm').style.display = 'block';\n    renderManage();\n    showToast('✅ Admin access granted!');\n  } else {\n    document.getElementById('adminPasswordError').style.display = 'block';\n    showToast('❌ Wrong password!');\n  }\n}\n\nfunction toggleAdminPanel() {\n  if (!isAdminLoggedIn) { showToast('❌ Please login as admin first!'); return; }\n  const form = document.getElementById('adminForm');\n  const icon = document.getElementById('adminIcon');\n  if (form.style.display === 'block') { form.style.display = 'none'; icon.textContent = '▼'; }\n  else { form.style.display = 'block'; icon.textContent = '▲'; renderManage(); }\n}\n\nfunction openLightbox(url, name) {\n  const lb = document.createElement('div');\n  lb.className = 'lightbox';\n  lb.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:10000;display:flex;align-items:center;justify-content:center;cursor:pointer;';\n  lb.onclick = () => lb.remove();\n  lb.innerHTML = `<div style="position:absolute;top:20px;right:35px;color:#fff;font-size:40px;cursor:pointer;">&times;</div><img src="${url}" style="max-width:90%;max-height:90%;object-fit:contain;border-radius:8px;"><div style="position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#fff;background:rgba(0,0,0,0.7);padding:10px;">${name}</div>`;\n  document.body.appendChild(lb);\n}\n\nfunction openWA(msg) { window.open(`https://wa.me/923256054759?text=${encodeURIComponent(msg)}`, '_blank'); }\nfunction orderProduct(name, price, color) { openWA(`Hi! I want to order *${name}* (${color} color) for PKR ${price.toLocaleString()}. Please confirm.`); }\nfunction showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }\n\nfunction openSlideMenu() { document.getElementById('slideMenu').classList.add('open'); document.getElementById('slideOverlay').classList.add('active'); }\nfunction closeSlideMenu() { document.getElementById('slideMenu').classList.remove('open'); document.getElementById('slideOverlay').classList.remove('active'); }\n\ndocument.getElementById('hamburger')?.addEventListener('click', openSlideMenu);\ndocument.getElementById('closeMenu')?.addEventListener('click', closeSlideMenu);\ndocument.getElementById('slideOverlay')?.addEventListener('click', closeSlideMenu);\ndocument.getElementById('adminShowBtn')?.addEventListener('click', () => { document.getElementById('adminPanelSection').style.display = 'block'; });\ndocument.querySelectorAll('.slide-menu .cat-item')?.forEach(item => {\n  item.addEventListener('click', () => {\n    const cat = item.getAttribute('data-cat');\n    const gender = item.getAttribute('data-gender');\n    if (cat) filterCat(cat, document.querySelector(`.cat-tab[onclick*="'${cat}'"]`));\n    if (gender) filterGender(gender, document.querySelector(`.gender-tab[onclick*="'${gender}'"]`));\n    closeSlideMenu();\n  });\n});\n\nfunction splitHeroTitle() {\n  const titleElement = document.getElementById('heroTitle');\n  if (!titleElement) return;\n  const html = titleElement.innerHTML;\n  const text = html.split('<br>')[0];\n  const rest = html.split('<br>')[1] ? '<br>' + html.split('<br>')[1] : '';\n  let newHtml = '';\n  for (let i = 0; i < text.length; i++) {\n    newHtml += `<span class=\"title-letter\">${text[i]}</span>`;\n  }\n  newHtml += rest;\n  titleElement.innerHTML = newHtml;\n}\n\nfunction createParticleBurst(event) {\n  const x = event.clientX;\n  const y = event.clientY;\n  for (let i = 0; i < 30; i++) {\n    const particle = document.createElement('div');\n    particle.style.position = 'fixed';\n    particle.style.width = '6px';\n    particle.style.height = '6px';\n    particle.style.background = '#C9A84C';\n    particle.style.borderRadius = '50%';\n    particle.style.pointerEvents = 'none';\n    particle.style.zIndex = '10000';\n    particle.style.left = x + 'px';\n    particle.style.top = y + 'px';\n    particle.style.opacity = '1';\n    const angle = Math.random() * Math.PI * 2;\n    const velocity = Math.random() * 100 + 50;\n    const vx = Math.cos(angle) * velocity;\n    const vy = Math.sin(angle) * velocity;\n    document.body.appendChild(particle);\n    let opacity = 1;\n    let posX = x, posY = y;\n    const animate = () => {\n      posX += vx * 0.02;\n      posY += vy * 0.02;\n      opacity -= 0.02;\n      particle.style.left = posX + 'px';\n      particle.style.top = posY + 'px';\n      particle.style.opacity = opacity;\n      if (opacity > 0) {\n        requestAnimationFrame(animate);\n      } else {\n        particle.remove();\n      }\n    };\n    requestAnimationFrame(animate);\n  }\n}\n\nconst logo = document.querySelector('.hero-logo');\nif (logo) {\n  logo.addEventListener('click', createParticleBurst);\n}\n\ncreateParticles();\nsplitHeroTitle();\ninitializeDefaultData();\nloadProductsFromFirebase();
+   </script>
 </body>
-</html>
+</html>\
