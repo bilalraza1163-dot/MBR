@@ -129,7 +129,7 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 .btn-facebook{background:#4267B2;color:#fff}
 .modal-content .switch-link{color:var(--gold);cursor:pointer;text-align:center;display:block;margin-top:10px}
 
-/* ===== SIZE SELECTION STYLES (BOTH SHIRT & TROUSER) ===== */
+/* ===== SIZE SELECTION STYLES ===== */
 .size-section-container {
     margin: 20px 0 10px;
 }
@@ -216,6 +216,58 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
     box-shadow: 0 0 0 2px var(--gold);
 }
 
+/* ===== TOGGLE SWITCH STYLES ===== */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 10px 0;
+    padding: 10px 15px;
+    background: var(--bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+.toggle-container label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+}
+.toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background: #555;
+    border-radius: 13px;
+    cursor: pointer;
+    transition: 0.3s;
+    flex-shrink: 0;
+}
+.toggle-switch.active {
+    background: var(--gold);
+}
+.toggle-switch .toggle-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+.toggle-switch.active .toggle-slider {
+    left: 27px;
+}
+.toggle-status {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+}
+.toggle-status.active-text {
+    color: var(--gold);
+}
+
 @media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}.stats{grid-template-columns:repeat(2,1fr)}.products-grid{grid-template-columns:1fr}.section{padding:40px 16px}.search-bar{flex-direction:column}}
 </style>
 </head>
@@ -299,12 +351,25 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 </div>
 <div style="margin-top:10px"><label style="font-size:11px;color:var(--text-light)">Color Variants</label>
 <div id="variantsContainer"></div>
-<button type="button" class="btn-add-variant" onclick="addVariantField()" style="background:transparent;border:1px dashed var(--gold);color:var(--gold);padding:10px;width:100%;border-radius:4px;margin:10px 0;cursor:pointer">+ Add Color Variant</button>
+<button type="button" class="btn-add-variant" onclick="addVariantField()" style="background:transparent;border:1px dashed var(--gold);color:var(--gold);padding:10px;width:100%;border-radius:4px;margin:10px 0;cursor:pointer">+ Add Variant</button>
 </div>
+
+<!-- ===== TROUSER TOGGLE (CHECKPOINT) ===== -->
+<div style="margin-top:15px;padding:15px;background:var(--bg);border-radius:8px;border:1px solid var(--border)">
+<label style="font-size:13px;font-weight:600;color:var(--text);display:block;margin-bottom:8px">👖 Trouser Size Option</label>
+<div class="toggle-container">
+    <div class="toggle-switch active" id="hasTrouserToggle" onclick="toggleHasTrouser()">
+        <div class="toggle-slider"></div>
+    </div>
+    <span class="toggle-status active-text" id="trouserStatus">Trouser Available</span>
+    <span style="font-size:11px;color:var(--text-light);margin-left:auto">Toggle to enable/disable trouser size</span>
+</div>
+</div>
+
 <div style="margin-top:10px"><label style="font-size:11px;color:var(--text-light)">Coupon Code</label><input id="pCoupon" placeholder="e.g. ZYRON10" style="padding:10px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
 <button class="btn-add" onclick="addProductToFirebase()" style="margin-top:15px;background:var(--gold);border:none;padding:10px 20px;border-radius:4px;cursor:pointer;color:#000;font-weight:600">✅ Add Product</button>
 <h3 style="margin-top:30px;color:var(--gold)">📋 Manage Products</h3>
-<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th style="padding:10px;border-bottom:1px solid var(--border);text-align:left;color:var(--gold)">Product</th><th style="padding:10px;border-bottom:1px solid var(--border);text-align:left;color:var(--gold)">Category</th><th style="padding:10px;border-bottom:1px solid var(--border);text-align:left;color:var(--gold)">Gender</th><th style="padding:10px;border-bottom:1px solid var(--border);text-align:left;color:var(--gold)">Action</th></tr></thead><tbody id="manageBody"></tbody></table></div>
+<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th style="padding:10px;border-bottom:1px solid var(--border);text-align:left;color:var(--gold)">Product</th><th style="padding:10px;border-bottom:1px solid var(--border);text-align:left;color:var(--gold)">Category</th><th style="padding:10px;border-bottom:1px solid var(--border);text-align:left;color:var(--gold)">Trouser</th><th style="padding:10px;border-bottom:1px solid var(--border);text-align:left;color:var(--gold)">Action</th></tr></thead><tbody id="manageBody"></tbody></table></div>
 <!-- Analytics Dashboard -->
 <h3 style="margin-top:30px;color:var(--gold)">📊 Analytics Dashboard</h3>
 <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:15px">
@@ -347,6 +412,16 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 <div style="margin-top:10px"><label style="font-size:11px;color:var(--text-light)">Description</label><input id="editDesc" style="padding:10px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
 <div style="margin-top:10px"><label style="font-size:11px;color:var(--text-light)">Images</label><div id="editImagesContainer"></div><button type="button" onclick="addEditImageField()" style="background:transparent;border:1px dashed var(--gold);color:var(--gold);padding:10px;width:100%;border-radius:4px;margin:10px 0;cursor:pointer">+ Add Image</button></div>
 <div style="margin-top:10px"><label style="font-size:11px;color:var(--text-light)">Variants</label><div id="editVariantsContainer"></div><button type="button" onclick="addEditVariantField()" style="background:transparent;border:1px dashed var(--gold);color:var(--gold);padding:10px;width:100%;border-radius:4px;margin:10px 0;cursor:pointer">+ Add Variant</button></div>
+<!-- Edit Trouser Toggle -->
+<div style="margin-top:15px;padding:15px;background:var(--bg);border-radius:8px;border:1px solid var(--border)">
+<label style="font-size:13px;font-weight:600;color:var(--text);display:block;margin-bottom:8px">👖 Trouser Size Option</label>
+<div class="toggle-container">
+    <div class="toggle-switch active" id="editHasTrouserToggle" onclick="toggleEditHasTrouser()">
+        <div class="toggle-slider"></div>
+    </div>
+    <span class="toggle-status active-text" id="editTrouserStatus">Trouser Available</span>
+</div>
+</div>
 <button onclick="saveEditedProduct()" style="margin-top:15px;background:var(--gold);border:none;padding:10px 20px;border-radius:4px;cursor:pointer;color:#000;font-weight:600">💾 Save Changes</button>
 </div></div></div>
 
@@ -362,10 +437,45 @@ const auth = firebase.auth();
 let products=[],activeCat='all',activeGender='all',selectedVariants={},cart=[],wishlist=[],currentUser=null,isAdminLoggedIn=false,isAuthMode='login',searchQuery='';
 let currentProduct=null,currentVariant=null,currentQty=1;
 
-// ===== BOTH SIZES: SHIRT & TROUSER =====
+// ===== SIZE VARIABLES =====
 let selectedShirtSize = 'M';
 let selectedTrouserSize = 'M';
 const allSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
+
+// ===== TROUSER TOGGLE (CHECKPOINT) =====
+let hasTrouser = true; // Default: true
+
+function toggleHasTrouser() {
+    hasTrouser = !hasTrouser;
+    const toggle = document.getElementById('hasTrouserToggle');
+    const status = document.getElementById('trouserStatus');
+    toggle.classList.toggle('active');
+    if (hasTrouser) {
+        status.textContent = 'Trouser Available';
+        status.className = 'toggle-status active-text';
+    } else {
+        status.textContent = 'No Trouser';
+        status.className = 'toggle-status';
+    }
+}
+
+function toggleEditHasTrouser() {
+    const toggle = document.getElementById('editHasTrouserToggle');
+    const status = document.getElementById('editTrouserStatus');
+    toggle.classList.toggle('active');
+    if (toggle.classList.contains('active')) {
+        status.textContent = 'Trouser Available';
+        status.className = 'toggle-status active-text';
+    } else {
+        status.textContent = 'No Trouser';
+        status.className = 'toggle-status';
+    }
+}
+
+function getEditHasTrouser() {
+    const toggle = document.getElementById('editHasTrouserToggle');
+    return toggle.classList.contains('active');
+}
 
 let variantFields=[],editVariantFields=[],imageFields=[],editImageFields=[];
 const ADMIN_PASSWORD='zyronadmin123';
@@ -422,7 +532,6 @@ function viewProductDirect(id) {
     currentProduct = p;
     currentVariant = Object.values(p.variants)[0];
     
-    // Reset sizes
     selectedShirtSize = 'M';
     selectedTrouserSize = 'M';
     currentQty = 1;
@@ -470,16 +579,28 @@ function addEditVariantField(){ editVariantFields.push({}); renderEditVariantFie
 function removeEditVariantField(i){ editVariantFields.splice(i,1); renderEditVariantFields(); }
 function renderEditVariantFields(){ const c=document.getElementById('editVariantsContainer'); if(!c)return; c.innerHTML=editVariantFields.map((f,i)=>`<div style="background:var(--bg);padding:12px;border-radius:6px;margin-bottom:10px"><div><span>Variant ${i+1}</span><button onclick="removeEditVariantField(${i})" style="float:right;background:red;color:white;border:none;padding:2px 10px;border-radius:4px">X</button></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><div><label style="font-size:10px;color:var(--text-light)">Color</label><input id="editVarColor_${i}" value="${f.color||''}" placeholder="Red" style="padding:6px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div><div><label style="font-size:10px;color:var(--text-light)">Code</label><input id="editVarCode_${i}" value="${f.colorCode||''}" placeholder="#DC2626" style="padding:6px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div><div><label style="font-size:10px;color:var(--text-light)">Image URL</label><input id="editVarImage_${i}" value="${f.image||''}" placeholder="https://i.imgur.com/xxx.jpg" style="padding:6px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div></div><div><label style="font-size:10px;color:var(--text-light)">Sale %</label><input id="editVarSale_${i}" type="number" value="${f.sale||0}" placeholder="0" style="padding:6px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text);margin-top:8px"></div></div>`).join(''); }
 
-async function addProductToFirebase(){ if(!isAdminLoggedIn){showToast('Admin login required');return;} const name=document.getElementById('pName').value.trim(); const price=parseInt(document.getElementById('pPrice').value); const cat=document.getElementById('pCat').value; const gender=document.getElementById('pGender').value; const desc=document.getElementById('pDesc').value.trim(); const coupon=document.getElementById('pCoupon').value.trim(); if(!name||!price){showToast('Name and price required');return;} const images=[]; imageFields.forEach((_,i)=>{const v=document.getElementById(`img_${i}`).value.trim();if(v)images.push(v);}); if(images.length===0){showToast('Add at least one product image');return;} if(variantFields.length===0){showToast('Add at least one color variant');return;} const variants={}; for(let i=0;i<variantFields.length;i++){const col=document.getElementById(`varColor_${i}`).value;if(!col){showToast(`Color for variant ${i+1} required`);return;} variants[i]={color:col,colorCode:document.getElementById(`varCode_${i}`).value||'#CCCCCC',image:document.getElementById(`varImage_${i}`).value,sale:parseInt(document.getElementById(`varSale_${i}`).value)||0,sizes:allSizes}; } const existing=await database.ref('products').once('value'); let maxId=0; if(existing.val()) maxId=Math.max(...Object.keys(existing.val()).map(Number)); const newId=maxId+1; await database.ref(`products/${newId}`).set({id:newId,name,cat,gender,description:desc||'Premium quality',originalPrice:price,trending:false,images,coupon,featured:false,reviews:[],variants}); showToast('✅ Product added!'); document.getElementById('pName').value='';document.getElementById('pPrice').value='';document.getElementById('pDesc').value='';document.getElementById('pCoupon').value='';imageFields=[];variantFields=[];renderImageFields();renderVariantFields();loadProductsFromFirebase();}
+async function addProductToFirebase(){ if(!isAdminLoggedIn){showToast('Admin login required');return;} const name=document.getElementById('pName').value.trim(); const price=parseInt(document.getElementById('pPrice').value); const cat=document.getElementById('pCat').value; const gender=document.getElementById('pGender').value; const desc=document.getElementById('pDesc').value.trim(); const coupon=document.getElementById('pCoupon').value.trim(); if(!name||!price){showToast('Name and price required');return;} const images=[]; imageFields.forEach((_,i)=>{const v=document.getElementById(`img_${i}`).value.trim();if(v)images.push(v);}); if(images.length===0){showToast('Add at least one product image');return;} if(variantFields.length===0){showToast('Add at least one color variant');return;} const variants={}; for(let i=0;i<variantFields.length;i++){const col=document.getElementById(`varColor_${i}`).value;if(!col){showToast(`Color for variant ${i+1} required`);return;} variants[i]={color:col,colorCode:document.getElementById(`varCode_${i}`).value||'#CCCCCC',image:document.getElementById(`varImage_${i}`).value,sale:parseInt(document.getElementById(`varSale_${i}`).value)||0,sizes:allSizes}; } const existing=await database.ref('products').once('value'); let maxId=0; if(existing.val()) maxId=Math.max(...Object.keys(existing.val()).map(Number)); const newId=maxId+1; await database.ref(`products/${newId}`).set({id:newId,name,cat,gender,description:desc||'Premium quality',originalPrice:price,trending:false,images,coupon,featured:false,reviews:[],variants,hasTrouser:hasTrouser}); showToast('✅ Product added!'); document.getElementById('pName').value='';document.getElementById('pPrice').value='';document.getElementById('pDesc').value='';document.getElementById('pCoupon').value='';imageFields=[];variantFields=[];renderImageFields();renderVariantFields();loadProductsFromFirebase();}
 
 async function deleteProduct(id){ if(confirm('Delete?')){ await database.ref(`products/${id}`).remove(); loadProductsFromFirebase(); showToast('Deleted!'); } }
-function openEditModal(id){ const p=products.find(p=>p.id===id); if(!p)return; editVariantFields=[]; editImageFields=[]; document.getElementById('editId').value=id; document.getElementById('editName').value=p.name; document.getElementById('editPrice').value=p.originalPrice; document.getElementById('editCat').value=p.cat; document.getElementById('editGender').value=p.gender; document.getElementById('editDesc').value=p.description||''; document.getElementById('editCoupon').value=p.coupon||''; if(p.images)p.images.forEach(img=>editImageFields.push(img)); else editImageFields.push(''); const variants=Object.values(p.variants); variants.forEach(v=>{ editVariantFields.push({color:v.color,colorCode:v.colorCode,image:v.image,sale:v.sale}); }); renderEditImageFields(); renderEditVariantFields(); document.getElementById('editModal').style.display='flex'; }
+function openEditModal(id){ const p=products.find(p=>p.id===id); if(!p)return; editVariantFields=[]; editImageFields=[]; document.getElementById('editId').value=id; document.getElementById('editName').value=p.name; document.getElementById('editPrice').value=p.originalPrice; document.getElementById('editCat').value=p.cat; document.getElementById('editGender').value=p.gender; document.getElementById('editDesc').value=p.description||''; document.getElementById('editCoupon').value=p.coupon||''; if(p.images)p.images.forEach(img=>editImageFields.push(img)); else editImageFields.push(''); const variants=Object.values(p.variants); variants.forEach(v=>{ editVariantFields.push({color:v.color,colorCode:v.colorCode,image:v.image,sale:v.sale}); }); renderEditImageFields(); renderEditVariantFields(); // Set edit trouser toggle
+const editToggle=document.getElementById('editHasTrouserToggle');
+const editStatus=document.getElementById('editTrouserStatus');
+if(p.hasTrouser !== undefined ? p.hasTrouser : true){
+    editToggle.classList.add('active');
+    editStatus.textContent='Trouser Available';
+    editStatus.className='toggle-status active-text';
+} else {
+    editToggle.classList.remove('active');
+    editStatus.textContent='No Trouser';
+    editStatus.className='toggle-status';
+}
+document.getElementById('editModal').style.display='flex'; }
 function closeEditModal(){ document.getElementById('editModal').style.display='none'; }
-async function saveEditedProduct(){ const id=parseInt(document.getElementById('editId').value); const name=document.getElementById('editName').value.trim(); const price=parseInt(document.getElementById('editPrice').value); const cat=document.getElementById('editCat').value; const gender=document.getElementById('editGender').value; const desc=document.getElementById('editDesc').value.trim(); const coupon=document.getElementById('editCoupon').value.trim(); if(!name||!price){showToast('Name and price required');return;} const images=[]; editImageFields.forEach((_,i)=>{const v=document.getElementById(`editImg_${i}`).value.trim();if(v)images.push(v);}); if(images.length===0){showToast('Add at least one product image');return;} if(editVariantFields.length===0){showToast('At least one variant required');return;} const variants={}; for(let i=0;i<editVariantFields.length;i++){const col=document.getElementById(`editVarColor_${i}`).value;if(!col){showToast(`Color for variant ${i+1} required`);return;} variants[i]={color:col,colorCode:document.getElementById(`editVarCode_${i}`).value||'#CCCCCC',image:document.getElementById(`editVarImage_${i}`).value,sale:parseInt(document.getElementById(`editVarSale_${i}`).value)||0,sizes:allSizes}; } await database.ref(`products/${id}`).update({name,cat,gender,description:desc||'Premium quality',originalPrice:price,images,coupon,variants}); showToast('✅ Product updated!'); closeEditModal(); loadProductsFromFirebase(); }
+async function saveEditedProduct(){ const id=parseInt(document.getElementById('editId').value); const name=document.getElementById('editName').value.trim(); const price=parseInt(document.getElementById('editPrice').value); const cat=document.getElementById('editCat').value; const gender=document.getElementById('editGender').value; const desc=document.getElementById('editDesc').value.trim(); const coupon=document.getElementById('editCoupon').value.trim(); if(!name||!price){showToast('Name and price required');return;} const images=[]; editImageFields.forEach((_,i)=>{const v=document.getElementById(`editImg_${i}`).value.trim();if(v)images.push(v);}); if(images.length===0){showToast('Add at least one product image');return;} if(editVariantFields.length===0){showToast('At least one variant required');return;} const variants={}; for(let i=0;i<editVariantFields.length;i++){const col=document.getElementById(`editVarColor_${i}`).value;if(!col){showToast(`Color for variant ${i+1} required`);return;} variants[i]={color:col,colorCode:document.getElementById(`editVarCode_${i}`).value||'#CCCCCC',image:document.getElementById(`editVarImage_${i}`).value,sale:parseInt(document.getElementById(`editVarSale_${i}`).value)||0,sizes:allSizes}; } const hasTrouserVal = getEditHasTrouser(); await database.ref(`products/${id}`).update({name,cat,gender,description:desc||'Premium quality',originalPrice:price,images,coupon,variants,hasTrouser:hasTrouserVal}); showToast('✅ Product updated!'); closeEditModal(); loadProductsFromFirebase(); }
 
 function checkAdminPassword(){ if(document.getElementById('adminPassword').value===ADMIN_PASSWORD){ isAdminLoggedIn=true; document.getElementById('adminPasswordBox').style.display='none'; document.getElementById('adminForm').style.display='block'; showToast('Admin access granted!'); renderManage(); updateAnalytics(); } else{document.getElementById('adminError').style.display='block';} }
 function toggleAdminPanel(){ if(!isAdminLoggedIn){showToast('Login first');return;} const f=document.getElementById('adminForm'); const ic=document.getElementById('adminIcon'); if(f.style.display==='block'){f.style.display='none';ic.innerText='▼';}else{f.style.display='block';ic.innerText='▲';renderManage();updateAnalytics();} }
-function renderManage(){ if(!isAdminLoggedIn)return; const tb=document.getElementById('manageBody'); tb.innerHTML=products.map(p=>`<tr><td style="padding:10px;border-bottom:1px solid var(--border)"><strong>${p.name}</strong></td><td style="padding:10px;border-bottom:1px solid var(--border)">${catNames[p.cat]}</td><td style="padding:10px;border-bottom:1px solid var(--border)">${p.gender}</td><td style="padding:10px;border-bottom:1px solid var(--border)"><button onclick="deleteProduct(${p.id})" style="background:transparent;color:#E24B4A;border:1px solid #E24B4A;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px">Delete</button> <button onclick="openEditModal(${p.id})" style="background:var(--gold);border:none;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px;color:#000">Edit</button></td></tr>`).join(''); }
+function renderManage(){ if(!isAdminLoggedIn)return; const tb=document.getElementById('manageBody'); tb.innerHTML=products.map(p=>`<tr><td style="padding:10px;border-bottom:1px solid var(--border)"><strong>${p.name}</strong></td><td style="padding:10px;border-bottom:1px solid var(--border)">${catNames[p.cat]}</td><td style="padding:10px;border-bottom:1px solid var(--border)">${p.hasTrouser !== undefined ? (p.hasTrouser ? '✅ Yes' : '❌ No') : '✅ Yes'}</td><td style="padding:10px;border-bottom:1px solid var(--border)"><button onclick="deleteProduct(${p.id})" style="background:transparent;color:#E24B4A;border:1px solid #E24B4A;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px">Delete</button> <button onclick="openEditModal(${p.id})" style="background:var(--gold);border:none;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px;color:#000">Edit</button></td></tr>`).join(''); }
 function updateAnalytics(){ if(!isAdminLoggedIn)return; document.getElementById('totalProducts').innerText=products.length; const orders=JSON.parse(localStorage.getItem('zyron_orders')||'[]'); document.getElementById('totalOrders').innerText=orders.length; let revenue=orders.reduce((s,o)=>s+o.total,0); document.getElementById('totalRevenue').innerText='PKR '+revenue.toLocaleString(); }
 
 function loadCart(){ const saved=localStorage.getItem('zyron_cart'); cart=saved?JSON.parse(saved):[]; updateCartCount(); }
@@ -488,12 +609,12 @@ function saveCart(){localStorage.setItem('zyron_cart',JSON.stringify(cart));upda
 function saveWishlist(){localStorage.setItem('zyron_wishlist',JSON.stringify(wishlist));updateWishlistCount();}
 
 const defaultProducts = [
-{id:1,name:'Elite Strike Football Jersey',cat:'kit',gender:'men',description:'Premium moisture-wicking fabric',originalPrice:3500,trending:true,featured:true,images:['https://i.imgur.com/1nJEkNy.jpeg','https://i.imgur.com/sGQqC1x.jpeg'],coupon:'',variants:{0:{color:'Red',colorCode:'#DC2626',image:'https://i.imgur.com/1nJEkNy.jpeg',sale:25,sizes:allSizes},1:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/sGQqC1x.jpeg',sale:0,sizes:allSizes}}},
-{id:2,name:'Pro Cricket Kit',cat:'kit',gender:'men',description:'Professional cricket uniform',originalPrice:4200,trending:false,featured:true,images:['https://i.imgur.com/sGQqC1x.jpeg','https://i.imgur.com/4XpMhLq.jpeg'],coupon:'',variants:{0:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/sGQqC1x.jpeg',sale:15,sizes:allSizes},1:{color:'Green',colorCode:'#16A34A',image:'https://i.imgur.com/4XpMhLq.jpeg',sale:0,sizes:allSizes}}},
-{id:3,name:'Varsity Heritage Jacket',cat:'jacket',gender:'uni',description:'Classic letterman jacket',originalPrice:6800,trending:true,featured:true,images:['https://i.imgur.com/XnLHKnM.jpeg','https://i.imgur.com/JqLkPcR.jpeg'],coupon:'ZYRON20',variants:{0:{color:'Maroon',colorCode:'#8B1A1A',image:'https://i.imgur.com/XnLHKnM.jpeg',sale:30,sizes:allSizes},1:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/JqLkPcR.jpeg',sale:20,sizes:allSizes}}},
-{id:4,name:'Elite Tracksuit',cat:'tracksuit',gender:'men',description:'Full tracksuit set with premium fabric',originalPrice:4200,trending:false,featured:false,images:['https://i.imgur.com/HgJLmNp.jpeg','https://i.imgur.com/XZqM9pL.jpeg'],coupon:'',variants:{0:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/HgJLmNp.jpeg',sale:20,sizes:allSizes},1:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/XZqM9pL.jpeg',sale:0,sizes:allSizes}}},
-{id:5,name:'Women Active Top',cat:'shirt',gender:'women',description:'Stretchable performance fabric',originalPrice:2000,trending:true,featured:true,images:['https://i.imgur.com/fR5XqyP.jpeg','https://i.imgur.com/9YhLkZc.jpeg'],coupon:'ZYRON10',variants:{0:{color:'Pink',colorCode:'#F472B6',image:'https://i.imgur.com/fR5XqyP.jpeg',sale:20,sizes:allSizes},1:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/9YhLkZc.jpeg',sale:0,sizes:allSizes}}},
-{id:6,name:'Premium Hoodie',cat:'winter',gender:'uni',description:'Cozy fleece hoodie for winter',originalPrice:4500,trending:true,featured:true,images:['https://i.imgur.com/HgJLmNp.jpeg','https://i.imgur.com/JqLkPcR.jpeg'],coupon:'WINTER15',variants:{0:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/HgJLmNp.jpeg',sale:15,sizes:allSizes},1:{color:'Navy',colorCode:'#1E3A5F',image:'https://i.imgur.com/JqLkPcR.jpeg',sale:0,sizes:allSizes}}}
+{id:1,name:'Elite Strike Football Jersey',cat:'kit',gender:'men',description:'Premium moisture-wicking fabric',originalPrice:3500,trending:true,featured:true,images:['https://i.imgur.com/1nJEkNy.jpeg','https://i.imgur.com/sGQqC1x.jpeg'],coupon:'',hasTrouser:true,variants:{0:{color:'Red',colorCode:'#DC2626',image:'https://i.imgur.com/1nJEkNy.jpeg',sale:25,sizes:allSizes},1:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/sGQqC1x.jpeg',sale:0,sizes:allSizes}}},
+{id:2,name:'Pro Cricket Kit',cat:'kit',gender:'men',description:'Professional cricket uniform',originalPrice:4200,trending:false,featured:true,images:['https://i.imgur.com/sGQqC1x.jpeg','https://i.imgur.com/4XpMhLq.jpeg'],coupon:'',hasTrouser:true,variants:{0:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/sGQqC1x.jpeg',sale:15,sizes:allSizes},1:{color:'Green',colorCode:'#16A34A',image:'https://i.imgur.com/4XpMhLq.jpeg',sale:0,sizes:allSizes}}},
+{id:3,name:'Varsity Heritage Jacket',cat:'jacket',gender:'uni',description:'Classic letterman jacket',originalPrice:6800,trending:true,featured:true,images:['https://i.imgur.com/XnLHKnM.jpeg','https://i.imgur.com/JqLkPcR.jpeg'],coupon:'ZYRON20',hasTrouser:false,variants:{0:{color:'Maroon',colorCode:'#8B1A1A',image:'https://i.imgur.com/XnLHKnM.jpeg',sale:30,sizes:allSizes},1:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/JqLkPcR.jpeg',sale:20,sizes:allSizes}}},
+{id:4,name:'Elite Tracksuit',cat:'tracksuit',gender:'men',description:'Full tracksuit set with premium fabric',originalPrice:4200,trending:false,featured:false,images:['https://i.imgur.com/HgJLmNp.jpeg','https://i.imgur.com/XZqM9pL.jpeg'],coupon:'',hasTrouser:true,variants:{0:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/HgJLmNp.jpeg',sale:20,sizes:allSizes},1:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/XZqM9pL.jpeg',sale:0,sizes:allSizes}}},
+{id:5,name:'Women Active Top',cat:'shirt',gender:'women',description:'Stretchable performance fabric',originalPrice:2000,trending:true,featured:true,images:['https://i.imgur.com/fR5XqyP.jpeg','https://i.imgur.com/9YhLkZc.jpeg'],coupon:'ZYRON10',hasTrouser:false,variants:{0:{color:'Pink',colorCode:'#F472B6',image:'https://i.imgur.com/fR5XqyP.jpeg',sale:20,sizes:allSizes},1:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/9YhLkZc.jpeg',sale:0,sizes:allSizes}}},
+{id:6,name:'Premium Hoodie',cat:'winter',gender:'uni',description:'Cozy fleece hoodie for winter',originalPrice:4500,trending:true,featured:true,images:['https://i.imgur.com/HgJLmNp.jpeg','https://i.imgur.com/JqLkPcR.jpeg'],coupon:'WINTER15',hasTrouser:false,variants:{0:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/HgJLmNp.jpeg',sale:15,sizes:allSizes},1:{color:'Navy',colorCode:'#1E3A5F',image:'https://i.imgur.com/JqLkPcR.jpeg',sale:0,sizes:allSizes}}}
 ];
 
 function loadProductsFromFirebase(){ database.ref('products').on('value',(snap)=>{ const d=snap.val(); if(d&&Object.keys(d).length>0) products=Object.values(d); else{ products=[...defaultProducts]; products.forEach(p=>database.ref(`products/${p.id}`).set(p)); } products.forEach(p=>{ if(selectedVariants[p.id]===undefined) selectedVariants[p.id]=0; }); renderProducts(); renderFeatured(); updateCartCount(); if(isAdminLoggedIn){renderManage();updateAnalytics();} }); }
@@ -506,7 +627,7 @@ function selectVariant(pid,idx){ selectedVariants[pid]=idx; renderProducts(); }
 
 function renderFeatured(){ const grid=document.getElementById('featuredGrid'); if(!grid)return; const featured=products.filter(p=>p.featured).slice(0,6); if(featured.length===0)return; grid.innerHTML=featured.map(p=>{ const v=Object.values(p.variants)[0]; const fp=getFinalPrice(p.originalPrice,v.sale,p.coupon); return `<div class="featured-card" onclick="viewProduct(${p.id})"><img src="${v.image}" onerror="this.src='https://placehold.co/200x200/1a1a1a/gold'"><h4>${p.name}</h4><p>PKR ${fp.toLocaleString()}</p></div>`; }).join(''); }
 
-// ===== PRODUCT DETAIL RENDER WITH BOTH SIZES =====
+// ===== PRODUCT DETAIL RENDER WITH TROUSER TOGGLE =====
 function renderProductDetail() {
     const p = currentProduct;
     if (!p) return;
@@ -517,6 +638,7 @@ function renderProductDetail() {
     const related = products.filter(p2 => p2.id !== p.id && p2.cat === p.cat).slice(0, 4);
     const reviews = p.reviews || [];
     const inWishlist = wishlist.includes(p.id);
+    const showTrouser = p.hasTrouser !== undefined ? p.hasTrouser : true;
 
     document.getElementById('productDetailContainer').innerHTML = `
     <div class="breadcrumb" style="font-size:11px;color:var(--text-light);margin-bottom:20px;padding:0 20px">
@@ -544,9 +666,9 @@ function renderProductDetail() {
             </div>
             <div class="rating-stars" style="margin-bottom:15px">${renderStars(reviews)}</div>
 
-            <!-- ===== BOTH SIZES: SHIRT + TROUSER ===== -->
+            <!-- ===== SIZE SELECTION (BASED ON TROUSER TOGGLE) ===== -->
             <div class="size-section-container">
-                <!-- SHIRT SIZE -->
+                <!-- SHIRT SIZE (ALWAYS SHOWN) -->
                 <div class="size-group">
                     <span class="size-group-label"><i class="fas fa-tshirt"></i> SHIRT SIZE</span>
                     <div class="size-options-row" id="shirtSizeOptions">
@@ -557,7 +679,8 @@ function renderProductDetail() {
                     </div>
                 </div>
 
-                <!-- TROUSER SIZE -->
+                <!-- TROUSER SIZE (ONLY IF hasTrouser IS TRUE) -->
+                ${showTrouser ? `
                 <div class="size-group">
                     <span class="size-group-label"><i class="fas fa-tshirt"></i> TROUSER SIZE</span>
                     <div class="size-options-row" id="trouserSizeOptions">
@@ -567,13 +690,14 @@ function renderProductDetail() {
                         `).join('')}
                     </div>
                 </div>
+                ` : ''}
             </div>
 
             <!-- Selected sizes display -->
             <div class="selected-size-display">
                 <span class="label">Selected:</span>
                 <span class="value" id="selectedSizeDisplay">
-                    Shirt: ${selectedShirtSize} | Trouser: ${selectedTrouserSize}
+                    Shirt: ${selectedShirtSize}${showTrouser ? ` | Trouser: ${selectedTrouserSize}` : ''}
                 </span>
             </div>
 
@@ -693,7 +817,8 @@ function selectShirtSize(size) {
     document.querySelectorAll('#shirtSizeOptions .size-opt-btn').forEach(btn => {
         btn.classList.toggle('active', btn.textContent.trim() === size);
     });
-    document.getElementById('selectedSizeDisplay').textContent = `Shirt: ${selectedShirtSize} | Trouser: ${selectedTrouserSize}`;
+    const showTrouser = currentProduct && (currentProduct.hasTrouser !== undefined ? currentProduct.hasTrouser : true);
+    document.getElementById('selectedSizeDisplay').textContent = `Shirt: ${selectedShirtSize}${showTrouser ? ` | Trouser: ${selectedTrouserSize}` : ''}`;
 }
 
 function selectTrouserSize(size) {
@@ -701,7 +826,8 @@ function selectTrouserSize(size) {
     document.querySelectorAll('#trouserSizeOptions .size-opt-btn').forEach(btn => {
         btn.classList.toggle('active', btn.textContent.trim() === size);
     });
-    document.getElementById('selectedSizeDisplay').textContent = `Shirt: ${selectedShirtSize} | Trouser: ${selectedTrouserSize}`;
+    const showTrouser = currentProduct && (currentProduct.hasTrouser !== undefined ? currentProduct.hasTrouser : true);
+    document.getElementById('selectedSizeDisplay').textContent = `Shirt: ${selectedShirtSize}${showTrouser ? ` | Trouser: ${selectedTrouserSize}` : ''}`;
 }
 
 function selectDetailColor(index) {
@@ -796,7 +922,11 @@ async function submitReview(id) {
 
 // ===== ADD TO CART WITH BOTH SIZES =====
 function addToCartFromDetail() {
-    const sizeDisplay = `Shirt: ${selectedShirtSize} | Trouser: ${selectedTrouserSize}`;
+    const showTrouser = currentProduct && (currentProduct.hasTrouser !== undefined ? currentProduct.hasTrouser : true);
+    let sizeDisplay = `Shirt: ${selectedShirtSize}`;
+    if (showTrouser) {
+        sizeDisplay += ` | Trouser: ${selectedTrouserSize}`;
+    }
     const sp = getFinalPrice(currentProduct.originalPrice, currentVariant.sale, currentProduct.coupon);
     
     const existingIdx = cart.findIndex(item => 
@@ -814,7 +944,7 @@ function addToCartFromDetail() {
             color: currentVariant.color,
             size: sizeDisplay,
             shirtSize: selectedShirtSize,
-            trouserSize: selectedTrouserSize,
+            trouserSize: showTrouser ? selectedTrouserSize : null,
             quantity: currentQty,
             image: currentVariant.image,
             price: currentProduct.originalPrice,
@@ -824,7 +954,7 @@ function addToCartFromDetail() {
     
     localStorage.setItem('zyron_cart', JSON.stringify(cart));
     updateCartCount();
-    showToast(`✅ Added to cart! (Shirt: ${selectedShirtSize} | Trouser: ${selectedTrouserSize})`);
+    showToast(`✅ Added to cart! (${sizeDisplay})`);
 }
 
 function buyNowFromDetail() {
