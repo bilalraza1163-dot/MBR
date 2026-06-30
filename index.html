@@ -100,30 +100,63 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 .toast.show{transform:translateX(0)}
 .page{display:none}
 .page.active{display:block}
+/* ========== PRODUCT DETAIL PAGE - NEW DESIGN ========== */
 .product-detail{display:grid;grid-template-columns:1fr 1fr;gap:50px;max-width:1200px;margin:0 auto;padding:40px 20px}
-.product-detail-img img{width:100%;border-radius:12px}
-.product-detail-title{font-size:28px;margin-bottom:15px}
-.product-detail-price{font-size:32px;color:var(--gold);font-weight:600;margin-bottom:15px}
-.product-detail-price s{font-size:18px;color:var(--text-light);margin-right:10px}
-.product-detail-desc{color:var(--text-light);line-height:1.6;margin-bottom:25px}
-.detail-section-title{margin:20px 0 10px;font-size:14px;letter-spacing:2px}
+/* Breadcrumb */
+.breadcrumb{font-size:11px;color:var(--text-light);margin-bottom:20px}
+.breadcrumb a{color:var(--text-light);text-decoration:none}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:var(--text)}
+/* Image Gallery */
+.gallery{position:relative}
+.gallery-main{width:100%;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#FAFAFA;cursor:zoom-in}
+.gallery-main img{width:100%;height:100%;object-fit:cover;transition:0.3s}
+.gallery-main img:hover{transform:scale(1.02)}
+.gallery-thumbs{display:flex;gap:10px;margin-top:15px;flex-wrap:wrap}
+.gallery-thumb{width:80px;height:80px;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:0.2s;opacity:0.7}
+.gallery-thumb.active{border-color:var(--gold);opacity:1}
+.gallery-thumb:hover{opacity:1;border-color:var(--gold)}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover}
+.gallery-thumb.blur img{filter:blur(2px)}
+/* Product Info */
+.product-info-title{font-size:28px;font-weight:700;margin-bottom:4px}
+.product-info-sub{font-size:14px;color:var(--text-light);margin-bottom:15px}
+.product-info-price{font-size:32px;color:var(--gold);font-weight:700;margin-bottom:15px}
+.product-info-price s{font-size:18px;color:var(--text-light);margin-right:10px}
+.product-info-desc{color:var(--text-light);line-height:1.6;margin-bottom:20px}
+.detail-section-title{margin:20px 0 10px;font-size:13px;letter-spacing:2px;font-weight:600}
 .detail-size-options{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px}
-.detail-size-btn{padding:10px 25px;border:1px solid var(--border);background:var(--card);cursor:pointer;border-radius:4px}
+.detail-size-btn{padding:10px 25px;border:1px solid var(--border);background:var(--card);cursor:pointer;border-radius:4px;transition:0.2s}
 .detail-size-btn.active{border-color:var(--gold);background:var(--gold);color:#000}
 .detail-color-options{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:15px}
-.detail-color-option{width:45px;height:45px;border-radius:50%;cursor:pointer;border:2px solid var(--border)}
+.detail-color-option{width:45px;height:45px;border-radius:50%;cursor:pointer;border:2px solid var(--border);transition:0.2s}
 .detail-color-option.active{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
-.detail-qty-selector{display:flex;align-items:center;gap:15px;margin-bottom:20px}
-.detail-qty-btn{width:40px;height:40px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:18px}
-.detail-qty-input{width:60px;text-align:center;border:1px solid var(--border);padding:10px}
-.detail-stock-info{font-size:13px;color:var(--text-light);margin-bottom:20px}
-.detail-action-buttons{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:25px;align-items:center}
-.detail-btn-add-cart{flex:1;background:var(--text);color:#fff;padding:14px;border:none;cursor:pointer;font-weight:600;border-radius:4px;transition:0.2s}
+.detail-qty-selector{display:flex;align-items:center;gap:15px;margin-bottom:15px}
+.detail-qty-btn{width:40px;height:40px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:18px;border-radius:4px}
+.detail-qty-input{width:60px;text-align:center;border:1px solid var(--border);padding:10px;border-radius:4px}
+.detail-stock-info{font-size:13px;color:var(--text-light);margin-bottom:15px}
+.detail-stock-info .in-stock{color:#22C55E}
+.detail-stock-info .low-stock{color:var(--sale)}
+.detail-action-buttons{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:15px}
+.detail-btn-add-cart{flex:1;background:var(--text);color:#fff;padding:14px;border:none;cursor:pointer;font-weight:600;border-radius:4px;transition:0.2s;min-width:140px}
 .detail-btn-add-cart:hover{background:var(--dark-gold);color:#000}
-.detail-btn-buy-now{flex:1;background:var(--whatsapp);color:#fff;padding:14px;border:none;cursor:pointer;font-weight:600;border-radius:4px;transition:0.2s}
+.detail-btn-buy-now{flex:1;background:var(--whatsapp);color:#fff;padding:14px;border:none;cursor:pointer;font-weight:600;border-radius:4px;transition:0.2s;min-width:140px}
 .detail-btn-buy-now:hover{opacity:0.9}
-.sizechart-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:8px 15px;border-radius:4px;cursor:pointer;font-size:12px;transition:0.2s;white-space:nowrap}
+.detail-extra-buttons{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.sizechart-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:8px 15px;border-radius:4px;cursor:pointer;font-size:12px;transition:0.2s}
 .sizechart-btn:hover{background:rgba(201,168,76,0.1)}
+/* Customer Satisfaction Badge */
+.satisfaction-badge{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 15px;display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.satisfaction-badge i{color:var(--gold);font-size:20px}
+.satisfaction-badge span{font-size:13px;color:var(--text-light)}
+/* Product Tabs */
+.product-tabs{border-top:1px solid var(--border);margin-top:30px;padding-top:20px}
+.tab-headers{display:flex;gap:30px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.tab-header{padding:10px 0;cursor:pointer;font-size:12px;letter-spacing:1px;color:var(--text-light);border-bottom:2px solid transparent;transition:0.2s}
+.tab-header.active{color:var(--text);border-bottom-color:var(--gold)}
+.tab-content{display:none;padding:20px 0;font-size:13px;color:var(--text-light);line-height:1.6}
+.tab-content.active{display:block}
+.tab-content ul{margin-left:20px}
 .back-btn{background:transparent;border:none;color:var(--text-light);cursor:pointer;font-size:13px;padding:8px 0;transition:0.2s}
 .back-btn:hover{color:var(--gold)}
 .back-btn i{margin-right:8px}
@@ -134,6 +167,7 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 .related-card img{width:100%;border-radius:8px;aspect-ratio:1/1;object-fit:cover}
 .related-card h4{font-size:13px;margin-top:8px}
 .related-card p{font-size:13px;color:var(--gold);font-weight:600}
+/* ========== CART PAGE ========== */
 .cart-grid{display:grid;grid-template-columns:2fr 1fr;gap:40px;max-width:1200px;margin:0 auto;padding:20px}
 .cart-items{border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .cart-header{display:grid;grid-template-columns:3fr 1fr 1fr 0.5fr;padding:15px;background:var(--bg);font-size:12px;font-weight:600}
@@ -145,48 +179,44 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 .cart-summary{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:25px}
 .summary-row{display:flex;justify-content:space-between;padding:10px 0}
 .summary-total{font-size:18px;font-weight:700;border-top:1px solid var(--border);padding-top:15px}
-.cart-qty-btn{width:28px;height:28px;border:1px solid var(--border);background:var(--card);cursor:pointer}
+.cart-qty-btn{width:28px;height:28px;border:1px solid var(--border);background:var(--card);cursor:pointer;border-radius:4px}
 .cart-remove{color:red;cursor:pointer}
-.checkout-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:40px;max-width:1200px;margin:0 auto;padding:20px}
-.checkout-form{background:var(--card);border-radius:12px;padding:30px;border:1px solid var(--border)}
+/* ========== CHECKOUT PAGE - REDESIGNED ========== */
+.checkout-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:40px;max-width:1200px;margin:0 auto;padding:20px}
+.checkout-progress{display:flex;justify-content:center;gap:40px;margin-bottom:30px;padding:20px;background:var(--card);border-radius:12px;border:1px solid var(--border)}
+.checkout-step{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-light)}
+.checkout-step.active{color:var(--text);font-weight:600}
+.checkout-step .step-num{width:28px;height:28px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;border:1px solid var(--border)}
+.checkout-step.active .step-num{background:var(--gold);border-color:var(--gold);color:#000}
+.checkout-form{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:30px}
+.checkout-form .form-title{font-size:18px;margin-bottom:20px}
 .checkout-form .form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:15px}
 .checkout-form .form-group{display:flex;flex-direction:column;gap:6px}
-.checkout-form input{padding:12px;border:1px solid var(--border);border-radius:6px}
+.checkout-form .form-group label{font-size:11px;color:var(--text-light);letter-spacing:1px}
+.checkout-form .form-group input{padding:12px;border:1px solid var(--border);border-radius:6px;font-size:14px;transition:0.2s}
+.checkout-form .form-group input:focus{border-color:var(--gold);outline:none}
+/* Payment Section */
+.payment-methods{margin:20px 0}
+.payment-method{display:flex;align-items:center;gap:12px;padding:12px 15px;border:1px solid var(--border);border-radius:8px;margin-bottom:10px;cursor:pointer;transition:0.2s}
+.payment-method.active{border-color:var(--gold);background:rgba(201,168,76,0.05)}
+.payment-method i{font-size:20px}
 .jazzcash-box{background:linear-gradient(135deg,#25D36610,#fff);border:1px solid var(--whatsapp);border-radius:12px;padding:20px;text-align:center;margin-top:15px}
 .jazzcash-box i{font-size:40px;color:var(--whatsapp)}
 .jazzcash-box h3{font-size:24px;color:var(--whatsapp);margin:10px 0}
-.back-link{display:inline-block;margin-top:15px;color:var(--text-light);text-decoration:none;font-size:12px;transition:0.2s}
-.back-link:hover{color:var(--gold)}
-.admin-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:25px;margin-top:40px}
-.admin-toggle{cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-.password-box{background:var(--bg);padding:20px;border-radius:8px;margin-top:15px;text-align:center}
-.variant-row{background:var(--bg);padding:15px;border-radius:8px;margin-bottom:15px}
-.btn-add{background:var(--gold);border:none;padding:10px 20px;border-radius:4px;cursor:pointer}
-.btn-add-variant{background:transparent;border:1px dashed var(--gold);padding:10px;width:100%;border-radius:4px;margin:10px 0;cursor:pointer}
-.manage-table{width:100%;border-collapse:collapse}
-.manage-table th,.manage-table td{padding:10px;border-bottom:1px solid var(--border);text-align:left}
-.sizechart-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:10000;align-items:center;justify-content:center}
-.sizechart-content{background:white;max-width:550px;width:90%;border-radius:12px;padding:25px;position:relative}
-.sizechart-content h3{color:var(--gold);margin-bottom:20px;font-family:'Bebas Neue';letter-spacing:2px;text-align:center}
-.sizechart-close{position:absolute;top:15px;right:20px;font-size:24px;cursor:pointer;color:#666}
-.sizechart-tab{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:8px 20px;border-radius:4px;cursor:pointer;font-size:12px;transition:0.2s}
-.sizechart-tab.active{background:var(--gold);color:#000}
-.sizechart-panel{display:none}
-.sizechart-panel.active{display:block}
-.sizechart-table{width:100%;border-collapse:collapse;margin-top:15px}
-.sizechart-table th,.sizechart-table td{padding:10px;border:1px solid #ddd;text-align:center}
-.sizechart-table th{background:var(--gold);color:#000}
-.edit-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:20000;align-items:center;justify-content:center}
-.edit-content{background:white;max-width:600px;width:95%;border-radius:12px;padding:25px;position:relative;max-height:90vh;overflow-y:auto}
-.edit-content h3{color:var(--gold);margin-bottom:20px;font-family:'Bebas Neue';letter-spacing:2px}
-.edit-close{position:absolute;top:15px;right:20px;font-size:24px;cursor:pointer;color:#666}
-.edit-form .form-group{margin-bottom:12px}
-.edit-form label{font-size:11px;letter-spacing:2px;color:var(--text-light);display:block;margin-bottom:4px}
-.edit-form input,.edit-form select{padding:10px;border:1px solid var(--border);border-radius:6px;width:100%}
-.edit-form .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.edit-variant-row{background:var(--bg);padding:12px;border-radius:6px;margin-bottom:10px}
-.edit-variant-row .form-row{grid-template-columns:1fr 1fr 1fr}
-@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}.stats{grid-template-columns:repeat(2,1fr)}.products-grid{grid-template-columns:1fr}.product-detail{grid-template-columns:1fr}.cart-grid{grid-template-columns:1fr}.cart-header{display:none}.cart-item{display:flex;flex-direction:column;text-align:center}.checkout-grid{grid-template-columns:1fr}.related-grid{grid-template-columns:repeat(2,1fr)}.detail-action-buttons{flex-direction:column}.sizechart-tab{padding:6px 12px;font-size:10px}}
+.jazzcash-box .small{font-size:11px;color:var(--text-light)}
+/* Order Summary in Checkout */
+.order-summary-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:25px;height:fit-content;position:sticky;top:100px}
+.order-summary-card h3{margin-bottom:20px}
+.summary-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.summary-item img{width:60px;height:60px;object-fit:cover;border-radius:6px}
+.summary-item-info{flex:1}
+.summary-item-info h4{font-size:13px}
+.summary-item-info p{font-size:11px;color:var(--text-light)}
+.summary-item-info .price{color:var(--gold);font-weight:600}
+.order-total{font-size:18px;font-weight:700;border-top:1px solid var(--border);padding-top:15px;margin-top:10px}
+.secure-badge{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;margin-top:15px;font-size:12px;color:var(--text-light)}
+.secure-badge i{color:#22C55E}
+@media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}.stats{grid-template-columns:repeat(2,1fr)}.products-grid{grid-template-columns:1fr}.product-detail{grid-template-columns:1fr;gap:30px}.cart-grid{grid-template-columns:1fr}.cart-header{display:none}.cart-item{display:flex;flex-direction:column;text-align:center}.checkout-grid{grid-template-columns:1fr}.checkout-form .form-row{grid-template-columns:1fr}.related-grid{grid-template-columns:repeat(2,1fr)}.detail-action-buttons{flex-direction:column}.checkout-progress{flex-direction:column;align-items:center;gap:15px}.gallery-thumb{width:60px;height:60px}.order-summary-card{position:relative;top:0}}
 </style>
 </head>
 <body>
@@ -233,67 +263,59 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 <footer id="contact"><div class="footer-logo">ZYRON</div><div style="font-size:11px;letter-spacing:3px;color:var(--text-light);margin-bottom:24px">Sportswear Manufacturing — Pakistan</div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('home');document.getElementById('products').scrollIntoView()">Products</a><a href="#" onclick="openWA('Hi! ZYRON Sportswear inquiry.')">WhatsApp</a></div><div class="footer-copy" style="font-size:11px;color:var(--text-light)">© 2025 ZYRON Sportswear. All rights reserved.</div></footer>
 </div>
 
-<div id="productPage" class="page"><div class="product-detail" id="productDetailContainer"></div></div>
+<div id="productPage" class="page"><div id="productDetailContainer"></div></div>
 <div id="cartPage" class="page"><div id="cartContainer"></div></div>
 <div id="checkoutPage" class="page"><div id="checkoutContainer"></div></div>
 
 <!-- Size Chart Modal -->
-<div id="sizeChartModal" class="sizechart-modal">
-<div class="sizechart-content">
-<span class="sizechart-close" onclick="closeSizeChart()">&times;</span>
-<div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
-<button id="sizeTabShirt" class="sizechart-tab active" onclick="showSizeChart('shirt')">👕 Shirt Size Chart</button>
-<button id="sizeTabTrouser" class="sizechart-tab" onclick="showSizeChart('trouser')">👖 Trouser Length Chart</button>
+<div id="sizeChartModal" class="sizechart-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:10000;align-items:center;justify-content:center">
+<div class="sizechart-content" style="background:white;max-width:550px;width:90%;border-radius:12px;padding:25px;position:relative">
+<span class="sizechart-close" onclick="closeSizeChart()" style="position:absolute;top:15px;right:20px;font-size:24px;cursor:pointer;color:#666">&times;</span>
+<div style="display:flex;gap:10px;justify-content:center;margin-bottom:20px;flex-wrap:wrap">
+<button id="sizeTabShirt" class="sizechart-tab" style="background:transparent;border:1px solid var(--gold);color:var(--gold);padding:8px 20px;border-radius:4px;cursor:pointer;font-size:12px;transition:0.2s" onclick="showSizeChart('shirt')">👕 Shirt Size Chart</button>
+<button id="sizeTabTrouser" class="sizechart-tab" style="background:transparent;border:1px solid var(--gold);color:var(--gold);padding:8px 20px;border-radius:4px;cursor:pointer;font-size:12px;transition:0.2s" onclick="showSizeChart('trouser')">👖 Trouser Length Chart</button>
 </div>
-<div id="shirtSizeChart" class="sizechart-panel active">
-<h3>📏 SHIRT SIZE CHART</h3>
-<table class="sizechart-table">
-<thead><tr><th>SIZE</th><th>WIDTH (inches)</th><th>LENGTH (inches)</th></tr></thead>
-<tbody>
-<tr><td>S</td><td>18</td><td>25</td></tr>
-<tr><td>M</td><td>19</td><td>26</td></tr>
-<tr><td>L</td><td>20</td><td>28</td></tr>
-<tr><td>XL</td><td>22</td><td>29</td></tr>
-<tr><td>2XL</td><td>24</td><td>30</td></tr>
-<tr><td>3XL</td><td>26</td><td>31</td></tr>
-</tbody>
-</table>
+<div id="shirtSizeChart" class="sizechart-panel" style="display:block">
+<h3 style="color:var(--gold);margin-bottom:20px;font-family:'Bebas Neue';letter-spacing:2px;text-align:center">📏 SHIRT SIZE CHART</h3>
+<table style="width:100%;border-collapse:collapse;margin-top:15px"><thead><tr><th style="padding:10px;border:1px solid #ddd;text-align:center;background:var(--gold);color:#000">SIZE</th><th style="padding:10px;border:1px solid #ddd;text-align:center;background:var(--gold);color:#000">WIDTH (inches)</th><th style="padding:10px;border:1px solid #ddd;text-align:center;background:var(--gold);color:#000">LENGTH (inches)</th></tr></thead>
+<tbody><tr><td style="padding:10px;border:1px solid #ddd;text-align:center">S</td><td style="padding:10px;border:1px solid #ddd;text-align:center">18</td><td style="padding:10px;border:1px solid #ddd;text-align:center">25</td></tr>
+<tr><td style="padding:10px;border:1px solid #ddd;text-align:center">M</td><td style="padding:10px;border:1px solid #ddd;text-align:center">19</td><td style="padding:10px;border:1px solid #ddd;text-align:center">26</td></tr>
+<tr><td style="padding:10px;border:1px solid #ddd;text-align:center">L</td><td style="padding:10px;border:1px solid #ddd;text-align:center">20</td><td style="padding:10px;border:1px solid #ddd;text-align:center">28</td></tr>
+<tr><td style="padding:10px;border:1px solid #ddd;text-align:center">XL</td><td style="padding:10px;border:1px solid #ddd;text-align:center">22</td><td style="padding:10px;border:1px solid #ddd;text-align:center">29</td></tr>
+<tr><td style="padding:10px;border:1px solid #ddd;text-align:center">2XL</td><td style="padding:10px;border:1px solid #ddd;text-align:center">24</td><td style="padding:10px;border:1px solid #ddd;text-align:center">30</td></tr>
+<tr><td style="padding:10px;border:1px solid #ddd;text-align:center">3XL</td><td style="padding:10px;border:1px solid #ddd;text-align:center">26</td><td style="padding:10px;border:1px solid #ddd;text-align:center">31</td></tr></tbody></table>
 </div>
-<div id="trouserSizeChart" class="sizechart-panel">
-<h3>📏 TROUSERS LENGTH CHART</h3>
-<table class="sizechart-table">
-<thead><tr><th>SIZE</th><th>LENGTH (inches)</th></tr></thead>
-<tbody>
-<tr><td>S</td><td>36</td></tr>
-<tr><td>M</td><td>38</td></tr>
-<tr><td>L</td><td>40</td></tr>
-<tr><td>XL</td><td>42</td></tr>
-<tr><td>2XL</td><td>42</td></tr>
-<tr><td>3XL</td><td>42</td></tr>
-</tbody>
-</table>
+<div id="trouserSizeChart" class="sizechart-panel" style="display:none">
+<h3 style="color:var(--gold);margin-bottom:20px;font-family:'Bebas Neue';letter-spacing:2px;text-align:center">📏 TROUSERS LENGTH CHART</h3>
+<table style="width:100%;border-collapse:collapse;margin-top:15px"><thead><tr><th style="padding:10px;border:1px solid #ddd;text-align:center;background:var(--gold);color:#000">SIZE</th><th style="padding:10px;border:1px solid #ddd;text-align:center;background:var(--gold);color:#000">LENGTH (inches)</th></tr></thead>
+<tbody><tr><td style="padding:10px;border:1px solid #ddd;text-align:center">S</td><td style="padding:10px;border:1px solid #ddd;text-align:center">36</td></tr>
+<tr><td style="padding:10px;border:1px solid #ddd;text-align:center">M</td><td style="padding:10px;border:1px solid #ddd;text-align:center">38</td></tr>
+<tr><td style="padding:10px;border:1px solid #ddd;text-align:center">L</td><td style="padding:10px;border:1px solid #ddd;text-align:center">40</td></tr>
+<tr><td style="padding:10px;border:1px solid #ddd;text-align:center">XL</td><td style="padding:10px;border:1px solid #ddd;text-align:center">42</td></tr>
+<tr><td style="padding:10px;border:1px solid #ddd;text-align:center">2XL</td><td style="padding:10px;border:1px solid #ddd;text-align:center">42</td></tr>
+<tr><td style="padding:10px;border:1px solid #ddd;text-align:center">3XL</td><td style="padding:10px;border:1px solid #ddd;text-align:center">42</td></tr></tbody></table>
 </div>
-<p style="font-size:11px; color:#666; text-align:center; margin-top:15px">Measurements may vary by style</p>
+<p style="font-size:11px;color:#666;text-align:center;margin-top:15px">Measurements may vary by style</p>
 </div>
 </div>
 
 <!-- Edit Product Modal -->
-<div id="editModal" class="edit-modal">
-<div class="edit-content">
-<span class="edit-close" onclick="closeEditModal()">&times;</span>
-<h3>✏️ Edit Product</h3>
-<div class="edit-form" id="editForm">
+<div id="editModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:20000;align-items:center;justify-content:center">
+<div style="background:white;max-width:600px;width:95%;border-radius:12px;padding:25px;position:relative;max-height:90vh;overflow-y:auto">
+<span onclick="closeEditModal()" style="position:absolute;top:15px;right:20px;font-size:24px;cursor:pointer;color:#666">&times;</span>
+<h3 style="color:var(--gold);margin-bottom:20px;font-family:'Bebas Neue';letter-spacing:2px">✏️ Edit Product</h3>
+<div id="editForm">
 <input type="hidden" id="editId">
-<div class="form-group"><label>Product Name</label><input id="editName" placeholder="Product name"></div>
-<div class="form-group"><label>Price</label><input id="editPrice" type="number" placeholder="Price"></div>
-<div class="form-row">
-<div class="form-group"><label>Category</label><select id="editCat"><option value="kit">Sports Kit</option><option value="trouser">Trouser</option><option value="shirt">Shirt</option><option value="jacket">Jacket</option><option value="tracksuit">Tracksuit</option><option value="summer">Summer</option><option value="winter">Winter</option></select></div>
-<div class="form-group"><label>Gender</label><select id="editGender"><option value="men">Men</option><option value="women">Women</option><option value="boys">Boys</option><option value="girls">Girls</option><option value="uni">Unisex</option></select></div>
+<div class="form-group" style="margin-bottom:12px"><label style="font-size:11px;letter-spacing:2px;color:var(--text-light);display:block;margin-bottom:4px">Product Name</label><input id="editName" placeholder="Product name" style="padding:10px;border:1px solid var(--border);border-radius:6px;width:100%"></div>
+<div class="form-group" style="margin-bottom:12px"><label style="font-size:11px;letter-spacing:2px;color:var(--text-light);display:block;margin-bottom:4px">Price</label><input id="editPrice" type="number" placeholder="Price" style="padding:10px;border:1px solid var(--border);border-radius:6px;width:100%"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+<div class="form-group"><label style="font-size:11px;letter-spacing:2px;color:var(--text-light);display:block;margin-bottom:4px">Category</label><select id="editCat" style="padding:10px;border:1px solid var(--border);border-radius:6px;width:100%"><option value="kit">Sports Kit</option><option value="trouser">Trouser</option><option value="shirt">Shirt</option><option value="jacket">Jacket</option><option value="tracksuit">Tracksuit</option><option value="summer">Summer</option><option value="winter">Winter</option></select></div>
+<div class="form-group"><label style="font-size:11px;letter-spacing:2px;color:var(--text-light);display:block;margin-bottom:4px">Gender</label><select id="editGender" style="padding:10px;border:1px solid var(--border);border-radius:6px;width:100%"><option value="men">Men</option><option value="women">Women</option><option value="boys">Boys</option><option value="girls">Girls</option><option value="uni">Unisex</option></select></div>
 </div>
-<div class="form-group"><label>Description</label><input id="editDesc" placeholder="Description"></div>
+<div class="form-group" style="margin-bottom:12px"><label style="font-size:11px;letter-spacing:2px;color:var(--text-light);display:block;margin-bottom:4px">Description</label><input id="editDesc" placeholder="Description" style="padding:10px;border:1px solid var(--border);border-radius:6px;width:100%"></div>
 <div id="editVariantsContainer"></div>
-<button class="btn-add-variant" onclick="addEditVariantField()" style="margin:10px 0">+ Add Color Variant</button>
-<button class="btn-add" onclick="saveEditedProduct()" style="margin-top:15px">💾 Save Changes</button>
+<button onclick="addEditVariantField()" style="background:transparent;border:1px dashed var(--gold);color:var(--gold);padding:10px;width:100%;border-radius:4px;margin:10px 0;cursor:pointer">+ Add Color Variant</button>
+<button onclick="saveEditedProduct()" style="background:var(--gold);border:none;padding:10px 20px;border-radius:4px;cursor:pointer;margin-top:15px">💾 Save Changes</button>
 </div>
 </div>
 </div>
@@ -321,8 +343,8 @@ function closeSizeChart(){ document.getElementById('sizeChartModal').style.displ
 function showSizeChart(type){
     document.getElementById('sizeTabShirt').classList.toggle('active', type === 'shirt');
     document.getElementById('sizeTabTrouser').classList.toggle('active', type === 'trouser');
-    document.getElementById('shirtSizeChart').classList.toggle('active', type === 'shirt');
-    document.getElementById('trouserSizeChart').classList.toggle('active', type === 'trouser');
+    document.getElementById('shirtSizeChart').style.display = type === 'shirt' ? 'block' : 'none';
+    document.getElementById('trouserSizeChart').style.display = type === 'trouser' ? 'block' : 'none';
 }
 function openSlideMenu(){ document.getElementById('slideMenu').classList.add('open'); document.getElementById('slideOverlay').classList.add('active'); }
 function closeSlideMenu(){ document.getElementById('slideMenu').classList.remove('open'); document.getElementById('slideOverlay').classList.remove('active'); }
@@ -333,65 +355,113 @@ document.getElementById('adminShowBtn')?.addEventListener('click',()=>{ document
 
 function checkAdminPassword(){ if(document.getElementById('adminPassword').value===ADMIN_PASSWORD){ isAdminLoggedIn=true; document.getElementById('adminPasswordBox').style.display='none'; document.getElementById('adminForm').style.display='block'; showToast('Admin access granted!'); renderManage(); } else{ document.getElementById('adminError').style.display='block'; } }
 function toggleAdminPanel(){ if(!isAdminLoggedIn){ showToast('Login first'); return; } const f=document.getElementById('adminForm'), ic=document.getElementById('adminIcon'); if(f.style.display==='block'){ f.style.display='none'; ic.innerText='▼'; } else{ f.style.display='block'; ic.innerText='▲'; renderManage(); } }
-function renderManage(){ if(!isAdminLoggedIn) return; const tb=document.getElementById('manageBody'); tb.innerHTML=products.map(p=>`<tr><td><strong>${p.name}</strong></td><td>${catNames[p.cat]}</td><td>${p.gender}</td><td>${p.variants?Object.keys(p.variants).length:0} colors</td><td><button class="btn-danger" onclick="deleteProduct(${p.id})">Delete</button> <button class="btn-primary" style="padding:4px 12px;font-size:11px" onclick="openEditModal(${p.id})">Edit</button></td></tr>`).join(''); }
+function renderManage(){ if(!isAdminLoggedIn) return; const tb=document.getElementById('manageBody'); tb.innerHTML=products.map(p=>`<tr><td><strong>${p.name}</strong></td><td>${catNames[p.cat]}</td><td>${p.gender}</td><td>${p.variants?Object.keys(p.variants).length:0} colors</td><td><button class="btn-danger" onclick="deleteProduct(${p.id})" style="background:transparent;color:#E24B4A;border:1px solid #E24B4A;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px">Delete</button> <button class="btn-primary" onclick="openEditModal(${p.id})" style="background:var(--gold);border:none;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px;color:#000">Edit</button></td></tr>`).join(''); }
 async function deleteProduct(id){ if(confirm('Delete?')){ await database.ref(`products/${id}`).remove(); loadProductsFromFirebase(); showToast('Deleted!'); } }
 function addVariantField(){ variantFields.push({}); renderVariantFields(); }
-function renderVariantFields(){ const c=document.getElementById('variantsContainer'); c.innerHTML=variantFields.map((_,i)=>`<div class="variant-row"><div><span>Variant ${i+1}</span><button onclick="removeVariantField(${i})" style="float:right;background:red;color:white;border:none;padding:2px 10px">X</button></div><div class="form-row"><div class="form-group"><label>Color</label><input id="varColor_${i}" placeholder="Red"></div><div class="form-group"><label>Code</label><input id="varCode_${i}" placeholder="#DC2626"></div></div><div class="form-row"><div class="form-group"><label>Image URL</label><input id="varImage_${i}" placeholder="https://i.imgur.com/xxx.jpg"></div><div class="form-group"><label>Sale %</label><input id="varSale_${i}" type="number" placeholder="0"></div></div></div>`).join(''); }
+function renderVariantFields(){ const c=document.getElementById('variantsContainer'); c.innerHTML=variantFields.map((_,i)=>`<div style="background:var(--bg);padding:12px;border-radius:6px;margin-bottom:10px"><div><span>Variant ${i+1}</span><button onclick="removeVariantField(${i})" style="float:right;background:red;color:white;border:none;padding:2px 10px;border-radius:4px">X</button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px"><div><label style="font-size:10px;color:var(--text-light)">Color</label><input id="varColor_${i}" placeholder="Red" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%"></div><div><label style="font-size:10px;color:var(--text-light)">Code</label><input id="varCode_${i}" placeholder="#DC2626" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div><label style="font-size:10px;color:var(--text-light)">Image URL</label><input id="varImage_${i}" placeholder="https://i.imgur.com/xxx.jpg" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%"></div><div><label style="font-size:10px;color:var(--text-light)">Sale %</label><input id="varSale_${i}" type="number" placeholder="0" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%"></div></div></div>`).join(''); }
 function removeVariantField(i){ variantFields.splice(i,1); renderVariantFields(); }
 async function addProductToFirebase(){ if(!isAdminLoggedIn){ showToast('Admin login required'); return; } const name=document.getElementById('pName').value.trim(); const price=parseInt(document.getElementById('pPrice').value); const cat=document.getElementById('pCat').value; const gender=document.getElementById('pGender').value; const desc=document.getElementById('pDesc').value.trim(); if(!name||!price){ showToast('Name and price required'); return; } if(variantFields.length===0){ showToast('Add color variant'); return; } const variants={}; for(let i=0;i<variantFields.length;i++){ const col=document.getElementById(`varColor_${i}`).value; if(!col){ showToast(`Color for variant ${i+1} required`); return; } variants[i]={ color:col, colorCode:document.getElementById(`varCode_${i}`).value||'#CCCCCC', image:document.getElementById(`varImage_${i}`).value, sale:parseInt(document.getElementById(`varSale_${i}`).value)||0, sizes:['S','M','L','XL','XXL'] }; } const existing=await database.ref('products').once('value'); let maxId=0; if(existing.val()) maxId=Math.max(...Object.keys(existing.val()).map(Number)); const newId=maxId+1; await database.ref(`products/${newId}`).set({ id:newId, name, cat, gender, description:desc||'Premium quality', originalPrice:price, trending:false, variants }); showToast('Product added!'); document.getElementById('pName').value=''; document.getElementById('pPrice').value=''; document.getElementById('pDesc').value=''; variantFields=[]; renderVariantFields(); loadProductsFromFirebase(); }
 
-// ========== EDIT PRODUCT FUNCTIONS ==========
-function openEditModal(id){ const product=products.find(p=>p.id===id); if(!product) return; editVariantFields=[]; document.getElementById('editId').value=id; document.getElementById('editName').value=product.name; document.getElementById('editPrice').value=product.originalPrice; document.getElementById('editCat').value=product.cat; document.getElementById('editGender').value=product.gender; document.getElementById('editDesc').value=product.description||''; const variants=Object.values(product.variants); variants.forEach((v,idx)=>{ editVariantFields.push({ color:v.color, colorCode:v.colorCode, image:v.image, sale:v.sale }); }); renderEditVariantFields(); document.getElementById('editModal').style.display='flex'; }
+function openEditModal(id){ const product=products.find(p=>p.id===id); if(!product) return; editVariantFields=[]; document.getElementById('editId').value=id; document.getElementById('editName').value=product.name; document.getElementById('editPrice').value=product.originalPrice; document.getElementById('editCat').value=product.cat; document.getElementById('editGender').value=product.gender; document.getElementById('editDesc').value=product.description||''; const variants=Object.values(product.variants); variants.forEach((v)=>{ editVariantFields.push({ color:v.color, colorCode:v.colorCode, image:v.image, sale:v.sale }); }); renderEditVariantFields(); document.getElementById('editModal').style.display='flex'; }
 function closeEditModal(){ document.getElementById('editModal').style.display='none'; }
 function addEditVariantField(){ editVariantFields.push({}); renderEditVariantFields(); }
 function removeEditVariantField(i){ editVariantFields.splice(i,1); renderEditVariantFields(); }
-function renderEditVariantFields(){ const c=document.getElementById('editVariantsContainer'); c.innerHTML=editVariantFields.map((field,i)=>`<div class="edit-variant-row"><div><span>Variant ${i+1}</span><button onclick="removeEditVariantField(${i})" style="float:right;background:red;color:white;border:none;padding:2px 10px;border-radius:4px">X</button></div><div class="form-row"><div class="form-group"><label>Color</label><input id="editVarColor_${i}" value="${field.color||''}" placeholder="Red"></div><div class="form-group"><label>Code</label><input id="editVarCode_${i}" value="${field.colorCode||''}" placeholder="#DC2626"></div><div class="form-group"><label>Image URL</label><input id="editVarImage_${i}" value="${field.image||''}" placeholder="https://i.imgur.com/xxx.jpg"></div></div><div class="form-row"><div class="form-group"><label>Sale %</label><input id="editVarSale_${i}" type="number" value="${field.sale||0}" placeholder="0"></div></div></div>`).join(''); }
+function renderEditVariantFields(){ const c=document.getElementById('editVariantsContainer'); c.innerHTML=editVariantFields.map((field,i)=>`<div style="background:var(--bg);padding:12px;border-radius:6px;margin-bottom:10px"><div><span>Variant ${i+1}</span><button onclick="removeEditVariantField(${i})" style="float:right;background:red;color:white;border:none;padding:2px 10px;border-radius:4px">X</button></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px"><div><label style="font-size:10px;color:var(--text-light)">Color</label><input id="editVarColor_${i}" value="${field.color||''}" placeholder="Red" style="padding:6px;border:1px solid var(--border);border-radius:4px;width:100%"></div><div><label style="font-size:10px;color:var(--text-light)">Code</label><input id="editVarCode_${i}" value="${field.colorCode||''}" placeholder="#DC2626" style="padding:6px;border:1px solid var(--border);border-radius:4px;width:100%"></div><div><label style="font-size:10px;color:var(--text-light)">Image URL</label><input id="editVarImage_${i}" value="${field.image||''}" placeholder="https://i.imgur.com/xxx.jpg" style="padding:6px;border:1px solid var(--border);border-radius:4px;width:100%"></div></div><div><label style="font-size:10px;color:var(--text-light)">Sale %</label><input id="editVarSale_${i}" type="number" value="${field.sale||0}" placeholder="0" style="padding:6px;border:1px solid var(--border);border-radius:4px;width:100%;margin-top:8px"></div></div>`).join(''); }
 async function saveEditedProduct(){ const id=parseInt(document.getElementById('editId').value); const name=document.getElementById('editName').value.trim(); const price=parseInt(document.getElementById('editPrice').value); const cat=document.getElementById('editCat').value; const gender=document.getElementById('editGender').value; const desc=document.getElementById('editDesc').value.trim(); if(!name||!price){ showToast('Name and price required'); return; } if(editVariantFields.length===0){ showToast('At least one variant required'); return; } const variants={}; for(let i=0;i<editVariantFields.length;i++){ const col=document.getElementById(`editVarColor_${i}`).value; if(!col){ showToast(`Color for variant ${i+1} required`); return; } variants[i]={ color:col, colorCode:document.getElementById(`editVarCode_${i}`).value||'#CCCCCC', image:document.getElementById(`editVarImage_${i}`).value, sale:parseInt(document.getElementById(`editVarSale_${i}`).value)||0, sizes:['S','M','L','XL','XXL'] }; } await database.ref(`products/${id}`).update({ name, cat, gender, description:desc||'Premium quality', originalPrice:price, variants }); showToast('✅ Product updated!'); closeEditModal(); loadProductsFromFirebase(); }
 
 const defaultProducts = [
-{id:1,name:'Elite Strike Football Jersey',cat:'kit',gender:'men',description:'Premium moisture-wicking',originalPrice:3500,trending:true,variants:{0:{color:'Red',colorCode:'#DC2626',image:'https://i.imgur.com/1nJEkNy.jpeg',sale:25,sizes:['S','M','L','XL','XXL']},1:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/sGQqC1x.jpeg',sale:0,sizes:['S','M','L','XL','XXL']}}},
-{id:2,name:'Pro Cricket Kit',cat:'kit',gender:'men',description:'Professional cricket uniform',originalPrice:4200,trending:false,variants:{0:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/sGQqC1x.jpeg',sale:15,sizes:['S','M','L','XL','XXL']},1:{color:'Green',colorCode:'#16A34A',image:'https://i.imgur.com/4XpMhLq.jpeg',sale:0,sizes:['S','M','L','XL','XXL']}}},
-{id:3,name:'Varsity Heritage Jacket',cat:'jacket',gender:'uni',description:'Classic letterman jacket',originalPrice:6800,trending:true,variants:{0:{color:'Maroon',colorCode:'#8B1A1A',image:'https://i.imgur.com/XnLHKnM.jpeg',sale:30,sizes:['S','M','L','XL','XXL']},1:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/JqLkPcR.jpeg',sale:20,sizes:['S','M','L','XL','XXL']}}},
-{id:4,name:'Elite Tracksuit',cat:'tracksuit',gender:'men',description:'Full tracksuit set',originalPrice:4200,trending:false,variants:{0:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/HgJLmNp.jpeg',sale:20,sizes:['S','M','L','XL','XXL']},1:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/XZqM9pL.jpeg',sale:0,sizes:['S','M','L','XL','XXL']}}},
-{id:5,name:'Women Active Top',cat:'shirt',gender:'women',description:'Stretchable performance',originalPrice:2000,trending:true,variants:{0:{color:'Pink',colorCode:'#F472B6',image:'https://i.imgur.com/fR5XqyP.jpeg',sale:20,sizes:['S','M','L','XL']},1:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/9YhLkZc.jpeg',sale:0,sizes:['S','M','L','XL']}}},
-{id:6,name:'Girls Summer Top',cat:'summer',gender:'girls',description:'Lightweight top',originalPrice:1200,trending:false,variants:{0:{color:'Lavender',colorCode:'#C084FC',image:'https://i.imgur.com/pQnYj8d.jpeg',sale:0,sizes:['XS','S','M','L']},1:{color:'Peach',colorCode:'#FDBA74',image:'https://i.imgur.com/QZmYo0p.jpeg',sale:15,sizes:['XS','S','M','L']}}},
-{id:7,name:'Boys Champion Kit',cat:'kit',gender:'boys',description:'Complete kids kit',originalPrice:2500,trending:true,variants:{0:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/vNmHxVb.jpeg',sale:0,sizes:['XS','S','M','L']},1:{color:'Red',colorCode:'#DC2626',image:'https://i.imgur.com/MDnbq7R.jpeg',sale:20,sizes:['XS','S','M','L']}}},
-{id:8,name:'Premium Hoodie',cat:'winter',gender:'uni',description:'Cozy fleece hoodie for cold days',originalPrice:4500,trending:true,variants:{0:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/HgJLmNp.jpeg',sale:15,sizes:['S','M','L','XL','XXL']},1:{color:'Navy',colorCode:'#1E3A5F',image:'https://i.imgur.com/JqLkPcR.jpeg',sale:0,sizes:['S','M','L','XL','XXL']}}},
-{id:9,name:'Winter Track Pants',cat:'winter',gender:'men',description:'Warm fleece-lined track pants',originalPrice:3200,trending:false,variants:{0:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/4XpMhLq.jpeg',sale:20,sizes:['S','M','L','XL','XXL']},1:{color:'Grey',colorCode:'#6B7280',image:'https://i.imgur.com/MDnbq7R.jpeg',sale:0,sizes:['S','M','L','XL','XXL']}}},
-{id:10,name:'Puffer Winter Jacket',cat:'winter',gender:'uni',description:'Lightweight puffer jacket for extreme cold',originalPrice:7800,trending:true,variants:{0:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/XnLHKnM.jpeg',sale:25,sizes:['S','M','L','XL','XXL']},1:{color:'Olive',colorCode:'#556B2F',image:'https://i.imgur.com/JqLkPcR.jpeg',sale:0,sizes:['S','M','L','XL','XXL']}}}
+{id:1,name:'Elite Strike Football Jersey',cat:'kit',gender:'men',description:'Premium moisture-wicking fabric for ultimate comfort',originalPrice:3500,trending:true,images:['https://i.imgur.com/1nJEkNy.jpeg','https://i.imgur.com/sGQqC1x.jpeg','https://i.imgur.com/vNmHxVb.jpeg'],variants:{0:{color:'Red',colorCode:'#DC2626',image:'https://i.imgur.com/1nJEkNy.jpeg',sale:25,sizes:['S','M','L','XL','XXL']},1:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/sGQqC1x.jpeg',sale:0,sizes:['S','M','L','XL','XXL']}}},
+{id:2,name:'Pro Cricket Kit',cat:'kit',gender:'men',description:'Professional grade cricket uniform',originalPrice:4200,trending:false,images:['https://i.imgur.com/sGQqC1x.jpeg','https://i.imgur.com/4XpMhLq.jpeg','https://i.imgur.com/QZmYo0p.jpeg'],variants:{0:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/sGQqC1x.jpeg',sale:15,sizes:['S','M','L','XL','XXL']},1:{color:'Green',colorCode:'#16A34A',image:'https://i.imgur.com/4XpMhLq.jpeg',sale:0,sizes:['S','M','L','XL','XXL']}}},
+{id:3,name:'Varsity Heritage Jacket',cat:'jacket',gender:'uni',description:'Classic wool blend letterman jacket',originalPrice:6800,trending:true,images:['https://i.imgur.com/XnLHKnM.jpeg','https://i.imgur.com/JqLkPcR.jpeg','https://i.imgur.com/dWYnHkM.jpeg'],variants:{0:{color:'Maroon',colorCode:'#8B1A1A',image:'https://i.imgur.com/XnLHKnM.jpeg',sale:30,sizes:['S','M','L','XL','XXL']},1:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/JqLkPcR.jpeg',sale:20,sizes:['S','M','L','XL','XXL']}}},
+{id:4,name:'Elite Tracksuit',cat:'tracksuit',gender:'men',description:'Full tracksuit set - top + bottom',originalPrice:4200,trending:false,images:['https://i.imgur.com/HgJLmNp.jpeg','https://i.imgur.com/XZqM9pL.jpeg','https://i.imgur.com/vNmHxVb.jpeg'],variants:{0:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/HgJLmNp.jpeg',sale:20,sizes:['S','M','L','XL','XXL']},1:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/XZqM9pL.jpeg',sale:0,sizes:['S','M','L','XL','XXL']}}},
+{id:5,name:'Women Active Sports Top',cat:'shirt',gender:'women',description:'Stretchable performance top for active lifestyle',originalPrice:2000,trending:true,images:['https://i.imgur.com/fR5XqyP.jpeg','https://i.imgur.com/9YhLkZc.jpeg'],variants:{0:{color:'Pink',colorCode:'#F472B6',image:'https://i.imgur.com/fR5XqyP.jpeg',sale:20,sizes:['S','M','L','XL']},1:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/9YhLkZc.jpeg',sale:0,sizes:['S','M','L','XL']}}},
+{id:6,name:'Girls Summer Top',cat:'summer',gender:'girls',description:'Lightweight breathable summer top',originalPrice:1200,trending:false,images:['https://i.imgur.com/pQnYj8d.jpeg','https://i.imgur.com/QZmYo0p.jpeg'],variants:{0:{color:'Lavender',colorCode:'#C084FC',image:'https://i.imgur.com/pQnYj8d.jpeg',sale:0,sizes:['XS','S','M','L']},1:{color:'Peach',colorCode:'#FDBA74',image:'https://i.imgur.com/QZmYo0p.jpeg',sale:15,sizes:['XS','S','M','L']}}},
+{id:7,name:'Boys Champion Kit',cat:'kit',gender:'boys',description:'Complete sports kit for young athletes',originalPrice:2500,trending:true,images:['https://i.imgur.com/vNmHxVb.jpeg','https://i.imgur.com/MDnbq7R.jpeg'],variants:{0:{color:'Blue',colorCode:'#2563EB',image:'https://i.imgur.com/vNmHxVb.jpeg',sale:0,sizes:['XS','S','M','L']},1:{color:'Red',colorCode:'#DC2626',image:'https://i.imgur.com/MDnbq7R.jpeg',sale:20,sizes:['XS','S','M','L']}}},
+{id:8,name:'Premium Hoodie',cat:'winter',gender:'uni',description:'Cozy fleece hoodie for cold days',originalPrice:4500,trending:true,images:['https://i.imgur.com/HgJLmNp.jpeg','https://i.imgur.com/JqLkPcR.jpeg'],variants:{0:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/HgJLmNp.jpeg',sale:15,sizes:['S','M','L','XL','XXL']},1:{color:'Navy',colorCode:'#1E3A5F',image:'https://i.imgur.com/JqLkPcR.jpeg',sale:0,sizes:['S','M','L','XL','XXL']}}},
+{id:9,name:'Winter Track Pants',cat:'winter',gender:'men',description:'Warm fleece-lined track pants',originalPrice:3200,trending:false,images:['https://i.imgur.com/4XpMhLq.jpeg','https://i.imgur.com/MDnbq7R.jpeg'],variants:{0:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/4XpMhLq.jpeg',sale:20,sizes:['S','M','L','XL','XXL']},1:{color:'Grey',colorCode:'#6B7280',image:'https://i.imgur.com/MDnbq7R.jpeg',sale:0,sizes:['S','M','L','XL','XXL']}}},
+{id:10,name:'Puffer Winter Jacket',cat:'winter',gender:'uni',description:'Lightweight puffer jacket for extreme cold',originalPrice:7800,trending:true,images:['https://i.imgur.com/XnLHKnM.jpeg','https://i.imgur.com/JqLkPcR.jpeg'],variants:{0:{color:'Black',colorCode:'#000000',image:'https://i.imgur.com/XnLHKnM.jpeg',sale:25,sizes:['S','M','L','XL','XXL']},1:{color:'Olive',colorCode:'#556B2F',image:'https://i.imgur.com/JqLkPcR.jpeg',sale:0,sizes:['S','M','L','XL','XXL']}}}
 ];
 
 function loadProductsFromFirebase(){ database.ref('products').on('value',(snap)=>{ const d=snap.val(); if(d&&Object.keys(d).length>0) products=Object.values(d); else{ products=[...defaultProducts]; products.forEach(p=>database.ref(`products/${p.id}`).set(p)); } products.forEach(p=>{ if(selectedVariants[p.id]===undefined) selectedVariants[p.id]=0; }); renderProducts(); updateCartCount(); if(isAdminLoggedIn) renderManage(); }); }
 function getFinalPrice(o,s){ return s>0 ? Math.round(o-(o*s/100)) : o; }
-function renderProducts(){ const grid=document.getElementById('productsGrid'); let filtered=products.filter(p=> (activeCat==='all'||p.cat===activeCat) && (activeGender==='all'||p.gender===activeGender||p.gender==='uni')); if(filtered.length===0){ grid.innerHTML='<div style="text-align:center;padding:60px;color:var(--text-light)"><i class="fas fa-box-open" style="font-size:50px;margin-bottom:15px;display:block"></i>No products in this category.<br>Try another selection.</div>'; return; } grid.innerHTML=filtered.map(p=>{ const idx=selectedVariants[p.id]||0; const vars=Object.values(p.variants); const v=vars[idx]; const hs=v.sale>0; const fp=getFinalPrice(p.originalPrice,v.sale); return `<div class="product-card" onclick="viewProduct(${p.id})"><div class="product-img"><img src="${v.image}" onerror="this.src='https://placehold.co/400x400/1a1a1a/gold?text=${p.name}'">${hs?`<div class="sale-badge">${v.sale}% OFF</div>`:''}${p.trending&&!hs?`<div class="trending-badge">🔥 TRENDING</div>`:''}</div><div class="product-body"><div class="product-cat">${catNames[p.cat]} • ${p.gender==='uni'?'Unisex':p.gender.charAt(0).toUpperCase()+p.gender.slice(1)}</div><div class="product-name">${p.name}</div><div class="product-desc">${p.description}</div><div class="color-variants">${vars.map((c,i)=>`<div class="color-dot ${i===idx?'active':''}" style="background:${c.colorCode};" onclick="event.stopPropagation(); selectVariant(${p.id},${i})" title="${c.color}"></div>`).join('')}</div><div class="price-row">${hs?`<span class="original-price">PKR ${p.originalPrice.toLocaleString()}</span><span class="sale-price">PKR ${fp.toLocaleString()}</span>`:`<span class="normal-price">PKR ${fp.toLocaleString()}</span>`}</div></div></div>`; }).join(''); }
+function renderProducts(){ const grid=document.getElementById('productsGrid'); let filtered=products.filter(p=> (activeCat==='all'||p.cat===activeCat) && (activeGender==='all'||p.gender===activeGender||p.gender==='uni')); if(filtered.length===0){ grid.innerHTML='<div style="text-align:center;padding:60px;color:var(--text-light)"><i class="fas fa-box-open" style="font-size:50px;margin-bottom:15px;display:block"></i>No products in this category.<br>Try another selection.</div>'; return; } grid.innerHTML=filtered.map(p=>{ const idx=selectedVariants[p.id]||0; const vars=Object.values(p.variants); const v=vars[idx]; const hs=v.sale>0; const fp=getFinalPrice(p.originalPrice,v.sale); return `<div class="product-card" onclick="viewProduct(${p.id})"><div class="product-img"><img src="${v.image}" onerror="this.src='https://placehold.co/400x400/1a1a1a/gold?text=${p.name}'">${hs?`<div class="sale-badge">${v.sale}% OFF</div>`:''}${p.trending&&!hs?`<div class="trending-badge">🔥 TRENDING</div>`:''}</div><div class="product-body"><div class="product-cat">${catNames[p.cat]} • ${p.gender==='uni'?'Unisex':p.gender.charAt(0).toUpperCase()+p.gender.slice(1)}</div><div class="product-name">${p.name}</div><div class="product-desc">${p.description||'Premium quality'}</div><div class="color-variants">${vars.map((c,i)=>`<div class="color-dot ${i===idx?'active':''}" style="background:${c.colorCode};" onclick="event.stopPropagation(); selectVariant(${p.id},${i})" title="${c.color}"></div>`).join('')}</div><div class="price-row">${hs?`<span class="original-price">PKR ${p.originalPrice.toLocaleString()}</span><span class="sale-price">PKR ${fp.toLocaleString()}</span>`:`<span class="normal-price">PKR ${fp.toLocaleString()}</span>`}</div></div></div>`; }).join(''); }
 function selectVariant(pid,idx){ selectedVariants[pid]=idx; renderProducts(); }
 function filterCat(cat,el){ activeCat=cat; document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active')); if(el) el.classList.add('active'); renderProducts(); closeSlideMenu(); }
 function filterGender(gender,el){ activeGender=gender; document.querySelectorAll('.gender-tab').forEach(t=>t.classList.remove('active')); if(el) el.classList.add('active'); renderProducts(); closeSlideMenu(); }
 
+// ========== PRODUCT DETAIL WITH IMAGE GALLERY ==========
 function viewProduct(id){ const p=products.find(p=>p.id===id); if(!p) return; currentProduct=p; currentVariant=Object.values(p.variants)[0]; selectedSize=currentVariant.sizes?.[0]||'M'; currentQty=1; renderProductDetail(); showPage('product'); }
-function renderProductDetail(){ const hs=currentVariant.sale>0; const sp=hs?Math.round(currentProduct.originalPrice-(currentProduct.originalPrice*currentVariant.sale/100)):currentProduct.originalPrice; const vars=Object.values(currentProduct.variants); const related=products.filter(p=>p.id!==currentProduct.id && p.cat===currentProduct.cat).slice(0,4); document.getElementById('productDetailContainer').innerHTML=`
-<div class="product-detail"><div class="product-detail-img"><img id="detailMainImg" src="${currentVariant.image}" onerror="this.src='https://placehold.co/600x600/1a1a1a/gold?text=${currentProduct.name}'"></div><div><h1 class="product-detail-title">${currentProduct.name}</h1><div class="product-detail-price">${hs?`<s>PKR ${currentProduct.originalPrice.toLocaleString()}</s> PKR ${sp.toLocaleString()}`:`PKR ${currentProduct.originalPrice.toLocaleString()}`}</div><div class="product-detail-desc">${currentProduct.description}</div><div class="detail-section-title">SIZE</div><div class="detail-size-options" id="detailSizeOptions"></div><div class="detail-section-title">COLOR</div><div class="detail-color-options" id="detailColorOptions"></div><div class="detail-section-title">QUANTITY</div><div class="detail-qty-selector"><button class="detail-qty-btn" onclick="changeDetailQty(-1)">-</button><input type="text" id="detailQty" value="1" class="detail-qty-input" readonly><button class="detail-qty-btn" onclick="changeDetailQty(1)">+</button></div><div class="detail-stock-info"><i class="fas fa-check-circle"></i> In Stock</div>
-<div class="detail-action-buttons"><button class="detail-btn-add-cart" onclick="addToCartFromDetail()"><i class="fas fa-shopping-bag"></i> ADD TO CART</button><button class="detail-btn-buy-now" onclick="buyNowFromDetail()"><i class="fab fa-whatsapp"></i> BUY NOW</button><button class="sizechart-btn" onclick="openSizeChart()"><i class="fas fa-chart-simple"></i> Size Chart</button></div>
+function renderProductDetail(){ const p=currentProduct; const hs=currentVariant.sale>0; const sp=hs?Math.round(p.originalPrice-(p.originalPrice*currentVariant.sale/100)):p.originalPrice; const vars=Object.values(p.variants); const images = p.images || [currentVariant.image]; const related=products.filter(p2=>p2.id!==p.id && p2.cat===p.cat).slice(0,4); document.getElementById('productDetailContainer').innerHTML=`
+<div class="breadcrumb"><a href="#" onclick="showPage('home');return false">Home</a> / <a href="#" onclick="showPage('home');document.getElementById('products').scrollIntoView();return false">${catNames[p.cat]}</a> / <span>${p.name}</span></div>
+<div class="product-detail">
+<div class="gallery">
+<div class="gallery-main" onclick="openLightbox(document.getElementById('mainGalleryImg').src, '${p.name}')"><img id="mainGalleryImg" src="${images[0]}" onerror="this.src='https://placehold.co/600x600/1a1a1a/gold?text=${p.name}'"></div>
+<div class="gallery-thumbs" id="galleryThumbs">
+${images.map((img,i)=>`<div class="gallery-thumb ${i===0?'active':''}" onclick="changeGalleryImage(${i})"><img src="${img}" onerror="this.src='https://placehold.co/80x80/1a1a1a/gold'"></div>`).join('')}
+</div>
+</div>
+<div><h1 class="product-info-title">${p.name}</h1><div class="product-info-sub">${p.description||'Premium quality sportswear'}</div>
+<div class="product-info-price">${hs?`<s>PKR ${p.originalPrice.toLocaleString()}</s> PKR ${sp.toLocaleString()}`:`PKR ${p.originalPrice.toLocaleString()}`} ${hs?`<span style="background:var(--sale);color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;margin-left:10px">${currentVariant.sale}% OFF</span>`:''}</div>
+<div class="product-info-desc">${p.description||'Premium quality sportswear manufactured in Pakistan. Designed for performance and comfort.'}</div>
+<div class="detail-section-title">SIZE</div><div class="detail-size-options" id="detailSizeOptions"></div>
+<div class="detail-section-title">COLOR</div><div class="detail-color-options" id="detailColorOptions"></div>
+<div class="detail-section-title">QUANTITY</div><div class="detail-qty-selector"><button class="detail-qty-btn" onclick="changeDetailQty(-1)">-</button><input type="text" id="detailQty" value="1" class="detail-qty-input" readonly><button class="detail-qty-btn" onclick="changeDetailQty(1)">+</button></div>
+<div class="detail-stock-info"><span class="in-stock"><i class="fas fa-check-circle"></i> In Stock</span></div>
+<div class="satisfaction-badge"><i class="fas fa-star"></i><span><strong>Customer Satisfaction</strong> — Premium quality guaranteed</span></div>
+<div class="detail-action-buttons"><button class="detail-btn-add-cart" onclick="addToCartFromDetail()"><i class="fas fa-shopping-bag"></i> Add to Cart</button><button class="detail-btn-buy-now" onclick="buyNowFromDetail()"><i class="fab fa-whatsapp"></i> Buy it now</button></div>
+<div class="detail-extra-buttons"><button class="sizechart-btn" onclick="openSizeChart()"><i class="fas fa-chart-simple"></i> Size Chart</button></div>
+<div class="product-tabs"><div class="tab-headers"><div class="tab-header active" onclick="switchTab('description')">DESCRIPTION</div><div class="tab-header" onclick="switchTab('exchange')">EXCHANGE & RETURN</div><div class="tab-header" onclick="switchTab('shipping')">SHIPPING</div><div class="tab-header" onclick="switchTab('faq')">FAQ</div></div>
+<div id="tabDescription" class="tab-content active"><p>${p.description||'Premium quality sportswear manufactured in Pakistan. Designed for performance and comfort.'}</p><ul><li>Premium moisture-wicking fabric</li><li>Durable stitching</li><li>Made in Pakistan</li></ul></div>
+<div id="tabExchange" class="tab-content"><p>We accept exchanges within <strong>7 days</strong> of delivery. Items must be unworn with original tags.</p><ul><li>Exchange only, no refunds</li><li>Customer pays return shipping</li><li>Contact us via WhatsApp to initiate exchange</li></ul></div>
+<div id="tabShipping" class="tab-content"><p>Free shipping on orders over <strong>PKR 5,000</strong>. Standard shipping: PKR 299.</p><ul><li>Delivery within 3-5 business days</li><li>Same day dispatch for orders before 2 PM</li><li>Tracking provided via WhatsApp</li></ul></div>
+<div id="tabFaq" class="tab-content"><ul><li><strong>How do I track my order?</strong><br>We'll send tracking info via WhatsApp once shipped.</li><li><strong>Can I cancel my order?</strong><br>Yes, within 2 hours of placing order.</li><li><strong>Do you offer custom sizes?</strong><br>Yes, contact us for custom sizing.</li></ul></div></div>
 <div style="margin-top:15px;"><button class="back-btn" onclick="showPage('home')"><i class="fas fa-arrow-left"></i> Back to Products</button></div>
 </div></div>
 <div class="related-products"><h3 style="text-align:center;margin-bottom:20px">YOU MAY ALSO LIKE</h3><div class="related-grid" id="detailRelatedGrid"></div></div>`;
- const colorContainer=document.getElementById('detailColorOptions'); if(colorContainer) colorContainer.innerHTML=vars.map((v,i)=>`<div class="detail-color-option ${i===0?'active':''}" style="background:${v.colorCode};" onclick="selectDetailColor(${i})" title="${v.color}"></div>`).join(''); const sizeContainer=document.getElementById('detailSizeOptions'); if(sizeContainer) sizeContainer.innerHTML=(currentVariant.sizes||['S','M','L','XL','XXL']).map(s=>`<div class="detail-size-btn ${s===selectedSize?'active':''}" onclick="selectDetailSize(this,'${s}')">${s}</div>`).join(''); const relatedGrid=document.getElementById('detailRelatedGrid'); if(relatedGrid) relatedGrid.innerHTML=related.map(p=>{ const fv=Object.values(p.variants)[0]; const price=fv.sale>0?Math.round(p.originalPrice-(p.originalPrice*fv.sale/100)):p.originalPrice; return `<div class="related-card" onclick="viewProduct(${p.id})"><img src="${fv.image}"><h4>${p.name}</h4><p>PKR ${price.toLocaleString()}</p></div>`; }).join(''); }
-function selectDetailColor(i){ document.querySelectorAll('.detail-color-option').forEach((btn,idx)=>btn.classList.toggle('active',idx===i)); currentVariant=Object.values(currentProduct.variants)[i]; selectedSize=currentVariant.sizes?.[0]||'M'; const hs=currentVariant.sale>0; const sp=hs?Math.round(currentProduct.originalPrice-(currentProduct.originalPrice*currentVariant.sale/100)):currentProduct.originalPrice; document.getElementById('detailMainImg').src=currentVariant.image; const priceDiv=document.querySelector('.product-detail-price'); if(priceDiv) priceDiv.innerHTML=hs?`<s>PKR ${currentProduct.originalPrice.toLocaleString()}</s> PKR ${sp.toLocaleString()}`:`PKR ${currentProduct.originalPrice.toLocaleString()}`; const sizeContainer=document.getElementById('detailSizeOptions'); if(sizeContainer) sizeContainer.innerHTML=(currentVariant.sizes||['S','M','L','XL','XXL']).map(s=>`<div class="detail-size-btn ${s===selectedSize?'active':''}" onclick="selectDetailSize(this,'${s}')">${s}</div>`).join(''); }
+ const colorContainer=document.getElementById('detailColorOptions'); colorContainer.innerHTML=vars.map((v,i)=>`<div class="detail-color-option ${i===0?'active':''}" style="background:${v.colorCode};" onclick="selectDetailColor(${i})" title="${v.color}"></div>`).join('');
+ const sizeContainer=document.getElementById('detailSizeOptions'); sizeContainer.innerHTML=(currentVariant.sizes||['S','M','L','XL','XXL']).map(s=>`<div class="detail-size-btn ${s===selectedSize?'active':''}" onclick="selectDetailSize(this,'${s}')">${s}</div>`).join('');
+ const relatedGrid=document.getElementById('detailRelatedGrid'); relatedGrid.innerHTML=related.map(p=>{ const fv=Object.values(p.variants)[0]; const price=fv.sale>0?Math.round(p.originalPrice-(p.originalPrice*fv.sale/100)):p.originalPrice; return `<div class="related-card" onclick="viewProduct(${p.id})"><img src="${fv.image}" onerror="this.src='https://placehold.co/200x200/1a1a1a/gold'"><h4>${p.name}</h4><p>PKR ${price.toLocaleString()}</p></div>`; }).join(''); }
+function changeGalleryImage(index){ const images = currentProduct.images || [currentVariant.image]; document.getElementById('mainGalleryImg').src = images[index]; document.querySelectorAll('.gallery-thumb').forEach((t,i)=>t.classList.toggle('active',i===index)); }
+function openLightbox(url, name){ const lb=document.createElement('div'); lb.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:30000;display:flex;align-items:center;justify-content:center;cursor:pointer;'; lb.onclick=()=>lb.remove(); lb.innerHTML=`<div style="position:absolute;top:20px;right:35px;color:#fff;font-size:40px;cursor:pointer;">&times;</div><img src="${url}" style="max-width:90%;max-height:90%;object-fit:contain;border-radius:8px;"><div style="position:absolute;bottom:20px;left:0;right:0;text-align:center;color:#fff;background:rgba(0,0,0,0.7);padding:10px;">${name}</div>`; document.body.appendChild(lb); }
+function switchTab(tab){ document.querySelectorAll('.tab-header').forEach(t=>t.classList.remove('active')); document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active')); document.querySelector(`.tab-header[onclick="switchTab('${tab}')"]`).classList.add('active'); document.getElementById(`tab${tab.charAt(0).toUpperCase()+tab.slice(1)}`).classList.add('active'); }
+function selectDetailColor(i){ document.querySelectorAll('.detail-color-option').forEach((btn,idx)=>btn.classList.toggle('active',idx===i)); currentVariant=Object.values(currentProduct.variants)[i]; selectedSize=currentVariant.sizes?.[0]||'M'; const hs=currentVariant.sale>0; const sp=hs?Math.round(currentProduct.originalPrice-(currentProduct.originalPrice*currentVariant.sale/100)):currentProduct.originalPrice; const priceDiv=document.querySelector('.product-info-price'); priceDiv.innerHTML=hs?`<s>PKR ${currentProduct.originalPrice.toLocaleString()}</s> PKR ${sp.toLocaleString()} <span style="background:var(--sale);color:#fff;padding:4px 8px;border-radius:4px;font-size:12px;margin-left:10px">${currentVariant.sale}% OFF</span>`:`PKR ${currentProduct.originalPrice.toLocaleString()}`; const sizeContainer=document.getElementById('detailSizeOptions'); sizeContainer.innerHTML=(currentVariant.sizes||['S','M','L','XL','XXL']).map(s=>`<div class="detail-size-btn ${s===selectedSize?'active':''}" onclick="selectDetailSize(this,'${s}')">${s}</div>`).join(''); document.getElementById('mainGalleryImg').src=currentVariant.image; const images = currentProduct.images || [currentVariant.image]; document.querySelectorAll('.gallery-thumb').forEach((t,i)=>{ if(i<images.length) t.querySelector('img').src=images[i]; }); }
 function selectDetailSize(el,s){ document.querySelectorAll('.detail-size-btn').forEach(btn=>btn.classList.remove('active')); el.classList.add('active'); selectedSize=s; }
 function changeDetailQty(d){ let n=currentQty+d; if(n>=1 && n<=10){ currentQty=n; document.getElementById('detailQty').value=currentQty; } }
 function addToCartFromDetail(){ const sp=currentVariant.sale>0?Math.round(currentProduct.originalPrice-(currentProduct.originalPrice*currentVariant.sale/100)):currentProduct.originalPrice; const idx=cart.findIndex(i=>i.id===currentProduct.id && i.color===currentVariant.color && i.size===selectedSize); if(idx>-1) cart[idx].quantity+=currentQty; else cart.push({id:currentProduct.id,name:currentProduct.name,color:currentVariant.color,size:selectedSize,quantity:currentQty,image:currentVariant.image,price:currentProduct.originalPrice,salePrice:sp}); localStorage.setItem('zyron_cart',JSON.stringify(cart)); updateCartCount(); showToast('✅ Added to cart!'); }
 function buyNowFromDetail(){ addToCartFromDetail(); showPage('cart'); renderCartPage(); }
+
 function renderCartPage(){ if(cart.length===0){ document.getElementById('cartContainer').innerHTML=`<div style="text-align:center;padding:60px"><i class="fas fa-shopping-bag" style="font-size:60px;color:#ddd"></i><p>Cart empty</p><button class="btn-primary" onclick="showPage('home')">Shop Now</button></div>`; return; } let sub=0; cart.forEach(i=>{ const p=i.salePrice||i.price; sub+=p*i.quantity; }); const ship=sub>=5000?0:299; const total=sub+ship; document.getElementById('cartContainer').innerHTML=`<div class="cart-grid"><div class="cart-items"><div class="cart-header"><div>PRODUCT</div><div>PRICE</div><div>QTY</div><div>TOTAL</div></div>${cart.map((i,idx)=>{ const p=i.salePrice||i.price; const tp=p*i.quantity; return `<div class="cart-item"><div class="cart-item-info"><img src="${i.image}"><div><h4>${i.name}</h4><p>${i.color} / ${i.size}</p></div></div><div>PKR ${p.toLocaleString()}</div><div><button class="cart-qty-btn" onclick="updateCartQty(${idx},-1)">-</button><span>${i.quantity}</span><button class="cart-qty-btn" onclick="updateCartQty(${idx},1)">+</button></div><div>PKR ${tp.toLocaleString()}</div><div class="cart-remove" onclick="removeCartItem(${idx})"><i class="fas fa-trash"></i></div></div>`; }).join('')}</div><div class="cart-summary"><h3>Order Summary</h3><div class="summary-row"><span>Subtotal</span><span>PKR ${sub.toLocaleString()}</span></div><div class="summary-row"><span>Shipping</span><span>${ship===0?'FREE':'PKR '+ship.toLocaleString()}</span></div><div class="summary-row summary-total"><span>Total</span><span>PKR ${total.toLocaleString()}</span></div>
 <button class="btn-primary" style="width:100%" onclick="showPage('checkout');renderCheckoutPage()">Proceed to Checkout</button>
 <button class="btn-outline" style="width:100%;margin-top:10px" onclick="showPage('home')"><i class="fas fa-arrow-left"></i> Continue Shopping</button>
 </div></div>`; updateCartCount(); }
 function updateCartQty(idx,d){ let n=cart[idx].quantity+d; if(n>=1 && n<=10){ cart[idx].quantity=n; localStorage.setItem('zyron_cart',JSON.stringify(cart)); renderCartPage(); } else if(n<1) removeCartItem(idx); }
 function removeCartItem(idx){ cart.splice(idx,1); localStorage.setItem('zyron_cart',JSON.stringify(cart)); renderCartPage(); updateCartCount(); }
-function renderCheckoutPage(){ if(cart.length===0){ showPage('cart'); return; } let sub=0; cart.forEach(i=>{ const p=i.salePrice||i.price; sub+=p*i.quantity; }); const ship=sub>=5000?0:299; const total=sub+ship; document.getElementById('checkoutContainer').innerHTML=`<div class="checkout-grid"><div class="checkout-form"><h2 class="form-title">Shipping Info</h2><div class="form-row"><div class="form-group"><label>First Name</label><input id="chFName"></div><div class="form-group"><label>Last Name</label><input id="chLName"></div></div><div class="form-group"><label>Email</label><input id="chEmail"></div><div class="form-group"><label>Phone</label><input id="chPhone"></div><div class="form-group"><label>Address</label><input id="chAddress"></div><div class="form-row"><div class="form-group"><label>City</label><input id="chCity"></div><div class="form-group"><label>Postal Code</label><input id="chPostal"></div></div><div class="jazzcash-box"><i class="fab fa-whatsapp"></i><h3>0325 6054759</h3><p>Send payment to JazzCash</p><p class="small">After payment, send screenshot on WhatsApp</p></div><div class="form-group"><label><input type="checkbox" id="chSaveInfo"> Save info</label></div></div><div class="order-summary"><h2>Order Summary</h2>${cart.map(i=>{ const p=i.salePrice||i.price; return `<div class="cart-item"><img class="cart-item-img" src="${i.image}"><div><h4>${i.name}</h4><p>${i.color} / ${i.size} / Qty: ${i.quantity}</p><div>PKR ${(p*i.quantity).toLocaleString()}</div></div></div>`; }).join('')}<div class="summary-row"><span>Subtotal</span><span>PKR ${sub.toLocaleString()}</span></div><div class="summary-row"><span>Shipping</span><span>${ship===0?'FREE':'PKR '+ship.toLocaleString()}</span></div><div class="summary-row summary-total"><span>Total</span><span>PKR ${total.toLocaleString()}</span></div>
-<button class="btn-primary" style="width:100%" onclick="placeOrder()">Confirm Order via WhatsApp</button>
-<a href="#" class="back-link" onclick="showPage('cart');return false"><i class="fas fa-arrow-left"></i> Back to Cart</a>
+
+function renderCheckoutPage(){ if(cart.length===0){ showPage('cart'); return; } let sub=0; cart.forEach(i=>{ const p=i.salePrice||i.price; sub+=p*i.quantity; }); const ship=sub>=5000?0:299; const total=sub+ship; document.getElementById('checkoutContainer').innerHTML=`
+<div class="checkout-progress"><div class="checkout-step active"><span class="step-num">1</span> Shipping</div><div class="checkout-step"><span class="step-num">2</span> Payment</div></div>
+<div class="checkout-grid">
+<div class="checkout-form"><h2 class="form-title">📦 Shipping Details</h2>
+<div class="form-row"><div class="form-group"><label>First Name</label><input id="chFName" placeholder="John"></div><div class="form-group"><label>Last Name</label><input id="chLName" placeholder="Doe"></div></div>
+<div class="form-group"><label>Email</label><input id="chEmail" placeholder="john@example.com"></div>
+<div class="form-group"><label>Phone</label><input id="chPhone" placeholder="0300 1234567"></div>
+<div class="form-group"><label>Address</label><input id="chAddress" placeholder="Street address"></div>
+<div class="form-row"><div class="form-group"><label>City</label><input id="chCity" placeholder="Karachi"></div><div class="form-group"><label>Postal Code</label><input id="chPostal" placeholder="12345"></div></div>
+<div class="form-group" style="margin-top:15px"><label><input type="checkbox" id="chSaveInfo"> Save information for next time</label></div>
+<div class="payment-methods"><h3 style="margin-bottom:10px;font-size:16px">💳 Payment Method</h3>
+<div class="payment-method active" onclick="selectPaymentMethod('jazzcash')"><i class="fab fa-whatsapp" style="color:#25D366"></i><span>JazzCash</span></div>
+<div class="jazzcash-box"><i class="fab fa-whatsapp"></i><h3>0325 6054759</h3><p>Send payment to this JazzCash number</p><p class="small">After payment, send screenshot on WhatsApp for order confirmation</p></div>
+</div></div>
+<div class="order-summary-card"><h3>📋 Order Summary</h3>
+${cart.map(i=>{ const p=i.salePrice||i.price; return `<div class="summary-item"><img src="${i.image}"><div class="summary-item-info"><h4>${i.name}</h4><p>${i.color} / ${i.size} / Qty: ${i.quantity}</p><div class="price">PKR ${(p*i.quantity).toLocaleString()}</div></div></div>`; }).join('')}
+<div class="summary-row"><span>Subtotal</span><span>PKR ${sub.toLocaleString()}</span></div>
+<div class="summary-row"><span>Shipping</span><span>${ship===0?'FREE':'PKR '+ship.toLocaleString()}</span></div>
+<div class="order-total"><span>Total</span><span>PKR ${total.toLocaleString()}</span></div>
+<div class="secure-badge"><i class="fas fa-lock"></i> Secure Checkout — All transactions are encrypted</div>
+<button class="btn-primary" style="width:100%;margin-top:15px" onclick="placeOrder()"><i class="fab fa-whatsapp"></i> Confirm Order via WhatsApp</button>
+<a href="#" class="back-link" onclick="showPage('cart');return false" style="display:inline-block;margin-top:15px;color:var(--text-light);text-decoration:none;font-size:12px"><i class="fas fa-arrow-left"></i> Back to Cart</a>
 </div></div>`; loadSavedCheckoutInfo(); }
-function placeOrder(){ if(cart.length===0){ alert('Cart empty'); return; } const fn=document.getElementById('chFName').value, ln=document.getElementById('chLName').value, em=document.getElementById('chEmail').value, ph=document.getElementById('chPhone').value, ad=document.getElementById('chAddress').value, ct=document.getElementById('chCity').value; if(!fn||!ln||!em||!ph||!ad||!ct){ alert('Fill all details'); return; } let sub=0; cart.forEach(i=>{ const p=i.salePrice||i.price; sub+=p*i.quantity; }); const ship=sub>=5000?0:299; const total=sub+ship; let msg=`🛍️ *ZYRON ORDER*%0A%0A*Customer*%0A${fn} ${ln}%0A${em}%0A${ph}%0A${ad}, ${ct}%0A%0A*Items*%0A`; cart.forEach(i=>{ const p=i.salePrice||i.price; msg+=`📦 ${i.name} (${i.color}/${i.size}) x${i.quantity} = PKR ${(p*i.quantity).toLocaleString()}%0A`; }); msg+=`%0A*Total*: PKR ${total.toLocaleString()}%0A%0A*Payment*: JazzCash 03256054759%0A🙏 Thank you!`; window.open(`https://wa.me/923256054759?text=${encodeURIComponent(msg)}`,'_blank'); if(document.getElementById('chSaveInfo').checked){ const info={firstName:fn,lastName:ln,email:em,phone:ph,address:ad,city:ct}; localStorage.setItem('zyron_shipping',JSON.stringify(info)); } }
+function selectPaymentMethod(type){ document.querySelectorAll('.payment-method').forEach(m=>m.classList.remove('active')); document.querySelector(`.payment-method[onclick*="${type}"]`).classList.add('active'); }
+function placeOrder(){ if(cart.length===0){ alert('Cart empty'); return; } const fn=document.getElementById('chFName').value, ln=document.getElementById('chLName').value, em=document.getElementById('chEmail').value, ph=document.getElementById('chPhone').value, ad=document.getElementById('chAddress').value, ct=document.getElementById('chCity').value; if(!fn||!ln||!em||!ph||!ad||!ct){ alert('Please fill all shipping details'); return; } let sub=0; cart.forEach(i=>{ const p=i.salePrice||i.price; sub+=p*i.quantity; }); const ship=sub>=5000?0:299; const total=sub+ship; let msg=`🛍️ *ZYRON ORDER*%0A%0A*Customer*%0A${fn} ${ln}%0A${em}%0A${ph}%0A${ad}, ${ct}%0A%0A*Items*%0A`; cart.forEach(i=>{ const p=i.salePrice||i.price; msg+=`📦 ${i.name} (${i.color}/${i.size}) x${i.quantity} = PKR ${(p*i.quantity).toLocaleString()}%0A`; }); msg+=`%0A*Total*: PKR ${total.toLocaleString()}%0A%0A*Payment*: JazzCash 03256054759%0A🙏 Thank you!`; window.open(`https://wa.me/923256054759?text=${encodeURIComponent(msg)}`,'_blank'); if(document.getElementById('chSaveInfo').checked){ const info={firstName:fn,lastName:ln,email:em,phone:ph,address:ad,city:ct}; localStorage.setItem('zyron_shipping',JSON.stringify(info)); } }
 function loadSavedCheckoutInfo(){ const saved=localStorage.getItem('zyron_shipping'); if(saved){ const i=JSON.parse(saved); document.getElementById('chFName').value=i.firstName||''; document.getElementById('chLName').value=i.lastName||''; document.getElementById('chEmail').value=i.email||''; document.getElementById('chPhone').value=i.phone||''; document.getElementById('chAddress').value=i.address||''; document.getElementById('chCity').value=i.city||''; } }
 function loadCart(){ const saved=localStorage.getItem('zyron_cart'); cart=saved?JSON.parse(saved):[]; updateCartCount(); }
 loadCart(); loadProductsFromFirebase();
