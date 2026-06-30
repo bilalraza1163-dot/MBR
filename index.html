@@ -100,13 +100,11 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 .toast.show{transform:translateX(0)}
 .page{display:none}
 .page.active{display:block}
-/* ========== PRODUCT DETAIL PAGE ========== */
 .product-detail{display:grid;grid-template-columns:1fr 1fr;gap:50px;max-width:1200px;margin:0 auto;padding:40px 20px}
 .breadcrumb{font-size:11px;color:var(--text-light);margin-bottom:20px}
 .breadcrumb a{color:var(--text-light);text-decoration:none}
 .breadcrumb a:hover{color:var(--gold)}
 .breadcrumb span{color:var(--text)}
-/* Gallery */
 .gallery{position:relative}
 .gallery-main{width:100%;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#FAFAFA;cursor:zoom-in}
 .gallery-main img{width:100%;height:100%;object-fit:cover;transition:0.3s}
@@ -117,7 +115,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 .gallery-thumb:hover{opacity:1;border-color:var(--gold)}
 .gallery-thumb img{width:100%;height:100%;object-fit:cover}
 .gallery-thumb.blur img{filter:blur(2px)}
-/* Product Info */
 .product-info-title{font-size:28px;font-weight:700;margin-bottom:4px}
 .product-info-sub{font-size:14px;color:var(--text-light);margin-bottom:15px}
 .product-info-price{font-size:32px;color:var(--gold);font-weight:700;margin-bottom:15px}
@@ -147,7 +144,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 .satisfaction-badge{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 15px;display:flex;align-items:center;gap:10px;margin-bottom:20px}
 .satisfaction-badge i{color:var(--gold);font-size:20px}
 .satisfaction-badge span{font-size:13px;color:var(--text-light)}
-/* Product Tabs */
 .product-tabs{border-top:1px solid var(--border);margin-top:30px;padding-top:20px}
 .tab-headers{display:flex;gap:30px;border-bottom:1px solid var(--border);flex-wrap:wrap}
 .tab-header{padding:10px 0;cursor:pointer;font-size:12px;letter-spacing:1px;color:var(--text-light);border-bottom:2px solid transparent;transition:0.2s}
@@ -165,7 +161,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 .related-card img{width:100%;border-radius:8px;aspect-ratio:1/1;object-fit:cover}
 .related-card h4{font-size:13px;margin-top:8px}
 .related-card p{font-size:13px;color:var(--gold);font-weight:600}
-/* ========== CART PAGE ========== */
 .cart-grid{display:grid;grid-template-columns:2fr 1fr;gap:40px;max-width:1200px;margin:0 auto;padding:20px}
 .cart-items{border:1px solid var(--border);border-radius:12px;overflow:hidden}
 .cart-header{display:grid;grid-template-columns:3fr 1fr 1fr 0.5fr;padding:15px;background:var(--bg);font-size:12px;font-weight:600}
@@ -179,7 +174,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 .summary-total{font-size:18px;font-weight:700;border-top:1px solid var(--border);padding-top:15px}
 .cart-qty-btn{width:28px;height:28px;border:1px solid var(--border);background:var(--card);cursor:pointer;border-radius:4px}
 .cart-remove{color:red;cursor:pointer}
-/* ========== CHECKOUT PAGE ========== */
 .checkout-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:40px;max-width:1200px;margin:0 auto;padding:20px}
 .checkout-progress{display:flex;justify-content:center;gap:40px;margin-bottom:30px;padding:20px;background:var(--card);border-radius:12px;border:1px solid var(--border)}
 .checkout-step{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--text-light)}
@@ -212,7 +206,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 .order-total{font-size:18px;font-weight:700;border-top:1px solid var(--border);padding-top:15px;margin-top:10px}
 .secure-badge{display:flex;align-items:center;gap:8px;padding:10px;background:var(--bg);border-radius:8px;margin-top:15px;font-size:12px;color:var(--text-light)}
 .secure-badge i{color:#22C55E}
-/* ========== ADMIN PANEL ========== */
 .admin-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:25px;margin-top:40px}
 .admin-toggle{cursor:pointer;display:flex;justify-content:space-between;align-items:center}
 .password-box{background:var(--bg);padding:20px;border-radius:8px;margin-top:15px;text-align:center}
@@ -232,7 +225,6 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 .sizechart-table{width:100%;border-collapse:collapse;margin-top:15px}
 .sizechart-table th,.sizechart-table td{padding:10px;border:1px solid #ddd;text-align:center}
 .sizechart-table th{background:var(--gold);color:#000}
-/* Edit Modal */
 #editModal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:20000;align-items:center;justify-content:center}
 #editModal .edit-content{background:white;max-width:700px;width:95%;border-radius:12px;padding:25px;position:relative;max-height:90vh;overflow-y:auto}
 #editModal .edit-close{position:absolute;top:15px;right:20px;font-size:24px;cursor:pointer;color:#666}
@@ -299,21 +291,18 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 <div class="form-row"><div class="form-group"><label>Product Name</label><input id="pName" placeholder="Product name"></div><div class="form-group"><label>Price (PKR)</label><input id="pPrice" type="number" placeholder="Price"></div></div>
 <div class="form-row"><div class="form-group"><label>Category</label><select id="pCat"><option value="kit">Sports Kit</option><option value="trouser">Trouser</option><option value="shirt">Shirt</option><option value="jacket">Jacket</option><option value="tracksuit">Tracksuit</option><option value="summer">Summer</option><option value="winter">Winter</option></select></div><div class="form-group"><label>Gender</label><select id="pGender"><option value="men">Men</option><option value="women">Women</option><option value="boys">Boys</option><option value="girls">Girls</option><option value="uni">Unisex</option></select></div></div>
 <div class="form-group"><label>Description</label><input id="pDesc" placeholder="Description"></div>
-
-<!-- MULTIPLE IMAGES SECTION -->
+<!-- IMAGES -->
 <div class="form-group"><label>Product Images (Gallery)</label>
 <div id="imagesContainer"></div>
 <button type="button" class="btn-add-variant" onclick="addImageField()">+ Add Image</button>
 <small style="font-size:10px;color:var(--text-light);display:block;margin-top:5px">First image will be the main display image</small>
 </div>
-
+<!-- VARIANTS -->
 <div class="form-group" style="margin-top:15px"><label>Color Variants</label>
 <div id="variantsContainer"></div>
 <button type="button" class="btn-add-variant" onclick="addVariantField()">+ Add Color Variant</button>
 </div>
-
 <button class="btn-add" onclick="addProductToFirebase()" style="margin-top:15px">✅ Add Product</button>
-
 <h3 style="margin-top:30px">📋 Manage Products</h3>
 <div style="overflow-x:auto"><table class="manage-table"><thead><th>Product</th><th>Category</th><th>Gender</th><th>Images</th><th>Variants</th><th>Action</th></thead><tbody id="manageBody"></tbody></table></div>
 </div></div></div>
@@ -358,19 +347,16 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 <div class="form-group"><label>Price (PKR)</label><input id="editPrice" type="number" placeholder="Price"></div>
 <div class="form-row"><div class="form-group"><label>Category</label><select id="editCat"><option value="kit">Sports Kit</option><option value="trouser">Trouser</option><option value="shirt">Shirt</option><option value="jacket">Jacket</option><option value="tracksuit">Tracksuit</option><option value="summer">Summer</option><option value="winter">Winter</option></select></div><div class="form-group"><label>Gender</label><select id="editGender"><option value="men">Men</option><option value="women">Women</option><option value="boys">Boys</option><option value="girls">Girls</option><option value="uni">Unisex</option></select></div></div>
 <div class="form-group"><label>Description</label><input id="editDesc" placeholder="Description"></div>
-
 <!-- Edit Images -->
 <div class="form-group"><label>Product Images</label>
 <div id="editImagesContainer"></div>
 <button type="button" class="btn-add-variant" onclick="addEditImageField()">+ Add Image</button>
 </div>
-
 <!-- Edit Variants -->
 <div class="form-group" style="margin-top:15px"><label>Color Variants</label>
 <div id="editVariantsContainer"></div>
 <button type="button" class="btn-add-variant" onclick="addEditVariantField()">+ Add Color Variant</button>
 </div>
-
 <button class="btn-add" onclick="saveEditedProduct()" style="margin-top:15px">💾 Save Changes</button>
 </div>
 </div>
@@ -415,7 +401,6 @@ function toggleAdminPanel(){ if(!isAdminLoggedIn){ showToast('Login first'); ret
 function renderManage(){ if(!isAdminLoggedIn) return; const tb=document.getElementById('manageBody'); tb.innerHTML=products.map(p=>`<tr><td><strong>${p.name}</strong></td><td>${catNames[p.cat]}</td><td>${p.gender}</td><td>${p.images?p.images.length:0}</td><td>${p.variants?Object.keys(p.variants).length:0}</td><td><button class="btn-danger" style="background:transparent;color:#E24B4A;border:1px solid #E24B4A;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px" onclick="deleteProduct(${p.id})">Delete</button> <button class="btn-primary" style="background:var(--gold);border:none;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px;color:#000" onclick="openEditModal(${p.id})">Edit</button></td></tr>`).join(''); }
 async function deleteProduct(id){ if(confirm('Delete?')){ await database.ref(`products/${id}`).remove(); loadProductsFromFirebase(); showToast('Deleted!'); } }
 
-// ========== IMAGE FIELDS ==========
 function addImageField(){ imageFields.push(''); renderImageFields(); }
 function removeImageField(i){ imageFields.splice(i,1); renderImageFields(); }
 function renderImageFields(){ const c=document.getElementById('imagesContainer'); c.innerHTML=imageFields.map((val,i)=>`<div class="image-url-field" style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><input id="img_${i}" value="${val}" placeholder="https://i.imgur.com/image.jpg" style="flex:1;padding:8px;border:1px solid var(--border);border-radius:4px"><button onclick="removeImageField(${i})" style="background:var(--sale);color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:11px">X</button></div>`).join(''); }
@@ -423,15 +408,12 @@ function addEditImageField(){ editImageFields.push(''); renderEditImageFields();
 function removeEditImageField(i){ editImageFields.splice(i,1); renderEditImageFields(); }
 function renderEditImageFields(){ const c=document.getElementById('editImagesContainer'); c.innerHTML=editImageFields.map((val,i)=>`<div class="image-url-field" style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><input id="editImg_${i}" value="${val}" placeholder="https://i.imgur.com/image.jpg" style="flex:1;padding:8px;border:1px solid var(--border);border-radius:4px"><button onclick="removeEditImageField(${i})" style="background:var(--sale);color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:11px">X</button></div>`).join(''); }
 
-// ========== VARIANT FIELDS ==========
 function addVariantField(){ variantFields.push({}); renderVariantFields(); }
 function removeVariantField(i){ variantFields.splice(i,1); renderVariantFields(); }
 function renderVariantFields(){ const c=document.getElementById('variantsContainer'); c.innerHTML=variantFields.map((_,i)=>`<div class="variant-row"><div><span>Variant ${i+1}</span><button onclick="removeVariantField(${i})" style="float:right;background:red;color:white;border:none;padding:2px 10px;border-radius:4px">X</button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px"><div><label style="font-size:10px;color:var(--text-light)">Color</label><input id="varColor_${i}" placeholder="Red" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%"></div><div><label style="font-size:10px;color:var(--text-light)">Code</label><input id="varCode_${i}" placeholder="#DC2626" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div><label style="font-size:10px;color:var(--text-light)">Image URL</label><input id="varImage_${i}" placeholder="https://i.imgur.com/xxx.jpg" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%"></div><div><label style="font-size:10px;color:var(--text-light)">Sale %</label><input id="varSale_${i}" type="number" placeholder="0" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%"></div></div></div>`).join(''); }
 
-// ========== ADD PRODUCT ==========
 async function addProductToFirebase(){ if(!isAdminLoggedIn){ showToast('Admin login required'); return; } const name=document.getElementById('pName').value.trim(); const price=parseInt(document.getElementById('pPrice').value); const cat=document.getElementById('pCat').value; const gender=document.getElementById('pGender').value; const desc=document.getElementById('pDesc').value.trim(); if(!name||!price){ showToast('Name and price required'); return; } const images=[]; imageFields.forEach((_,i)=>{ const val=document.getElementById(`img_${i}`).value.trim(); if(val) images.push(val); }); if(images.length===0){ showToast('Add at least one product image'); return; } if(variantFields.length===0){ showToast('Add at least one color variant'); return; } const variants={}; for(let i=0;i<variantFields.length;i++){ const col=document.getElementById(`varColor_${i}`).value; if(!col){ showToast(`Color for variant ${i+1} required`); return; } variants[i]={ color:col, colorCode:document.getElementById(`varCode_${i}`).value||'#CCCCCC', image:document.getElementById(`varImage_${i}`).value, sale:parseInt(document.getElementById(`varSale_${i}`).value)||0, sizes:['S','M','L','XL','XXL'] }; } const existing=await database.ref('products').once('value'); let maxId=0; if(existing.val()) maxId=Math.max(...Object.keys(existing.val()).map(Number)); const newId=maxId+1; await database.ref(`products/${newId}`).set({ id:newId, name, cat, gender, description:desc||'Premium quality', originalPrice:price, trending:false, images, variants }); showToast('✅ Product added!'); document.getElementById('pName').value=''; document.getElementById('pPrice').value=''; document.getElementById('pDesc').value=''; imageFields=[]; variantFields=[]; renderImageFields(); renderVariantFields(); loadProductsFromFirebase(); }
 
-// ========== EDIT PRODUCT ==========
 function openEditModal(id){ const product=products.find(p=>p.id===id); if(!product) return; editVariantFields=[]; editImageFields=[]; document.getElementById('editId').value=id; document.getElementById('editName').value=product.name; document.getElementById('editPrice').value=product.originalPrice; document.getElementById('editCat').value=product.cat; document.getElementById('editGender').value=product.gender; document.getElementById('editDesc').value=product.description||''; if(product.images) product.images.forEach(img=>editImageFields.push(img)); else editImageFields.push(''); const variants=Object.values(product.variants); variants.forEach((v)=>{ editVariantFields.push({ color:v.color, colorCode:v.colorCode, image:v.image, sale:v.sale }); }); renderEditImageFields(); renderEditVariantFields(); document.getElementById('editModal').style.display='flex'; }
 function closeEditModal(){ document.getElementById('editModal').style.display='none'; }
 function addEditVariantField(){ editVariantFields.push({}); renderEditVariantFields(); }
@@ -459,7 +441,6 @@ function selectVariant(pid,idx){ selectedVariants[pid]=idx; renderProducts(); }
 function filterCat(cat,el){ activeCat=cat; document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active')); if(el) el.classList.add('active'); renderProducts(); closeSlideMenu(); }
 function filterGender(gender,el){ activeGender=gender; document.querySelectorAll('.gender-tab').forEach(t=>t.classList.remove('active')); if(el) el.classList.add('active'); renderProducts(); closeSlideMenu(); }
 
-// ========== PRODUCT DETAIL ==========
 function viewProduct(id){ const p=products.find(p=>p.id===id); if(!p) return; currentProduct=p; currentVariant=Object.values(p.variants)[0]; selectedSize=currentVariant.sizes?.[0]||'M'; currentQty=1; renderProductDetail(); showPage('product'); }
 function renderProductDetail(){ const p=currentProduct; const hs=currentVariant.sale>0; const sp=hs?Math.round(p.originalPrice-(p.originalPrice*currentVariant.sale/100)):p.originalPrice; const vars=Object.values(p.variants); const images = p.images || [currentVariant.image]; const related=products.filter(p2=>p2.id!==p.id && p2.cat===p.cat).slice(0,4); document.getElementById('productDetailContainer').innerHTML=`
 <div class="breadcrumb"><a href="#" onclick="showPage('home');return false">Home</a> / <a href="#" onclick="showPage('home');document.getElementById('products').scrollIntoView();return false">${catNames[p.cat]}</a> / <span>${p.name}</span></div>
@@ -526,7 +507,64 @@ ${cart.map(i=>{ const p=i.salePrice||i.price; return `<div class="summary-item">
 <a href="#" class="back-link" onclick="showPage('cart');return false" style="display:inline-block;margin-top:15px;color:var(--text-light);text-decoration:none;font-size:12px"><i class="fas fa-arrow-left"></i> Back to Cart</a>
 </div></div>`; loadSavedCheckoutInfo(); }
 function selectPaymentMethod(type){ document.querySelectorAll('.payment-method').forEach(m=>m.classList.remove('active')); document.querySelector(`.payment-method[onclick*="${type}"]`).classList.add('active'); }
-function placeOrder(){ if(cart.length===0){ alert('Cart empty'); return; } const fn=document.getElementById('chFName').value, ln=document.getElementById('chLName').value, em=document.getElementById('chEmail').value, ph=document.getElementById('chPhone').value, ad=document.getElementById('chAddress').value, ct=document.getElementById('chCity').value; if(!fn||!ln||!em||!ph||!ad||!ct){ alert('Please fill all shipping details'); return; } let sub=0; cart.forEach(i=>{ const p=i.salePrice||i.price; sub+=p*i.quantity; }); const ship=sub>=5000?0:299; const total=sub+ship; let msg=`🛍️ *ZYRON ORDER*%0A%0A*Customer*%0A${fn} ${ln}%0A${em}%0A${ph}%0A${ad}, ${ct}%0A%0A*Items*%0A`; cart.forEach(i=>{ const p=i.salePrice||i.price; msg+=`📦 ${i.name} (${i.color}/${i.size}) x${i.quantity} = PKR ${(p*i.quantity).toLocaleString()}%0A`; }); msg+=`%0A*Total*: PKR ${total.toLocaleString()}%0A%0A*Payment*: JazzCash 03256054759%0A🙏 Thank you!`; window.open(`https://wa.me/923256054759?text=${encodeURIComponent(msg)}`,'_blank'); if(document.getElementById('chSaveInfo').checked){ const info={firstName:fn,lastName:ln,email:em,phone:ph,address:ad,city:ct}; localStorage.setItem('zyron_shipping',JSON.stringify(info)); } }
+
+function placeOrder(){
+    if(cart.length === 0){ alert('Cart empty'); return; }
+    const fn = document.getElementById('chFName').value;
+    const ln = document.getElementById('chLName').value;
+    const em = document.getElementById('chEmail').value;
+    const ph = document.getElementById('chPhone').value;
+    const ad = document.getElementById('chAddress').value;
+    const ct = document.getElementById('chCity').value;
+    if(!fn || !ln || !em || !ph || !ad || !ct){
+        alert('Please fill all shipping details');
+        return;
+    }
+    let subtotal = 0;
+    cart.forEach(i => {
+        const p = i.salePrice || i.price;
+        subtotal += p * i.quantity;
+    });
+    const shipping = subtotal >= 5000 ? 0 : 299;
+    const total = subtotal + shipping;
+    const orderNumber = 'ZY-' + Date.now().toString().slice(-6);
+    const date = new Date().toLocaleDateString('en-PK', { day: '2-digit', month: 'short', year: 'numeric' });
+    let itemsText = '';
+    cart.forEach((i, idx) => {
+        const p = i.salePrice || i.price;
+        itemsText += `${idx+1}. ${i.name}\n`;
+        itemsText += `   Color: ${i.color} | Size: ${i.size} | Qty: ${i.quantity}\n`;
+        itemsText += `   Price: PKR ${(p * i.quantity).toLocaleString()}\n\n`;
+    });
+    let msg = `🛍️ ZYRON SPORTSWEAR - ORDER RECEIPT\n`;
+    msg += `═══════════════════════════════════\n\n`;
+    msg += `📋 ORDER #: ${orderNumber}\n`;
+    msg += `📅 Date: ${date}\n\n`;
+    msg += `👤 CUSTOMER DETAILS\n`;
+    msg += `───────────────────\n`;
+    msg += `Name: ${fn} ${ln}\n`;
+    msg += `Email: ${em}\n`;
+    msg += `Phone: ${ph}\n`;
+    msg += `Address: ${ad}, ${ct}\n\n`;
+    msg += `📦 ORDER ITEMS\n`;
+    msg += `───────────────────\n`;
+    msg += itemsText;
+    msg += `💳 PAYMENT SUMMARY\n`;
+    msg += `───────────────────\n`;
+    msg += `Subtotal: PKR ${subtotal.toLocaleString()}\n`;
+    msg += `Shipping: ${shipping === 0 ? 'FREE' : 'PKR ' + shipping.toLocaleString()}\n`;
+    msg += `───────────────────\n`;
+    msg += `TOTAL: PKR ${total.toLocaleString()}\n\n`;
+    msg += `💚 PAYMENT METHOD\n`;
+    msg += `───────────────────\n`;
+    msg += `JazzCash: 0325 6054759\n`;
+    msg += `⚠️ Please send payment screenshot for confirmation\n\n`;
+    msg += `🙏 Thank you for shopping with ZYRON!\n`;
+    msg += `Visit us: https://bilalraza1163-dot.github.io/MBR/`;
+
+    window.open(`https://wa.me/923256054759?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
 function loadSavedCheckoutInfo(){ const saved=localStorage.getItem('zyron_shipping'); if(saved){ const i=JSON.parse(saved); document.getElementById('chFName').value=i.firstName||''; document.getElementById('chLName').value=i.lastName||''; document.getElementById('chEmail').value=i.email||''; document.getElementById('chPhone').value=i.phone||''; document.getElementById('chAddress').value=i.address||''; document.getElementById('chCity').value=i.city||''; } }
 function loadCart(){ const saved=localStorage.getItem('zyron_cart'); cart=saved?JSON.parse(saved):[]; updateCartCount(); }
 loadCart(); loadProductsFromFirebase();
