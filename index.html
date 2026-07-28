@@ -153,7 +153,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .modal-close{position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:var(--text-light)}
 .modal-content input{width:100%;padding:12px;border:1px solid var(--border);border-radius:6px;margin-bottom:10px;background:var(--bg);color:var(--text)}
 
-/* ===== ADMIN PANEL (Hidden by default) ===== */
 .admin-panel-section{display:none;padding:40px 20px;max-width:1200px;margin:0 auto}
 .admin-panel-section.show{display:block}
 
@@ -179,7 +178,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .btn-edit{background:var(--gold);border:none;padding:2px 10px;border-radius:4px;cursor:pointer;font-size:10px;color:#000;margin-right:4px}
 .btn-delete{background:transparent;color:var(--red);border:1px solid var(--red);padding:2px 10px;border-radius:4px;cursor:pointer;font-size:10px}
 
-/* ===== EDIT MODAL ===== */
 .edit-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:20000;align-items:center;justify-content:center;backdrop-filter:blur(5px)}
 .edit-modal-content{background:var(--card);max-width:700px;width:95%;border-radius:12px;padding:25px;position:relative;max-height:90vh;overflow-y:auto}
 .edit-modal-content .modal-close{position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:var(--text-light)}
@@ -347,7 +345,7 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 </div>
 
 <!-- ============================================================ -->
-<!-- ===== ADMIN PANEL (Hidden by default, opens on button click) ===== -->
+<!-- ===== ADMIN PANEL ===== -->
 <!-- ============================================================ -->
 <div class="admin-panel-section" id="adminPanelSection">
   <div class="admin-section">
@@ -356,7 +354,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
       <span id="adminIcon">▼</span>
     </div>
     
-    <!-- Password Box -->
     <div class="admin-password-box" id="adminPasswordBox">
       <h3 style="font-size:14px">🔐 Admin Access Required</h3>
       <p style="font-size:11px;color:var(--text-light);margin-bottom:8px">Enter admin password to access panel</p>
@@ -365,7 +362,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
       <div id="adminError" style="color:red;display:none;margin-top:8px;font-size:12px">Wrong password!</div>
     </div>
     
-    <!-- Admin Form -->
     <div class="admin-form" id="adminForm">
       <h3 style="color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px;margin-bottom:15px">➕ Add New Product</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
@@ -382,7 +378,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
       </div>
       <div style="margin-top:8px"><label style="font-size:10px;color:var(--text-light)">Description</label><input id="pDesc" placeholder="Description"></div>
       
-      <!-- Image URLs -->
       <div style="margin-top:8px">
         <label style="font-size:10px;color:var(--text-light)">Product Images (URLs)</label>
         <div id="imageUrlsContainer"></div>
@@ -393,7 +388,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
         <div class="url-preview" id="urlPreviewContainer"></div>
       </div>
 
-      <!-- Variants -->
       <div style="margin-top:8px"><label style="font-size:10px;color:var(--text-light)">Color Variants</label>
         <div id="variantsContainer"></div>
         <button type="button" onclick="addVariantField()" style="background:transparent;border:1px dashed var(--gold);color:var(--gold);padding:6px;width:100%;border-radius:4px;margin:6px 0;cursor:pointer;font-size:11px">+ Add Color Variant</button>
@@ -420,7 +414,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
       
       <button onclick="addProductWithUrls()" style="margin-top:12px;background:var(--gold);border:none;padding:10px;border-radius:4px;cursor:pointer;color:#000;font-weight:600;width:100%">✅ Add Product</button>
 
-      <!-- Manage Products -->
       <h3 style="margin-top:25px;color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px">📋 Manage Products</h3>
       <div style="overflow-x:auto;margin-top:10px">
         <table style="width:100%;border-collapse:collapse;font-size:12px">
@@ -475,7 +468,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
     </div>
     <div style="margin-top:8px"><label style="font-size:10px;color:var(--text-light)">Description</label><input id="editDesc" placeholder="Description"></div>
     
-    <!-- Edit Image URLs -->
     <div style="margin-top:8px">
       <label style="font-size:10px;color:var(--text-light)">Product Images (URLs)</label>
       <div id="editImageUrlsContainer"></div>
@@ -486,7 +478,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
       <div class="url-preview" id="editUrlPreviewContainer"></div>
     </div>
 
-    <!-- Edit Variants -->
     <div style="margin-top:8px"><label style="font-size:10px;color:var(--text-light)">Color Variants</label>
       <div id="editVariantsContainer"></div>
       <button type="button" onclick="addEditVariantField()" style="background:transparent;border:1px dashed var(--gold);color:var(--gold);padding:6px;width:100%;border-radius:4px;margin:6px 0;cursor:pointer;font-size:11px">+ Add Color Variant</button>
@@ -559,9 +550,108 @@ let variantFields = [];
 let editVariantFields = [];
 let imageUrls = [];
 let editImageUrls = [];
+let lastCategory = 'all';
+let lastGender = 'all';
 const allSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
 const ADMIN_PASSWORD = 'ZYRON@2025#Secure!';
 const catNames = {kit:'Sports Kit',trouser:'Trouser',shirt:'Shirt',jacket:'Jacket',tracksuit:'Tracksuit',summer:'Summer',winter:'Winter'};
+
+// ============================================================
+// NAVIGATION SYSTEM - FIXED BACK BUTTON
+// ============================================================
+let pageHistory = ['home'];
+let currentPage = 'home';
+
+function navigateTo(page, data) {
+    // If already on this page with same data, don't push duplicate
+    if (currentPage === page && !data) {
+        return;
+    }
+    
+    // Save current page to history (only if different)
+    if (currentPage !== page) {
+        pageHistory.push(currentPage);
+    }
+    
+    currentPage = page;
+    
+    // Update URL hash
+    let hash = page;
+    if (page === 'product' && data && data.id) {
+        hash = `product/${data.id}`;
+    }
+    window.history.pushState({ page: page, data: data || {} }, '', `#${hash}`);
+    
+    // Show page
+    showPageDirect(page, data);
+}
+
+function showPageDirect(page, data) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    
+    // Show target page
+    const tp = document.getElementById(page + 'Page');
+    if (tp) tp.classList.add('active');
+    
+    // Render content
+    if (page === 'home') {
+        renderProducts();
+        renderFeatured();
+        // Close admin panel
+        document.getElementById('adminPanelSection').classList.remove('show');
+    } else if (page === 'cart') {
+        renderCartPage();
+    } else if (page === 'checkout') {
+        renderCheckoutPage();
+    } else if (page === 'wishlist') {
+        renderWishlistPage();
+    } else if (page === 'blog') {
+        renderBlogPage();
+    } else if (page === 'product' && data && data.id) {
+        viewProductDirect(data.id);
+    }
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function handleBackButton() {
+    // If on product page, go back to home with category
+    if (currentPage === 'product') {
+        navigateTo('home', { category: lastCategory, gender: lastGender });
+        return;
+    }
+    
+    // For other pages, use history
+    if (pageHistory.length > 0) {
+        const prev = pageHistory.pop();
+        if (prev === 'home') {
+            navigateTo('home', {});
+        } else {
+            navigateTo(prev, {});
+        }
+    } else {
+        navigateTo('home', {});
+    }
+}
+
+// Browser back/forward
+window.addEventListener('popstate', function(event) {
+    if (event.state && event.state.page) {
+        const page = event.state.page;
+        const data = event.state.data || {};
+        currentPage = page;
+        
+        if (page === 'product' && data.id) {
+            viewProductDirect(data.id);
+        } else {
+            showPageDirect(page, data);
+        }
+    } else {
+        navigateTo('home', {});
+    }
+});
 
 // ============================================================
 // TOAST
@@ -621,30 +711,30 @@ function toggleEditHasTrouser(){
 }
 
 // ============================================================
-// NAVIGATION
+// NAVIGATION HELPERS
 // ============================================================
-function navigateTo(page,data){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  const tp=document.getElementById(page+'Page');
-  if(tp)tp.classList.add('active');
-  if(page==='home'){renderProducts();renderFeatured();}
-  else if(page==='cart')renderCartPage();
-  else if(page==='checkout')renderCheckoutPage();
-  else if(page==='wishlist')renderWishlistPage();
-  else if(page==='blog')renderBlogPage();
-  else if(page==='product'&&data&&data.id){viewProductDirect(data.id);}
+function viewProduct(id) {
+    lastCategory = activeCat;
+    lastGender = activeGender;
+    navigateTo('product', { id: id });
 }
-function viewProduct(id){navigateTo('product',{id:id});}
-function viewProductDirect(id){
-  const p=products.find(p=>p.id===id);
-  if(!p)return;
-  currentProduct=p;
-  currentVariant=Object.values(p.variants)[0];
-  selectedShirtSize='M';
-  selectedTrouserSize='M';
-  currentQty=1;
-  renderProductDetail();
+
+function viewProductDirect(id) {
+    const p = products.find(p => p.id === id);
+    if (!p) {
+        navigateTo('home', {});
+        return;
+    }
+    currentProduct = p;
+    currentVariant = Object.values(p.variants)[0];
+    selectedShirtSize = 'M';
+    selectedTrouserSize = 'M';
+    currentQty = 1;
+    renderProductDetail();
+    document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
+    document.getElementById('productPage').classList.add('active');
 }
+
 function toggleMobileMenu(){
   document.getElementById('mobileMenu').classList.toggle('open');
   document.getElementById('mobileOverlay').classList.toggle('active');
@@ -652,7 +742,7 @@ function toggleMobileMenu(){
 }
 
 // ============================================================
-// ADMIN PANEL - TOGGLE
+// ADMIN PANEL
 // ============================================================
 function toggleAdminPanel(){
   const panel=document.getElementById('adminPanelSection');
@@ -672,9 +762,6 @@ function toggleAdminForm(){
   }
 }
 
-// ============================================================
-// ADMIN - PASSWORD
-// ============================================================
 function checkAdminPassword(){
   const inputPassword = document.getElementById('adminPassword').value;
   const errorEl = document.getElementById('adminError');
@@ -695,9 +782,6 @@ function checkAdminPassword(){
   }
 }
 
-// ============================================================
-// ADMIN - MANAGE PRODUCTS (With Edit Button)
-// ============================================================
 function renderManage(){
   if(!isAdminLoggedIn)return;
   const tb=document.getElementById('manageBody');
@@ -813,7 +897,9 @@ function renderProductDetail(){
 
   document.getElementById('productDetailContainer').innerHTML=`
     <div style="max-width:1200px;margin:0 auto;padding:20px">
-      <a href="#" onclick="navigateTo('home');return false" style="color:var(--text-light);font-size:12px;text-decoration:none"><i class="fas fa-arrow-left"></i> Back to Products</a>
+      <a href="#" onclick="handleBackButton();return false" style="color:var(--text-light);font-size:12px;text-decoration:none">
+        <i class="fas fa-arrow-left"></i> Back
+      </a>
     </div>
     <div class="product-detail">
       <div>
@@ -1122,7 +1208,7 @@ function renderVariantFields(){
 }
 
 // ============================================================
-// ADMIN - ADD PRODUCT (ONLY URLS)
+// ADMIN - ADD PRODUCT
 // ============================================================
 async function addProductWithUrls() {
     if (!isAdminLoggedIn) {
@@ -1230,7 +1316,7 @@ async function deleteProduct(id){
 }
 
 // ============================================================
-// ADMIN - EDIT PRODUCT (OPEN MODAL)
+// ADMIN - EDIT PRODUCT
 // ============================================================
 function openEditModal(id){
   const p=products.find(p=>p.id===id);
@@ -1247,11 +1333,9 @@ function openEditModal(id){
   document.getElementById('editTrending').checked=p.trending||false;
   document.getElementById('editFeatured').checked=p.featured||false;
   
-  // Edit images
   editImageUrls = p.images?[...p.images]:[];
   renderEditUrlPreviews();
   
-  // Edit variants
   editVariantFields = Object.values(p.variants).map(v=>({
     color:v.color,
     colorCode:v.colorCode,
@@ -1260,7 +1344,6 @@ function openEditModal(id){
   }));
   renderEditVariantFields();
   
-  // Edit trouser toggle
   const et=document.getElementById('editHasTrouserToggle');
   const es=document.getElementById('editTrouserStatus');
   if(p.hasTrouser!==undefined?p.hasTrouser:true){
@@ -1276,9 +1359,6 @@ function closeEditModal(){
   document.getElementById('editModal').style.display='none';
 }
 
-// ============================================================
-// ADMIN - EDIT IMAGE URLS
-// ============================================================
 function addEditImageUrl(){
   const input=document.getElementById('editImageUrlInput');
   const url=input.value.trim();
@@ -1306,9 +1386,6 @@ function renderEditUrlPreviews(){
   `).join('');
 }
 
-// ============================================================
-// ADMIN - EDIT VARIANTS
-// ============================================================
 function addEditVariantField(){
   editVariantFields.push({});
   renderEditVariantFields();
@@ -1337,9 +1414,6 @@ function renderEditVariantFields(){
   `).join('');
 }
 
-// ============================================================
-// ADMIN - SAVE EDITED PRODUCT
-// ============================================================
 async function saveEditedProduct(){
   const id=parseInt(document.getElementById('editId').value);
   const name=document.getElementById('editName').value.trim();
