@@ -11,12 +11,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
+/* ===== ALL STYLES ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--gold:#C9A84C;--dark-gold:#A07830;--red:#8B1A1A;--text:#1A1A1A;--text-light:#666;--border:#E5E5E5;--bg:#F8F9FA;--card:#FFFFFF;--whatsapp:#25D366;--sale:#E24B4A;--shadow:0 2px 15px rgba(0,0,0,0.08)}
 [data-theme="dark"]{--bg:#0A0A0A;--card:#1A1A1A;--text:#F0EDE8;--text-light:#999;--border:#2A2A2A;--shadow:0 2px 15px rgba(255,255,255,0.05)}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;transition:all 0.3s}
-
-/* ===== ANIMATIONS ===== */
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-8px)}}
 @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
@@ -226,6 +225,22 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 .variant-group .variant-row-full{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
 .variant-group .variant-row-full input{padding:8px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text);width:100%}
 
+/* ===== SLIDER MANAGER ===== */
+.slider-manager-section{margin-top:40px;border-top:2px solid var(--border);padding-top:30px}
+.slider-manager-section h3{color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px}
+.slider-manager-section .slider-desc{color:var(--text-light);font-size:12px;margin-bottom:15px}
+.slider-card{background:var(--bg);padding:15px;border-radius:8px;margin-bottom:12px;border:1px solid var(--border)}
+.slider-card h4{color:var(--text);font-size:14px;margin-bottom:8px}
+.slider-card .slider-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.slider-card .slider-grid-full{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px}
+.slider-card label{font-size:10px;color:var(--text-light);display:block;margin-bottom:3px}
+.slider-card input{padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)}
+.slider-save-btn{background:var(--gold);border:none;padding:12px 20px;border-radius:4px;cursor:pointer;color:#000;font-weight:600;width:100%;margin-top:10px}
+.slider-upload-box{border:2px dashed var(--border);border-radius:8px;padding:10px;text-align:center;cursor:pointer;transition:0.3s;margin:5px 0}
+.slider-upload-box:hover{border-color:var(--gold);background:rgba(201,168,76,0.05)}
+.slider-upload-box input[type="file"]{display:none}
+.slider-upload-box small{font-size:10px;color:var(--text-light)}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
 .nav-links{display:none}
@@ -251,6 +266,8 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 .hero-arrow.next{right:10px}
 .hero-nav{bottom:15px}
 .top-ticker .ticker-track span{font-size:9px;padding:0 15px}
+.slider-card .slider-grid{grid-template-columns:1fr}
+.slider-card .slider-grid-full{grid-template-columns:1fr}
 }
 @media(max-width:400px){
 .size-opt-btn{padding:6px 10px;font-size:11px;min-width:36px}
@@ -325,66 +342,13 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 <!-- ===== HOME PAGE ===== -->
 <div id="homePage" class="page active">
 
-<!-- ===== HERO SLIDER ===== -->
+<!-- ===== HERO SLIDER (DYNAMIC) ===== -->
 <div class="hero-slider">
   <div class="hero-slides" id="heroSlides">
-    <!-- Slide 1: Summer Collection -->
-    <div class="hero-slide">
-      <div class="slide-bg"></div>
-      <div class="hero-content">
-        <div class="hero-tag"><i class="fas fa-sun"></i> Summer Collection '26</div>
-        <h1 class="hero-title">ZYRON <span>Summer</span> Collection</h1>
-        <p class="hero-sub">Shirts • Trousers • Hoodies • Shorts — Premium quality for the perfect summer look.</p>
-        <div class="hero-btns">
-          <button class="hero-btn-primary" onclick="document.getElementById('products').scrollIntoView()">Shop Now</button>
-          <button class="hero-btn-outline" onclick="openWA('Hi! ZYRON Summer Collection inquiry.')">Contact Us</button>
-        </div>
-      </div>
-      <div class="hero-image">
-        <img src="https://i.imgur.com/XnLHKnM.jpeg" alt="Summer Collection" onerror="this.src='https://placehold.co/400x400/1a1a1a/gold?text=ZYRON'">
-      </div>
-    </div>
-
-    <!-- Slide 2: Bikers Special -->
-    <div class="hero-slide">
-      <div class="slide-bg"></div>
-      <div class="hero-content">
-        <div class="hero-tag"><i class="fas fa-motorcycle"></i> Bikers Special</div>
-        <h1 class="hero-title">Soft Shell <span>Biker</span> Jacket</h1>
-        <p class="hero-sub">Windproof • Waterproof • Lightweight — Designed for riders who demand the best.</p>
-        <div class="hero-btns">
-          <button class="hero-btn-primary" onclick="document.getElementById('products').scrollIntoView()">View Jacket</button>
-          <button class="hero-btn-outline" onclick="openWA('Hi! ZYRON Biker Jacket inquiry.')">Inquire Now</button>
-        </div>
-      </div>
-      <div class="hero-image">
-        <img src="https://i.imgur.com/JqLkPcR.jpeg" alt="Biker Jacket" onerror="this.src='https://placehold.co/400x400/1a1a1a/gold?text=ZYRON'">
-      </div>
-    </div>
-
-    <!-- Slide 3: Custom Kits -->
-    <div class="hero-slide">
-      <div class="slide-bg"></div>
-      <div class="hero-content">
-        <div class="hero-tag"><i class="fas fa-tshirt"></i> Custom Order</div>
-        <h1 class="hero-title">Team <span>Custom</span> Kits</h1>
-        <p class="hero-sub">Design your own team kit — colors, logos, names, numbers. Made in Pakistan with premium quality.</p>
-        <div class="hero-btns">
-          <button class="hero-btn-primary" onclick="document.getElementById('custom').scrollIntoView()">Customize Now</button>
-          <button class="hero-btn-outline" onclick="openWA('Hi! ZYRON Custom Kit inquiry.')">Get Quote</button>
-        </div>
-      </div>
-      <div class="hero-image">
-        <img src="https://i.imgur.com/1nJEkNy.jpeg" alt="Custom Kits" onerror="this.src='https://placehold.co/400x400/1a1a1a/gold?text=ZYRON'">
-      </div>
-    </div>
+    <!-- Rendered by JavaScript -->
   </div>
-
-  <!-- Arrows -->
   <button class="hero-arrow prev" id="heroPrev"><i class="fas fa-chevron-left"></i></button>
   <button class="hero-arrow next" id="heroNext"><i class="fas fa-chevron-right"></i></button>
-
-  <!-- Dots -->
   <div class="hero-nav" id="heroDots">
     <button class="hero-dot active" data-index="0"></button>
     <button class="hero-dot" data-index="1"></button>
@@ -424,10 +388,77 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:40px 24
 
 <!-- ===== ADMIN FORM ===== -->
 <div id="adminForm" style="display:none">
-<h3 style="color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px;margin-bottom:20px">➕ Add New Product</h3>
 
-<!-- Basic Info -->
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<!-- ===== SLIDER MANAGER ===== -->
+<div class="slider-manager-section">
+  <h3>🎬 Hero Slider Manager</h3>
+  <p class="slider-desc">Edit the 3 slides shown on the homepage hero section. Upload images or paste URL.</p>
+  <div id="sliderManager">
+    <!-- Slide 1 -->
+    <div class="slider-card">
+      <h4>📸 Slide 1</h4>
+      <div class="slider-grid">
+        <div><label>Tag</label><input id="s1Tag" placeholder="Summer Collection '26"></div>
+        <div><label>Title</label><input id="s1Title" placeholder="ZYRON Summer Collection"></div>
+      </div>
+      <div style="margin-top:8px"><label>Description</label><input id="s1Desc" placeholder="Shirts • Trousers • Hoodies • Shorts — Premium quality for the perfect summer look."></div>
+      <div class="slider-grid-full">
+        <div><label>Image URL</label><input id="s1Image" placeholder="https://i.imgur.com/xxx.jpg"></div>
+        <div><label>Button Text</label><input id="s1BtnText" placeholder="Shop Now"></div>
+        <div><label>Button Link</label><input id="s1BtnLink" placeholder="#products"></div>
+      </div>
+      <div class="slider-upload-box" onclick="document.getElementById('s1FileInput').click()">
+        <i class="fas fa-cloud-upload-alt" style="color:var(--gold)"></i>
+        <small>Or upload image</small>
+        <input type="file" id="s1FileInput" accept="image/*" onchange="uploadSliderImage(1, this)">
+      </div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="slider-card">
+      <h4>📸 Slide 2</h4>
+      <div class="slider-grid">
+        <div><label>Tag</label><input id="s2Tag" placeholder="Bikers Special"></div>
+        <div><label>Title</label><input id="s2Title" placeholder="Soft Shell Biker Jacket"></div>
+      </div>
+      <div style="margin-top:8px"><label>Description</label><input id="s2Desc" placeholder="Windproof • Waterproof • Lightweight — Designed for riders who demand the best."></div>
+      <div class="slider-grid-full">
+        <div><label>Image URL</label><input id="s2Image" placeholder="https://i.imgur.com/xxx.jpg"></div>
+        <div><label>Button Text</label><input id="s2BtnText" placeholder="View Jacket"></div>
+        <div><label>Button Link</label><input id="s2BtnLink" placeholder="#products"></div>
+      </div>
+      <div class="slider-upload-box" onclick="document.getElementById('s2FileInput').click()">
+        <i class="fas fa-cloud-upload-alt" style="color:var(--gold)"></i>
+        <small>Or upload image</small>
+        <input type="file" id="s2FileInput" accept="image/*" onchange="uploadSliderImage(2, this)">
+      </div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="slider-card">
+      <h4>📸 Slide 3</h4>
+      <div class="slider-grid">
+        <div><label>Tag</label><input id="s3Tag" placeholder="Custom Order"></div>
+        <div><label>Title</label><input id="s3Title" placeholder="Team Custom Kits"></div>
+      </div>
+      <div style="margin-top:8px"><label>Description</label><input id="s3Desc" placeholder="Design your own team kit — colors, logos, names, numbers. Made in Pakistan with premium quality."></div>
+      <div class="slider-grid-full">
+        <div><label>Image URL</label><input id="s3Image" placeholder="https://i.imgur.com/xxx.jpg"></div>
+        <div><label>Button Text</label><input id="s3BtnText" placeholder="Customize Now"></div>
+        <div><label>Button Link</label><input id="s3BtnLink" placeholder="#custom"></div>
+      </div>
+      <div class="slider-upload-box" onclick="document.getElementById('s3FileInput').click()">
+        <i class="fas fa-cloud-upload-alt" style="color:var(--gold)"></i>
+        <small>Or upload image</small>
+        <input type="file" id="s3FileInput" accept="image/*" onchange="uploadSliderImage(3, this)">
+      </div>
+    </div>
+    <button class="slider-save-btn" onclick="saveSliderData()">💾 Save Slider Changes</button>
+  </div>
+</div>
+
+<!-- ===== ADD PRODUCT ===== -->
+<h3 style="color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px;margin-top:40px;padding-top:30px;border-top:2px solid var(--border)">➕ Add New Product</h3>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px">
   <div><label style="font-size:11px;color:var(--text-light)">Product Name *</label><input id="pName" placeholder="e.g. Elite Strike Jersey" style="padding:10px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
   <div><label style="font-size:11px;color:var(--text-light)">Price (PKR) *</label><input id="pPrice" type="number" placeholder="3500" style="padding:10px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
 </div>
@@ -807,6 +838,154 @@ function getEditHasTrouser() {
 }
 
 // ============================================================
+// SLIDER MANAGER
+// ============================================================
+const defaultSliderData = {
+  slide1: {
+    tag: 'Summer Collection \'26',
+    title: 'ZYRON Summer Collection',
+    description: 'Shirts • Trousers • Hoodies • Shorts — Premium quality for the perfect summer look.',
+    image: 'https://i.imgur.com/XnLHKnM.jpeg',
+    btnText: 'Shop Now',
+    btnLink: '#products'
+  },
+  slide2: {
+    tag: 'Bikers Special',
+    title: 'Soft Shell Biker Jacket',
+    description: 'Windproof • Waterproof • Lightweight — Designed for riders who demand the best.',
+    image: 'https://i.imgur.com/JqLkPcR.jpeg',
+    btnText: 'View Jacket',
+    btnLink: '#products'
+  },
+  slide3: {
+    tag: 'Custom Order',
+    title: 'Team Custom Kits',
+    description: 'Design your own team kit — colors, logos, names, numbers. Made in Pakistan with premium quality.',
+    image: 'https://i.imgur.com/1nJEkNy.jpeg',
+    btnText: 'Customize Now',
+    btnLink: '#custom'
+  }
+};
+
+async function uploadSliderImage(slideNum, input) {
+  const file = input.files[0];
+  if (!file) return;
+  try {
+    showToast('⏳ Uploading image...', 'info');
+    const path = `slider/slide${slideNum}_${Date.now()}_${file.name}`;
+    const uploadTask = storage.ref(path).put(file);
+    const snapshot = await uploadTask;
+    const url = await snapshot.ref.getDownloadURL();
+    
+    const imageInput = document.getElementById(`s${slideNum}Image`);
+    if (imageInput) {
+      imageInput.value = url;
+      showToast('✅ Image uploaded! Click "Save Slider Changes" to apply.', 'success');
+    }
+  } catch (error) {
+    showToast('Error uploading image: ' + error.message, 'error');
+  }
+}
+
+async function saveSliderData() {
+  if (!isAdminLoggedIn) {
+    showToast('Admin login required', 'error');
+    return;
+  }
+
+  const sliderData = {
+    slide1: {
+      tag: document.getElementById('s1Tag').value || defaultSliderData.slide1.tag,
+      title: document.getElementById('s1Title').value || defaultSliderData.slide1.title,
+      description: document.getElementById('s1Desc').value || defaultSliderData.slide1.description,
+      image: document.getElementById('s1Image').value || defaultSliderData.slide1.image,
+      btnText: document.getElementById('s1BtnText').value || defaultSliderData.slide1.btnText,
+      btnLink: document.getElementById('s1BtnLink').value || defaultSliderData.slide1.btnLink
+    },
+    slide2: {
+      tag: document.getElementById('s2Tag').value || defaultSliderData.slide2.tag,
+      title: document.getElementById('s2Title').value || defaultSliderData.slide2.title,
+      description: document.getElementById('s2Desc').value || defaultSliderData.slide2.description,
+      image: document.getElementById('s2Image').value || defaultSliderData.slide2.image,
+      btnText: document.getElementById('s2BtnText').value || defaultSliderData.slide2.btnText,
+      btnLink: document.getElementById('s2BtnLink').value || defaultSliderData.slide2.btnLink
+    },
+    slide3: {
+      tag: document.getElementById('s3Tag').value || defaultSliderData.slide3.tag,
+      title: document.getElementById('s3Title').value || defaultSliderData.slide3.title,
+      description: document.getElementById('s3Desc').value || defaultSliderData.slide3.description,
+      image: document.getElementById('s3Image').value || defaultSliderData.slide3.image,
+      btnText: document.getElementById('s3BtnText').value || defaultSliderData.slide3.btnText,
+      btnLink: document.getElementById('s3BtnLink').value || defaultSliderData.slide3.btnLink
+    }
+  };
+
+  try {
+    await database.ref('slider').set(sliderData);
+    showToast('✅ Slider updated successfully!');
+    renderHeroSlider();
+  } catch (error) {
+    showToast('Error: ' + error.message, 'error');
+  }
+}
+
+function loadSliderData() {
+  database.ref('slider').on('value', (snap) => {
+    const data = snap.val();
+    if (data) {
+      if (document.getElementById('s1Tag')) {
+        document.getElementById('s1Tag').value = data.slide1?.tag || '';
+        document.getElementById('s1Title').value = data.slide1?.title || '';
+        document.getElementById('s1Desc').value = data.slide1?.description || '';
+        document.getElementById('s1Image').value = data.slide1?.image || '';
+        document.getElementById('s1BtnText').value = data.slide1?.btnText || '';
+        document.getElementById('s1BtnLink').value = data.slide1?.btnLink || '';
+        document.getElementById('s2Tag').value = data.slide2?.tag || '';
+        document.getElementById('s2Title').value = data.slide2?.title || '';
+        document.getElementById('s2Desc').value = data.slide2?.description || '';
+        document.getElementById('s2Image').value = data.slide2?.image || '';
+        document.getElementById('s2BtnText').value = data.slide2?.btnText || '';
+        document.getElementById('s2BtnLink').value = data.slide2?.btnLink || '';
+        document.getElementById('s3Tag').value = data.slide3?.tag || '';
+        document.getElementById('s3Title').value = data.slide3?.title || '';
+        document.getElementById('s3Desc').value = data.slide3?.description || '';
+        document.getElementById('s3Image').value = data.slide3?.image || '';
+        document.getElementById('s3BtnText').value = data.slide3?.btnText || '';
+        document.getElementById('s3BtnLink').value = data.slide3?.btnLink || '';
+      }
+    }
+    renderHeroSlider(data);
+  });
+}
+
+function renderHeroSlider(sliderData) {
+  const data = sliderData || defaultSliderData;
+  const slides = document.getElementById('heroSlides');
+  if (!slides) return;
+  const icons = ['fa-sun', 'fa-motorcycle', 'fa-tshirt'];
+  slides.innerHTML = ['slide1', 'slide2', 'slide3'].map((key, index) => {
+    const s = data[key];
+    return `
+      <div class="hero-slide">
+        <div class="slide-bg"></div>
+        <div class="hero-content">
+          <div class="hero-tag"><i class="fas ${icons[index]}"></i> ${s.tag || defaultSliderData[key].tag}</div>
+          <h1 class="hero-title">${s.title || defaultSliderData[key].title}</h1>
+          <p class="hero-sub">${s.description || defaultSliderData[key].description}</p>
+          <div class="hero-btns">
+            <button class="hero-btn-primary" onclick="document.querySelector('${s.btnLink || defaultSliderData[key].btnLink}').scrollIntoView()">${s.btnText || defaultSliderData[key].btnText}</button>
+            <button class="hero-btn-outline" onclick="openWA('Hi! ZYRON inquiry.')">Contact Us</button>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="${s.image || defaultSliderData[key].image}" alt="${s.title || defaultSliderData[key].title}" onerror="this.src='https://placehold.co/400x400/1a1a1a/gold?text=ZYRON'">
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ============================================================
 // ADMIN - IMAGE UPLOAD
 // ============================================================
 function handleImageFiles(event) {
@@ -846,10 +1025,8 @@ function removeImageFile(index) {
 function renderEditImagePreviews() {
   const container = document.getElementById('editImagesContainer');
   if (!container) return;
-  // Remove old previews but keep existing image URLs
   const existing = container.querySelectorAll('.edit-image-preview');
   existing.forEach(el => el.remove());
-  
   editImageFiles.forEach((file, i) => {
     const div = document.createElement('div');
     div.className = 'edit-image-preview';
@@ -887,11 +1064,11 @@ function renderVariantFields() {
         <span>Variant ${i + 1}</span>
         <button onclick="removeVariantField(${i})">✕</button>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+      <div class="variant-row">
         <div><label style="font-size:10px;color:var(--text-light)">Color *</label><input class="var-color" placeholder="Red" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
         <div><label style="font-size:10px;color:var(--text-light)">Code</label><input class="var-code" placeholder="#DC2626" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+      <div class="variant-row-full">
         <div><label style="font-size:10px;color:var(--text-light)">Image URL</label><input class="var-image-url" placeholder="https://i.imgur.com/xxx.jpg" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
         <div><label style="font-size:10px;color:var(--text-light)">Sale %</label><input class="var-sale" type="number" placeholder="0" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
       </div>
@@ -916,11 +1093,11 @@ function renderEditVariantFields() {
         <span>Variant ${i + 1}</span>
         <button onclick="removeEditVariantField(${i})">✕</button>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+      <div class="variant-row">
         <div><label style="font-size:10px;color:var(--text-light)">Color *</label><input class="edit-var-color" value="${f.color || ''}" placeholder="Red" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
         <div><label style="font-size:10px;color:var(--text-light)">Code</label><input class="edit-var-code" value="${f.colorCode || ''}" placeholder="#DC2626" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+      <div class="variant-row-full">
         <div><label style="font-size:10px;color:var(--text-light)">Image URL</label><input class="edit-var-image-url" value="${f.image || ''}" placeholder="https://i.imgur.com/xxx.jpg" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
         <div><label style="font-size:10px;color:var(--text-light)">Sale %</label><input class="edit-var-sale" type="number" value="${f.sale || 0}" placeholder="0" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
       </div>
@@ -959,7 +1136,7 @@ function toggleAdminPanel() {
 }
 
 // ============================================================
-// ADMIN - ADD PRODUCT WITH IMAGE UPLOAD
+// ADMIN - UPLOAD IMAGE TO FIREBASE
 // ============================================================
 async function uploadImage(file, path) {
   return new Promise((resolve, reject) => {
@@ -978,6 +1155,9 @@ async function uploadImage(file, path) {
   });
 }
 
+// ============================================================
+// ADMIN - ADD PRODUCT
+// ============================================================
 async function addProductWithImage() {
   if (!isAdminLoggedIn) {
     showToast('Admin login required', 'error');
@@ -1000,7 +1180,6 @@ async function addProductWithImage() {
     return;
   }
 
-  // Get variants
   const variantGroups = document.querySelectorAll('#variantsContainer .variant-group');
   const variants = {};
   for (let i = 0; i < variantGroups.length; i++) {
@@ -1008,7 +1187,6 @@ async function addProductWithImage() {
     const colorCode = variantGroups[i].querySelector('.var-code').value || '#CCCCCC';
     const imageUrl = variantGroups[i].querySelector('.var-image-url').value;
     const salePercent = parseInt(variantGroups[i].querySelector('.var-sale').value) || 0;
-    
     if (!color) {
       showToast(`Color for variant ${i+1} required`, 'error');
       return;
@@ -1035,7 +1213,6 @@ async function addProductWithImage() {
   showToast('⏳ Uploading images...', 'info');
 
   try {
-    // Upload images
     const uploadedImages = [];
     for (let i = 0; i < imageFiles.length; i++) {
       const file = imageFiles[i];
@@ -1063,10 +1240,8 @@ async function addProductWithImage() {
     };
 
     await database.ref(`products/${newProduct.id}`).set(newProduct);
-    
     showToast('✅ Product added successfully!');
     
-    // Reset form
     document.getElementById('pName').value = '';
     document.getElementById('pPrice').value = '';
     document.getElementById('pDesc').value = '';
@@ -1078,7 +1253,6 @@ async function addProductWithImage() {
     variantFields = [];
     renderImagePreviews();
     renderVariantFields();
-    
     loadProductsFromFirebase();
 
   } catch (error) {
@@ -1122,7 +1296,6 @@ function openEditModal(id) {
   document.getElementById('editTrending').checked = p.trending || false;
   document.getElementById('editFeatured').checked = p.featured || false;
   
-  // Set variants
   const vars = Object.values(p.variants);
   vars.forEach(v => {
     editVariantFields.push({
@@ -1134,7 +1307,6 @@ function openEditModal(id) {
   });
   renderEditVariantFields();
   
-  // Set trouser toggle
   const et = document.getElementById('editHasTrouserToggle');
   const es = document.getElementById('editTrouserStatus');
   if (p.hasTrouser !== undefined ? p.hasTrouser : true) {
@@ -1147,7 +1319,6 @@ function openEditModal(id) {
     es.className = 'toggle-status';
   }
   
-  // Show existing images
   const container = document.getElementById('editImagesContainer');
   container.innerHTML = '';
   if (p.images) {
@@ -1204,7 +1375,6 @@ async function saveEditedProductWithImage() {
     return;
   }
 
-  // Get variants
   const variantGroups = document.querySelectorAll('#editVariantsContainer .variant-group');
   const variants = {};
   for (let i = 0; i < variantGroups.length; i++) {
@@ -1212,7 +1382,6 @@ async function saveEditedProductWithImage() {
     const colorCode = variantGroups[i].querySelector('.edit-var-code').value || '#CCCCCC';
     const imageUrl = variantGroups[i].querySelector('.edit-var-image-url').value;
     const salePercent = parseInt(variantGroups[i].querySelector('.edit-var-sale').value) || 0;
-    
     if (!color) {
       showToast(`Color for variant ${i+1} required`, 'error');
       return;
@@ -1234,7 +1403,6 @@ async function saveEditedProductWithImage() {
   showToast('⏳ Updating...', 'info');
 
   try {
-    // Upload new images
     let uploadedImages = [...existingProduct.images || []];
     for (let i = 0; i < editImageFiles.length; i++) {
       const file = editImageFiles[i];
@@ -1573,7 +1741,7 @@ document.getElementById('adminShowBtn')?.addEventListener('click', () => {
 });
 
 // ============================================================
-// HERO SLIDER
+// HERO SLIDER AUTO-PLAY
 // ============================================================
 (function() {
   const slides = document.getElementById('heroSlides');
@@ -1581,7 +1749,7 @@ document.getElementById('adminShowBtn')?.addEventListener('click', () => {
   const prevBtn = document.getElementById('heroPrev');
   const nextBtn = document.getElementById('heroNext');
   let currentIndex = 0;
-  const totalSlides = dots.length;
+  const totalSlides = 3;
   let autoPlayInterval;
 
   function goToSlide(index) {
@@ -1608,15 +1776,145 @@ document.getElementById('adminShowBtn')?.addEventListener('click', () => {
   nextBtn.addEventListener('click', function() { nextSlide(); startAutoPlay(); });
 
   const container = document.querySelector('.hero-slider');
-  container.addEventListener('mouseenter', stopAutoPlay);
-  container.addEventListener('mouseleave', startAutoPlay);
+  if (container) {
+    container.addEventListener('mouseenter', stopAutoPlay);
+    container.addEventListener('mouseleave', startAutoPlay);
+  }
   startAutoPlay();
 })();
+
+// ============================================================
+// PRODUCT DETAIL
+// ============================================================
+function renderProductDetail() {
+  const p = currentProduct;
+  if (!p) return;
+  const v = Object.values(p.variants)[0];
+  document.getElementById('productDetailContainer').innerHTML = `
+    <div style="padding:60px 20px;text-align:center;max-width:800px;margin:0 auto">
+      <img src="${v.image}" style="width:300px;height:300px;object-fit:cover;border-radius:12px;border:2px solid var(--gold);margin-bottom:20px" onerror="this.src='https://placehold.co/300x300/1a1a1a/gold'">
+      <h1 style="font-family:'Bebas Neue';font-size:36px;color:var(--text)">${p.name}</h1>
+      <p style="color:var(--text-light);margin:10px 0">${p.description || ''}</p>
+      <div style="font-size:28px;color:var(--gold);font-weight:700">PKR ${p.originalPrice.toLocaleString()}</div>
+      <button class="btn-primary" style="margin-top:20px" onclick="goBackToHome()">Back to Products</button>
+    </div>
+  `;
+}
+
+// ============================================================
+// CART, CHECKOUT, WISHLIST, BLOG
+// ============================================================
+function renderCartPage() {
+  if (cart.length === 0) {
+    document.getElementById('cartContainer').innerHTML = `
+      <div style="text-align:center;padding:80px 20px;color:var(--text-light)">
+        <i class="fas fa-shopping-bag" style="font-size:60px;color:var(--border);display:block;margin-bottom:20px"></i>
+        <h2 style="font-family:'Bebas Neue';font-size:28px;color:var(--text)">Your cart is empty</h2>
+        <button class="btn-primary" onclick="navigateTo('home')" style="margin-top:20px">Shop Now</button>
+      </div>
+    `;
+    return;
+  }
+  let sub = 0;
+  cart.forEach(i => { sub += i.price * i.quantity; });
+  const ship = sub >= 5000 ? 0 : 299;
+  const total = sub + ship;
+  document.getElementById('cartContainer').innerHTML = `
+    <div style="max-width:1200px;margin:40px auto;padding:0 20px">
+      <h2 style="font-family:'Bebas Neue';font-size:32px;color:var(--text);margin-bottom:30px">🛒 Your Cart</h2>
+      ${cart.map((i, idx) => `
+        <div style="display:flex;align-items:center;gap:20px;padding:15px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:10px">
+          <img src="${i.image}" style="width:80px;height:80px;object-fit:cover;border-radius:8px" onerror="this.src='https://placehold.co/80x80/1a1a1a/gold'">
+          <div style="flex:1"><h4 style="color:var(--text)">${i.name}</h4><p style="color:var(--text-light);font-size:13px">PKR ${i.price.toLocaleString()} x ${i.quantity}</p></div>
+          <div style="color:var(--gold);font-weight:700;font-size:18px">PKR ${(i.price * i.quantity).toLocaleString()}</div>
+          <button onclick="removeCartItem(${idx})" style="background:var(--sale);color:#fff;border:none;padding:6px 14px;border-radius:4px;cursor:pointer">Remove</button>
+        </div>
+      `).join('')}
+      <div style="text-align:right;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-top:20px">
+        <p style="font-size:18px;font-weight:700;color:var(--text)">Total: <span style="color:var(--gold)">PKR ${total.toLocaleString()}</span></p>
+        <button class="btn-primary" onclick="navigateTo('checkout')" style="margin-top:10px">Proceed to Checkout</button>
+      </div>
+    </div>
+  `;
+}
+
+function removeCartItem(idx) {
+  cart.splice(idx, 1);
+  saveCart();
+  renderCartPage();
+}
+
+function renderCheckoutPage() {
+  document.getElementById('checkoutContainer').innerHTML = `
+    <div style="text-align:center;padding:60px 20px;max-width:600px;margin:0 auto">
+      <h2 style="font-family:'Bebas Neue';font-size:32px;color:var(--text);margin-bottom:20px">📦 Checkout</h2>
+      <p style="color:var(--text-light);margin-bottom:20px">Order will be confirmed via WhatsApp</p>
+      <button class="btn-primary" onclick="openWA('Hi! I want to place an order.')">Confirm via WhatsApp</button>
+      <button class="btn-outline" onclick="navigateTo('cart')" style="margin-top:10px;display:block;width:100%;text-align:center">Back to Cart</button>
+    </div>
+  `;
+}
+
+function renderWishlistPage() {
+  if (wishlist.length === 0) {
+    document.getElementById('wishlistContainer').innerHTML = `
+      <div style="text-align:center;padding:80px 20px;color:var(--text-light)">
+        <i class="fas fa-heart" style="font-size:60px;color:var(--border);display:block;margin-bottom:20px"></i>
+        <h2 style="font-family:'Bebas Neue';font-size:28px;color:var(--text)">Your wishlist is empty</h2>
+        <button class="btn-primary" onclick="navigateTo('home')" style="margin-top:20px">Start Shopping</button>
+      </div>
+    `;
+    return;
+  }
+  const items = products.filter(p => wishlist.includes(p.id));
+  document.getElementById('wishlistContainer').innerHTML = `
+    <h2 style="font-family:'Bebas Neue';font-size:32px;text-align:center;margin:40px 0;color:var(--text)">❤️ My Wishlist</h2>
+    <div class="products-grid" style="max-width:1400px;margin:0 auto;padding:0 20px 40px">
+      ${items.map(p => {
+        const v = Object.values(p.variants)[0];
+        return `
+          <div class="product-card" onclick="viewProduct(${p.id})">
+            <div class="product-img">
+              <img src="${v.image}" onerror="this.src='https://placehold.co/400x400/1a1a1a/gold'">
+              <button class="wishlist-btn active" onclick="event.stopPropagation();toggleWishlist(${p.id})"><i class="fas fa-heart"></i></button>
+            </div>
+            <div class="product-body">
+              <div class="product-name">${p.name}</div>
+              <div class="price-row"><span class="normal-price">PKR ${p.originalPrice.toLocaleString()}</span></div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+function renderBlogPage() {
+  document.getElementById('blogContainer').innerHTML = `
+    <h2 style="font-family:'Bebas Neue';font-size:32px;text-align:center;margin:40px 0;color:var(--text)">📰 ZYRON Blog</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:30px;max-width:1200px;margin:0 auto;padding:0 20px 40px">
+      <div class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden">
+        <img src="https://i.imgur.com/1nJEkNy.jpeg" style="width:100%;height:200px;object-fit:cover">
+        <div style="padding:20px"><h3 style="color:var(--text)">🏆 How to Choose the Perfect Sports Kit</h3><p style="color:var(--text-light);font-size:13px;margin:10px 0">Learn how to select the right sports kit for your team.</p></div>
+      </div>
+      <div class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden">
+        <img src="https://i.imgur.com/XnLHKnM.jpeg" style="width:100%;height:200px;object-fit:cover">
+        <div style="padding:20px"><h3 style="color:var(--text)">🧥 Winter Collection 2025</h3><p style="color:var(--text-light);font-size:13px;margin:10px 0">Explore our latest winter wear collection.</p></div>
+      </div>
+      <div class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden">
+        <img src="https://i.imgur.com/fR5XqyP.jpeg" style="width:100%;height:200px;object-fit:cover">
+        <div style="padding:20px"><h3 style="color:var(--text)">👟 Why Custom Sportswear is a Game Changer</h3><p style="color:var(--text-light);font-size:13px;margin:10px 0">Discover how custom sportswear boosts team spirit.</p></div>
+      </div>
+    </div>
+  `;
+}
 
 // ============================================================
 // INIT
 // ============================================================
 window.addEventListener('load', function() {
+  loadSliderData();
+  
   if (!window.location.hash || window.location.hash === '#') {
     navigateTo('home');
   } else {
@@ -1634,13 +1932,6 @@ window.addEventListener('load', function() {
 loadCart();
 loadWishlist();
 loadProductsFromFirebase();
-
-// ============================================================
-// PRODUCT DETAIL - SIMPLIFIED VERSION (Keep existing functions)
-// ============================================================
-// ... (rest of product detail, cart, checkout functions remain same)
-// To keep code manageable, I've included the core functions above.
-// The product detail rendering uses the same structure as before.
 </script>
 </body>
 </html>
