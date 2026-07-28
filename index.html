@@ -24,13 +24,11 @@ button{cursor:pointer;border:none;font-family:inherit}
 @keyframes pulseGold{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0.4)}50%{box-shadow:0 0 0 20px transparent}}
 @keyframes tickerMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* ===== TOP TICKER ===== */
 .top-ticker{background:var(--text);padding:6px 0;overflow:hidden;border-bottom:2px solid var(--gold);position:relative;z-index:1001}
 .top-ticker .ticker-track{display:flex;animation:tickerMove 30s linear infinite;white-space:nowrap}
 .top-ticker .ticker-track span{padding:0 30px;font-size:10px;letter-spacing:0.3px;color:#fff;font-weight:500}
 .top-ticker .ticker-track span i{margin-right:5px;color:var(--gold)}
 
-/* ===== NAVBAR ===== */
 nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;transition:all 0.3s}
 .nav-logo{display:flex;align-items:center;gap:8px}
 .nav-logo img{height:40px;width:40px;object-fit:contain;border-radius:50%}
@@ -50,7 +48,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .hamburger.active span:nth-child(2){opacity:0}
 .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
 
-/* ===== MOBILE MENU ===== */
 .mobile-menu{position:fixed;top:0;right:-100%;width:280px;height:100%;z-index:2000;background:var(--card);border-left:1px solid var(--border);padding:80px 20px 20px;transition:right 0.3s;overflow-y:auto}
 .mobile-menu.open{right:0}
 .mobile-menu .close-btn{position:absolute;top:15px;right:20px;font-size:24px;cursor:pointer;background:none;border:none;color:var(--text)}
@@ -59,7 +56,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .mobile-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1999;display:none}
 .mobile-overlay.active{display:block}
 
-/* ===== HERO ===== */
 .hero{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,var(--bg),var(--card));padding:80px 20px 40px;position:relative}
 .hero-logo{width:100px;height:100px;object-fit:contain;margin-bottom:15px;animation:float 3s ease-in-out infinite}
 .hero-eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase}
@@ -72,25 +68,21 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .btn-outline{background:transparent;color:var(--gold);padding:12px 28px;border-radius:4px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;border:1px solid var(--gold);transition:0.3s;cursor:pointer}
 .btn-outline:hover{background:rgba(201,168,76,0.08);transform:translateY(-2px)}
 
-/* ===== STATS ===== */
 .stats{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:15px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
 .stat{text-align:center;padding:12px}
 .stat-num{font-family:'Bebas Neue';font-size:28px;color:var(--gold)}
 .stat-label{font-size:9px;letter-spacing:2px;color:var(--text-light);text-transform:uppercase;margin-top:2px}
 
-/* ===== SECTION ===== */
 .section{padding:40px 20px;max-width:1200px;margin:0 auto}
 .section-header{text-align:center;margin-bottom:30px}
 .section-eyebrow{font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase}
 .section-title{font-family:'Bebas Neue';font-size:clamp(28px,4vw,42px);letter-spacing:2px;color:var(--text)}
 .section-line{width:50px;height:2px;background:linear-gradient(90deg,var(--gold),var(--red));margin:12px auto 0}
 
-/* ===== CATEGORY TABS ===== */
 .cat-tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:25px}
 .cat-tab{padding:6px 16px;border-radius:30px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:1px solid var(--border);background:var(--card);color:var(--text-light);transition:0.3s}
 .cat-tab.active,.cat-tab:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.05)}
 
-/* ===== PRODUCTS ===== */
 .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
 .product-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:0.3s;position:relative}
 .product-card:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:var(--shadow)}
@@ -110,7 +102,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .sale-price{font-size:20px;font-weight:700;color:var(--red);font-family:'Bebas Neue'}
 .normal-price{font-size:20px;font-weight:700;color:var(--text);font-family:'Bebas Neue'}
 
-/* ===== PRODUCT DETAIL ===== */
 .product-detail{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1200px;margin:0 auto;padding:30px 20px}
 .gallery-main{width:100%;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#FAFAFA}
 .gallery-main img{width:100%;height:100%;object-fit:cover}
@@ -118,6 +109,7 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .gallery-thumb{width:70px;height:70px;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:0.3s}
 .gallery-thumb.active{border-color:var(--gold)}
 .gallery-thumb img{width:100%;height:100%;object-fit:cover}
+
 .size-group{margin:15px 0}
 .size-group-label{font-size:12px;font-weight:600;color:var(--text);letter-spacing:1px;margin-bottom:6px;display:block}
 .size-group-label i{color:var(--gold);margin-right:5px}
@@ -136,39 +128,32 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .quantity-selector button{width:32px;height:32px;border:1px solid var(--border);background:var(--card);border-radius:6px;font-size:16px;cursor:pointer;color:var(--text)}
 .quantity-selector .qty-num{font-size:16px;font-weight:600;min-width:30px;text-align:center}
 
-/* ===== CART ===== */
 .cart-item{display:flex;align-items:center;gap:15px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:8px}
 .cart-item img{width:60px;height:60px;object-fit:cover;border-radius:8px}
 .cart-item .info{flex:1}
 .cart-item .info h4{font-size:14px;color:var(--text)}
 .cart-item .info p{font-size:11px;color:var(--text-light)}
 
-/* ===== CHECKOUT ===== */
 .checkout-form input{width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;margin-bottom:10px;background:var(--bg);color:var(--text)}
 .checkout-form input:focus{border-color:var(--gold);outline:none}
 .summary-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}
 .summary-row.total{font-size:18px;font-weight:700;border-bottom:none;padding-top:12px}
 .free-shipping{color:#22C55E;font-weight:600}
 
-/* ===== TOAST ===== */
 .toast{position:fixed;bottom:90px;right:20px;background:var(--text);color:var(--card);border-radius:8px;padding:12px 20px;font-size:12px;z-index:300;transform:translateX(120%);transition:0.4s;max-width:350px;border-left:4px solid var(--gold)}
 .toast.show{transform:translateX(0)}
 .toast i{margin-right:8px;color:var(--gold)}
 
-/* ===== WHATSAPP FLOAT ===== */
 .wa-float{position:fixed;bottom:20px;right:20px;z-index:200;background:var(--whatsapp);color:#fff;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:26px;text-decoration:none;box-shadow:0 4px 15px rgba(37,211,102,0.3);animation:pulseGold 2s infinite}
 
-/* ===== PAGES ===== */
 .page{display:none}
 .page.active{display:block}
 
-/* ===== MODAL ===== */
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:10000;align-items:center;justify-content:center}
 .modal-content{background:var(--card);max-width:450px;width:95%;border-radius:12px;padding:30px;position:relative;max-height:90vh;overflow-y:auto}
 .modal-close{position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:var(--text-light)}
 .modal-content input{width:100%;padding:12px;border:1px solid var(--border);border-radius:6px;margin-bottom:10px;background:var(--bg);color:var(--text)}
 
-/* ===== ADMIN ===== */
 .admin-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:30px}
 .admin-toggle{cursor:pointer;display:flex;justify-content:space-between;align-items:center}
 .admin-title{font-family:'Rajdhani';font-size:18px;font-weight:700;color:var(--gold);letter-spacing:2px}
@@ -190,7 +175,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .toggle-switch .toggle-slider{position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:0.3s}
 .toggle-switch.active .toggle-slider{left:20px}
 
-/* ===== RESPONSIVE ===== */
 @media(max-width:768px){
 .nav-links{display:none}
 .hamburger{display:flex}
@@ -353,7 +337,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
       <span id="adminIcon">▼</span>
     </div>
     
-    <!-- 🔐 ADMIN PASSWORD PROTECTION -->
     <div class="admin-password-box" id="adminPasswordBox">
       <h3 style="font-size:14px">🔐 Admin Access Required</h3>
       <p style="font-size:11px;color:var(--text-light);margin-bottom:8px">Enter admin password to access panel</p>
@@ -362,7 +345,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
       <div id="adminError" style="color:red;display:none;margin-top:8px;font-size:12px">Wrong password!</div>
     </div>
     
-    <!-- ADMIN FORM (Hidden until password entered) -->
     <div class="admin-form" id="adminForm">
       <h3 style="color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px;margin-bottom:15px">➕ Add New Product</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
@@ -488,7 +470,7 @@ let variantFields = [];
 let editVariantFields = [];
 let editImageFiles = [];
 const allSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
-const ADMIN_PASSWORD = 'ZYRON@2025#Secure!'; // 🔥 STRONG PASSWORD
+const ADMIN_PASSWORD = 'ZYRON@2025#Secure!';
 const catNames = {kit:'Sports Kit',trouser:'Trouser',shirt:'Shirt',jacket:'Jacket',tracksuit:'Tracksuit',summer:'Summer',winter:'Winter'};
 
 // ============================================================
@@ -576,13 +558,11 @@ function toggleMobileMenu(){
 // ADMIN - PASSWORD PROTECTED
 // ============================================================
 function toggleAdminPanel(){
-  // Only show admin panel if logged in
   if(isAdminLoggedIn){
     const f=document.getElementById('adminForm');
     const ic=document.getElementById('adminIcon');
     if(f.style.display==='block'){f.style.display='none';ic.innerText='▼';}else{f.style.display='block';ic.innerText='▲';renderManage();}
   } else {
-    // Show password box
     document.getElementById('adminPasswordBox').style.display='block';
     document.getElementById('adminForm').style.display='none';
     document.getElementById('adminError').style.display='none';
@@ -613,6 +593,10 @@ function renderManage(){
   if(!isAdminLoggedIn)return;
   const tb=document.getElementById('manageBody');
   if(!tb)return;
+  if(products.length===0){
+    tb.innerHTML='<tr><td colspan="3" style="padding:10px;text-align:center;color:var(--text-light)">No products added yet</td></tr>';
+    return;
+  }
   tb.innerHTML=products.map(p=>{
     const v=Object.values(p.variants)[0];
     return `<tr><td style="padding:6px;border-bottom:1px solid var(--border)"><strong style="color:var(--text)">${p.name}</strong></td><td style="padding:6px;border-bottom:1px solid var(--border)">${catNames[p.cat]||p.cat}</td><td style="padding:6px;border-bottom:1px solid var(--border)"><button onclick="deleteProduct(${p.id})" style="background:transparent;color:var(--red);border:1px solid var(--red);padding:2px 10px;border-radius:4px;cursor:pointer;font-size:10px">Delete</button></td></tr>`;
@@ -727,7 +711,6 @@ function renderProductDetail(){
         <p style="color:var(--text-light);font-size:13px;margin:6px 0">${p.description||''}</p>
         <div style="font-size:28px;font-weight:700;color:var(--gold)">${hs?`<s style="font-size:16px;color:var(--text-light);margin-right:8px">PKR ${p.originalPrice.toLocaleString()}</s> PKR ${fp.toLocaleString()}`:`PKR ${fp.toLocaleString()}`} ${p.coupon?`<span style="font-size:10px;color:#22C55E;background:#22C55E20;padding:2px 8px;border-radius:12px;margin-left:8px">${p.coupon}</span>`:''}</div>
 
-        <!-- SHIRT SIZE -->
         <div class="size-group">
           <span class="size-group-label"><i class="fas fa-tshirt"></i> SHIRT SIZE</span>
           <div class="size-options" id="shirtSizeOptions">
@@ -735,7 +718,6 @@ function renderProductDetail(){
           </div>
         </div>
 
-        <!-- TROUSER SIZE (if available) -->
         ${showTrouser?`
         <div class="size-group">
           <span class="size-group-label"><i class="fas fa-tshirt"></i> TROUSER SIZE</span>
@@ -745,13 +727,11 @@ function renderProductDetail(){
         </div>
         `:''}
 
-        <!-- Selected Display -->
         <div class="selected-display">
           <span class="label">Selected:</span>
           <span class="value" id="selectedDisplay">Shirt: ${selectedShirtSize}${showTrouser?` | Trouser: ${selectedTrouserSize}`:''}</span>
         </div>
 
-        <!-- Colors -->
         <div class="size-group">
           <span class="size-group-label"><i class="fas fa-palette"></i> COLOR</span>
           <div class="color-options" id="colorOptions">
@@ -759,7 +739,6 @@ function renderProductDetail(){
           </div>
         </div>
 
-        <!-- Quantity -->
         <div class="size-group">
           <span class="size-group-label"><i class="fas fa-cube"></i> QUANTITY</span>
           <div class="quantity-selector">
@@ -769,7 +748,6 @@ function renderProductDetail(){
           </div>
         </div>
 
-        <!-- Buttons -->
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px">
           <button onclick="addToCart()" style="flex:1;background:var(--text);color:var(--card);padding:12px;border:none;border-radius:6px;font-weight:600;cursor:pointer;min-width:120px"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
           <button onclick="buyNow()" style="flex:1;background:var(--whatsapp);color:#fff;padding:12px;border:none;border-radius:6px;font-weight:600;cursor:pointer;min-width:120px"><i class="fab fa-whatsapp"></i> Buy Now</button>
@@ -978,7 +956,16 @@ function handleImageFiles(event){
 function renderImagePreviews(){
   const c=document.getElementById('imagesContainer');
   if(!c)return;
-  c.innerHTML=imageFiles.map((f,i)=>`<div class="preview-item"><img src="${URL.createObjectURL(f)}"><button class="remove-btn" onclick="removeImageFile(${i})">×</button></div>`).join('');
+  if(imageFiles.length===0){
+    c.innerHTML='<div style="font-size:11px;color:var(--text-light);padding:8px">No images selected</div>';
+    return;
+  }
+  c.innerHTML=imageFiles.map((f,i)=>`
+    <div class="preview-item">
+      <img src="${URL.createObjectURL(f)}">
+      <button class="remove-btn" onclick="removeImageFile(${i})">×</button>
+    </div>
+  `).join('');
 }
 function removeImageFile(i){imageFiles.splice(i,1);renderImagePreviews();}
 
@@ -987,76 +974,136 @@ function addVariantField(){
   renderVariantFields();
 }
 function removeVariantField(i){
+  if(variantFields.length<=1){showToast('❌ At least one variant required','error');return;}
   variantFields.splice(i,1);
   renderVariantFields();
 }
 function renderVariantFields(){
   const c=document.getElementById('variantsContainer');
   if(!c)return;
+  if(variantFields.length===0){
+    variantFields.push({});
+  }
   c.innerHTML=variantFields.map((_,i)=>`
     <div class="variant-group">
       <div class="variant-header"><span>Variant ${i+1}</span><button onclick="removeVariantField(${i})">✕</button></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
-        <div><label style="font-size:9px;color:var(--text-light)">Color *</label><input class="var-color" placeholder="Red"></div>
-        <div><label style="font-size:9px;color:var(--text-light)">Code</label><input class="var-code" placeholder="#DC2626"></div>
+        <div><label style="font-size:9px;color:var(--text-light)">Color *</label><input class="var-color" placeholder="Red" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
+        <div><label style="font-size:9px;color:var(--text-light)">Code</label><input class="var-code" placeholder="#DC2626" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
-        <div><label style="font-size:9px;color:var(--text-light)">Image URL</label><input class="var-image-url" placeholder="https://i.imgur.com/xxx.jpg"></div>
-        <div><label style="font-size:9px;color:var(--text-light)">Sale %</label><input class="var-sale" type="number" placeholder="0"></div>
+        <div><label style="font-size:9px;color:var(--text-light)">Image URL</label><input class="var-image-url" placeholder="https://i.imgur.com/xxx.jpg" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
+        <div><label style="font-size:9px;color:var(--text-light)">Sale %</label><input class="var-sale" type="number" placeholder="0" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
       </div>
     </div>
   `).join('');
 }
 
 // ============================================================
-// ADMIN - ADD PRODUCT (with Firebase Storage)
+// ADMIN - ADD PRODUCT (FIXED)
 // ============================================================
-async function addProductWithImage(){
-  if(!isAdminLoggedIn){showToast('Admin login required','error');return;}
-  const name=document.getElementById('pName').value.trim();
-  const price=parseInt(document.getElementById('pPrice').value);
-  const cat=document.getElementById('pCat').value;
-  const gender=document.getElementById('pGender').value;
-  const desc=document.getElementById('pDesc').value.trim();
-  const coupon=document.getElementById('pCoupon').value.trim();
-  const sale=parseInt(document.getElementById('pSale').value)||0;
-  const trending=document.getElementById('pTrending').checked;
-  const featured=document.getElementById('pFeatured').checked;
-  const hasTrouserVal=hasTrouser;
-  if(!name||!price){showToast('Name and price required','error');return;}
-  if(imageFiles.length===0){showToast('Please select at least one image','error');return;}
-  
-  const variantGroups=document.querySelectorAll('#variantsContainer .variant-group');
-  const variants={};
-  for(let i=0;i<variantGroups.length;i++){
-    const color=variantGroups[i].querySelector('.var-color').value;
-    if(!color){showToast(`Color for variant ${i+1} required`,'error');return;}
-    variants[i]={
-      color:color,
-      colorCode:variantGroups[i].querySelector('.var-code').value||'#CCCCCC',
-      image:variantGroups[i].querySelector('.var-image-url').value||'',
-      sale:parseInt(variantGroups[i].querySelector('.var-sale').value)||0,
-      sizes:allSizes
-    };
-  }
-  if(Object.keys(variants).length===0){showToast('Add at least one color variant','error');return;}
-  
-  try{
-    const uploadedImages=[];
-    for(let f of imageFiles){
-      const path=`products/${Date.now()}_${f.name}`;
-      const uploadTask=storage.ref(path).put(f);
-      const snapshot=await uploadTask;
-      const url=await snapshot.ref.getDownloadURL();
-      uploadedImages.push(url);
+async function addProductWithImage() {
+    if (!isAdminLoggedIn) {
+        showToast('⚠️ Admin login required', 'error');
+        return;
     }
-    const newProduct={id:Date.now(),name,cat,gender,description:desc||'Premium quality',originalPrice:price,sale,trending,featured,hasTrouser:hasTrouserVal,coupon:coupon||'',images:uploadedImages,variants,reviews:[],createdAt:new Date().toISOString()};
-    await database.ref(`products/${newProduct.id}`).set(newProduct);
-    showToast('✅ Product added!');
-    imageFiles=[];variantFields=[];renderImagePreviews();renderVariantFields();
-    document.getElementById('pName').value='';document.getElementById('pPrice').value='';document.getElementById('pDesc').value='';document.getElementById('pCoupon').value='';document.getElementById('pSale').value='';document.getElementById('pTrending').checked=false;document.getElementById('pFeatured').checked=false;
-    loadProductsFromFirebase();
-  }catch(e){showToast('Error: '+e.message,'error');}
+
+    const name = document.getElementById('pName').value.trim();
+    const price = parseInt(document.getElementById('pPrice').value);
+    const category = document.getElementById('pCat').value;
+    const gender = document.getElementById('pGender').value;
+    const description = document.getElementById('pDesc').value.trim();
+    const coupon = document.getElementById('pCoupon').value.trim();
+    const sale = parseInt(document.getElementById('pSale').value) || 0;
+    const trending = document.getElementById('pTrending').checked;
+    const featured = document.getElementById('pFeatured').checked;
+    const hasTrouserVal = hasTrouser;
+
+    if (!name) { showToast('❌ Product name is required', 'error'); return; }
+    if (!price || price <= 0) { showToast('❌ Valid price is required', 'error'); return; }
+    if (imageFiles.length === 0) { showToast('❌ Please select at least one product image', 'error'); return; }
+
+    const variantGroups = document.querySelectorAll('#variantsContainer .variant-group');
+    const variants = {};
+    
+    if (variantGroups.length === 0) {
+        showToast('❌ Add at least one color variant', 'error');
+        return;
+    }
+
+    for (let i = 0; i < variantGroups.length; i++) {
+        const color = variantGroups[i].querySelector('.var-color')?.value?.trim();
+        const colorCode = variantGroups[i].querySelector('.var-code')?.value?.trim() || '#CCCCCC';
+        const imageUrl = variantGroups[i].querySelector('.var-image-url')?.value?.trim() || '';
+        const salePercent = parseInt(variantGroups[i].querySelector('.var-sale')?.value) || 0;
+        
+        if (!color) {
+            showToast(`❌ Color for variant ${i+1} is required`, 'error');
+            return;
+        }
+        
+        variants[i] = {
+            color: color,
+            colorCode: colorCode,
+            image: imageUrl || '',
+            sale: salePercent,
+            sizes: allSizes
+        };
+    }
+
+    showToast('⏳ Uploading images...', 'info');
+
+    try {
+        const uploadedImages = [];
+        for (let i = 0; i < imageFiles.length; i++) {
+            const file = imageFiles[i];
+            const path = `products/${Date.now()}_${file.name}`;
+            const uploadTask = storage.ref(path).put(file);
+            const snapshot = await uploadTask;
+            const url = await snapshot.ref.getDownloadURL();
+            uploadedImages.push(url);
+        }
+
+        const newProduct = {
+            id: Date.now(),
+            name: name,
+            cat: category,
+            gender: gender,
+            description: description || 'Premium quality sportswear',
+            originalPrice: price,
+            sale: sale,
+            trending: trending,
+            featured: featured,
+            hasTrouser: hasTrouserVal,
+            coupon: coupon || '',
+            images: uploadedImages,
+            variants: variants,
+            reviews: [],
+            createdAt: new Date().toISOString()
+        };
+
+        await database.ref(`products/${newProduct.id}`).set(newProduct);
+        
+        showToast('✅ Product added successfully!');
+        
+        document.getElementById('pName').value = '';
+        document.getElementById('pPrice').value = '';
+        document.getElementById('pDesc').value = '';
+        document.getElementById('pCoupon').value = '';
+        document.getElementById('pSale').value = '';
+        document.getElementById('pTrending').checked = false;
+        document.getElementById('pFeatured').checked = false;
+        imageFiles = [];
+        variantFields = [];
+        renderImagePreviews();
+        renderVariantFields();
+        
+        loadProductsFromFirebase();
+
+    } catch (error) {
+        console.error('❌ Error:', error);
+        showToast('❌ Error: ' + error.message, 'error');
+    }
 }
 
 // ============================================================
