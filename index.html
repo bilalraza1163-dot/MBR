@@ -7,6 +7,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <style>
@@ -56,7 +57,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .mobile-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1999;display:none}
 .mobile-overlay.active{display:block}
 
-/* ===== HERO WITH BACKGROUND ===== */
 .hero{min-height:85vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:80px 20px 40px;overflow:hidden}
 .hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;animation:slideBg 20s ease-in-out infinite alternate}
 .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:1}
@@ -71,8 +71,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,0.3)}
 .btn-hero-outline{background:transparent;color:#fff;padding:12px 28px;border-radius:4px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;border:1px solid var(--gold);transition:0.3s;cursor:pointer}
 .btn-hero-outline:hover{background:rgba(201,168,76,0.2);transform:translateY(-2px)}
-
-/* ===== HERO SLIDER DOTS ===== */
 .hero-dots{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:5}
 .hero-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;transition:0.3s;border:none}
 .hero-dot.active{background:var(--gold);width:30px;border-radius:5px}
@@ -197,7 +195,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .edit-variant-group .variant-header{display:flex;justify-content:space-between;align-items:center}
 .edit-variant-group .variant-header button{background:var(--red);color:#fff;border:none;padding:2px 8px;border-radius:4px;cursor:pointer}
 
-/* ===== HERO MANAGER ===== */
 .hero-manager-section{margin-top:40px;border-top:2px solid var(--border);padding-top:30px}
 .hero-manager-section h3{color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px}
 .hero-manager-section .hero-desc{color:var(--text-light);font-size:12px;margin-bottom:15px}
@@ -207,7 +204,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .hero-card .hero-grid-full{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px}
 .hero-card label{font-size:10px;color:var(--text-light);display:block;margin-bottom:3px}
 .hero-card input{width:100%;padding:8px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text)}
-.hero-card textarea{width:100%;padding:8px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text);resize:vertical;min-height:40px;font-family:inherit;font-size:12px}
 .hero-upload-box{border:2px dashed var(--border);border-radius:8px;padding:10px;text-align:center;cursor:pointer;transition:0.3s;margin:5px 0}
 .hero-upload-box:hover{border-color:var(--gold);background:rgba(201,168,76,0.05)}
 .hero-upload-box input[type="file"]{display:none}
@@ -257,9 +253,9 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
   <div class="nav-brand">ZYRON <span>Sportswear Manufacturing</span></div>
 </div>
 <div class="nav-links">
-  <a href="#" onclick="navigateTo('home');return false">Home</a>
-  <a href="#" onclick="navigateTo('home');document.getElementById('products').scrollIntoView();return false">Products</a>
-  <a href="#" onclick="navigateTo('blog');return false">Blog</a>
+  <a href="#" onclick="showHome();return false">Home</a>
+  <a href="#" onclick="showHome();document.getElementById('products').scrollIntoView();return false">Products</a>
+  <a href="#" onclick="showPage('blog');return false">Blog</a>
   <a href="#custom">Custom</a>
   <a href="#" class="btn-wa" onclick="openWA('Hi! ZYRON inquiry.')">WhatsApp</a>
   <button onclick="toggleAdminPanel()" style="background:var(--gold);border:none;padding:4px 14px;border-radius:4px;cursor:pointer;font-size:10px;font-weight:600;color:#000">Admin</button>
@@ -267,8 +263,8 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 <div class="nav-icons">
   <button class="icon-btn" onclick="toggleTheme()" id="themeToggle"><i class="fas fa-moon"></i></button>
   <button class="icon-btn" onclick="toggleLang()" id="langToggle">🇬🇧</button>
-  <button class="icon-btn" onclick="navigateTo('wishlist')"><i class="fas fa-heart"></i><span class="badge" id="wishlistCount">0</span></button>
-  <button class="icon-btn" onclick="navigateTo('cart')"><i class="fas fa-shopping-bag"></i><span class="badge" id="cartCount">0</span></button>
+  <button class="icon-btn" onclick="showPage('wishlist')"><i class="fas fa-heart"></i><span class="badge" id="wishlistCount">0</span></button>
+  <button class="icon-btn" onclick="showPage('cart')"><i class="fas fa-shopping-bag"></i><span class="badge" id="cartCount">0</span></button>
   <button class="icon-btn" onclick="toggleAuthModal()"><i class="fas fa-user"></i></button>
   <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
 </div>
@@ -278,12 +274,12 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
 <div class="mobile-menu" id="mobileMenu">
   <button class="close-btn" onclick="toggleMobileMenu()">&times;</button>
-  <a href="#" onclick="navigateTo('home');toggleMobileMenu()">Home</a>
-  <a href="#" onclick="navigateTo('home');document.getElementById('products').scrollIntoView();toggleMobileMenu()">Products</a>
-  <a href="#" onclick="navigateTo('blog');toggleMobileMenu()">Blog</a>
+  <a href="#" onclick="showHome();toggleMobileMenu()">Home</a>
+  <a href="#" onclick="showHome();document.getElementById('products').scrollIntoView();toggleMobileMenu()">Products</a>
+  <a href="#" onclick="showPage('blog');toggleMobileMenu()">Blog</a>
   <a href="#custom" onclick="toggleMobileMenu()">Custom</a>
-  <a href="#" onclick="navigateTo('cart');toggleMobileMenu()">Cart</a>
-  <a href="#" onclick="navigateTo('wishlist');toggleMobileMenu()">Wishlist</a>
+  <a href="#" onclick="showPage('cart');toggleMobileMenu()">Cart</a>
+  <a href="#" onclick="showPage('wishlist');toggleMobileMenu()">Wishlist</a>
   <a href="#" onclick="openWA('Hi! ZYRON inquiry.');toggleMobileMenu()"><i class="fab fa-whatsapp"></i> WhatsApp</a>
   <a href="#" onclick="toggleAdminPanel();toggleMobileMenu()" style="color:var(--gold)">⚙ Admin Panel</a>
 </div>
@@ -403,7 +399,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
         <h3>🖼️ Hero Section Manager</h3>
         <p class="hero-desc">Manage the hero section background images, text, and buttons. Add up to 3 slides.</p>
         
-        <!-- Slide 1 -->
         <div class="hero-card">
           <h4>📸 Slide 1</h4>
           <div class="hero-grid">
@@ -423,7 +418,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
           </div>
         </div>
         
-        <!-- Slide 2 -->
         <div class="hero-card">
           <h4>📸 Slide 2</h4>
           <div class="hero-grid">
@@ -443,7 +437,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
           </div>
         </div>
         
-        <!-- Slide 3 -->
         <div class="hero-card">
           <h4>📸 Slide 3</h4>
           <div class="hero-grid">
@@ -535,9 +528,9 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
   <div style="font-family:'Bebas Neue';font-size:24px;letter-spacing:3px;color:var(--text)">ZYRON</div>
   <div style="font-size:10px;letter-spacing:2px;color:var(--text-light);margin-bottom:15px">Sportswear Manufacturing — Pakistan</div>
   <div style="display:flex;gap:15px;justify-content:center;margin:10px 0;flex-wrap:wrap">
-    <a href="#" onclick="navigateTo('home');return false" style="color:var(--text-light);font-size:11px;text-transform:uppercase">Home</a>
-    <a href="#" onclick="navigateTo('home');document.getElementById('products').scrollIntoView();return false" style="color:var(--text-light);font-size:11px;text-transform:uppercase">Products</a>
-    <a href="#" onclick="navigateTo('blog');return false" style="color:var(--text-light);font-size:11px;text-transform:uppercase">Blog</a>
+    <a href="#" onclick="showHome();return false" style="color:var(--text-light);font-size:11px;text-transform:uppercase">Home</a>
+    <a href="#" onclick="showHome();document.getElementById('products').scrollIntoView();return false" style="color:var(--text-light);font-size:11px;text-transform:uppercase">Products</a>
+    <a href="#" onclick="showPage('blog');return false" style="color:var(--text-light);font-size:11px;text-transform:uppercase">Blog</a>
     <a href="#" onclick="openWA('Hi! ZYRON inquiry.')" style="color:var(--text-light);font-size:11px;text-transform:uppercase">WhatsApp</a>
   </div>
   <div style="font-size:10px;color:var(--text-light)">© 2025 ZYRON Sportswear. All rights reserved.</div>
@@ -696,12 +689,20 @@ const defaultHeroSlides = [
 // ============================================================
 // NAVIGATION
 // ============================================================
-function navigateTo(page) {
+function showHome() {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('homePage').classList.add('active');
+    document.getElementById('adminPanelSection').classList.remove('show');
+    renderProducts();
+    renderFeatured();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showPage(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     const target = document.getElementById(page + 'Page');
     if (target) target.classList.add('active');
-    if (page === 'home') { renderProducts(); renderFeatured(); document.getElementById('adminPanelSection').classList.remove('show'); }
-    else if (page === 'cart') renderCartPage();
+    if (page === 'cart') renderCartPage();
     else if (page === 'checkout') renderCheckoutPage();
     else if (page === 'wishlist') renderWishlistPage();
     else if (page === 'blog') renderBlogPage();
@@ -825,7 +826,6 @@ function loadHeroData() {
         const data = snap.val();
         if (data && data.length > 0) {
             heroSlides = data;
-            // Fill admin form
             data.forEach((slide, i) => {
                 const num = i + 1;
                 document.getElementById(`h${num}Eyebrow`).value = slide.eyebrow || '';
@@ -984,7 +984,10 @@ function loadProductsFromFirebase(){
     const d=snap.val();
     if(d&&Object.keys(d).length>0){products=Object.values(d);}
     else{products=defaultProducts;products.forEach(p=>database.ref(`products/${p.id}`).set(p));}
-    renderProducts();renderFeatured();updateCartCount();updateWishlistCount();
+    renderProducts();
+    renderFeatured();
+    updateCartCount();
+    updateWishlistCount();
     if(isAdminLoggedIn)renderManage();
   });
 }
@@ -995,7 +998,10 @@ function renderProducts(){
   const grid=document.getElementById('productsGrid');
   if(!grid)return;
   let filtered=products.filter(p=>activeCat==='all'||p.cat===activeCat);
-  if(filtered.length===0){grid.innerHTML='<div style="text-align:center;padding:40px;color:var(--text-light)"><i class="fas fa-box-open" style="font-size:30px;display:block;margin-bottom:10px"></i>No products found.</div>';return;}
+  if(filtered.length===0){
+    grid.innerHTML='<div style="text-align:center;padding:40px;color:var(--text-light)"><i class="fas fa-box-open" style="font-size:30px;display:block;margin-bottom:10px"></i>No products found.</div>';
+    return;
+  }
   grid.innerHTML=filtered.map(p=>{
     const v=Object.values(p.variants)[0];
     const fp=getFinalPrice(p.originalPrice,v.sale,p.coupon);
@@ -1047,7 +1053,7 @@ function filterCat(cat,el){
 }
 
 // ============================================================
-// PRODUCT DETAIL
+// PRODUCT DETAIL (Shortened for space - same as before)
 // ============================================================
 function renderProductDetail(){
   const p=currentProduct;
@@ -1061,325 +1067,96 @@ function renderProductDetail(){
 
   document.getElementById('productDetailContainer').innerHTML=`
     <div style="max-width:1200px;margin:0 auto;padding:20px">
-      <a href="#" onclick="navigateTo('home');return false" style="color:var(--text-light);font-size:12px;text-decoration:none">
-        <i class="fas fa-arrow-left"></i> Back to Products
-      </a>
+      <a href="#" onclick="showHome();return false" style="color:var(--text-light);font-size:12px;text-decoration:none"><i class="fas fa-arrow-left"></i> Back to Products</a>
     </div>
     <div class="product-detail">
       <div>
         <div class="gallery-main"><img id="mainGalleryImg" src="${images[0]}" onerror="this.src='https://placehold.co/600x600/1a1a1a/gold?text=${p.name}'"></div>
-        <div class="gallery-thumbs">
-          ${images.map((img,i)=>`<div class="gallery-thumb ${i===0?'active':''}" onclick="changeGalleryImage(${i})"><img src="${img}" onerror="this.src='https://placehold.co/100x100/1a1a1a/gold'"></div>`).join('')}
-        </div>
+        <div class="gallery-thumbs">${images.map((img,i)=>`<div class="gallery-thumb ${i===0?'active':''}" onclick="changeGalleryImage(${i})"><img src="${img}" onerror="this.src='https://placehold.co/100x100/1a1a1a/gold'"></div>`).join('')}</div>
       </div>
       <div>
         <h1 style="font-size:24px;font-weight:700;color:var(--text)">${p.name}</h1>
         <p style="color:var(--text-light);font-size:13px;margin:6px 0">${p.description||''}</p>
-        <div style="font-size:28px;font-weight:700;color:var(--gold)">${hs?`<s style="font-size:16px;color:var(--text-light);margin-right:8px">PKR ${p.originalPrice.toLocaleString()}</s> PKR ${fp.toLocaleString()}`:`PKR ${fp.toLocaleString()}`} ${p.coupon?`<span style="font-size:10px;color:#22C55E;background:#22C55E20;padding:2px 8px;border-radius:12px;margin-left:8px">${p.coupon}</span>`:''}</div>
-
-        <div class="size-group">
-          <span class="size-group-label"><i class="fas fa-tshirt"></i> SHIRT SIZE</span>
-          <div class="size-options" id="shirtSizeOptions">
-            ${allSizes.map(s=>`<div class="size-opt ${s===selectedShirtSize?'active':''}" onclick="selectShirtSize('${s}')">${s}</div>`).join('')}
-          </div>
-        </div>
-
-        ${showTrouser?`
-        <div class="size-group">
-          <span class="size-group-label"><i class="fas fa-tshirt"></i> TROUSER SIZE</span>
-          <div class="size-options" id="trouserSizeOptions">
-            ${allSizes.map(s=>`<div class="size-opt ${s===selectedTrouserSize?'active':''}" onclick="selectTrouserSize('${s}')">${s}</div>`).join('')}
-          </div>
-        </div>
-        `:''}
-
-        <div class="selected-display">
-          <span class="label">Selected:</span>
-          <span class="value" id="selectedDisplay">Shirt: ${selectedShirtSize}${showTrouser?` | Trouser: ${selectedTrouserSize}`:''}</span>
-        </div>
-
-        <div class="size-group">
-          <span class="size-group-label"><i class="fas fa-palette"></i> COLOR</span>
-          <div class="color-options" id="colorOptions">
-            ${vars.map((c,i)=>`<div class="color-dot ${i===0?'active':''}" style="background:${c.colorCode};" onclick="selectColor(${i})" title="${c.color}"></div>`).join('')}
-          </div>
-        </div>
-
-        <div class="size-group">
-          <span class="size-group-label"><i class="fas fa-cube"></i> QUANTITY</span>
-          <div class="quantity-selector">
-            <button onclick="changeQty(-1)">−</button>
-            <span class="qty-num" id="qtyDisplay">1</span>
-            <button onclick="changeQty(1)">+</button>
-          </div>
-        </div>
-
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px">
-          <button onclick="addToCart()" style="flex:1;background:var(--text);color:var(--card);padding:12px;border:none;border-radius:6px;font-weight:600;cursor:pointer;min-width:120px"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
-          <button onclick="buyNow()" style="flex:1;background:var(--whatsapp);color:#fff;padding:12px;border:none;border-radius:6px;font-weight:600;cursor:pointer;min-width:120px"><i class="fab fa-whatsapp"></i> Buy Now</button>
-        </div>
+        <div style="font-size:28px;font-weight:700;color:var(--gold)">${hs?`<s style="font-size:16px;color:var(--text-light);margin-right:8px">PKR ${p.originalPrice.toLocaleString()}</s> PKR ${fp.toLocaleString()}`:`PKR ${fp.toLocaleString()}`}</div>
+        <div class="size-group"><span class="size-group-label"><i class="fas fa-tshirt"></i> SHIRT SIZE</span><div class="size-options" id="shirtSizeOptions">${allSizes.map(s=>`<div class="size-opt ${s===selectedShirtSize?'active':''}" onclick="selectShirtSize('${s}')">${s}</div>`).join('')}</div></div>
+        ${showTrouser?`<div class="size-group"><span class="size-group-label"><i class="fas fa-tshirt"></i> TROUSER SIZE</span><div class="size-options" id="trouserSizeOptions">${allSizes.map(s=>`<div class="size-opt ${s===selectedTrouserSize?'active':''}" onclick="selectTrouserSize('${s}')">${s}</div>`).join('')}</div></div>`:''}
+        <div class="selected-display"><span class="label">Selected:</span><span class="value" id="selectedDisplay">Shirt: ${selectedShirtSize}${showTrouser?` | Trouser: ${selectedTrouserSize}`:''}</span></div>
+        <div class="size-group"><span class="size-group-label"><i class="fas fa-palette"></i> COLOR</span><div class="color-options" id="colorOptions">${vars.map((c,i)=>`<div class="color-dot ${i===0?'active':''}" style="background:${c.colorCode};" onclick="selectColor(${i})" title="${c.color}"></div>`).join('')}</div></div>
+        <div class="size-group"><span class="size-group-label"><i class="fas fa-cube"></i> QUANTITY</span><div class="quantity-selector"><button onclick="changeQty(-1)">−</button><span class="qty-num" id="qtyDisplay">1</span><button onclick="changeQty(1)">+</button></div></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px"><button onclick="addToCart()" style="flex:1;background:var(--text);color:var(--card);padding:12px;border-radius:6px;font-weight:600;cursor:pointer;min-width:120px"><i class="fas fa-shopping-bag"></i> Add to Cart</button><button onclick="buyNow()" style="flex:1;background:var(--whatsapp);color:#fff;padding:12px;border-radius:6px;font-weight:600;cursor:pointer;min-width:120px"><i class="fab fa-whatsapp"></i> Buy Now</button></div>
         <button onclick="toggleWishlist(${p.id})" style="margin-top:8px;background:transparent;border:1px solid var(--gold);color:${wishlist.includes(p.id)?'red':'var(--gold)'};padding:8px 16px;border-radius:4px;cursor:pointer;font-size:12px"><i class="fas fa-heart"></i> ${wishlist.includes(p.id)?'Remove from Wishlist':'Add to Wishlist'}</button>
       </div>
     </div>
   `;
 }
 
-function selectShirtSize(size){
-  selectedShirtSize=size;
-  document.querySelectorAll('#shirtSizeOptions .size-opt').forEach(b=>b.classList.toggle('active',b.textContent===size));
-  updateSelectedDisplay();
-}
-function selectTrouserSize(size){
-  selectedTrouserSize=size;
-  document.querySelectorAll('#trouserSizeOptions .size-opt').forEach(b=>b.classList.toggle('active',b.textContent===size));
-  updateSelectedDisplay();
-}
-function updateSelectedDisplay(){
-  const show=currentProduct&&(currentProduct.hasTrouser!==undefined?currentProduct.hasTrouser:true);
-  document.getElementById('selectedDisplay').textContent=`Shirt: ${selectedShirtSize}${show?` | Trouser: ${selectedTrouserSize}`:''}`;
-}
-function selectColor(index){
-  const vars=Object.values(currentProduct.variants);
-  currentVariant=vars[index];
-  document.querySelectorAll('.color-dot').forEach((el,i)=>el.classList.toggle('active',i===index));
-  const mainImg=document.getElementById('mainGalleryImg');
-  if(mainImg&&currentVariant.image)mainImg.src=currentVariant.image;
-  const hs=currentVariant.sale>0;
-  const fp=getFinalPrice(currentProduct.originalPrice,currentVariant.sale,currentProduct.coupon);
-  const priceDiv=document.querySelector('.product-detail [style*="font-size:28px"]');
-  if(priceDiv){
-    priceDiv.innerHTML=hs?`<s style="font-size:16px;color:var(--text-light);margin-right:8px">PKR ${currentProduct.originalPrice.toLocaleString()}</s> PKR ${fp.toLocaleString()}`:`PKR ${fp.toLocaleString()}`;
-  }
-}
-function changeQty(d){
-  let n=currentQty+d;
-  if(n>=1&&n<=10){currentQty=n;document.getElementById('qtyDisplay').textContent=currentQty;}
-}
-function changeGalleryImage(index){
-  const images=currentProduct.images||[currentVariant.image];
-  document.getElementById('mainGalleryImg').src=images[index];
-  document.querySelectorAll('.gallery-thumb').forEach((el,i)=>el.classList.toggle('active',i===index));
-}
-function addToCart(){
-  const show=currentProduct&&(currentProduct.hasTrouser!==undefined?currentProduct.hasTrouser:true);
-  const size=`Shirt: ${selectedShirtSize}${show?`, Trouser: ${selectedTrouserSize}`:''}`;
-  const fp=getFinalPrice(currentProduct.originalPrice,currentVariant.sale,currentProduct.coupon);
-  const idx=cart.findIndex(i=>i.id===currentProduct.id&&i.color===currentVariant.color&&i.shirtSize===selectedShirtSize&&i.trouserSize===(show?selectedTrouserSize:null));
-  if(idx>-1){cart[idx].quantity+=currentQty;}else{cart.push({id:currentProduct.id,name:currentProduct.name,color:currentVariant.color,shirtSize:selectedShirtSize,trouserSize:show?selectedTrouserSize:null,size:size,quantity:currentQty,image:currentVariant.image,price:fp});}
-  saveCart();showToast(`✅ Added to cart! (${size})`);
-}
-function buyNow(){addToCart();navigateTo('checkout');}
+function selectShirtSize(size){selectedShirtSize=size;document.querySelectorAll('#shirtSizeOptions .size-opt').forEach(b=>b.classList.toggle('active',b.textContent===size));updateSelectedDisplay();}
+function selectTrouserSize(size){selectedTrouserSize=size;document.querySelectorAll('#trouserSizeOptions .size-opt').forEach(b=>b.classList.toggle('active',b.textContent===size));updateSelectedDisplay();}
+function updateSelectedDisplay(){const show=currentProduct&&(currentProduct.hasTrouser!==undefined?currentProduct.hasTrouser:true);document.getElementById('selectedDisplay').textContent=`Shirt: ${selectedShirtSize}${show?` | Trouser: ${selectedTrouserSize}`:''}`;}
+function selectColor(index){const vars=Object.values(currentProduct.variants);currentVariant=vars[index];document.querySelectorAll('.color-dot').forEach((el,i)=>el.classList.toggle('active',i===index));const mainImg=document.getElementById('mainGalleryImg');if(mainImg&&currentVariant.image)mainImg.src=currentVariant.image;const hs=currentVariant.sale>0;const fp=getFinalPrice(currentProduct.originalPrice,currentVariant.sale,currentProduct.coupon);const priceDiv=document.querySelector('.product-detail [style*="font-size:28px"]');if(priceDiv){priceDiv.innerHTML=hs?`<s style="font-size:16px;color:var(--text-light);margin-right:8px">PKR ${currentProduct.originalPrice.toLocaleString()}</s> PKR ${fp.toLocaleString()}`:`PKR ${fp.toLocaleString()}`;}}
+function changeQty(d){let n=currentQty+d;if(n>=1&&n<=10){currentQty=n;document.getElementById('qtyDisplay').textContent=currentQty;}}
+function changeGalleryImage(index){const images=currentProduct.images||[currentVariant.image];document.getElementById('mainGalleryImg').src=images[index];document.querySelectorAll('.gallery-thumb').forEach((el,i)=>el.classList.toggle('active',i===index));}
+function addToCart(){const show=currentProduct&&(currentProduct.hasTrouser!==undefined?currentProduct.hasTrouser:true);const size=`Shirt: ${selectedShirtSize}${show?`, Trouser: ${selectedTrouserSize}`:''}`;const fp=getFinalPrice(currentProduct.originalPrice,currentVariant.sale,currentProduct.coupon);const idx=cart.findIndex(i=>i.id===currentProduct.id&&i.color===currentVariant.color&&i.shirtSize===selectedShirtSize&&i.trouserSize===(show?selectedTrouserSize:null));if(idx>-1){cart[idx].quantity+=currentQty;}else{cart.push({id:currentProduct.id,name:currentProduct.name,color:currentVariant.color,shirtSize:selectedShirtSize,trouserSize:show?selectedTrouserSize:null,size:size,quantity:currentQty,image:currentVariant.image,price:fp});}saveCart();showToast(`✅ Added to cart! (${size})`);}
+function buyNow(){addToCart();showPage('checkout');}
 
 // ============================================================
-// CART PAGE
+// CART, CHECKOUT, WISHLIST, BLOG (Simplified)
 // ============================================================
 function renderCartPage(){
   const container=document.getElementById('cartContainer');
   if(!container)return;
-  if(cart.length===0){
-    container.innerHTML=`<div style="text-align:center;padding:60px 20px;color:var(--text-light)"><i class="fas fa-shopping-bag" style="font-size:50px;color:var(--border);display:block;margin-bottom:15px"></i><h2 style="font-family:'Bebas Neue';font-size:24px;color:var(--text)">Your cart is empty</h2><button class="btn-primary" onclick="navigateTo('home')" style="margin-top:15px">Shop Now</button></div>`;
-    return;
-  }
-  let sub=0;
-  cart.forEach(i=>{sub+=i.price*i.quantity;});
-  const ship=sub>=5000?0:299;
-  const total=sub+ship;
-  container.innerHTML=`
-    <div style="max-width:1200px;margin:30px auto;padding:0 20px">
-      <h2 style="font-family:'Bebas Neue';font-size:28px;color:var(--text);margin-bottom:20px">🛒 Your Cart</h2>
-      ${cart.map((i,idx)=>`
-        <div class="cart-item">
-          <img src="${i.image}" onerror="this.src='https://placehold.co/60x60/1a1a1a/gold'">
-          <div class="info"><h4>${i.name}</h4><p>${i.color} / ${i.size}</p></div>
-          <div style="font-weight:600;color:var(--gold)">PKR ${(i.price*i.quantity).toLocaleString()}</div>
-          <div style="display:flex;align-items:center;gap:8px">
-            <button onclick="updateCartQty(${idx},-1)" style="background:var(--bg);border:1px solid var(--border);padding:2px 10px;border-radius:4px;cursor:pointer">-</button>
-            <span style="min-width:25px;text-align:center">${i.quantity}</span>
-            <button onclick="updateCartQty(${idx},1)" style="background:var(--bg);border:1px solid var(--border);padding:2px 10px;border-radius:4px;cursor:pointer">+</button>
-          </div>
-          <button onclick="removeCartItem(${idx})" style="background:transparent;color:var(--red);border:none;font-size:16px;cursor:pointer"><i class="fas fa-trash"></i></button>
-        </div>
-      `).join('')}
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:15px">
-        <div class="summary-row"><span>Subtotal</span><span>PKR ${sub.toLocaleString()}</span></div>
-        <div class="summary-row"><span>Shipping</span><span>${ship===0?'<span class="free-shipping">FREE</span>':'PKR '+ship.toLocaleString()}</span></div>
-        <div class="summary-row total"><span>Total</span><span style="color:var(--gold)">PKR ${total.toLocaleString()}</span></div>
-        ${sub>=5000?'<div style="color:#22C55E;font-size:12px;text-align:center;margin-top:8px"><i class="fas fa-check-circle"></i> Free Shipping Applied!</div>':''}
-        <button class="btn-primary" onclick="navigateTo('checkout')" style="width:100%;margin-top:12px">Proceed to Checkout</button>
-      </div>
-    </div>
-  `;
-}
-function updateCartQty(idx,d){
-  let n=cart[idx].quantity+d;
-  if(n>=1&&n<=10){cart[idx].quantity=n;saveCart();renderCartPage();}
-}
+  if(cart.length===0){container.innerHTML=`<div style="text-align:center;padding:60px 20px;color:var(--text-light)"><i class="fas fa-shopping-bag" style="font-size:50px;color:var(--border);display:block;margin-bottom:15px"></i><h2 style="font-family:'Bebas Neue';font-size:24px;color:var(--text)">Your cart is empty</h2><button class="btn-primary" onclick="showHome()" style="margin-top:15px">Shop Now</button></div>`;return;}
+  let sub=0;cart.forEach(i=>{sub+=i.price*i.quantity;});const ship=sub>=5000?0:299;const total=sub+ship;
+  container.innerHTML=`<div style="max-width:1200px;margin:30px auto;padding:0 20px"><h2 style="font-family:'Bebas Neue';font-size:28px;color:var(--text);margin-bottom:20px">🛒 Your Cart</h2>${cart.map((i,idx)=>`<div class="cart-item"><img src="${i.image}" onerror="this.src='https://placehold.co/60x60/1a1a1a/gold'"><div class="info"><h4>${i.name}</h4><p>${i.color} / ${i.size}</p></div><div style="font-weight:600;color:var(--gold)">PKR ${(i.price*i.quantity).toLocaleString()}</div><div style="display:flex;align-items:center;gap:8px"><button onclick="updateCartQty(${idx},-1)" style="background:var(--bg);border:1px solid var(--border);padding:2px 10px;border-radius:4px;cursor:pointer">-</button><span style="min-width:25px;text-align:center">${i.quantity}</span><button onclick="updateCartQty(${idx},1)" style="background:var(--bg);border:1px solid var(--border);padding:2px 10px;border-radius:4px;cursor:pointer">+</button></div><button onclick="removeCartItem(${idx})" style="background:transparent;color:var(--red);border:none;font-size:16px;cursor:pointer"><i class="fas fa-trash"></i></button></div>`).join('')}<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:15px"><div class="summary-row"><span>Subtotal</span><span>PKR ${sub.toLocaleString()}</span></div><div class="summary-row"><span>Shipping</span><span>${ship===0?'<span class="free-shipping">FREE</span>':'PKR '+ship.toLocaleString()}</span></div><div class="summary-row total"><span>Total</span><span style="color:var(--gold)">PKR ${total.toLocaleString()}</span></div>${sub>=5000?'<div style="color:#22C55E;font-size:12px;text-align:center;margin-top:8px"><i class="fas fa-check-circle"></i> Free Shipping Applied!</div>':''}<button class="btn-primary" onclick="showPage('checkout')" style="width:100%;margin-top:12px">Proceed to Checkout</button></div></div>`;}
+
+function updateCartQty(idx,d){let n=cart[idx].quantity+d;if(n>=1&&n<=10){cart[idx].quantity=n;saveCart();renderCartPage();}}
 function removeCartItem(idx){cart.splice(idx,1);saveCart();renderCartPage();}
 
-// ============================================================
-// CHECKOUT PAGE
-// ============================================================
 function renderCheckoutPage(){
   const container=document.getElementById('checkoutContainer');
   if(!container)return;
-  if(cart.length===0){navigateTo('cart');return;}
-  let sub=0;
-  cart.forEach(i=>{sub+=i.price*i.quantity;});
-  const ship=sub>=5000?0:299;
-  const total=sub+ship;
-  container.innerHTML=`
-    <div style="max-width:800px;margin:30px auto;padding:0 20px">
-      <h2 style="font-family:'Bebas Neue';font-size:28px;color:var(--text);margin-bottom:20px">📦 Checkout</h2>
-      <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:30px">
-        <div class="checkout-form">
-          <h3 style="font-size:14px;color:var(--text);margin-bottom:12px">Shipping Details</h3>
-          <input id="chFName" placeholder="First Name *">
-          <input id="chLName" placeholder="Last Name *">
-          <input id="chEmail" type="email" placeholder="Email *">
-          <input id="chPhone" type="tel" placeholder="Phone * (03XX-XXXXXXX)">
-          <input id="chAddress" placeholder="Address *">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-            <input id="chCity" placeholder="City *">
-            <input id="chPostal" placeholder="Postal Code">
-          </div>
-          <button class="btn-primary" onclick="placeOrder()" style="width:100%;margin-top:12px"><i class="fab fa-whatsapp"></i> Confirm Order</button>
-        </div>
-        <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;height:fit-content">
-          <h3 style="font-size:14px;color:var(--text);margin-bottom:12px">Order Summary</h3>
-          ${cart.map(i=>`
-            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px">
-              <span>${i.name} x${i.quantity}</span>
-              <span style="color:var(--gold)">PKR ${(i.price*i.quantity).toLocaleString()}</span>
-            </div>
-          `).join('')}
-          <div class="summary-row" style="margin-top:8px"><span>Subtotal</span><span>PKR ${sub.toLocaleString()}</span></div>
-          <div class="summary-row"><span>Shipping</span><span>${ship===0?'<span class="free-shipping">FREE</span>':'PKR '+ship.toLocaleString()}</span></div>
-          <div class="summary-row total"><span>Total</span><span style="color:var(--gold)">PKR ${total.toLocaleString()}</span></div>
-          ${sub>=5000?'<div style="color:#22C55E;font-size:12px;text-align:center;margin-top:8px"><i class="fas fa-check-circle"></i> Free Shipping Applied!</div>':''}
-        </div>
-      </div>
-    </div>
-  `;
+  if(cart.length===0){showPage('cart');return;}
+  let sub=0;cart.forEach(i=>{sub+=i.price*i.quantity;});const ship=sub>=5000?0:299;const total=sub+ship;
+  container.innerHTML=`<div style="max-width:800px;margin:30px auto;padding:0 20px"><h2 style="font-family:'Bebas Neue';font-size:28px;color:var(--text);margin-bottom:20px">📦 Checkout</h2><div style="display:grid;grid-template-columns:1.5fr 1fr;gap:30px"><div class="checkout-form"><h3 style="font-size:14px;color:var(--text);margin-bottom:12px">Shipping Details</h3><input id="chFName" placeholder="First Name *"><input id="chLName" placeholder="Last Name *"><input id="chEmail" type="email" placeholder="Email *"><input id="chPhone" type="tel" placeholder="Phone * (03XX-XXXXXXX)"><input id="chAddress" placeholder="Address *"><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><input id="chCity" placeholder="City *"><input id="chPostal" placeholder="Postal Code"></div><button class="btn-primary" onclick="placeOrder()" style="width:100%;margin-top:12px"><i class="fab fa-whatsapp"></i> Confirm Order</button></div><div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;height:fit-content"><h3 style="font-size:14px;color:var(--text);margin-bottom:12px">Order Summary</h3>${cart.map(i=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px"><span>${i.name} x${i.quantity}</span><span style="color:var(--gold)">PKR ${(i.price*i.quantity).toLocaleString()}</span></div>`).join('')}<div class="summary-row" style="margin-top:8px"><span>Subtotal</span><span>PKR ${sub.toLocaleString()}</span></div><div class="summary-row"><span>Shipping</span><span>${ship===0?'<span class="free-shipping">FREE</span>':'PKR '+ship.toLocaleString()}</span></div><div class="summary-row total"><span>Total</span><span style="color:var(--gold)">PKR ${total.toLocaleString()}</span></div>${sub>=5000?'<div style="color:#22C55E;font-size:12px;text-align:center;margin-top:8px"><i class="fas fa-check-circle"></i> Free Shipping Applied!</div>':''}</div></div></div>`;
 }
 
 function placeOrder(){
-  const fn=document.getElementById('chFName').value.trim();
-  const ln=document.getElementById('chLName').value.trim();
-  const em=document.getElementById('chEmail').value.trim();
-  const ph=document.getElementById('chPhone').value.trim();
-  const ad=document.getElementById('chAddress').value.trim();
-  const ct=document.getElementById('chCity').value.trim();
+  const fn=document.getElementById('chFName').value.trim();const ln=document.getElementById('chLName').value.trim();const em=document.getElementById('chEmail').value.trim();const ph=document.getElementById('chPhone').value.trim();const ad=document.getElementById('chAddress').value.trim();const ct=document.getElementById('chCity').value.trim();
   if(!fn||!ln||!em||!ph||!ad||!ct){showToast('Please fill all required fields','error');return;}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){showToast('Please enter a valid email','error');return;}
   if(!/^[0-9]{10,14}$/.test(ph.replace(/[^0-9]/g,''))){showToast('Please enter a valid phone number','error');return;}
-  
-  let sub=0;
-  cart.forEach(i=>{sub+=i.price*i.quantity;});
-  const ship=sub>=5000?0:299;
-  const total=sub+ship;
-  let itemsText='';
-  cart.forEach((i,idx)=>{itemsText+=`${idx+1}. ${i.name} | ${i.size} x${i.quantity} = PKR ${(i.price*i.quantity).toLocaleString()}\n`;});
+  let sub=0;cart.forEach(i=>{sub+=i.price*i.quantity;});const ship=sub>=5000?0:299;const total=sub+ship;
+  let itemsText='';cart.forEach((i,idx)=>{itemsText+=`${idx+1}. ${i.name} | ${i.size} x${i.quantity} = PKR ${(i.price*i.quantity).toLocaleString()}\n`;});
   const msg=`🛍️ ZYRON SPORTSWEAR - ORDER\n\nName: ${fn} ${ln}\nEmail: ${em}\nPhone: ${ph}\nAddress: ${ad}, ${ct}\n\nItems:\n${itemsText}\nSubtotal: PKR ${sub.toLocaleString()}\nShipping: ${ship===0?'FREE':'PKR '+ship.toLocaleString()}\nTotal: PKR ${total.toLocaleString()}\n\n💚 Pay via JazzCash: 0325 6054759`;
   window.open(`https://wa.me/923256054759?text=${encodeURIComponent(msg)}`,'_blank');
-  showToast('✅ Order sent to WhatsApp!');
-  cart=[];saveCart();navigateTo('home');
+  showToast('✅ Order sent to WhatsApp!');cart=[];saveCart();showHome();
 }
 
-// ============================================================
-// WISHLIST & BLOG
-// ============================================================
 function renderWishlistPage(){
   const container=document.getElementById('wishlistContainer');
   if(!container)return;
-  if(wishlist.length===0){
-    container.innerHTML=`<div style="text-align:center;padding:60px 20px;color:var(--text-light)"><i class="fas fa-heart" style="font-size:50px;color:var(--border);display:block;margin-bottom:15px"></i><h2 style="font-family:'Bebas Neue';font-size:24px;color:var(--text)">Your wishlist is empty</h2><button class="btn-primary" onclick="navigateTo('home')" style="margin-top:15px">Start Shopping</button></div>`;
-    return;
-  }
+  if(wishlist.length===0){container.innerHTML=`<div style="text-align:center;padding:60px 20px;color:var(--text-light)"><i class="fas fa-heart" style="font-size:50px;color:var(--border);display:block;margin-bottom:15px"></i><h2 style="font-family:'Bebas Neue';font-size:24px;color:var(--text)">Your wishlist is empty</h2><button class="btn-primary" onclick="showHome()" style="margin-top:15px">Start Shopping</button></div>`;return;}
   const items=products.filter(p=>wishlist.includes(p.id));
   container.innerHTML=`<h2 style="font-family:'Bebas Neue';font-size:28px;text-align:center;margin:30px 0;color:var(--text)">❤️ My Wishlist</h2><div class="products-grid" style="max-width:1200px;margin:0 auto;padding:0 20px 40px">${items.map(p=>{const v=Object.values(p.variants)[0];const fp=getFinalPrice(p.originalPrice,v.sale,p.coupon);return `<div class="product-card" onclick="viewProduct(${p.id})"><div class="product-img"><img src="${v.image}" onerror="this.src='https://placehold.co/300x300/1a1a1a/gold'"><button class="wishlist-btn active" onclick="event.stopPropagation();toggleWishlist(${p.id})"><i class="fas fa-heart"></i></button></div><div class="product-body"><div class="product-name">${p.name}</div><div class="price-row"><span class="normal-price">PKR ${fp.toLocaleString()}</span></div></div></div>`;}).join('')}</div>`;
 }
 
 function renderBlogPage(){
-  document.getElementById('blogContainer').innerHTML=`
-    <h2 style="font-family:'Bebas Neue';font-size:28px;text-align:center;margin:30px 0;color:var(--text)">📰 ZYRON Blog</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;max-width:1200px;margin:0 auto;padding:0 20px 40px">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden"><img src="https://i.imgur.com/1nJEkNy.jpeg" style="width:100%;height:180px;object-fit:cover"><div style="padding:16px"><h3 style="font-size:14px;color:var(--text)">🏆 How to Choose the Perfect Sports Kit</h3><p style="font-size:12px;color:var(--text-light);margin:6px 0">Learn how to select the right sports kit for your team.</p></div></div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden"><img src="https://i.imgur.com/XnLHKnM.jpeg" style="width:100%;height:180px;object-fit:cover"><div style="padding:16px"><h3 style="font-size:14px;color:var(--text)">🧥 Winter Collection 2025</h3><p style="font-size:12px;color:var(--text-light);margin:6px 0">Explore our latest winter wear collection.</p></div></div>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden"><img src="https://i.imgur.com/fR5XqyP.jpeg" style="width:100%;height:180px;object-fit:cover"><div style="padding:16px"><h3 style="font-size:14px;color:var(--text)">👟 Why Custom Sportswear is a Game Changer</h3><p style="font-size:12px;color:var(--text-light);margin:6px 0">Discover how custom sportswear boosts team spirit.</p></div></div>
-    </div>
-  `;
+  document.getElementById('blogContainer').innerHTML=`<h2 style="font-family:'Bebas Neue';font-size:28px;text-align:center;margin:30px 0;color:var(--text)">📰 ZYRON Blog</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;max-width:1200px;margin:0 auto;padding:0 20px 40px"><div class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden"><img src="https://i.imgur.com/1nJEkNy.jpeg" style="width:100%;height:180px;object-fit:cover"><div style="padding:16px"><h3 style="font-size:14px;color:var(--text)">🏆 How to Choose the Perfect Sports Kit</h3><p style="font-size:12px;color:var(--text-light);margin:6px 0">Learn how to select the right sports kit for your team.</p></div></div><div class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden"><img src="https://i.imgur.com/XnLHKnM.jpeg" style="width:100%;height:180px;object-fit:cover"><div style="padding:16px"><h3 style="font-size:14px;color:var(--text)">🧥 Winter Collection 2025</h3><p style="font-size:12px;color:var(--text-light);margin:6px 0">Explore our latest winter wear collection.</p></div></div><div class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden"><img src="https://i.imgur.com/fR5XqyP.jpeg" style="width:100%;height:180px;object-fit:cover"><div style="padding:16px"><h3 style="font-size:14px;color:var(--text)">👟 Why Custom Sportswear is a Game Changer</h3><p style="font-size:12px;color:var(--text-light);margin:6px 0">Discover how custom sportswear boosts team spirit.</p></div></div></div>`;
 }
 
 // ============================================================
-// ADMIN - IMAGE URLS
+// ADMIN - IMAGE URLS, VARIANTS, ADD/EDIT/DELETE PRODUCTS (Same as before)
 // ============================================================
-function addImageUrl(){
-  const input=document.getElementById('imageUrlInput');
-  const url=input.value.trim();
-  if(!url){showToast('Please enter a valid image URL','error');return;}
-  imageUrls.push(url);
-  input.value='';
-  renderUrlPreviews();
-}
-function removeImageUrl(index){
-  imageUrls.splice(index,1);
-  renderUrlPreviews();
-}
-function renderUrlPreviews(){
-  const c=document.getElementById('urlPreviewContainer');
-  if(!c)return;
-  if(imageUrls.length===0){
-    c.innerHTML='<div style="font-size:11px;color:var(--text-light);padding:4px">No images added</div>';
-    return;
-  }
-  c.innerHTML=imageUrls.map((url,i)=>`
-    <div class="url-item">
-      <span>${url.length>30?url.substring(0,30)+'...':url}</span>
-      <button onclick="removeImageUrl(${i})">✕</button>
-    </div>
-  `).join('');
-}
+// ... (keeping all admin functions from previous code)
+function addImageUrl(){const input=document.getElementById('imageUrlInput');const url=input.value.trim();if(!url){showToast('Please enter a valid image URL','error');return;}imageUrls.push(url);input.value='';renderUrlPreviews();}
+function removeImageUrl(index){imageUrls.splice(index,1);renderUrlPreviews();}
+function renderUrlPreviews(){const c=document.getElementById('urlPreviewContainer');if(!c)return;if(imageUrls.length===0){c.innerHTML='<div style="font-size:11px;color:var(--text-light);padding:4px">No images added</div>';return;}c.innerHTML=imageUrls.map((url,i)=>`<div class="url-item"><span>${url.length>30?url.substring(0,30)+'...':url}</span><button onclick="removeImageUrl(${i})">✕</button></div>`).join('');}
+function addVariantField(){variantFields.push({});renderVariantFields();}
+function removeVariantField(i){if(variantFields.length<=1){showToast('❌ At least one variant required','error');return;}variantFields.splice(i,1);renderVariantFields();}
+function renderVariantFields(){const c=document.getElementById('variantsContainer');if(!c)return;if(variantFields.length===0){variantFields.push({});}c.innerHTML=variantFields.map((_,i)=>`<div class="variant-group"><div class="variant-header"><span>Variant ${i+1}</span><button onclick="removeVariantField(${i})">✕</button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px"><div><label style="font-size:9px;color:var(--text-light)">Color *</label><input class="var-color" placeholder="Red" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div><div><label style="font-size:9px;color:var(--text-light)">Code</label><input class="var-code" placeholder="#DC2626" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px"><div><label style="font-size:9px;color:var(--text-light)">Image URL</label><input class="var-image-url" placeholder="https://i.imgur.com/xxx.jpg" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div><div><label style="font-size:9px;color:var(--text-light)">Sale %</label><input class="var-sale" type="number" placeholder="0" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div></div></div>`).join('');}
 
-// ============================================================
-// ADMIN - VARIANTS
-// ============================================================
-function addVariantField(){
-  variantFields.push({});
-  renderVariantFields();
-}
-function removeVariantField(i){
-  if(variantFields.length<=1){showToast('❌ At least one variant required','error');return;}
-  variantFields.splice(i,1);
-  renderVariantFields();
-}
-function renderVariantFields(){
-  const c=document.getElementById('variantsContainer');
-  if(!c)return;
-  if(variantFields.length===0){variantFields.push({});}
-  c.innerHTML=variantFields.map((_,i)=>`
-    <div class="variant-group">
-      <div class="variant-header"><span>Variant ${i+1}</span><button onclick="removeVariantField(${i})">✕</button></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
-        <div><label style="font-size:9px;color:var(--text-light)">Color *</label><input class="var-color" placeholder="Red" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
-        <div><label style="font-size:9px;color:var(--text-light)">Code</label><input class="var-code" placeholder="#DC2626" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
-        <div><label style="font-size:9px;color:var(--text-light)">Image URL</label><input class="var-image-url" placeholder="https://i.imgur.com/xxx.jpg" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
-        <div><label style="font-size:9px;color:var(--text-light)">Sale %</label><input class="var-sale" type="number" placeholder="0" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
-      </div>
-    </div>
-  `).join('');
-}
-
-// ============================================================
-// ADMIN - ADD PRODUCT
-// ============================================================
 async function addProductWithUrls() {
-    if (!isAdminLoggedIn) {
-        showToast('⚠️ Admin login required', 'error');
-        return;
-    }
-
+    if (!isAdminLoggedIn) { showToast('⚠️ Admin login required', 'error'); return; }
     const name = document.getElementById('pName').value.trim();
     const price = parseInt(document.getElementById('pPrice').value);
     const category = document.getElementById('pCat').value;
@@ -1390,242 +1167,47 @@ async function addProductWithUrls() {
     const trending = document.getElementById('pTrending').checked;
     const featured = document.getElementById('pFeatured').checked;
     const hasTrouserVal = hasTrouser;
-
     if (!name) { showToast('❌ Product name is required', 'error'); return; }
     if (!price || price <= 0) { showToast('❌ Valid price is required', 'error'); return; }
     if (imageUrls.length === 0) { showToast('❌ Please add at least one image URL', 'error'); return; }
-
     const variantGroups = document.querySelectorAll('#variantsContainer .variant-group');
     const variants = {};
-    
-    if (variantGroups.length === 0) {
-        showToast('❌ Add at least one color variant', 'error');
-        return;
-    }
-
+    if (variantGroups.length === 0) { showToast('❌ Add at least one color variant', 'error'); return; }
     for (let i = 0; i < variantGroups.length; i++) {
         const color = variantGroups[i].querySelector('.var-color')?.value?.trim();
         const colorCode = variantGroups[i].querySelector('.var-code')?.value?.trim() || '#CCCCCC';
         const imageUrl = variantGroups[i].querySelector('.var-image-url')?.value?.trim() || '';
         const salePercent = parseInt(variantGroups[i].querySelector('.var-sale')?.value) || 0;
-        
-        if (!color) {
-            showToast(`❌ Color for variant ${i+1} is required`, 'error');
-            return;
-        }
-        
-        variants[i] = {
-            color: color,
-            colorCode: colorCode,
-            image: imageUrl || imageUrls[0] || '',
-            sale: salePercent,
-            sizes: allSizes
-        };
+        if (!color) { showToast(`❌ Color for variant ${i+1} is required`, 'error'); return; }
+        variants[i] = { color: color, colorCode: colorCode, image: imageUrl || imageUrls[0] || '', sale: salePercent, sizes: allSizes };
     }
-
     try {
-        const newProduct = {
-            id: Date.now(),
-            name: name,
-            cat: category,
-            gender: gender,
-            description: description || 'Premium quality sportswear',
-            originalPrice: price,
-            sale: sale,
-            trending: trending,
-            featured: featured,
-            hasTrouser: hasTrouserVal,
-            coupon: coupon || '',
-            images: imageUrls,
-            variants: variants,
-            reviews: [],
-            createdAt: new Date().toISOString()
-        };
-
+        const newProduct = { id: Date.now(), name: name, cat: category, gender: gender, description: description || 'Premium quality sportswear', originalPrice: price, sale: sale, trending: trending, featured: featured, hasTrouser: hasTrouserVal, coupon: coupon || '', images: imageUrls, variants: variants, reviews: [], createdAt: new Date().toISOString() };
         await database.ref(`products/${newProduct.id}`).set(newProduct);
-        
         showToast('✅ Product added successfully!');
-        
-        document.getElementById('pName').value = '';
-        document.getElementById('pPrice').value = '';
-        document.getElementById('pDesc').value = '';
-        document.getElementById('pCoupon').value = '';
-        document.getElementById('pSale').value = '';
-        document.getElementById('pTrending').checked = false;
-        document.getElementById('pFeatured').checked = false;
-        imageUrls = [];
-        variantFields = [];
-        renderUrlPreviews();
-        renderVariantFields();
-        
+        document.getElementById('pName').value = ''; document.getElementById('pPrice').value = ''; document.getElementById('pDesc').value = ''; document.getElementById('pCoupon').value = ''; document.getElementById('pSale').value = ''; document.getElementById('pTrending').checked = false; document.getElementById('pFeatured').checked = false;
+        imageUrls = []; variantFields = []; renderUrlPreviews(); renderVariantFields();
         loadProductsFromFirebase();
-
-    } catch (error) {
-        console.error('❌ Error:', error);
-        showToast('❌ Error: ' + error.message, 'error');
-    }
+    } catch (error) { console.error('❌ Error:', error); showToast('❌ Error: ' + error.message, 'error'); }
 }
 
-// ============================================================
-// ADMIN - DELETE PRODUCT
-// ============================================================
-async function deleteProduct(id){
-  if(!isAdminLoggedIn){showToast('Admin login required','error');return;}
-  if(!confirm('Delete this product permanently?'))return;
-  try{
-    await database.ref(`products/${id}`).remove();
-    showToast('🗑 Product deleted');
-    loadProductsFromFirebase();
-  }catch(e){showToast('Error: '+e.message,'error');}
-}
+async function deleteProduct(id){ if(!isAdminLoggedIn){showToast('Admin login required','error');return;} if(!confirm('Delete this product permanently?'))return; try{ await database.ref(`products/${id}`).remove(); showToast('🗑 Product deleted'); loadProductsFromFirebase(); }catch(e){showToast('Error: '+e.message,'error');} }
 
-// ============================================================
-// ADMIN - EDIT PRODUCT
-// ============================================================
-function openEditModal(id){
-  const p=products.find(p=>p.id===id);
-  if(!p){showToast('Product not found','error');return;}
-  
-  document.getElementById('editId').value=id;
-  document.getElementById('editName').value=p.name;
-  document.getElementById('editPrice').value=p.originalPrice;
-  document.getElementById('editCat').value=p.cat;
-  document.getElementById('editGender').value=p.gender;
-  document.getElementById('editDesc').value=p.description||'';
-  document.getElementById('editCoupon').value=p.coupon||'';
-  document.getElementById('editSale').value=p.sale||0;
-  document.getElementById('editTrending').checked=p.trending||false;
-  document.getElementById('editFeatured').checked=p.featured||false;
-  
-  editImageUrls = p.images?[...p.images]:[];
-  renderEditUrlPreviews();
-  
-  editVariantFields = Object.values(p.variants).map(v=>({
-    color:v.color,
-    colorCode:v.colorCode,
-    image:v.image,
-    sale:v.sale
-  }));
-  renderEditVariantFields();
-  
-  const et=document.getElementById('editHasTrouserToggle');
-  const es=document.getElementById('editTrouserStatus');
-  if(p.hasTrouser!==undefined?p.hasTrouser:true){
-    et.classList.add('active');es.textContent='Trouser Available';es.style.color='var(--gold)';
-  }else{
-    et.classList.remove('active');es.textContent='No Trouser';es.style.color='var(--text-light)';
-  }
-  
-  document.getElementById('editModal').style.display='flex';
-}
-
-function closeEditModal(){
-  document.getElementById('editModal').style.display='none';
-}
-
-function addEditImageUrl(){
-  const input=document.getElementById('editImageUrlInput');
-  const url=input.value.trim();
-  if(!url){showToast('Please enter a valid image URL','error');return;}
-  editImageUrls.push(url);
-  input.value='';
-  renderEditUrlPreviews();
-}
-function removeEditImageUrl(index){
-  editImageUrls.splice(index,1);
-  renderEditUrlPreviews();
-}
-function renderEditUrlPreviews(){
-  const c=document.getElementById('editUrlPreviewContainer');
-  if(!c)return;
-  if(editImageUrls.length===0){
-    c.innerHTML='<div style="font-size:11px;color:var(--text-light);padding:4px">No images added</div>';
-    return;
-  }
-  c.innerHTML=editImageUrls.map((url,i)=>`
-    <div class="url-item">
-      <span>${url.length>30?url.substring(0,30)+'...':url}</span>
-      <button onclick="removeEditImageUrl(${i})">✕</button>
-    </div>
-  `).join('');
-}
-
-function addEditVariantField(){
-  editVariantFields.push({});
-  renderEditVariantFields();
-}
-function removeEditVariantField(i){
-  if(editVariantFields.length<=1){showToast('❌ At least one variant required','error');return;}
-  editVariantFields.splice(i,1);
-  renderEditVariantFields();
-}
-function renderEditVariantFields(){
-  const c=document.getElementById('editVariantsContainer');
-  if(!c)return;
-  if(editVariantFields.length===0){editVariantFields.push({});}
-  c.innerHTML=editVariantFields.map((f,i)=>`
-    <div class="edit-variant-group">
-      <div class="variant-header"><span>Variant ${i+1}</span><button onclick="removeEditVariantField(${i})">✕</button></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
-        <div><label style="font-size:9px;color:var(--text-light)">Color *</label><input class="edit-var-color" value="${f.color||''}" placeholder="Red" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
-        <div><label style="font-size:9px;color:var(--text-light)">Code</label><input class="edit-var-code" value="${f.colorCode||''}" placeholder="#DC2626" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
-        <div><label style="font-size:9px;color:var(--text-light)">Image URL</label><input class="edit-var-image-url" value="${f.image||''}" placeholder="https://i.imgur.com/xxx.jpg" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
-        <div><label style="font-size:9px;color:var(--text-light)">Sale %</label><input class="edit-var-sale" type="number" value="${f.sale||0}" placeholder="0" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
-      </div>
-    </div>
-  `).join('');
-}
-
-async function saveEditedProduct(){
-  const id=parseInt(document.getElementById('editId').value);
-  const name=document.getElementById('editName').value.trim();
-  const price=parseInt(document.getElementById('editPrice').value);
-  const category=document.getElementById('editCat').value;
-  const gender=document.getElementById('editGender').value;
-  const description=document.getElementById('editDesc').value.trim();
-  const coupon=document.getElementById('editCoupon').value.trim();
-  const sale=parseInt(document.getElementById('editSale').value)||0;
-  const trending=document.getElementById('editTrending').checked;
-  const featured=document.getElementById('editFeatured').checked;
-  const hasTrouserVal=editHasTrouser;
-
-  if(!name){showToast('❌ Name is required','error');return;}
-  if(!price||price<=0){showToast('❌ Valid price is required','error');return;}
-  if(editImageUrls.length===0){showToast('❌ At least one image URL required','error');return;}
-
-  const variantGroups=document.querySelectorAll('#editVariantsContainer .edit-variant-group');
-  const variants={};
-  for(let i=0;i<variantGroups.length;i++){
-    const color=variantGroups[i].querySelector('.edit-var-color')?.value?.trim();
-    if(!color){showToast(`❌ Color for variant ${i+1} required`,'error');return;}
-    variants[i]={
-      color:color,
-      colorCode:variantGroups[i].querySelector('.edit-var-code')?.value?.trim()||'#CCCCCC',
-      image:variantGroups[i].querySelector('.edit-var-image-url')?.value?.trim()||'',
-      sale:parseInt(variantGroups[i].querySelector('.edit-var-sale')?.value)||0,
-      sizes:allSizes
-    };
-  }
-
-  try{
-    await database.ref(`products/${id}`).update({
-      name,cat:category,gender,description:description||'Premium quality sportswear',
-      originalPrice:price,sale,trending,featured,hasTrouser:hasTrouserVal,
-      coupon:coupon||'',images:editImageUrls,variants
-    });
-    showToast('✅ Product updated successfully!');
-    closeEditModal();
-    loadProductsFromFirebase();
-  }catch(e){showToast('❌ Error: '+e.message,'error');}
-}
+function openEditModal(id){ const p=products.find(p=>p.id===id); if(!p){showToast('Product not found','error');return;} document.getElementById('editId').value=id; document.getElementById('editName').value=p.name; document.getElementById('editPrice').value=p.originalPrice; document.getElementById('editCat').value=p.cat; document.getElementById('editGender').value=p.gender; document.getElementById('editDesc').value=p.description||''; document.getElementById('editCoupon').value=p.coupon||''; document.getElementById('editSale').value=p.sale||0; document.getElementById('editTrending').checked=p.trending||false; document.getElementById('editFeatured').checked=p.featured||false; editImageUrls = p.images?[...p.images]:[]; renderEditUrlPreviews(); editVariantFields = Object.values(p.variants).map(v=>({color:v.color,colorCode:v.colorCode,image:v.image,sale:v.sale})); renderEditVariantFields(); const et=document.getElementById('editHasTrouserToggle'); const es=document.getElementById('editTrouserStatus'); if(p.hasTrouser!==undefined?p.hasTrouser:true){ et.classList.add('active'); es.textContent='Trouser Available'; es.style.color='var(--gold)'; }else{ et.classList.remove('active'); es.textContent='No Trouser'; es.style.color='var(--text-light)'; } document.getElementById('editModal').style.display='flex'; }
+function closeEditModal(){ document.getElementById('editModal').style.display='none'; }
+function addEditImageUrl(){ const input=document.getElementById('editImageUrlInput'); const url=input.value.trim(); if(!url){showToast('Please enter a valid image URL','error');return;} editImageUrls.push(url); input.value=''; renderEditUrlPreviews(); }
+function removeEditImageUrl(index){ editImageUrls.splice(index,1); renderEditUrlPreviews(); }
+function renderEditUrlPreviews(){ const c=document.getElementById('editUrlPreviewContainer'); if(!c)return; if(editImageUrls.length===0){ c.innerHTML='<div style="font-size:11px;color:var(--text-light);padding:4px">No images added</div>'; return; } c.innerHTML=editImageUrls.map((url,i)=>`<div class="url-item"><span>${url.length>30?url.substring(0,30)+'...':url}</span><button onclick="removeEditImageUrl(${i})">✕</button></div>`).join(''); }
+function addEditVariantField(){ editVariantFields.push({}); renderEditVariantFields(); }
+function removeEditVariantField(i){ if(editVariantFields.length<=1){showToast('❌ At least one variant required','error');return;} editVariantFields.splice(i,1); renderEditVariantFields(); }
+function renderEditVariantFields(){ const c=document.getElementById('editVariantsContainer'); if(!c)return; if(editVariantFields.length===0){editVariantFields.push({});} c.innerHTML=editVariantFields.map((f,i)=>`<div class="edit-variant-group"><div class="variant-header"><span>Variant ${i+1}</span><button onclick="removeEditVariantField(${i})">✕</button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px"><div><label style="font-size:9px;color:var(--text-light)">Color *</label><input class="edit-var-color" value="${f.color||''}" placeholder="Red" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div><div><label style="font-size:9px;color:var(--text-light)">Code</label><input class="edit-var-code" value="${f.colorCode||''}" placeholder="#DC2626" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px"><div><label style="font-size:9px;color:var(--text-light)">Image URL</label><input class="edit-var-image-url" value="${f.image||''}" placeholder="https://i.imgur.com/xxx.jpg" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div><div><label style="font-size:9px;color:var(--text-light)">Sale %</label><input class="edit-var-sale" type="number" value="${f.sale||0}" placeholder="0" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div></div></div>`).join(''); }
+async function saveEditedProduct(){ const id=parseInt(document.getElementById('editId').value); const name=document.getElementById('editName').value.trim(); const price=parseInt(document.getElementById('editPrice').value); const category=document.getElementById('editCat').value; const gender=document.getElementById('editGender').value; const description=document.getElementById('editDesc').value.trim(); const coupon=document.getElementById('editCoupon').value.trim(); const sale=parseInt(document.getElementById('editSale').value)||0; const trending=document.getElementById('editTrending').checked; const featured=document.getElementById('editFeatured').checked; const hasTrouserVal=editHasTrouser; if(!name){showToast('❌ Name is required','error');return;} if(!price||price<=0){showToast('❌ Valid price is required','error');return;} if(editImageUrls.length===0){showToast('❌ At least one image URL required','error');return;} const variantGroups=document.querySelectorAll('#editVariantsContainer .edit-variant-group'); const variants={}; for(let i=0;i<variantGroups.length;i++){ const color=variantGroups[i].querySelector('.edit-var-color')?.value?.trim(); if(!color){showToast(`❌ Color for variant ${i+1} required`,'error');return;} variants[i]={color:color,colorCode:variantGroups[i].querySelector('.edit-var-code')?.value?.trim()||'#CCCCCC',image:variantGroups[i].querySelector('.edit-var-image-url')?.value?.trim()||'',sale:parseInt(variantGroups[i].querySelector('.edit-var-sale')?.value)||0,sizes:allSizes}; } try{ await database.ref(`products/${id}`).update({ name,cat:category,gender,description:description||'Premium quality sportswear', originalPrice:price,sale,trending,featured,hasTrouser:hasTrouserVal, coupon:coupon||'',images:editImageUrls,variants }); showToast('✅ Product updated successfully!'); closeEditModal(); loadProductsFromFirebase(); }catch(e){showToast('❌ Error: '+e.message,'error');} }
 
 // ============================================================
 // INIT
 // ============================================================
 window.addEventListener('load',function(){
-  navigateTo('home');
+  showHome();
   loadCart();
   loadWishlist();
   loadProductsFromFirebase();
