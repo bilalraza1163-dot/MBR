@@ -22,6 +22,7 @@ button{cursor:pointer;border:none;font-family:inherit}
 @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
 @keyframes pulseGold{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0.4)}50%{box-shadow:0 0 0 20px transparent}}
 @keyframes tickerMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes slideBg{0%{transform:scale(1)}100%{transform:scale(1.05)}}
 
 .top-ticker{background:var(--text);padding:6px 0;overflow:hidden;border-bottom:2px solid var(--gold);position:relative;z-index:1001}
 .top-ticker .ticker-track{display:flex;animation:tickerMove 30s linear infinite;white-space:nowrap}
@@ -55,17 +56,26 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .mobile-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1999;display:none}
 .mobile-overlay.active{display:block}
 
-.hero{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,var(--bg),var(--card));padding:80px 20px 40px;position:relative}
-.hero-logo{width:100px;height:100px;object-fit:contain;margin-bottom:15px;animation:float 3s ease-in-out infinite}
-.hero-eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase}
-.hero-title{font-family:'Bebas Neue';font-size:clamp(36px,7vw,70px);line-height:0.95;letter-spacing:3px;color:var(--text)}
-.hero-title span{background:linear-gradient(90deg,var(--gold),#E8D48B,var(--gold));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 3s linear infinite}
-.hero-sub{font-size:12px;letter-spacing:3px;color:var(--text-light);text-transform:uppercase;margin:15px 0}
+/* ===== HERO WITH BACKGROUND ===== */
+.hero{min-height:85vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:80px 20px 40px;overflow:hidden}
+.hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;animation:slideBg 20s ease-in-out infinite alternate}
+.hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:1}
+.hero-content{position:relative;z-index:2;max-width:800px;margin:0 auto}
+.hero-logo{width:100px;height:100px;object-fit:contain;margin-bottom:15px;animation:float 3s ease-in-out infinite;border-radius:50%;border:2px solid var(--gold);padding:4px;background:rgba(0,0,0,0.3)}
+.hero-eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:600}
+.hero-title{font-family:'Bebas Neue';font-size:clamp(36px,7vw,70px);line-height:0.95;letter-spacing:3px;color:#fff;text-shadow:0 4px 30px rgba(0,0,0,0.3)}
+.hero-title span{color:var(--gold)}
+.hero-sub{font-size:12px;letter-spacing:3px;color:rgba(255,255,255,0.8);text-transform:uppercase;margin:15px 0}
 .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn-primary{background:linear-gradient(135deg,var(--gold),var(--dark-gold));color:#000;padding:12px 28px;border-radius:4px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;transition:0.3s;border:none;cursor:pointer}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,0.3)}
-.btn-outline{background:transparent;color:var(--gold);padding:12px 28px;border-radius:4px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;border:1px solid var(--gold);transition:0.3s;cursor:pointer}
-.btn-outline:hover{background:rgba(201,168,76,0.08);transform:translateY(-2px)}
+.btn-hero-primary{background:linear-gradient(135deg,var(--gold),var(--dark-gold));color:#000;padding:12px 28px;border-radius:4px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;transition:0.3s;border:none;cursor:pointer}
+.btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,0.3)}
+.btn-hero-outline{background:transparent;color:#fff;padding:12px 28px;border-radius:4px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;border:1px solid var(--gold);transition:0.3s;cursor:pointer}
+.btn-hero-outline:hover{background:rgba(201,168,76,0.2);transform:translateY(-2px)}
+
+/* ===== HERO SLIDER DOTS ===== */
+.hero-dots{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:5}
+.hero-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.4);cursor:pointer;transition:0.3s;border:none}
+.hero-dot.active{background:var(--gold);width:30px;border-radius:5px}
 
 .stats{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:15px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
 .stat{text-align:center;padding:12px}
@@ -108,7 +118,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .gallery-thumb{width:70px;height:70px;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:0.3s}
 .gallery-thumb.active{border-color:var(--gold)}
 .gallery-thumb img{width:100%;height:100%;object-fit:cover}
-
 .size-group{margin:15px 0}
 .size-group-label{font-size:12px;font-weight:600;color:var(--text);letter-spacing:1px;margin-bottom:6px;display:block}
 .size-group-label i{color:var(--gold);margin-right:5px}
@@ -155,7 +164,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 
 .admin-panel-section{display:none;padding:40px 20px;max-width:1200px;margin:0 auto}
 .admin-panel-section.show{display:block}
-
 .admin-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:0}
 .admin-toggle{cursor:pointer;display:flex;justify-content:space-between;align-items:center}
 .admin-title{font-family:'Rajdhani';font-size:18px;font-weight:700;color:var(--gold);letter-spacing:2px}
@@ -189,6 +197,23 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .edit-variant-group .variant-header{display:flex;justify-content:space-between;align-items:center}
 .edit-variant-group .variant-header button{background:var(--red);color:#fff;border:none;padding:2px 8px;border-radius:4px;cursor:pointer}
 
+/* ===== HERO MANAGER ===== */
+.hero-manager-section{margin-top:40px;border-top:2px solid var(--border);padding-top:30px}
+.hero-manager-section h3{color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px}
+.hero-manager-section .hero-desc{color:var(--text-light);font-size:12px;margin-bottom:15px}
+.hero-card{background:var(--bg);padding:15px;border-radius:8px;margin-bottom:12px;border:1px solid var(--border)}
+.hero-card h4{color:var(--text);font-size:14px;margin-bottom:8px}
+.hero-card .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.hero-card .hero-grid-full{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px}
+.hero-card label{font-size:10px;color:var(--text-light);display:block;margin-bottom:3px}
+.hero-card input{width:100%;padding:8px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text)}
+.hero-card textarea{width:100%;padding:8px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text);resize:vertical;min-height:40px;font-family:inherit;font-size:12px}
+.hero-upload-box{border:2px dashed var(--border);border-radius:8px;padding:10px;text-align:center;cursor:pointer;transition:0.3s;margin:5px 0}
+.hero-upload-box:hover{border-color:var(--gold);background:rgba(201,168,76,0.05)}
+.hero-upload-box input[type="file"]{display:none}
+.hero-upload-box small{font-size:10px;color:var(--text-light)}
+.hero-save-btn{background:var(--gold);border:none;padding:12px 20px;border-radius:4px;cursor:pointer;color:#000;font-weight:600;width:100%;margin-top:10px}
+
 @media(max-width:768px){
 .nav-links{display:none}
 .hamburger{display:flex}
@@ -199,6 +224,8 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .section{padding:30px 16px}
 .cart-item{flex-wrap:wrap}
 .gallery-thumb{width:50px;height:50px}
+.hero-card .hero-grid{grid-template-columns:1fr}
+.hero-card .hero-grid-full{grid-template-columns:1fr}
 }
 @media(max-width:480px){
 .nav-brand{font-size:16px}
@@ -281,17 +308,24 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 <!-- ============================================================ -->
 <div id="homePage" class="page active">
 
-<!-- ===== HERO ===== -->
-<section class="hero">
-  <div>
+<!-- ===== HERO WITH DYNAMIC BACKGROUND ===== -->
+<section class="hero" id="heroSection">
+  <img class="hero-bg" id="heroBg" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600" alt="Background">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
     <img src="/mnt/user-data/uploads/zyron_logo.jpeg" alt="ZYRON" class="hero-logo" onerror="this.style.display='none'">
-    <div class="hero-eyebrow">Premium Quality Since Day One</div>
-    <h1 class="hero-title">ZYRON<br><span>Sportswear</span></h1>
-    <p class="hero-sub">Crafted for Champions — Made in Pakistan</p>
+    <div class="hero-eyebrow" id="heroEyebrow">Premium Quality Since Day One</div>
+    <h1 class="hero-title" id="heroTitle">ZYRON<br><span>Sportswear</span></h1>
+    <p class="hero-sub" id="heroSub">Crafted for Champions — Made in Pakistan</p>
     <div class="hero-btns">
-      <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView()">Shop Now</button>
-      <button class="btn-outline" onclick="openWA('Hi! I want bulk order.')">Bulk Order</button>
+      <button class="btn-hero-primary" id="heroBtn1" onclick="document.getElementById('products').scrollIntoView()">Shop Now</button>
+      <button class="btn-hero-outline" id="heroBtn2" onclick="openWA('Hi! I want bulk order.')">Bulk Order</button>
     </div>
+  </div>
+  <div class="hero-dots" id="heroDots">
+    <button class="hero-dot active" data-index="0" onclick="changeHeroSlide(0)"></button>
+    <button class="hero-dot" data-index="1" onclick="changeHeroSlide(1)"></button>
+    <button class="hero-dot" data-index="2" onclick="changeHeroSlide(2)"></button>
   </div>
 </section>
 
@@ -363,6 +397,77 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
     </div>
     
     <div class="admin-form" id="adminForm">
+      
+      <!-- ===== HERO MANAGER ===== -->
+      <div class="hero-manager-section">
+        <h3>🖼️ Hero Section Manager</h3>
+        <p class="hero-desc">Manage the hero section background images, text, and buttons. Add up to 3 slides.</p>
+        
+        <!-- Slide 1 -->
+        <div class="hero-card">
+          <h4>📸 Slide 1</h4>
+          <div class="hero-grid">
+            <div><label>Eyebrow Text</label><input id="h1Eyebrow" placeholder="Premium Quality Since Day One"></div>
+            <div><label>Title</label><input id="h1Title" placeholder="ZYRON Sportswear"></div>
+          </div>
+          <div style="margin-top:8px"><label>Subtitle</label><input id="h1Sub" placeholder="Crafted for Champions — Made in Pakistan"></div>
+          <div class="hero-grid-full">
+            <div><label>Button 1 Text</label><input id="h1Btn1" placeholder="Shop Now"></div>
+            <div><label>Button 2 Text</label><input id="h1Btn2" placeholder="Bulk Order"></div>
+            <div><label>Background Image URL</label><input id="h1Bg" placeholder="https://images.unsplash.com/xxx"></div>
+          </div>
+          <div class="hero-upload-box" onclick="document.getElementById('h1FileInput').click()">
+            <i class="fas fa-cloud-upload-alt" style="color:var(--gold)"></i>
+            <small>Or upload image</small>
+            <input type="file" id="h1FileInput" accept="image/*" onchange="uploadHeroImage(1, this)">
+          </div>
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="hero-card">
+          <h4>📸 Slide 2</h4>
+          <div class="hero-grid">
+            <div><label>Eyebrow Text</label><input id="h2Eyebrow" placeholder="Premium Quality Since Day One"></div>
+            <div><label>Title</label><input id="h2Title" placeholder="ZYRON Sportswear"></div>
+          </div>
+          <div style="margin-top:8px"><label>Subtitle</label><input id="h2Sub" placeholder="Crafted for Champions — Made in Pakistan"></div>
+          <div class="hero-grid-full">
+            <div><label>Button 1 Text</label><input id="h2Btn1" placeholder="Shop Now"></div>
+            <div><label>Button 2 Text</label><input id="h2Btn2" placeholder="Bulk Order"></div>
+            <div><label>Background Image URL</label><input id="h2Bg" placeholder="https://images.unsplash.com/xxx"></div>
+          </div>
+          <div class="hero-upload-box" onclick="document.getElementById('h2FileInput').click()">
+            <i class="fas fa-cloud-upload-alt" style="color:var(--gold)"></i>
+            <small>Or upload image</small>
+            <input type="file" id="h2FileInput" accept="image/*" onchange="uploadHeroImage(2, this)">
+          </div>
+        </div>
+        
+        <!-- Slide 3 -->
+        <div class="hero-card">
+          <h4>📸 Slide 3</h4>
+          <div class="hero-grid">
+            <div><label>Eyebrow Text</label><input id="h3Eyebrow" placeholder="Premium Quality Since Day One"></div>
+            <div><label>Title</label><input id="h3Title" placeholder="ZYRON Sportswear"></div>
+          </div>
+          <div style="margin-top:8px"><label>Subtitle</label><input id="h3Sub" placeholder="Crafted for Champions — Made in Pakistan"></div>
+          <div class="hero-grid-full">
+            <div><label>Button 1 Text</label><input id="h3Btn1" placeholder="Shop Now"></div>
+            <div><label>Button 2 Text</label><input id="h3Btn2" placeholder="Bulk Order"></div>
+            <div><label>Background Image URL</label><input id="h3Bg" placeholder="https://images.unsplash.com/xxx"></div>
+          </div>
+          <div class="hero-upload-box" onclick="document.getElementById('h3FileInput').click()">
+            <i class="fas fa-cloud-upload-alt" style="color:var(--gold)"></i>
+            <small>Or upload image</small>
+            <input type="file" id="h3FileInput" accept="image/*" onchange="uploadHeroImage(3, this)">
+          </div>
+        </div>
+        
+        <button class="hero-save-btn" onclick="saveHeroData()">💾 Save Hero Slider</button>
+      </div>
+      
+      <hr style="margin:40px 0;border-color:var(--border)">
+      
       <h3 style="color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px;margin-bottom:15px">➕ Add New Product</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <div><label style="font-size:10px;color:var(--text-light)">Name *</label><input id="pName" placeholder="Product name"></div>
@@ -528,6 +633,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 const auth = firebase.auth();
+const storage = firebase.storage();
 
 // ============================================================
 // GLOBALS
@@ -550,106 +656,61 @@ let variantFields = [];
 let editVariantFields = [];
 let imageUrls = [];
 let editImageUrls = [];
+let heroSlides = [];
+let currentHeroIndex = 0;
+let heroInterval = null;
 const allSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
 const ADMIN_PASSWORD = 'ZYRON@2025#Secure!';
 const catNames = {kit:'Sports Kit',trouser:'Trouser',shirt:'Shirt',jacket:'Jacket',tracksuit:'Tracksuit',summer:'Summer',winter:'Winter'};
 
 // ============================================================
-// NAVIGATION WITH BROWSER BACK BUTTON SUPPORT
+// DEFAULT HERO SLIDES
 // ============================================================
-let pageStack = ['home'];
-let currentPage = 'home';
+const defaultHeroSlides = [
+  {
+    eyebrow: 'Premium Quality Since Day One',
+    title: 'ZYRON Sportswear',
+    subtitle: 'Crafted for Champions — Made in Pakistan',
+    btn1: 'Shop Now',
+    btn2: 'Bulk Order',
+    bg: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600'
+  },
+  {
+    eyebrow: 'Winter Collection 2025',
+    title: 'Stay Warm in Style',
+    subtitle: 'Premium jackets & hoodies for the cold season',
+    btn1: 'Shop Winter',
+    btn2: 'Learn More',
+    bg: 'https://images.unsplash.com/photo-1517639493569-5666a7b2d6c3?w=1600'
+  },
+  {
+    eyebrow: 'Custom Team Kits',
+    title: 'Design Your Own Kit',
+    subtitle: 'Colors, logos, names, numbers — Made in Pakistan',
+    btn1: 'Customize Now',
+    btn2: 'Get Quote',
+    bg: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=1600'
+  }
+];
 
-function navigateTo(page, data) {
-    // If already on this page, don't push duplicate
-    if (currentPage === page && !data) return;
-    
-    // Push current page to history stack
-    if (currentPage !== 'product' || page !== 'home') {
-        // Only push if navigating to a different page
-        if (currentPage !== page) {
-            pageStack.push(currentPage);
-        }
-    }
-    
-    currentPage = page;
-    
-    // Update URL hash for back button support
-    let hash = page;
-    if (page === 'product' && data && data.id) {
-        hash = `product/${data.id}`;
-    }
-    window.history.pushState({ page: page, data: data || {} }, '', `#${hash}`);
-    
-    // Show the page
-    showPageDirect(page, data);
-}
-
-function showPageDirect(page, data) {
-    // Hide all pages
+// ============================================================
+// NAVIGATION
+// ============================================================
+function navigateTo(page) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    
-    // Show target page
     const target = document.getElementById(page + 'Page');
     if (target) target.classList.add('active');
-    
-    // Render content
-    if (page === 'home') {
-        renderProducts();
-        renderFeatured();
-        document.getElementById('adminPanelSection').classList.remove('show');
-    } else if (page === 'cart') {
-        renderCartPage();
-    } else if (page === 'checkout') {
-        renderCheckoutPage();
-    } else if (page === 'wishlist') {
-        renderWishlistPage();
-    } else if (page === 'blog') {
-        renderBlogPage();
-    } else if (page === 'product' && data && data.id) {
-        viewProductDirect(data.id);
-    }
-    
+    if (page === 'home') { renderProducts(); renderFeatured(); document.getElementById('adminPanelSection').classList.remove('show'); }
+    else if (page === 'cart') renderCartPage();
+    else if (page === 'checkout') renderCheckoutPage();
+    else if (page === 'wishlist') renderWishlistPage();
+    else if (page === 'blog') renderBlogPage();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Handle browser back button
-window.addEventListener('popstate', function(event) {
-    if (event.state && event.state.page) {
-        const page = event.state.page;
-        const data = event.state.data || {};
-        currentPage = page;
-        
-        // Update pageStack
-        if (pageStack.length > 0 && pageStack[pageStack.length - 1] !== page) {
-            // Remove current from stack if exists
-            const idx = pageStack.indexOf(page);
-            if (idx > -1) {
-                pageStack.splice(idx, 1);
-            }
-        }
-        
-        if (page === 'product' && data.id) {
-            viewProductDirect(data.id);
-        } else {
-            showPageDirect(page, data);
-        }
-    } else {
-        // If no state, go home
-        navigateTo('home', {});
-    }
-});
-
 function viewProduct(id) {
-    navigateTo('product', { id: id });
-}
-
-function viewProductDirect(id) {
     const p = products.find(p => p.id === id);
-    if (!p) {
-        navigateTo('home', {});
-        return;
-    }
+    if (!p) return;
     currentProduct = p;
     currentVariant = Object.values(p.variants)[0];
     selectedShirtSize = 'M';
@@ -658,6 +719,127 @@ function viewProductDirect(id) {
     renderProductDetail();
     document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
     document.getElementById('productPage').classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================================
+// HERO SLIDER FUNCTIONS
+// ============================================================
+function renderHeroSlides(slides) {
+    heroSlides = slides || defaultHeroSlides;
+    currentHeroIndex = 0;
+    updateHeroSlide(0);
+    startHeroAutoPlay();
+}
+
+function updateHeroSlide(index) {
+    const slide = heroSlides[index];
+    if (!slide) return;
+    document.getElementById('heroBg').src = slide.bg || defaultHeroSlides[index].bg;
+    document.getElementById('heroEyebrow').textContent = slide.eyebrow || defaultHeroSlides[index].eyebrow;
+    document.getElementById('heroTitle').innerHTML = slide.title || defaultHeroSlides[index].title;
+    document.getElementById('heroSub').textContent = slide.subtitle || defaultHeroSlides[index].subtitle;
+    document.getElementById('heroBtn1').textContent = slide.btn1 || defaultHeroSlides[index].btn1;
+    document.getElementById('heroBtn2').textContent = slide.btn2 || defaultHeroSlides[index].btn2;
+    document.querySelectorAll('.hero-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+    });
+}
+
+function changeHeroSlide(index) {
+    if (index < 0) index = heroSlides.length - 1;
+    if (index >= heroSlides.length) index = 0;
+    currentHeroIndex = index;
+    updateHeroSlide(index);
+    resetHeroAutoPlay();
+}
+
+function startHeroAutoPlay() {
+    stopHeroAutoPlay();
+    heroInterval = setInterval(() => {
+        changeHeroSlide(currentHeroIndex + 1);
+    }, 6000);
+}
+
+function stopHeroAutoPlay() {
+    if (heroInterval) clearInterval(heroInterval);
+    heroInterval = null;
+}
+
+function resetHeroAutoPlay() {
+    stopHeroAutoPlay();
+    startHeroAutoPlay();
+}
+
+// ============================================================
+// HERO MANAGER - UPLOAD IMAGE
+// ============================================================
+async function uploadHeroImage(slideNum, input) {
+    const file = input.files[0];
+    if (!file) return;
+    try {
+        showToast('⏳ Uploading image...', 'info');
+        const path = `hero/slide${slideNum}_${Date.now()}_${file.name}`;
+        const uploadTask = storage.ref(path).put(file);
+        const snapshot = await uploadTask;
+        const url = await snapshot.ref.getDownloadURL();
+        const bgInput = document.getElementById(`h${slideNum}Bg`);
+        if (bgInput) bgInput.value = url;
+        showToast('✅ Image uploaded!', 'success');
+    } catch (error) {
+        showToast('Error uploading: ' + error.message, 'error');
+    }
+}
+
+// ============================================================
+// HERO MANAGER - SAVE
+// ============================================================
+async function saveHeroData() {
+    if (!isAdminLoggedIn) {
+        showToast('Admin login required', 'error');
+        return;
+    }
+    const slides = [];
+    for (let i = 1; i <= 3; i++) {
+        slides.push({
+            eyebrow: document.getElementById(`h${i}Eyebrow`).value || defaultHeroSlides[i-1].eyebrow,
+            title: document.getElementById(`h${i}Title`).value || defaultHeroSlides[i-1].title,
+            subtitle: document.getElementById(`h${i}Sub`).value || defaultHeroSlides[i-1].subtitle,
+            btn1: document.getElementById(`h${i}Btn1`).value || defaultHeroSlides[i-1].btn1,
+            btn2: document.getElementById(`h${i}Btn2`).value || defaultHeroSlides[i-1].btn2,
+            bg: document.getElementById(`h${i}Bg`).value || defaultHeroSlides[i-1].bg
+        });
+    }
+    try {
+        await database.ref('heroSlides').set(slides);
+        showToast('✅ Hero slides saved!');
+        renderHeroSlides(slides);
+        loadHeroData();
+    } catch (error) {
+        showToast('Error: ' + error.message, 'error');
+    }
+}
+
+function loadHeroData() {
+    database.ref('heroSlides').on('value', (snap) => {
+        const data = snap.val();
+        if (data && data.length > 0) {
+            heroSlides = data;
+            // Fill admin form
+            data.forEach((slide, i) => {
+                const num = i + 1;
+                document.getElementById(`h${num}Eyebrow`).value = slide.eyebrow || '';
+                document.getElementById(`h${num}Title`).value = slide.title || '';
+                document.getElementById(`h${num}Sub`).value = slide.subtitle || '';
+                document.getElementById(`h${num}Btn1`).value = slide.btn1 || '';
+                document.getElementById(`h${num}Btn2`).value = slide.btn2 || '';
+                document.getElementById(`h${num}Bg`).value = slide.bg || '';
+            });
+            renderHeroSlides(data);
+        } else {
+            renderHeroSlides(defaultHeroSlides);
+        }
+    });
 }
 
 // ============================================================
@@ -1447,12 +1629,7 @@ window.addEventListener('load',function(){
   loadCart();
   loadWishlist();
   loadProductsFromFirebase();
-});
-
-// Also handle page refresh
-window.addEventListener('beforeunload', function() {
-  // Save cart before page unload
-  saveCart();
+  loadHeroData();
 });
 </script>
 </body>
