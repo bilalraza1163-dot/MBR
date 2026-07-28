@@ -17,7 +17,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 a{text-decoration:none;color:inherit}
 button{cursor:pointer;border:none;font-family:inherit}
 
-/* ===== ALL ANIMATIONS ===== */
 @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
@@ -154,7 +153,11 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .modal-close{position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:var(--text-light)}
 .modal-content input{width:100%;padding:12px;border:1px solid var(--border);border-radius:6px;margin-bottom:10px;background:var(--bg);color:var(--text)}
 
-.admin-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:30px}
+/* ===== ADMIN PANEL (Hidden by default) ===== */
+.admin-panel-section{display:none;padding:40px 20px;max-width:1200px;margin:0 auto}
+.admin-panel-section.show{display:block}
+
+.admin-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:0}
 .admin-toggle{cursor:pointer;display:flex;justify-content:space-between;align-items:center}
 .admin-title{font-family:'Rajdhani';font-size:18px;font-weight:700;color:var(--gold);letter-spacing:2px}
 .admin-password-box{background:var(--bg);padding:15px;border-radius:8px;margin-top:12px;text-align:center}
@@ -162,7 +165,7 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .admin-form input, .admin-form select{padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)}
 .image-url-input{display:flex;gap:8px;align-items:center;margin:4px 0}
 .image-url-input input{flex:1;padding:8px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text)}
-.image-url-input button{background:var(--red);color:#fff;border:none;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:11px}
+.image-url-input button{background:var(--gold);color:#000;border:none;padding:4px 14px;border-radius:4px;cursor:pointer;font-weight:600}
 .variant-group{background:var(--bg);padding:10px;border-radius:6px;margin-bottom:8px;border:1px solid var(--border)}
 .variant-group .variant-header{display:flex;justify-content:space-between;align-items:center}
 .variant-group .variant-header button{background:var(--red);color:#fff;border:none;padding:2px 8px;border-radius:4px;cursor:pointer}
@@ -173,6 +176,20 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .url-preview{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
 .url-preview .url-item{background:var(--bg);padding:4px 10px;border-radius:4px;font-size:11px;border:1px solid var(--border);display:flex;align-items:center;gap:6px}
 .url-preview .url-item button{background:var(--red);color:#fff;border:none;border-radius:50%;width:18px;height:18px;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center}
+.btn-edit{background:var(--gold);border:none;padding:2px 10px;border-radius:4px;cursor:pointer;font-size:10px;color:#000;margin-right:4px}
+.btn-delete{background:transparent;color:var(--red);border:1px solid var(--red);padding:2px 10px;border-radius:4px;cursor:pointer;font-size:10px}
+
+/* ===== EDIT MODAL ===== */
+.edit-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:20000;align-items:center;justify-content:center;backdrop-filter:blur(5px)}
+.edit-modal-content{background:var(--card);max-width:700px;width:95%;border-radius:12px;padding:25px;position:relative;max-height:90vh;overflow-y:auto}
+.edit-modal-content .modal-close{position:absolute;top:12px;right:16px;font-size:24px;cursor:pointer;color:var(--text-light)}
+.edit-modal-content input,.edit-modal-content select{padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)}
+.edit-url-input{display:flex;gap:8px;align-items:center;margin:4px 0}
+.edit-url-input input{flex:1;padding:8px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text)}
+.edit-url-input button{background:var(--gold);color:#000;border:none;padding:4px 14px;border-radius:4px;cursor:pointer;font-weight:600}
+.edit-variant-group{background:var(--bg);padding:10px;border-radius:6px;margin-bottom:8px;border:1px solid var(--border)}
+.edit-variant-group .variant-header{display:flex;justify-content:space-between;align-items:center}
+.edit-variant-group .variant-header button{background:var(--red);color:#fff;border:none;padding:2px 8px;border-radius:4px;cursor:pointer}
 
 @media(max-width:768px){
 .nav-links{display:none}
@@ -220,7 +237,7 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
   <a href="#" onclick="navigateTo('blog');return false">Blog</a>
   <a href="#custom">Custom</a>
   <a href="#" class="btn-wa" onclick="openWA('Hi! ZYRON inquiry.')">WhatsApp</a>
-  <button onclick="document.getElementById('adminPanelSection').scrollIntoView();return false" style="background:var(--gold);border:none;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:10px;font-weight:600;color:#000">Admin</button>
+  <button onclick="toggleAdminPanel()" style="background:var(--gold);border:none;padding:4px 14px;border-radius:4px;cursor:pointer;font-size:10px;font-weight:600;color:#000">Admin</button>
 </div>
 <div class="nav-icons">
   <button class="icon-btn" onclick="toggleTheme()" id="themeToggle"><i class="fas fa-moon"></i></button>
@@ -243,6 +260,7 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
   <a href="#" onclick="navigateTo('cart');toggleMobileMenu()">Cart</a>
   <a href="#" onclick="navigateTo('wishlist');toggleMobileMenu()">Wishlist</a>
   <a href="#" onclick="openWA('Hi! ZYRON inquiry.');toggleMobileMenu()"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  <a href="#" onclick="toggleAdminPanel();toggleMobileMenu()" style="color:var(--gold)">⚙ Admin Panel</a>
 </div>
 
 <!-- ===== AUTH MODAL ===== -->
@@ -328,14 +346,17 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
   </div>
 </div>
 
-<!-- ===== ADMIN PANEL ===== -->
-<div class="section" id="adminPanelSection">
+<!-- ============================================================ -->
+<!-- ===== ADMIN PANEL (Hidden by default, opens on button click) ===== -->
+<!-- ============================================================ -->
+<div class="admin-panel-section" id="adminPanelSection">
   <div class="admin-section">
-    <div class="admin-toggle" onclick="toggleAdminPanel()">
+    <div class="admin-toggle" onclick="toggleAdminForm()">
       <div class="admin-title">⚙ Admin Panel</div>
       <span id="adminIcon">▼</span>
     </div>
     
+    <!-- Password Box -->
     <div class="admin-password-box" id="adminPasswordBox">
       <h3 style="font-size:14px">🔐 Admin Access Required</h3>
       <p style="font-size:11px;color:var(--text-light);margin-bottom:8px">Enter admin password to access panel</p>
@@ -344,6 +365,7 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
       <div id="adminError" style="color:red;display:none;margin-top:8px;font-size:12px">Wrong password!</div>
     </div>
     
+    <!-- Admin Form -->
     <div class="admin-form" id="adminForm">
       <h3 style="color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px;margin-bottom:15px">➕ Add New Product</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
@@ -360,18 +382,18 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
       </div>
       <div style="margin-top:8px"><label style="font-size:10px;color:var(--text-light)">Description</label><input id="pDesc" placeholder="Description"></div>
       
-      <!-- ===== PRODUCT IMAGES (ONLY URL) ===== -->
+      <!-- Image URLs -->
       <div style="margin-top:8px">
         <label style="font-size:10px;color:var(--text-light)">Product Images (URLs)</label>
         <div id="imageUrlsContainer"></div>
         <div class="image-url-input">
           <input id="imageUrlInput" placeholder="https://i.imgur.com/xxx.jpg" style="flex:1;padding:8px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text)">
-          <button onclick="addImageUrl()" style="background:var(--gold);color:#000;border:none;padding:6px 14px;border-radius:4px;cursor:pointer;font-weight:600">Add</button>
+          <button onclick="addImageUrl()">Add</button>
         </div>
         <div class="url-preview" id="urlPreviewContainer"></div>
       </div>
 
-      <!-- ===== COLOR VARIANTS ===== -->
+      <!-- Variants -->
       <div style="margin-top:8px"><label style="font-size:10px;color:var(--text-light)">Color Variants</label>
         <div id="variantsContainer"></div>
         <button type="button" onclick="addVariantField()" style="background:transparent;border:1px dashed var(--gold);color:var(--gold);padding:6px;width:100%;border-radius:4px;margin:6px 0;cursor:pointer;font-size:11px">+ Add Color Variant</button>
@@ -398,6 +420,7 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
       
       <button onclick="addProductWithUrls()" style="margin-top:12px;background:var(--gold);border:none;padding:10px;border-radius:4px;cursor:pointer;color:#000;font-weight:600;width:100%">✅ Add Product</button>
 
+      <!-- Manage Products -->
       <h3 style="margin-top:25px;color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px">📋 Manage Products</h3>
       <div style="overflow-x:auto;margin-top:10px">
         <table style="width:100%;border-collapse:collapse;font-size:12px">
@@ -431,6 +454,66 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 <div id="checkoutPage" class="page"><div id="checkoutContainer"></div></div>
 <div id="wishlistPage" class="page"><div id="wishlistContainer"></div></div>
 <div id="blogPage" class="page"><div id="blogContainer"></div></div>
+
+<!-- ===== EDIT MODAL ===== -->
+<div class="edit-modal" id="editModal">
+  <div class="edit-modal-content">
+    <span class="modal-close" onclick="closeEditModal()">&times;</span>
+    <h3 style="color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px;margin-bottom:15px">✏️ Edit Product</h3>
+    <input type="hidden" id="editId">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div><label style="font-size:10px;color:var(--text-light)">Name</label><input id="editName" placeholder="Product name"></div>
+      <div><label style="font-size:10px;color:var(--text-light)">Price</label><input id="editPrice" type="number" placeholder="Price"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px">
+      <div><label style="font-size:10px;color:var(--text-light)">Category</label>
+        <select id="editCat"><option value="kit">Sports Kit</option><option value="trouser">Trouser</option><option value="shirt">Shirt</option><option value="jacket">Jacket</option><option value="tracksuit">Tracksuit</option><option value="summer">Summer</option><option value="winter">Winter</option></select>
+      </div>
+      <div><label style="font-size:10px;color:var(--text-light)">Gender</label>
+        <select id="editGender"><option value="men">Men</option><option value="women">Women</option><option value="boys">Boys</option><option value="girls">Girls</option><option value="uni">Unisex</option></select>
+      </div>
+    </div>
+    <div style="margin-top:8px"><label style="font-size:10px;color:var(--text-light)">Description</label><input id="editDesc" placeholder="Description"></div>
+    
+    <!-- Edit Image URLs -->
+    <div style="margin-top:8px">
+      <label style="font-size:10px;color:var(--text-light)">Product Images (URLs)</label>
+      <div id="editImageUrlsContainer"></div>
+      <div class="edit-url-input">
+        <input id="editImageUrlInput" placeholder="https://i.imgur.com/xxx.jpg" style="flex:1;padding:8px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text)">
+        <button onclick="addEditImageUrl()">Add</button>
+      </div>
+      <div class="url-preview" id="editUrlPreviewContainer"></div>
+    </div>
+
+    <!-- Edit Variants -->
+    <div style="margin-top:8px"><label style="font-size:10px;color:var(--text-light)">Color Variants</label>
+      <div id="editVariantsContainer"></div>
+      <button type="button" onclick="addEditVariantField()" style="background:transparent;border:1px dashed var(--gold);color:var(--gold);padding:6px;width:100%;border-radius:4px;margin:6px 0;cursor:pointer;font-size:11px">+ Add Color Variant</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px">
+      <div><label style="font-size:10px;color:var(--text-light)">Sale %</label><input id="editSale" type="number" placeholder="0"></div>
+      <div><label style="font-size:10px;color:var(--text-light)">Coupon</label><input id="editCoupon" placeholder="ZYRON10"></div>
+      <div style="display:flex;align-items:center;gap:10px;padding-top:12px">
+        <label style="font-size:10px;color:var(--text-light)">Trending</label><input type="checkbox" id="editTrending">
+        <label style="font-size:10px;color:var(--text-light)">Featured</label><input type="checkbox" id="editFeatured">
+      </div>
+    </div>
+
+    <div style="margin-top:8px;padding:10px;background:var(--bg);border-radius:6px;border:1px solid var(--border)">
+      <label style="font-size:12px;font-weight:600;color:var(--text)">👖 Trouser Size Option</label>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:4px">
+        <div class="toggle-switch active" id="editHasTrouserToggle" onclick="toggleEditHasTrouser()">
+          <div class="toggle-slider"></div>
+        </div>
+        <span id="editTrouserStatus" style="font-size:12px;font-weight:600;color:var(--gold)">Trouser Available</span>
+      </div>
+    </div>
+
+    <button onclick="saveEditedProduct()" style="margin-top:12px;background:var(--gold);border:none;padding:10px;border-radius:4px;cursor:pointer;color:#000;font-weight:600;width:100%">💾 Save Changes</button>
+  </div>
+</div>
 
 <!-- ===== TOAST ===== -->
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i> <span id="toastMsg">Success!</span></div>
@@ -471,8 +554,11 @@ let currentQty = 1;
 let selectedShirtSize = 'M';
 let selectedTrouserSize = 'M';
 let hasTrouser = true;
+let editHasTrouser = true;
 let variantFields = [];
+let editVariantFields = [];
 let imageUrls = [];
+let editImageUrls = [];
 const allSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
 const ADMIN_PASSWORD = 'ZYRON@2025#Secure!';
 const catNames = {kit:'Sports Kit',trouser:'Trouser',shirt:'Shirt',jacket:'Jacket',tracksuit:'Tracksuit',summer:'Summer',winter:'Winter'};
@@ -526,6 +612,13 @@ function toggleHasTrouser(){
   if(hasTrouser){t.classList.add('active');s.textContent='Trouser Available';s.style.color='var(--gold)';}
   else{t.classList.remove('active');s.textContent='No Trouser';s.style.color='var(--text-light)';}
 }
+function toggleEditHasTrouser(){
+  editHasTrouser=!editHasTrouser;
+  const t=document.getElementById('editHasTrouserToggle');
+  const s=document.getElementById('editTrouserStatus');
+  if(editHasTrouser){t.classList.add('active');s.textContent='Trouser Available';s.style.color='var(--gold)';}
+  else{t.classList.remove('active');s.textContent='No Trouser';s.style.color='var(--text-light)';}
+}
 
 // ============================================================
 // NAVIGATION
@@ -559,20 +652,29 @@ function toggleMobileMenu(){
 }
 
 // ============================================================
-// ADMIN - PASSWORD
+// ADMIN PANEL - TOGGLE
 // ============================================================
 function toggleAdminPanel(){
-  if(isAdminLoggedIn){
-    const f=document.getElementById('adminForm');
-    const ic=document.getElementById('adminIcon');
-    if(f.style.display==='block'){f.style.display='none';ic.innerText='▼';}else{f.style.display='block';ic.innerText='▲';renderManage();}
-  } else {
+  const panel=document.getElementById('adminPanelSection');
+  panel.classList.toggle('show');
+  if(panel.classList.contains('show')){
     document.getElementById('adminPasswordBox').style.display='block';
     document.getElementById('adminForm').style.display='none';
     document.getElementById('adminError').style.display='none';
   }
 }
 
+function toggleAdminForm(){
+  if(isAdminLoggedIn){
+    const f=document.getElementById('adminForm');
+    const ic=document.getElementById('adminIcon');
+    if(f.style.display==='block'){f.style.display='none';ic.innerText='▼';}else{f.style.display='block';ic.innerText='▲';renderManage();}
+  }
+}
+
+// ============================================================
+// ADMIN - PASSWORD
+// ============================================================
 function checkAdminPassword(){
   const inputPassword = document.getElementById('adminPassword').value;
   const errorEl = document.getElementById('adminError');
@@ -593,6 +695,9 @@ function checkAdminPassword(){
   }
 }
 
+// ============================================================
+// ADMIN - MANAGE PRODUCTS (With Edit Button)
+// ============================================================
 function renderManage(){
   if(!isAdminLoggedIn)return;
   const tb=document.getElementById('manageBody');
@@ -603,7 +708,14 @@ function renderManage(){
   }
   tb.innerHTML=products.map(p=>{
     const v=Object.values(p.variants)[0];
-    return `<tr><td style="padding:6px;border-bottom:1px solid var(--border)"><strong style="color:var(--text)">${p.name}</strong></td><td style="padding:6px;border-bottom:1px solid var(--border)">${catNames[p.cat]||p.cat}</td><td style="padding:6px;border-bottom:1px solid var(--border)"><button onclick="deleteProduct(${p.id})" style="background:transparent;color:var(--red);border:1px solid var(--red);padding:2px 10px;border-radius:4px;cursor:pointer;font-size:10px">Delete</button></td></tr>`;
+    return `<tr>
+      <td style="padding:6px;border-bottom:1px solid var(--border)"><strong style="color:var(--text)">${p.name}</strong></td>
+      <td style="padding:6px;border-bottom:1px solid var(--border)">${catNames[p.cat]||p.cat}</td>
+      <td style="padding:6px;border-bottom:1px solid var(--border)">
+        <button class="btn-edit" onclick="openEditModal(${p.id})">✏️ Edit</button>
+        <button class="btn-delete" onclick="deleteProduct(${p.id})">🗑 Delete</button>
+      </td>
+    </tr>`;
   }).join('');
 }
 
@@ -959,12 +1071,10 @@ function addImageUrl(){
   input.value='';
   renderUrlPreviews();
 }
-
 function removeImageUrl(index){
   imageUrls.splice(index,1);
   renderUrlPreviews();
 }
-
 function renderUrlPreviews(){
   const c=document.getElementById('urlPreviewContainer');
   if(!c)return;
@@ -1012,7 +1122,7 @@ function renderVariantFields(){
 }
 
 // ============================================================
-// ADMIN - ADD PRODUCT (ONLY URLS - NO UPLOAD)
+// ADMIN - ADD PRODUCT (ONLY URLS)
 // ============================================================
 async function addProductWithUrls() {
     if (!isAdminLoggedIn) {
@@ -1084,9 +1194,8 @@ async function addProductWithUrls() {
 
         await database.ref(`products/${newProduct.id}`).set(newProduct);
         
-        showToast('✅ Product added successfully! (1 second!)');
+        showToast('✅ Product added successfully!');
         
-        // Reset form
         document.getElementById('pName').value = '';
         document.getElementById('pPrice').value = '';
         document.getElementById('pDesc').value = '';
@@ -1118,6 +1227,160 @@ async function deleteProduct(id){
     showToast('🗑 Product deleted');
     loadProductsFromFirebase();
   }catch(e){showToast('Error: '+e.message,'error');}
+}
+
+// ============================================================
+// ADMIN - EDIT PRODUCT (OPEN MODAL)
+// ============================================================
+function openEditModal(id){
+  const p=products.find(p=>p.id===id);
+  if(!p){showToast('Product not found','error');return;}
+  
+  document.getElementById('editId').value=id;
+  document.getElementById('editName').value=p.name;
+  document.getElementById('editPrice').value=p.originalPrice;
+  document.getElementById('editCat').value=p.cat;
+  document.getElementById('editGender').value=p.gender;
+  document.getElementById('editDesc').value=p.description||'';
+  document.getElementById('editCoupon').value=p.coupon||'';
+  document.getElementById('editSale').value=p.sale||0;
+  document.getElementById('editTrending').checked=p.trending||false;
+  document.getElementById('editFeatured').checked=p.featured||false;
+  
+  // Edit images
+  editImageUrls = p.images?[...p.images]:[];
+  renderEditUrlPreviews();
+  
+  // Edit variants
+  editVariantFields = Object.values(p.variants).map(v=>({
+    color:v.color,
+    colorCode:v.colorCode,
+    image:v.image,
+    sale:v.sale
+  }));
+  renderEditVariantFields();
+  
+  // Edit trouser toggle
+  const et=document.getElementById('editHasTrouserToggle');
+  const es=document.getElementById('editTrouserStatus');
+  if(p.hasTrouser!==undefined?p.hasTrouser:true){
+    et.classList.add('active');es.textContent='Trouser Available';es.style.color='var(--gold)';
+  }else{
+    et.classList.remove('active');es.textContent='No Trouser';es.style.color='var(--text-light)';
+  }
+  
+  document.getElementById('editModal').style.display='flex';
+}
+
+function closeEditModal(){
+  document.getElementById('editModal').style.display='none';
+}
+
+// ============================================================
+// ADMIN - EDIT IMAGE URLS
+// ============================================================
+function addEditImageUrl(){
+  const input=document.getElementById('editImageUrlInput');
+  const url=input.value.trim();
+  if(!url){showToast('Please enter a valid image URL','error');return;}
+  editImageUrls.push(url);
+  input.value='';
+  renderEditUrlPreviews();
+}
+function removeEditImageUrl(index){
+  editImageUrls.splice(index,1);
+  renderEditUrlPreviews();
+}
+function renderEditUrlPreviews(){
+  const c=document.getElementById('editUrlPreviewContainer');
+  if(!c)return;
+  if(editImageUrls.length===0){
+    c.innerHTML='<div style="font-size:11px;color:var(--text-light);padding:4px">No images added</div>';
+    return;
+  }
+  c.innerHTML=editImageUrls.map((url,i)=>`
+    <div class="url-item">
+      <span>${url.length>30?url.substring(0,30)+'...':url}</span>
+      <button onclick="removeEditImageUrl(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// ADMIN - EDIT VARIANTS
+// ============================================================
+function addEditVariantField(){
+  editVariantFields.push({});
+  renderEditVariantFields();
+}
+function removeEditVariantField(i){
+  if(editVariantFields.length<=1){showToast('❌ At least one variant required','error');return;}
+  editVariantFields.splice(i,1);
+  renderEditVariantFields();
+}
+function renderEditVariantFields(){
+  const c=document.getElementById('editVariantsContainer');
+  if(!c)return;
+  if(editVariantFields.length===0){editVariantFields.push({});}
+  c.innerHTML=editVariantFields.map((f,i)=>`
+    <div class="edit-variant-group">
+      <div class="variant-header"><span>Variant ${i+1}</span><button onclick="removeEditVariantField(${i})">✕</button></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
+        <div><label style="font-size:9px;color:var(--text-light)">Color *</label><input class="edit-var-color" value="${f.color||''}" placeholder="Red" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
+        <div><label style="font-size:9px;color:var(--text-light)">Code</label><input class="edit-var-code" value="${f.colorCode||''}" placeholder="#DC2626" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
+        <div><label style="font-size:9px;color:var(--text-light)">Image URL</label><input class="edit-var-image-url" value="${f.image||''}" placeholder="https://i.imgur.com/xxx.jpg" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
+        <div><label style="font-size:9px;color:var(--text-light)">Sale %</label><input class="edit-var-sale" type="number" value="${f.sale||0}" placeholder="0" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// ADMIN - SAVE EDITED PRODUCT
+// ============================================================
+async function saveEditedProduct(){
+  const id=parseInt(document.getElementById('editId').value);
+  const name=document.getElementById('editName').value.trim();
+  const price=parseInt(document.getElementById('editPrice').value);
+  const category=document.getElementById('editCat').value;
+  const gender=document.getElementById('editGender').value;
+  const description=document.getElementById('editDesc').value.trim();
+  const coupon=document.getElementById('editCoupon').value.trim();
+  const sale=parseInt(document.getElementById('editSale').value)||0;
+  const trending=document.getElementById('editTrending').checked;
+  const featured=document.getElementById('editFeatured').checked;
+  const hasTrouserVal=editHasTrouser;
+
+  if(!name){showToast('❌ Name is required','error');return;}
+  if(!price||price<=0){showToast('❌ Valid price is required','error');return;}
+  if(editImageUrls.length===0){showToast('❌ At least one image URL required','error');return;}
+
+  const variantGroups=document.querySelectorAll('#editVariantsContainer .edit-variant-group');
+  const variants={};
+  for(let i=0;i<variantGroups.length;i++){
+    const color=variantGroups[i].querySelector('.edit-var-color')?.value?.trim();
+    if(!color){showToast(`❌ Color for variant ${i+1} required`,'error');return;}
+    variants[i]={
+      color:color,
+      colorCode:variantGroups[i].querySelector('.edit-var-code')?.value?.trim()||'#CCCCCC',
+      image:variantGroups[i].querySelector('.edit-var-image-url')?.value?.trim()||'',
+      sale:parseInt(variantGroups[i].querySelector('.edit-var-sale')?.value)||0,
+      sizes:allSizes
+    };
+  }
+
+  try{
+    await database.ref(`products/${id}`).update({
+      name,cat:category,gender,description:description||'Premium quality sportswear',
+      originalPrice:price,sale,trending,featured,hasTrouser:hasTrouserVal,
+      coupon:coupon||'',images:editImageUrls,variants
+    });
+    showToast('✅ Product updated successfully!');
+    closeEditModal();
+    loadProductsFromFirebase();
+  }catch(e){showToast('❌ Error: '+e.message,'error');}
 }
 
 // ============================================================
