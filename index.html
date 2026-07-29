@@ -59,7 +59,7 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 
 .hero{min-height:85vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:80px 20px 40px;overflow:hidden}
 .hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;animation:slideBg 20s ease-in-out infinite alternate}
-.hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:1}
+.hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:1}
 .hero-content{position:relative;z-index:2;max-width:800px;margin:0 auto}
 .hero-logo{width:100px;height:100px;object-fit:contain;margin-bottom:15px;animation:float 3s ease-in-out infinite;border-radius:50%;border:2px solid var(--gold);padding:4px;background:rgba(0,0,0,0.3)}
 .hero-eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;font-weight:600}
@@ -195,21 +195,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .edit-variant-group .variant-header{display:flex;justify-content:space-between;align-items:center}
 .edit-variant-group .variant-header button{background:var(--red);color:#fff;border:none;padding:2px 8px;border-radius:4px;cursor:pointer}
 
-.hero-manager-section{margin-top:40px;border-top:2px solid var(--border);padding-top:30px}
-.hero-manager-section h3{color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px}
-.hero-manager-section .hero-desc{color:var(--text-light);font-size:12px;margin-bottom:15px}
-.hero-card{background:var(--bg);padding:15px;border-radius:8px;margin-bottom:12px;border:1px solid var(--border)}
-.hero-card h4{color:var(--text);font-size:14px;margin-bottom:8px}
-.hero-card .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
-.hero-card .hero-grid-full{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px}
-.hero-card label{font-size:10px;color:var(--text-light);display:block;margin-bottom:3px}
-.hero-card input{width:100%;padding:8px;border:1px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text)}
-.hero-upload-box{border:2px dashed var(--border);border-radius:8px;padding:10px;text-align:center;cursor:pointer;transition:0.3s;margin:5px 0}
-.hero-upload-box:hover{border-color:var(--gold);background:rgba(201,168,76,0.05)}
-.hero-upload-box input[type="file"]{display:none}
-.hero-upload-box small{font-size:10px;color:var(--text-light)}
-.hero-save-btn{background:var(--gold);border:none;padding:12px 20px;border-radius:4px;cursor:pointer;color:#000;font-weight:600;width:100%;margin-top:10px}
-
 @media(max-width:768px){
 .nav-links{display:none}
 .hamburger{display:flex}
@@ -220,8 +205,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .section{padding:30px 16px}
 .cart-item{flex-wrap:wrap}
 .gallery-thumb{width:50px;height:50px}
-.hero-card .hero-grid{grid-template-columns:1fr}
-.hero-card .hero-grid-full{grid-template-columns:1fr}
 }
 @media(max-width:480px){
 .nav-brand{font-size:16px}
@@ -253,18 +236,18 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
   <div class="nav-brand">ZYRON <span>Sportswear Manufacturing</span></div>
 </div>
 <div class="nav-links">
-  <a href="#" onclick="showHome();return false">Home</a>
-  <a href="#" onclick="showHome();document.getElementById('products').scrollIntoView();return false">Products</a>
-  <a href="#" onclick="showPage('blog');return false">Blog</a>
-  <a href="#custom">Custom</a>
+  <a href="#" onclick="navigateTo('home');return false">Home</a>
+  <a href="#" onclick="navigateTo('home');document.getElementById('products').scrollIntoView();return false">Products</a>
+  <a href="#" onclick="navigateTo('blog');return false">Blog</a>
+  <a href="#custom" onclick="navigateTo('home');setTimeout(()=>document.getElementById('custom').scrollIntoView(),100);return false">Custom</a>
   <a href="#" class="btn-wa" onclick="openWA('Hi! ZYRON inquiry.')">WhatsApp</a>
   <button onclick="toggleAdminPanel()" style="background:var(--gold);border:none;padding:4px 14px;border-radius:4px;cursor:pointer;font-size:10px;font-weight:600;color:#000">Admin</button>
 </div>
 <div class="nav-icons">
   <button class="icon-btn" onclick="toggleTheme()" id="themeToggle"><i class="fas fa-moon"></i></button>
   <button class="icon-btn" onclick="toggleLang()" id="langToggle">🇬🇧</button>
-  <button class="icon-btn" onclick="showPage('wishlist')"><i class="fas fa-heart"></i><span class="badge" id="wishlistCount">0</span></button>
-  <button class="icon-btn" onclick="showPage('cart')"><i class="fas fa-shopping-bag"></i><span class="badge" id="cartCount">0</span></button>
+  <button class="icon-btn" onclick="navigateTo('wishlist')"><i class="fas fa-heart"></i><span class="badge" id="wishlistCount">0</span></button>
+  <button class="icon-btn" onclick="navigateTo('cart')"><i class="fas fa-shopping-bag"></i><span class="badge" id="cartCount">0</span></button>
   <button class="icon-btn" onclick="toggleAuthModal()"><i class="fas fa-user"></i></button>
   <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
 </div>
@@ -274,12 +257,12 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
 <div class="mobile-menu" id="mobileMenu">
   <button class="close-btn" onclick="toggleMobileMenu()">&times;</button>
-  <a href="#" onclick="showHome();toggleMobileMenu()">Home</a>
-  <a href="#" onclick="showHome();document.getElementById('products').scrollIntoView();toggleMobileMenu()">Products</a>
-  <a href="#" onclick="showPage('blog');toggleMobileMenu()">Blog</a>
-  <a href="#custom" onclick="toggleMobileMenu()">Custom</a>
-  <a href="#" onclick="showPage('cart');toggleMobileMenu()">Cart</a>
-  <a href="#" onclick="showPage('wishlist');toggleMobileMenu()">Wishlist</a>
+  <a href="#" onclick="navigateTo('home');toggleMobileMenu()">Home</a>
+  <a href="#" onclick="navigateTo('home');document.getElementById('products').scrollIntoView();toggleMobileMenu()">Products</a>
+  <a href="#" onclick="navigateTo('blog');toggleMobileMenu()">Blog</a>
+  <a href="#" onclick="navigateTo('home');setTimeout(()=>document.getElementById('custom').scrollIntoView(),100);toggleMobileMenu()">Custom</a>
+  <a href="#" onclick="navigateTo('cart');toggleMobileMenu()">Cart</a>
+  <a href="#" onclick="navigateTo('wishlist');toggleMobileMenu()">Wishlist</a>
   <a href="#" onclick="openWA('Hi! ZYRON inquiry.');toggleMobileMenu()"><i class="fab fa-whatsapp"></i> WhatsApp</a>
   <a href="#" onclick="toggleAdminPanel();toggleMobileMenu()" style="color:var(--gold)">⚙ Admin Panel</a>
 </div>
@@ -304,9 +287,9 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 <!-- ============================================================ -->
 <div id="homePage" class="page active">
 
-<!-- ===== HERO WITH DYNAMIC BACKGROUND ===== -->
+<!-- ===== HERO WITH 3 SLIDES ===== -->
 <section class="hero" id="heroSection">
-  <img class="hero-bg" id="heroBg" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600" alt="Background">
+  <img class="hero-bg" id="heroBg" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80" alt="Background">
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <img src="/mnt/user-data/uploads/zyron_logo.jpeg" alt="ZYRON" class="hero-logo" onerror="this.style.display='none'">
@@ -393,74 +376,6 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
     </div>
     
     <div class="admin-form" id="adminForm">
-      
-      <!-- ===== HERO MANAGER ===== -->
-      <div class="hero-manager-section">
-        <h3>🖼️ Hero Section Manager</h3>
-        <p class="hero-desc">Manage the hero section background images, text, and buttons. Add up to 3 slides.</p>
-        
-        <div class="hero-card">
-          <h4>📸 Slide 1</h4>
-          <div class="hero-grid">
-            <div><label>Eyebrow Text</label><input id="h1Eyebrow" placeholder="Premium Quality Since Day One"></div>
-            <div><label>Title</label><input id="h1Title" placeholder="ZYRON Sportswear"></div>
-          </div>
-          <div style="margin-top:8px"><label>Subtitle</label><input id="h1Sub" placeholder="Crafted for Champions — Made in Pakistan"></div>
-          <div class="hero-grid-full">
-            <div><label>Button 1 Text</label><input id="h1Btn1" placeholder="Shop Now"></div>
-            <div><label>Button 2 Text</label><input id="h1Btn2" placeholder="Bulk Order"></div>
-            <div><label>Background Image URL</label><input id="h1Bg" placeholder="https://images.unsplash.com/xxx"></div>
-          </div>
-          <div class="hero-upload-box" onclick="document.getElementById('h1FileInput').click()">
-            <i class="fas fa-cloud-upload-alt" style="color:var(--gold)"></i>
-            <small>Or upload image</small>
-            <input type="file" id="h1FileInput" accept="image/*" onchange="uploadHeroImage(1, this)">
-          </div>
-        </div>
-        
-        <div class="hero-card">
-          <h4>📸 Slide 2</h4>
-          <div class="hero-grid">
-            <div><label>Eyebrow Text</label><input id="h2Eyebrow" placeholder="Premium Quality Since Day One"></div>
-            <div><label>Title</label><input id="h2Title" placeholder="ZYRON Sportswear"></div>
-          </div>
-          <div style="margin-top:8px"><label>Subtitle</label><input id="h2Sub" placeholder="Crafted for Champions — Made in Pakistan"></div>
-          <div class="hero-grid-full">
-            <div><label>Button 1 Text</label><input id="h2Btn1" placeholder="Shop Now"></div>
-            <div><label>Button 2 Text</label><input id="h2Btn2" placeholder="Bulk Order"></div>
-            <div><label>Background Image URL</label><input id="h2Bg" placeholder="https://images.unsplash.com/xxx"></div>
-          </div>
-          <div class="hero-upload-box" onclick="document.getElementById('h2FileInput').click()">
-            <i class="fas fa-cloud-upload-alt" style="color:var(--gold)"></i>
-            <small>Or upload image</small>
-            <input type="file" id="h2FileInput" accept="image/*" onchange="uploadHeroImage(2, this)">
-          </div>
-        </div>
-        
-        <div class="hero-card">
-          <h4>📸 Slide 3</h4>
-          <div class="hero-grid">
-            <div><label>Eyebrow Text</label><input id="h3Eyebrow" placeholder="Premium Quality Since Day One"></div>
-            <div><label>Title</label><input id="h3Title" placeholder="ZYRON Sportswear"></div>
-          </div>
-          <div style="margin-top:8px"><label>Subtitle</label><input id="h3Sub" placeholder="Crafted for Champions — Made in Pakistan"></div>
-          <div class="hero-grid-full">
-            <div><label>Button 1 Text</label><input id="h3Btn1" placeholder="Shop Now"></div>
-            <div><label>Button 2 Text</label><input id="h3Btn2" placeholder="Bulk Order"></div>
-            <div><label>Background Image URL</label><input id="h3Bg" placeholder="https://images.unsplash.com/xxx"></div>
-          </div>
-          <div class="hero-upload-box" onclick="document.getElementById('h3FileInput').click()">
-            <i class="fas fa-cloud-upload-alt" style="color:var(--gold)"></i>
-            <small>Or upload image</small>
-            <input type="file" id="h3FileInput" accept="image/*" onchange="uploadHeroImage(3, this)">
-          </div>
-        </div>
-        
-        <button class="hero-save-btn" onclick="saveHeroData()">💾 Save Hero Slider</button>
-      </div>
-      
-      <hr style="margin:40px 0;border-color:var(--border)">
-      
       <h3 style="color:var(--gold);font-family:'Bebas Neue';letter-spacing:2px;margin-bottom:15px">➕ Add New Product</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
         <div><label style="font-size:10px;color:var(--text-light)">Name *</label><input id="pName" placeholder="Product name"></div>
@@ -528,9 +443,9 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
   <div style="font-family:'Bebas Neue';font-size:24px;letter-spacing:3px;color:var(--text)">ZYRON</div>
   <div style="font-size:10px;letter-spacing:2px;color:var(--text-light);margin-bottom:15px">Sportswear Manufacturing — Pakistan</div>
   <div style="display:flex;gap:15px;justify-content:center;margin:10px 0;flex-wrap:wrap">
-    <a href="#" onclick="showHome();return false" style="color:var(--text-light);font-size:11px;text-transform:uppercase">Home</a>
-    <a href="#" onclick="showHome();document.getElementById('products').scrollIntoView();return false" style="color:var(--text-light);font-size:11px;text-transform:uppercase">Products</a>
-    <a href="#" onclick="showPage('blog');return false" style="color:var(--text-light);font-size:11px;text-transform:uppercase">Blog</a>
+    <a href="#" onclick="navigateTo('home');return false" style="color:var(--text-light);font-size:11px;text-transform:uppercase">Home</a>
+    <a href="#" onclick="navigateTo('home');document.getElementById('products').scrollIntoView();return false" style="color:var(--text-light);font-size:11px;text-transform:uppercase">Products</a>
+    <a href="#" onclick="navigateTo('blog');return false" style="color:var(--text-light);font-size:11px;text-transform:uppercase">Blog</a>
     <a href="#" onclick="openWA('Hi! ZYRON inquiry.')" style="color:var(--text-light);font-size:11px;text-transform:uppercase">WhatsApp</a>
   </div>
   <div style="font-size:10px;color:var(--text-light)">© 2025 ZYRON Sportswear. All rights reserved.</div>
@@ -649,7 +564,6 @@ let variantFields = [];
 let editVariantFields = [];
 let imageUrls = [];
 let editImageUrls = [];
-let heroSlides = [];
 let currentHeroIndex = 0;
 let heroInterval = null;
 const allSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL'];
@@ -657,77 +571,169 @@ const ADMIN_PASSWORD = 'ZYRON@2025#Secure!';
 const catNames = {kit:'Sports Kit',trouser:'Trouser',shirt:'Shirt',jacket:'Jacket',tracksuit:'Tracksuit',summer:'Summer',winter:'Winter'};
 
 // ============================================================
-// DEFAULT HERO SLIDES
+// 3 HERO SLIDES
 // ============================================================
-const defaultHeroSlides = [
+const heroSlides = [
   {
     eyebrow: 'Premium Quality Since Day One',
-    title: 'ZYRON Sportswear',
+    title: 'ZYRON <span>Sportswear</span>',
     subtitle: 'Crafted for Champions — Made in Pakistan',
     btn1: 'Shop Now',
     btn2: 'Bulk Order',
-    bg: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600'
+    bg: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600&q=80'
+  },
+  {
+    eyebrow: 'Elite Performance Gear',
+    title: 'Train Like a <span>Champion</span>',
+    subtitle: 'Premium sportswear for athletes who demand the best',
+    btn1: 'Explore Collection',
+    btn2: 'Learn More',
+    bg: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=1600&q=80'
   },
   {
     eyebrow: 'Winter Collection 2025',
-    title: 'Stay Warm in Style',
-    subtitle: 'Premium jackets & hoodies for the cold season',
-    btn1: 'Shop Winter',
-    btn2: 'Learn More',
-    bg: 'https://images.unsplash.com/photo-1517639493569-5666a7b2d6c3?w=1600'
-  },
-  {
-    eyebrow: 'Custom Team Kits',
-    title: 'Design Your Own Kit',
-    subtitle: 'Colors, logos, names, numbers — Made in Pakistan',
-    btn1: 'Customize Now',
-    btn2: 'Get Quote',
-    bg: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=1600'
+    title: 'Stay Warm in <span>Style</span>',
+    subtitle: 'Premium hoodies & jackets — crafted for Pakistani winters',
+    btn1: 'Shop Hoodies',
+    btn2: 'View Collection',
+    bg: 'https://images.unsplash.com/photo-1516820612845-a13894592046?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzB8fHNwb3J0c3xlbnwwfHwwfHx8MA%3D%3D'
   }
 ];
 
 // ============================================================
-// NAVIGATION
+// NAVIGATION WITH HASH-BASED HISTORY
 // ============================================================
-function showHome() {
+let currentPage = 'home';
+let pageHistory = ['home'];
+
+function navigateTo(page, data = null) {
+    // Don't push if already on same page
+    if (currentPage === page && !data) return;
+    
+    // Save current page to history
+    if (currentPage !== page) {
+        pageHistory.push(currentPage);
+    }
+    
+    // Update URL hash
+    if (page === 'home') {
+        window.location.hash = '';
+    } else if (page === 'product' && data) {
+        window.location.hash = `product-${data}`;
+    } else {
+        window.location.hash = page;
+    }
+    
+    // Perform navigation
+    doNavigate(page, data);
+}
+
+function doNavigate(page, data = null) {
+    // Hide all pages
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('homePage').classList.add('active');
-    document.getElementById('adminPanelSection').classList.remove('show');
-    renderProducts();
-    renderFeatured();
+    
+    // Show target page
+    const target = document.getElementById(page + 'Page');
+    if (target) {
+        target.classList.add('active');
+        currentPage = page;
+        
+        // Render page content
+        if (page === 'cart') renderCartPage();
+        else if (page === 'checkout') renderCheckoutPage();
+        else if (page === 'wishlist') renderWishlistPage();
+        else if (page === 'blog') renderBlogPage();
+        else if (page === 'product' && data) {
+            const productId = parseInt(data);
+            const p = products.find(p => p.id === productId);
+            if (p) {
+                currentProduct = p;
+                currentVariant = Object.values(p.variants)[0];
+                selectedShirtSize = 'M';
+                selectedTrouserSize = 'M';
+                currentQty = 1;
+                renderProductDetail();
+            } else {
+                navigateTo('home');
+            }
+        } else if (page === 'home') {
+            document.getElementById('adminPanelSection').classList.remove('show');
+            renderProducts();
+            renderFeatured();
+        }
+    }
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function showPage(page) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    const target = document.getElementById(page + 'Page');
-    if (target) target.classList.add('active');
-    if (page === 'cart') renderCartPage();
-    else if (page === 'checkout') renderCheckoutPage();
-    else if (page === 'wishlist') renderWishlistPage();
-    else if (page === 'blog') renderBlogPage();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+// Handle browser back/forward buttons
+window.addEventListener('hashchange', function() {
+    const hash = window.location.hash.replace('#', '');
+    
+    if (!hash || hash === 'home' || hash === '') {
+        // Go to home
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('homePage').classList.add('active');
+        document.getElementById('adminPanelSection').classList.remove('show');
+        renderProducts();
+        renderFeatured();
+        currentPage = 'home';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    }
+    
+    if (hash.startsWith('product-')) {
+        const id = parseInt(hash.replace('product-', ''));
+        const p = products.find(p => p.id === id);
+        if (p) {
+            document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
+            document.getElementById('productPage').classList.add('active');
+            currentProduct = p;
+            currentVariant = Object.values(p.variants)[0];
+            selectedShirtSize = 'M';
+            selectedTrouserSize = 'M';
+            currentQty = 1;
+            renderProductDetail();
+            currentPage = 'product';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        return;
+    }
+    
+    // For other pages
+    const pageNames = ['cart', 'checkout', 'wishlist', 'blog'];
+    if (pageNames.includes(hash)) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        const target = document.getElementById(hash + 'Page');
+        if (target) {
+            target.classList.add('active');
+            currentPage = hash;
+            if (hash === 'cart') renderCartPage();
+            else if (hash === 'checkout') renderCheckoutPage();
+            else if (hash === 'wishlist') renderWishlistPage();
+            else if (hash === 'blog') renderBlogPage();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+});
+
+// Override old navigation functions
+function goHome() {
+    navigateTo('home');
+}
+
+function goToPage(page) {
+    navigateTo(page);
 }
 
 function viewProduct(id) {
-    const p = products.find(p => p.id === id);
-    if (!p) return;
-    currentProduct = p;
-    currentVariant = Object.values(p.variants)[0];
-    selectedShirtSize = 'M';
-    selectedTrouserSize = 'M';
-    currentQty = 1;
-    renderProductDetail();
-    document.querySelectorAll('.page').forEach(pg => pg.classList.remove('active'));
-    document.getElementById('productPage').classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigateTo('product', id);
 }
 
 // ============================================================
 // HERO SLIDER FUNCTIONS
 // ============================================================
-function renderHeroSlides(slides) {
-    heroSlides = slides || defaultHeroSlides;
+function renderHeroSlides() {
     currentHeroIndex = 0;
     updateHeroSlide(0);
     startHeroAutoPlay();
@@ -736,12 +742,12 @@ function renderHeroSlides(slides) {
 function updateHeroSlide(index) {
     const slide = heroSlides[index];
     if (!slide) return;
-    document.getElementById('heroBg').src = slide.bg || defaultHeroSlides[index].bg;
-    document.getElementById('heroEyebrow').textContent = slide.eyebrow || defaultHeroSlides[index].eyebrow;
-    document.getElementById('heroTitle').innerHTML = slide.title || defaultHeroSlides[index].title;
-    document.getElementById('heroSub').textContent = slide.subtitle || defaultHeroSlides[index].subtitle;
-    document.getElementById('heroBtn1').textContent = slide.btn1 || defaultHeroSlides[index].btn1;
-    document.getElementById('heroBtn2').textContent = slide.btn2 || defaultHeroSlides[index].btn2;
+    document.getElementById('heroBg').src = slide.bg;
+    document.getElementById('heroEyebrow').textContent = slide.eyebrow;
+    document.getElementById('heroTitle').innerHTML = slide.title;
+    document.getElementById('heroSub').textContent = slide.subtitle;
+    document.getElementById('heroBtn1').textContent = slide.btn1;
+    document.getElementById('heroBtn2').textContent = slide.btn2;
     document.querySelectorAll('.hero-dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === index);
     });
@@ -770,76 +776,6 @@ function stopHeroAutoPlay() {
 function resetHeroAutoPlay() {
     stopHeroAutoPlay();
     startHeroAutoPlay();
-}
-
-// ============================================================
-// HERO MANAGER - UPLOAD IMAGE
-// ============================================================
-async function uploadHeroImage(slideNum, input) {
-    const file = input.files[0];
-    if (!file) return;
-    try {
-        showToast('⏳ Uploading image...', 'info');
-        const path = `hero/slide${slideNum}_${Date.now()}_${file.name}`;
-        const uploadTask = storage.ref(path).put(file);
-        const snapshot = await uploadTask;
-        const url = await snapshot.ref.getDownloadURL();
-        const bgInput = document.getElementById(`h${slideNum}Bg`);
-        if (bgInput) bgInput.value = url;
-        showToast('✅ Image uploaded!', 'success');
-    } catch (error) {
-        showToast('Error uploading: ' + error.message, 'error');
-    }
-}
-
-// ============================================================
-// HERO MANAGER - SAVE
-// ============================================================
-async function saveHeroData() {
-    if (!isAdminLoggedIn) {
-        showToast('Admin login required', 'error');
-        return;
-    }
-    const slides = [];
-    for (let i = 1; i <= 3; i++) {
-        slides.push({
-            eyebrow: document.getElementById(`h${i}Eyebrow`).value || defaultHeroSlides[i-1].eyebrow,
-            title: document.getElementById(`h${i}Title`).value || defaultHeroSlides[i-1].title,
-            subtitle: document.getElementById(`h${i}Sub`).value || defaultHeroSlides[i-1].subtitle,
-            btn1: document.getElementById(`h${i}Btn1`).value || defaultHeroSlides[i-1].btn1,
-            btn2: document.getElementById(`h${i}Btn2`).value || defaultHeroSlides[i-1].btn2,
-            bg: document.getElementById(`h${i}Bg`).value || defaultHeroSlides[i-1].bg
-        });
-    }
-    try {
-        await database.ref('heroSlides').set(slides);
-        showToast('✅ Hero slides saved!');
-        renderHeroSlides(slides);
-        loadHeroData();
-    } catch (error) {
-        showToast('Error: ' + error.message, 'error');
-    }
-}
-
-function loadHeroData() {
-    database.ref('heroSlides').on('value', (snap) => {
-        const data = snap.val();
-        if (data && data.length > 0) {
-            heroSlides = data;
-            data.forEach((slide, i) => {
-                const num = i + 1;
-                document.getElementById(`h${num}Eyebrow`).value = slide.eyebrow || '';
-                document.getElementById(`h${num}Title`).value = slide.title || '';
-                document.getElementById(`h${num}Sub`).value = slide.subtitle || '';
-                document.getElementById(`h${num}Btn1`).value = slide.btn1 || '';
-                document.getElementById(`h${num}Btn2`).value = slide.btn2 || '';
-                document.getElementById(`h${num}Bg`).value = slide.bg || '';
-            });
-            renderHeroSlides(data);
-        } else {
-            renderHeroSlides(defaultHeroSlides);
-        }
-    });
 }
 
 // ============================================================
@@ -1053,7 +989,7 @@ function filterCat(cat,el){
 }
 
 // ============================================================
-// PRODUCT DETAIL (Shortened for space - same as before)
+// PRODUCT DETAIL (unchanged)
 // ============================================================
 function renderProductDetail(){
   const p=currentProduct;
@@ -1067,96 +1003,318 @@ function renderProductDetail(){
 
   document.getElementById('productDetailContainer').innerHTML=`
     <div style="max-width:1200px;margin:0 auto;padding:20px">
-      <a href="#" onclick="showHome();return false" style="color:var(--text-light);font-size:12px;text-decoration:none"><i class="fas fa-arrow-left"></i> Back to Products</a>
+      <a href="#" onclick="goHome();return false" style="color:var(--text-light);font-size:12px;text-decoration:none">
+        <i class="fas fa-arrow-left"></i> Back to Products
+      </a>
     </div>
     <div class="product-detail">
       <div>
         <div class="gallery-main"><img id="mainGalleryImg" src="${images[0]}" onerror="this.src='https://placehold.co/600x600/1a1a1a/gold?text=${p.name}'"></div>
-        <div class="gallery-thumbs">${images.map((img,i)=>`<div class="gallery-thumb ${i===0?'active':''}" onclick="changeGalleryImage(${i})"><img src="${img}" onerror="this.src='https://placehold.co/100x100/1a1a1a/gold'"></div>`).join('')}</div>
+        <div class="gallery-thumbs">
+          ${images.map((img,i)=>`<div class="gallery-thumb ${i===0?'active':''}" onclick="changeGalleryImage(${i})"><img src="${img}" onerror="this.src='https://placehold.co/100x100/1a1a1a/gold'"></div>`).join('')}
+        </div>
       </div>
       <div>
         <h1 style="font-size:24px;font-weight:700;color:var(--text)">${p.name}</h1>
         <p style="color:var(--text-light);font-size:13px;margin:6px 0">${p.description||''}</p>
-        <div style="font-size:28px;font-weight:700;color:var(--gold)">${hs?`<s style="font-size:16px;color:var(--text-light);margin-right:8px">PKR ${p.originalPrice.toLocaleString()}</s> PKR ${fp.toLocaleString()}`:`PKR ${fp.toLocaleString()}`}</div>
-        <div class="size-group"><span class="size-group-label"><i class="fas fa-tshirt"></i> SHIRT SIZE</span><div class="size-options" id="shirtSizeOptions">${allSizes.map(s=>`<div class="size-opt ${s===selectedShirtSize?'active':''}" onclick="selectShirtSize('${s}')">${s}</div>`).join('')}</div></div>
-        ${showTrouser?`<div class="size-group"><span class="size-group-label"><i class="fas fa-tshirt"></i> TROUSER SIZE</span><div class="size-options" id="trouserSizeOptions">${allSizes.map(s=>`<div class="size-opt ${s===selectedTrouserSize?'active':''}" onclick="selectTrouserSize('${s}')">${s}</div>`).join('')}</div></div>`:''}
-        <div class="selected-display"><span class="label">Selected:</span><span class="value" id="selectedDisplay">Shirt: ${selectedShirtSize}${showTrouser?` | Trouser: ${selectedTrouserSize}`:''}</span></div>
-        <div class="size-group"><span class="size-group-label"><i class="fas fa-palette"></i> COLOR</span><div class="color-options" id="colorOptions">${vars.map((c,i)=>`<div class="color-dot ${i===0?'active':''}" style="background:${c.colorCode};" onclick="selectColor(${i})" title="${c.color}"></div>`).join('')}</div></div>
-        <div class="size-group"><span class="size-group-label"><i class="fas fa-cube"></i> QUANTITY</span><div class="quantity-selector"><button onclick="changeQty(-1)">−</button><span class="qty-num" id="qtyDisplay">1</span><button onclick="changeQty(1)">+</button></div></div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px"><button onclick="addToCart()" style="flex:1;background:var(--text);color:var(--card);padding:12px;border-radius:6px;font-weight:600;cursor:pointer;min-width:120px"><i class="fas fa-shopping-bag"></i> Add to Cart</button><button onclick="buyNow()" style="flex:1;background:var(--whatsapp);color:#fff;padding:12px;border-radius:6px;font-weight:600;cursor:pointer;min-width:120px"><i class="fab fa-whatsapp"></i> Buy Now</button></div>
+        <div style="font-size:28px;font-weight:700;color:var(--gold)">${hs?`<s style="font-size:16px;color:var(--text-light);margin-right:8px">PKR ${p.originalPrice.toLocaleString()}</s> PKR ${fp.toLocaleString()}`:`PKR ${fp.toLocaleString()}`} ${p.coupon?`<span style="font-size:10px;color:#22C55E;background:#22C55E20;padding:2px 8px;border-radius:12px;margin-left:8px">${p.coupon}</span>`:''}</div>
+
+        <div class="size-group">
+          <span class="size-group-label"><i class="fas fa-tshirt"></i> SHIRT SIZE</span>
+          <div class="size-options" id="shirtSizeOptions">
+            ${allSizes.map(s=>`<div class="size-opt ${s===selectedShirtSize?'active':''}" onclick="selectShirtSize('${s}')">${s}</div>`).join('')}
+          </div>
+        </div>
+
+        ${showTrouser?`
+        <div class="size-group">
+          <span class="size-group-label"><i class="fas fa-tshirt"></i> TROUSER SIZE</span>
+          <div class="size-options" id="trouserSizeOptions">
+            ${allSizes.map(s=>`<div class="size-opt ${s===selectedTrouserSize?'active':''}" onclick="selectTrouserSize('${s}')">${s}</div>`).join('')}
+          </div>
+        </div>
+        `:''}
+
+        <div class="selected-display">
+          <span class="label">Selected:</span>
+          <span class="value" id="selectedDisplay">Shirt: ${selectedShirtSize}${showTrouser?` | Trouser: ${selectedTrouserSize}`:''}</span>
+        </div>
+
+        <div class="size-group">
+          <span class="size-group-label"><i class="fas fa-palette"></i> COLOR</span>
+          <div class="color-options" id="colorOptions">
+            ${vars.map((c,i)=>`<div class="color-dot ${i===0?'active':''}" style="background:${c.colorCode};" onclick="selectColor(${i})" title="${c.color}"></div>`).join('')}
+          </div>
+        </div>
+
+        <div class="size-group">
+          <span class="size-group-label"><i class="fas fa-cube"></i> QUANTITY</span>
+          <div class="quantity-selector">
+            <button onclick="changeQty(-1)">−</button>
+            <span class="qty-num" id="qtyDisplay">1</span>
+            <button onclick="changeQty(1)">+</button>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:15px">
+          <button onclick="addToCart()" style="flex:1;background:var(--text);color:var(--card);padding:12px;border:none;border-radius:6px;font-weight:600;cursor:pointer;min-width:120px"><i class="fas fa-shopping-bag"></i> Add to Cart</button>
+          <button onclick="buyNow()" style="flex:1;background:var(--whatsapp);color:#fff;padding:12px;border:none;border-radius:6px;font-weight:600;cursor:pointer;min-width:120px"><i class="fab fa-whatsapp"></i> Buy Now</button>
+        </div>
         <button onclick="toggleWishlist(${p.id})" style="margin-top:8px;background:transparent;border:1px solid var(--gold);color:${wishlist.includes(p.id)?'red':'var(--gold)'};padding:8px 16px;border-radius:4px;cursor:pointer;font-size:12px"><i class="fas fa-heart"></i> ${wishlist.includes(p.id)?'Remove from Wishlist':'Add to Wishlist'}</button>
       </div>
     </div>
   `;
 }
 
-function selectShirtSize(size){selectedShirtSize=size;document.querySelectorAll('#shirtSizeOptions .size-opt').forEach(b=>b.classList.toggle('active',b.textContent===size));updateSelectedDisplay();}
-function selectTrouserSize(size){selectedTrouserSize=size;document.querySelectorAll('#trouserSizeOptions .size-opt').forEach(b=>b.classList.toggle('active',b.textContent===size));updateSelectedDisplay();}
-function updateSelectedDisplay(){const show=currentProduct&&(currentProduct.hasTrouser!==undefined?currentProduct.hasTrouser:true);document.getElementById('selectedDisplay').textContent=`Shirt: ${selectedShirtSize}${show?` | Trouser: ${selectedTrouserSize}`:''}`;}
-function selectColor(index){const vars=Object.values(currentProduct.variants);currentVariant=vars[index];document.querySelectorAll('.color-dot').forEach((el,i)=>el.classList.toggle('active',i===index));const mainImg=document.getElementById('mainGalleryImg');if(mainImg&&currentVariant.image)mainImg.src=currentVariant.image;const hs=currentVariant.sale>0;const fp=getFinalPrice(currentProduct.originalPrice,currentVariant.sale,currentProduct.coupon);const priceDiv=document.querySelector('.product-detail [style*="font-size:28px"]');if(priceDiv){priceDiv.innerHTML=hs?`<s style="font-size:16px;color:var(--text-light);margin-right:8px">PKR ${currentProduct.originalPrice.toLocaleString()}</s> PKR ${fp.toLocaleString()}`:`PKR ${fp.toLocaleString()}`;}}
-function changeQty(d){let n=currentQty+d;if(n>=1&&n<=10){currentQty=n;document.getElementById('qtyDisplay').textContent=currentQty;}}
-function changeGalleryImage(index){const images=currentProduct.images||[currentVariant.image];document.getElementById('mainGalleryImg').src=images[index];document.querySelectorAll('.gallery-thumb').forEach((el,i)=>el.classList.toggle('active',i===index));}
-function addToCart(){const show=currentProduct&&(currentProduct.hasTrouser!==undefined?currentProduct.hasTrouser:true);const size=`Shirt: ${selectedShirtSize}${show?`, Trouser: ${selectedTrouserSize}`:''}`;const fp=getFinalPrice(currentProduct.originalPrice,currentVariant.sale,currentProduct.coupon);const idx=cart.findIndex(i=>i.id===currentProduct.id&&i.color===currentVariant.color&&i.shirtSize===selectedShirtSize&&i.trouserSize===(show?selectedTrouserSize:null));if(idx>-1){cart[idx].quantity+=currentQty;}else{cart.push({id:currentProduct.id,name:currentProduct.name,color:currentVariant.color,shirtSize:selectedShirtSize,trouserSize:show?selectedTrouserSize:null,size:size,quantity:currentQty,image:currentVariant.image,price:fp});}saveCart();showToast(`✅ Added to cart! (${size})`);}
-function buyNow(){addToCart();showPage('checkout');}
+function selectShirtSize(size){
+  selectedShirtSize=size;
+  document.querySelectorAll('#shirtSizeOptions .size-opt').forEach(b=>b.classList.toggle('active',b.textContent===size));
+  updateSelectedDisplay();
+}
+function selectTrouserSize(size){
+  selectedTrouserSize=size;
+  document.querySelectorAll('#trouserSizeOptions .size-opt').forEach(b=>b.classList.toggle('active',b.textContent===size));
+  updateSelectedDisplay();
+}
+function updateSelectedDisplay(){
+  const show=currentProduct&&(currentProduct.hasTrouser!==undefined?currentProduct.hasTrouser:true);
+  document.getElementById('selectedDisplay').textContent=`Shirt: ${selectedShirtSize}${show?` | Trouser: ${selectedTrouserSize}`:''}`;
+}
+function selectColor(index){
+  const vars=Object.values(currentProduct.variants);
+  currentVariant=vars[index];
+  document.querySelectorAll('.color-dot').forEach((el,i)=>el.classList.toggle('active',i===index));
+  const mainImg=document.getElementById('mainGalleryImg');
+  if(mainImg&&currentVariant.image)mainImg.src=currentVariant.image;
+  const hs=currentVariant.sale>0;
+  const fp=getFinalPrice(currentProduct.originalPrice,currentVariant.sale,currentProduct.coupon);
+  const priceDiv=document.querySelector('.product-detail [style*="font-size:28px"]');
+  if(priceDiv){
+    priceDiv.innerHTML=hs?`<s style="font-size:16px;color:var(--text-light);margin-right:8px">PKR ${currentProduct.originalPrice.toLocaleString()}</s> PKR ${fp.toLocaleString()}`:`PKR ${fp.toLocaleString()}`;
+  }
+}
+function changeQty(d){
+  let n=currentQty+d;
+  if(n>=1&&n<=10){currentQty=n;document.getElementById('qtyDisplay').textContent=currentQty;}
+}
+function changeGalleryImage(index){
+  const images=currentProduct.images||[currentVariant.image];
+  document.getElementById('mainGalleryImg').src=images[index];
+  document.querySelectorAll('.gallery-thumb').forEach((el,i)=>el.classList.toggle('active',i===index));
+}
+function addToCart(){
+  const show=currentProduct&&(currentProduct.hasTrouser!==undefined?currentProduct.hasTrouser:true);
+  const size=`Shirt: ${selectedShirtSize}${show?`, Trouser: ${selectedTrouserSize}`:''}`;
+  const fp=getFinalPrice(currentProduct.originalPrice,currentVariant.sale,currentProduct.coupon);
+  const idx=cart.findIndex(i=>i.id===currentProduct.id&&i.color===currentVariant.color&&i.shirtSize===selectedShirtSize&&i.trouserSize===(show?selectedTrouserSize:null));
+  if(idx>-1){cart[idx].quantity+=currentQty;}else{cart.push({id:currentProduct.id,name:currentProduct.name,color:currentVariant.color,shirtSize:selectedShirtSize,trouserSize:show?selectedTrouserSize:null,size:size,quantity:currentQty,image:currentVariant.image,price:fp});}
+  saveCart();showToast(`✅ Added to cart! (${size})`);
+}
+function buyNow(){addToCart();navigateTo('checkout');}
 
 // ============================================================
-// CART, CHECKOUT, WISHLIST, BLOG (Simplified)
+// CART PAGE
 // ============================================================
 function renderCartPage(){
   const container=document.getElementById('cartContainer');
   if(!container)return;
-  if(cart.length===0){container.innerHTML=`<div style="text-align:center;padding:60px 20px;color:var(--text-light)"><i class="fas fa-shopping-bag" style="font-size:50px;color:var(--border);display:block;margin-bottom:15px"></i><h2 style="font-family:'Bebas Neue';font-size:24px;color:var(--text)">Your cart is empty</h2><button class="btn-primary" onclick="showHome()" style="margin-top:15px">Shop Now</button></div>`;return;}
-  let sub=0;cart.forEach(i=>{sub+=i.price*i.quantity;});const ship=sub>=5000?0:299;const total=sub+ship;
-  container.innerHTML=`<div style="max-width:1200px;margin:30px auto;padding:0 20px"><h2 style="font-family:'Bebas Neue';font-size:28px;color:var(--text);margin-bottom:20px">🛒 Your Cart</h2>${cart.map((i,idx)=>`<div class="cart-item"><img src="${i.image}" onerror="this.src='https://placehold.co/60x60/1a1a1a/gold'"><div class="info"><h4>${i.name}</h4><p>${i.color} / ${i.size}</p></div><div style="font-weight:600;color:var(--gold)">PKR ${(i.price*i.quantity).toLocaleString()}</div><div style="display:flex;align-items:center;gap:8px"><button onclick="updateCartQty(${idx},-1)" style="background:var(--bg);border:1px solid var(--border);padding:2px 10px;border-radius:4px;cursor:pointer">-</button><span style="min-width:25px;text-align:center">${i.quantity}</span><button onclick="updateCartQty(${idx},1)" style="background:var(--bg);border:1px solid var(--border);padding:2px 10px;border-radius:4px;cursor:pointer">+</button></div><button onclick="removeCartItem(${idx})" style="background:transparent;color:var(--red);border:none;font-size:16px;cursor:pointer"><i class="fas fa-trash"></i></button></div>`).join('')}<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:15px"><div class="summary-row"><span>Subtotal</span><span>PKR ${sub.toLocaleString()}</span></div><div class="summary-row"><span>Shipping</span><span>${ship===0?'<span class="free-shipping">FREE</span>':'PKR '+ship.toLocaleString()}</span></div><div class="summary-row total"><span>Total</span><span style="color:var(--gold)">PKR ${total.toLocaleString()}</span></div>${sub>=5000?'<div style="color:#22C55E;font-size:12px;text-align:center;margin-top:8px"><i class="fas fa-check-circle"></i> Free Shipping Applied!</div>':''}<button class="btn-primary" onclick="showPage('checkout')" style="width:100%;margin-top:12px">Proceed to Checkout</button></div></div>`;}
-
-function updateCartQty(idx,d){let n=cart[idx].quantity+d;if(n>=1&&n<=10){cart[idx].quantity=n;saveCart();renderCartPage();}}
+  if(cart.length===0){
+    container.innerHTML=`<div style="text-align:center;padding:60px 20px;color:var(--text-light)"><i class="fas fa-shopping-bag" style="font-size:50px;color:var(--border);display:block;margin-bottom:15px"></i><h2 style="font-family:'Bebas Neue';font-size:24px;color:var(--text)">Your cart is empty</h2><button class="btn-primary" onclick="goHome()" style="margin-top:15px">Shop Now</button></div>`;
+    return;
+  }
+  let sub=0;
+  cart.forEach(i=>{sub+=i.price*i.quantity;});
+  const ship=sub>=5000?0:299;
+  const total=sub+ship;
+  container.innerHTML=`
+    <div style="max-width:1200px;margin:30px auto;padding:0 20px">
+      <h2 style="font-family:'Bebas Neue';font-size:28px;color:var(--text);margin-bottom:20px">🛒 Your Cart</h2>
+      ${cart.map((i,idx)=>`
+        <div class="cart-item">
+          <img src="${i.image}" onerror="this.src='https://placehold.co/60x60/1a1a1a/gold'">
+          <div class="info"><h4>${i.name}</h4><p>${i.color} / ${i.size}</p></div>
+          <div style="font-weight:600;color:var(--gold)">PKR ${(i.price*i.quantity).toLocaleString()}</div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <button onclick="updateCartQty(${idx},-1)" style="background:var(--bg);border:1px solid var(--border);padding:2px 10px;border-radius:4px;cursor:pointer">-</button>
+            <span style="min-width:25px;text-align:center">${i.quantity}</span>
+            <button onclick="updateCartQty(${idx},1)" style="background:var(--bg);border:1px solid var(--border);padding:2px 10px;border-radius:4px;cursor:pointer">+</button>
+          </div>
+          <button onclick="removeCartItem(${idx})" style="background:transparent;color:var(--red);border:none;font-size:16px;cursor:pointer"><i class="fas fa-trash"></i></button>
+        </div>
+      `).join('')}
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:15px">
+        <div class="summary-row"><span>Subtotal</span><span>PKR ${sub.toLocaleString()}</span></div>
+        <div class="summary-row"><span>Shipping</span><span>${ship===0?'<span class="free-shipping">FREE</span>':'PKR '+ship.toLocaleString()}</span></div>
+        <div class="summary-row total"><span>Total</span><span style="color:var(--gold)">PKR ${total.toLocaleString()}</span></div>
+        ${sub>=5000?'<div style="color:#22C55E;font-size:12px;text-align:center;margin-top:8px"><i class="fas fa-check-circle"></i> Free Shipping Applied!</div>':''}
+        <button class="btn-primary" onclick="navigateTo('checkout')" style="width:100%;margin-top:12px">Proceed to Checkout</button>
+      </div>
+    </div>
+  `;
+}
+function updateCartQty(idx,d){
+  let n=cart[idx].quantity+d;
+  if(n>=1&&n<=10){cart[idx].quantity=n;saveCart();renderCartPage();}
+}
 function removeCartItem(idx){cart.splice(idx,1);saveCart();renderCartPage();}
 
+// ============================================================
+// CHECKOUT PAGE
+// ============================================================
 function renderCheckoutPage(){
   const container=document.getElementById('checkoutContainer');
   if(!container)return;
-  if(cart.length===0){showPage('cart');return;}
-  let sub=0;cart.forEach(i=>{sub+=i.price*i.quantity;});const ship=sub>=5000?0:299;const total=sub+ship;
-  container.innerHTML=`<div style="max-width:800px;margin:30px auto;padding:0 20px"><h2 style="font-family:'Bebas Neue';font-size:28px;color:var(--text);margin-bottom:20px">📦 Checkout</h2><div style="display:grid;grid-template-columns:1.5fr 1fr;gap:30px"><div class="checkout-form"><h3 style="font-size:14px;color:var(--text);margin-bottom:12px">Shipping Details</h3><input id="chFName" placeholder="First Name *"><input id="chLName" placeholder="Last Name *"><input id="chEmail" type="email" placeholder="Email *"><input id="chPhone" type="tel" placeholder="Phone * (03XX-XXXXXXX)"><input id="chAddress" placeholder="Address *"><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><input id="chCity" placeholder="City *"><input id="chPostal" placeholder="Postal Code"></div><button class="btn-primary" onclick="placeOrder()" style="width:100%;margin-top:12px"><i class="fab fa-whatsapp"></i> Confirm Order</button></div><div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;height:fit-content"><h3 style="font-size:14px;color:var(--text);margin-bottom:12px">Order Summary</h3>${cart.map(i=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px"><span>${i.name} x${i.quantity}</span><span style="color:var(--gold)">PKR ${(i.price*i.quantity).toLocaleString()}</span></div>`).join('')}<div class="summary-row" style="margin-top:8px"><span>Subtotal</span><span>PKR ${sub.toLocaleString()}</span></div><div class="summary-row"><span>Shipping</span><span>${ship===0?'<span class="free-shipping">FREE</span>':'PKR '+ship.toLocaleString()}</span></div><div class="summary-row total"><span>Total</span><span style="color:var(--gold)">PKR ${total.toLocaleString()}</span></div>${sub>=5000?'<div style="color:#22C55E;font-size:12px;text-align:center;margin-top:8px"><i class="fas fa-check-circle"></i> Free Shipping Applied!</div>':''}</div></div></div>`;
+  if(cart.length===0){navigateTo('cart');return;}
+  let sub=0;
+  cart.forEach(i=>{sub+=i.price*i.quantity;});
+  const ship=sub>=5000?0:299;
+  const total=sub+ship;
+  container.innerHTML=`
+    <div style="max-width:800px;margin:30px auto;padding:0 20px">
+      <h2 style="font-family:'Bebas Neue';font-size:28px;color:var(--text);margin-bottom:20px">📦 Checkout</h2>
+      <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:30px">
+        <div class="checkout-form">
+          <h3 style="font-size:14px;color:var(--text);margin-bottom:12px">Shipping Details</h3>
+          <input id="chFName" placeholder="First Name *">
+          <input id="chLName" placeholder="Last Name *">
+          <input id="chEmail" type="email" placeholder="Email *">
+          <input id="chPhone" type="tel" placeholder="Phone * (03XX-XXXXXXX)">
+          <input id="chAddress" placeholder="Address *">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <input id="chCity" placeholder="City *">
+            <input id="chPostal" placeholder="Postal Code">
+          </div>
+          <button class="btn-primary" onclick="placeOrder()" style="width:100%;margin-top:12px"><i class="fab fa-whatsapp"></i> Confirm Order</button>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;height:fit-content">
+          <h3 style="font-size:14px;color:var(--text);margin-bottom:12px">Order Summary</h3>
+          ${cart.map(i=>`
+            <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px">
+              <span>${i.name} x${i.quantity}</span>
+              <span style="color:var(--gold)">PKR ${(i.price*i.quantity).toLocaleString()}</span>
+            </div>
+          `).join('')}
+          <div class="summary-row" style="margin-top:8px"><span>Subtotal</span><span>PKR ${sub.toLocaleString()}</span></div>
+          <div class="summary-row"><span>Shipping</span><span>${ship===0?'<span class="free-shipping">FREE</span>':'PKR '+ship.toLocaleString()}</span></div>
+          <div class="summary-row total"><span>Total</span><span style="color:var(--gold)">PKR ${total.toLocaleString()}</span></div>
+          ${sub>=5000?'<div style="color:#22C55E;font-size:12px;text-align:center;margin-top:8px"><i class="fas fa-check-circle"></i> Free Shipping Applied!</div>':''}
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 function placeOrder(){
-  const fn=document.getElementById('chFName').value.trim();const ln=document.getElementById('chLName').value.trim();const em=document.getElementById('chEmail').value.trim();const ph=document.getElementById('chPhone').value.trim();const ad=document.getElementById('chAddress').value.trim();const ct=document.getElementById('chCity').value.trim();
+  const fn=document.getElementById('chFName').value.trim();
+  const ln=document.getElementById('chLName').value.trim();
+  const em=document.getElementById('chEmail').value.trim();
+  const ph=document.getElementById('chPhone').value.trim();
+  const ad=document.getElementById('chAddress').value.trim();
+  const ct=document.getElementById('chCity').value.trim();
   if(!fn||!ln||!em||!ph||!ad||!ct){showToast('Please fill all required fields','error');return;}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){showToast('Please enter a valid email','error');return;}
   if(!/^[0-9]{10,14}$/.test(ph.replace(/[^0-9]/g,''))){showToast('Please enter a valid phone number','error');return;}
-  let sub=0;cart.forEach(i=>{sub+=i.price*i.quantity;});const ship=sub>=5000?0:299;const total=sub+ship;
-  let itemsText='';cart.forEach((i,idx)=>{itemsText+=`${idx+1}. ${i.name} | ${i.size} x${i.quantity} = PKR ${(i.price*i.quantity).toLocaleString()}\n`;});
+  
+  let sub=0;
+  cart.forEach(i=>{sub+=i.price*i.quantity;});
+  const ship=sub>=5000?0:299;
+  const total=sub+ship;
+  let itemsText='';
+  cart.forEach((i,idx)=>{itemsText+=`${idx+1}. ${i.name} | ${i.size} x${i.quantity} = PKR ${(i.price*i.quantity).toLocaleString()}\n`;});
   const msg=`🛍️ ZYRON SPORTSWEAR - ORDER\n\nName: ${fn} ${ln}\nEmail: ${em}\nPhone: ${ph}\nAddress: ${ad}, ${ct}\n\nItems:\n${itemsText}\nSubtotal: PKR ${sub.toLocaleString()}\nShipping: ${ship===0?'FREE':'PKR '+ship.toLocaleString()}\nTotal: PKR ${total.toLocaleString()}\n\n💚 Pay via JazzCash: 0325 6054759`;
   window.open(`https://wa.me/923256054759?text=${encodeURIComponent(msg)}`,'_blank');
-  showToast('✅ Order sent to WhatsApp!');cart=[];saveCart();showHome();
+  showToast('✅ Order sent to WhatsApp!');
+  cart=[];saveCart();navigateTo('home');
 }
 
+// ============================================================
+// WISHLIST & BLOG
+// ============================================================
 function renderWishlistPage(){
   const container=document.getElementById('wishlistContainer');
   if(!container)return;
-  if(wishlist.length===0){container.innerHTML=`<div style="text-align:center;padding:60px 20px;color:var(--text-light)"><i class="fas fa-heart" style="font-size:50px;color:var(--border);display:block;margin-bottom:15px"></i><h2 style="font-family:'Bebas Neue';font-size:24px;color:var(--text)">Your wishlist is empty</h2><button class="btn-primary" onclick="showHome()" style="margin-top:15px">Start Shopping</button></div>`;return;}
+  if(wishlist.length===0){
+    container.innerHTML=`<div style="text-align:center;padding:60px 20px;color:var(--text-light)"><i class="fas fa-heart" style="font-size:50px;color:var(--border);display:block;margin-bottom:15px"></i><h2 style="font-family:'Bebas Neue';font-size:24px;color:var(--text)">Your wishlist is empty</h2><button class="btn-primary" onclick="goHome()" style="margin-top:15px">Start Shopping</button></div>`;
+    return;
+  }
   const items=products.filter(p=>wishlist.includes(p.id));
   container.innerHTML=`<h2 style="font-family:'Bebas Neue';font-size:28px;text-align:center;margin:30px 0;color:var(--text)">❤️ My Wishlist</h2><div class="products-grid" style="max-width:1200px;margin:0 auto;padding:0 20px 40px">${items.map(p=>{const v=Object.values(p.variants)[0];const fp=getFinalPrice(p.originalPrice,v.sale,p.coupon);return `<div class="product-card" onclick="viewProduct(${p.id})"><div class="product-img"><img src="${v.image}" onerror="this.src='https://placehold.co/300x300/1a1a1a/gold'"><button class="wishlist-btn active" onclick="event.stopPropagation();toggleWishlist(${p.id})"><i class="fas fa-heart"></i></button></div><div class="product-body"><div class="product-name">${p.name}</div><div class="price-row"><span class="normal-price">PKR ${fp.toLocaleString()}</span></div></div></div>`;}).join('')}</div>`;
 }
 
 function renderBlogPage(){
-  document.getElementById('blogContainer').innerHTML=`<h2 style="font-family:'Bebas Neue';font-size:28px;text-align:center;margin:30px 0;color:var(--text)">📰 ZYRON Blog</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;max-width:1200px;margin:0 auto;padding:0 20px 40px"><div class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden"><img src="https://i.imgur.com/1nJEkNy.jpeg" style="width:100%;height:180px;object-fit:cover"><div style="padding:16px"><h3 style="font-size:14px;color:var(--text)">🏆 How to Choose the Perfect Sports Kit</h3><p style="font-size:12px;color:var(--text-light);margin:6px 0">Learn how to select the right sports kit for your team.</p></div></div><div class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden"><img src="https://i.imgur.com/XnLHKnM.jpeg" style="width:100%;height:180px;object-fit:cover"><div style="padding:16px"><h3 style="font-size:14px;color:var(--text)">🧥 Winter Collection 2025</h3><p style="font-size:12px;color:var(--text-light);margin:6px 0">Explore our latest winter wear collection.</p></div></div><div class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden"><img src="https://i.imgur.com/fR5XqyP.jpeg" style="width:100%;height:180px;object-fit:cover"><div style="padding:16px"><h3 style="font-size:14px;color:var(--text)">👟 Why Custom Sportswear is a Game Changer</h3><p style="font-size:12px;color:var(--text-light);margin:6px 0">Discover how custom sportswear boosts team spirit.</p></div></div></div>`;
+  document.getElementById('blogContainer').innerHTML=`
+    <h2 style="font-family:'Bebas Neue';font-size:28px;text-align:center;margin:30px 0;color:var(--text)">📰 ZYRON Blog</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;max-width:1200px;margin:0 auto;padding:0 20px 40px">
+      <div class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden"><img src="https://i.imgur.com/1nJEkNy.jpeg" style="width:100%;height:180px;object-fit:cover"><div style="padding:16px"><h3 style="font-size:14px;color:var(--text)">🏆 How to Choose the Perfect Sports Kit</h3><p style="font-size:12px;color:var(--text-light);margin:6px 0">Learn how to select the right sports kit for your team.</p></div></div>
+      <div class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden"><img src="https://i.imgur.com/XnLHKnM.jpeg" style="width:100%;height:180px;object-fit:cover"><div style="padding:16px"><h3 style="font-size:14px;color:var(--text)">🧥 Winter Collection 2025</h3><p style="font-size:12px;color:var(--text-light);margin:6px 0">Explore our latest winter wear collection.</p></div></div>
+      <div class="blog-card" style="background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden"><img src="https://i.imgur.com/fR5XqyP.jpeg" style="width:100%;height:180px;object-fit:cover"><div style="padding:16px"><h3 style="font-size:14px;color:var(--text)">👟 Why Custom Sportswear is a Game Changer</h3><p style="font-size:12px;color:var(--text-light);margin:6px 0">Discover how custom sportswear boosts team spirit.</p></div></div>
+    </div>
+  `;
 }
 
 // ============================================================
-// ADMIN - IMAGE URLS, VARIANTS, ADD/EDIT/DELETE PRODUCTS (Same as before)
+// ADMIN - IMAGE URLS, VARIANTS, ADD/EDIT/DELETE
 // ============================================================
-// ... (keeping all admin functions from previous code)
-function addImageUrl(){const input=document.getElementById('imageUrlInput');const url=input.value.trim();if(!url){showToast('Please enter a valid image URL','error');return;}imageUrls.push(url);input.value='';renderUrlPreviews();}
-function removeImageUrl(index){imageUrls.splice(index,1);renderUrlPreviews();}
-function renderUrlPreviews(){const c=document.getElementById('urlPreviewContainer');if(!c)return;if(imageUrls.length===0){c.innerHTML='<div style="font-size:11px;color:var(--text-light);padding:4px">No images added</div>';return;}c.innerHTML=imageUrls.map((url,i)=>`<div class="url-item"><span>${url.length>30?url.substring(0,30)+'...':url}</span><button onclick="removeImageUrl(${i})">✕</button></div>`).join('');}
-function addVariantField(){variantFields.push({});renderVariantFields();}
-function removeVariantField(i){if(variantFields.length<=1){showToast('❌ At least one variant required','error');return;}variantFields.splice(i,1);renderVariantFields();}
-function renderVariantFields(){const c=document.getElementById('variantsContainer');if(!c)return;if(variantFields.length===0){variantFields.push({});}c.innerHTML=variantFields.map((_,i)=>`<div class="variant-group"><div class="variant-header"><span>Variant ${i+1}</span><button onclick="removeVariantField(${i})">✕</button></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px"><div><label style="font-size:9px;color:var(--text-light)">Color *</label><input class="var-color" placeholder="Red" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div><div><label style="font-size:9px;color:var(--text-light)">Code</label><input class="var-code" placeholder="#DC2626" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px"><div><label style="font-size:9px;color:var(--text-light)">Image URL</label><input class="var-image-url" placeholder="https://i.imgur.com/xxx.jpg" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div><div><label style="font-size:9px;color:var(--text-light)">Sale %</label><input class="var-sale" type="number" placeholder="0" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div></div></div>`).join('');}
+function addImageUrl(){
+  const input=document.getElementById('imageUrlInput');
+  const url=input.value.trim();
+  if(!url){showToast('Please enter a valid image URL','error');return;}
+  imageUrls.push(url);
+  input.value='';
+  renderUrlPreviews();
+}
+function removeImageUrl(index){
+  imageUrls.splice(index,1);
+  renderUrlPreviews();
+}
+function renderUrlPreviews(){
+  const c=document.getElementById('urlPreviewContainer');
+  if(!c)return;
+  if(imageUrls.length===0){
+    c.innerHTML='<div style="font-size:11px;color:var(--text-light);padding:4px">No images added</div>';
+    return;
+  }
+  c.innerHTML=imageUrls.map((url,i)=>`
+    <div class="url-item">
+      <span>${url.length>30?url.substring(0,30)+'...':url}</span>
+      <button onclick="removeImageUrl(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+function addVariantField(){
+  variantFields.push({});
+  renderVariantFields();
+}
+function removeVariantField(i){
+  if(variantFields.length<=1){showToast('❌ At least one variant required','error');return;}
+  variantFields.splice(i,1);
+  renderVariantFields();
+}
+function renderVariantFields(){
+  const c=document.getElementById('variantsContainer');
+  if(!c)return;
+  if(variantFields.length===0){variantFields.push({});}
+  c.innerHTML=variantFields.map((_,i)=>`
+    <div class="variant-group">
+      <div class="variant-header"><span>Variant ${i+1}</span><button onclick="removeVariantField(${i})">✕</button></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
+        <div><label style="font-size:9px;color:var(--text-light)">Color *</label><input class="var-color" placeholder="Red" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
+        <div><label style="font-size:9px;color:var(--text-light)">Code</label><input class="var-code" placeholder="#DC2626" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
+        <div><label style="font-size:9px;color:var(--text-light)">Image URL</label><input class="var-image-url" placeholder="https://i.imgur.com/xxx.jpg" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
+        <div><label style="font-size:9px;color:var(--text-light)">Sale %</label><input class="var-sale" type="number" placeholder="0" style="padding:8px;border:1px solid var(--border);border-radius:4px;width:100%;background:var(--bg);color:var(--text)"></div>
+      </div>
+    </div>
+  `).join('');
+}
 
 async function addProductWithUrls() {
-    if (!isAdminLoggedIn) { showToast('⚠️ Admin login required', 'error'); return; }
+    if (!isAdminLoggedIn) {
+        showToast('⚠️ Admin login required', 'error');
+        return;
+    }
     const name = document.getElementById('pName').value.trim();
     const price = parseInt(document.getElementById('pPrice').value);
     const category = document.getElementById('pCat').value;
@@ -1207,11 +1365,26 @@ async function saveEditedProduct(){ const id=parseInt(document.getElementById('e
 // INIT
 // ============================================================
 window.addEventListener('load',function(){
-  showHome();
+  // Check if there's a hash on load
+  const hash = window.location.hash.replace('#', '');
+  if (hash && hash !== 'home') {
+    if (hash.startsWith('product-')) {
+      const id = parseInt(hash.replace('product-', ''));
+      setTimeout(() => {
+        const p = products.find(p => p.id === id);
+        if (p) viewProduct(id);
+      }, 500);
+    } else {
+      setTimeout(() => navigateTo(hash), 100);
+    }
+  } else {
+    goHome();
+  }
+  
   loadCart();
   loadWishlist();
   loadProductsFromFirebase();
-  loadHeroData();
+  renderHeroSlides();
 });
 </script>
 </body>
