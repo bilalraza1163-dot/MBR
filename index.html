@@ -110,7 +110,8 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .normal-price{font-size:20px;font-weight:700;color:var(--text);font-family:'Bebas Neue'}
 
 .product-detail{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1200px;margin:0 auto;padding:30px 20px}
-.gallery-main{width:100%;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#FAFAFA}
+.gallery-main{width:100%;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#FAFAFA;cursor:pointer;transition:transform 0.2s}
+.gallery-main:hover{transform:scale(1.01)}
 .gallery-main img{width:100%;height:100%;object-fit:cover}
 .gallery-thumbs{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
 .gallery-thumb{width:70px;height:70px;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:0.3s}
@@ -195,6 +196,45 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .edit-variant-group .variant-header{display:flex;justify-content:space-between;align-items:center}
 .edit-variant-group .variant-header button{background:var(--red);color:#fff;border:none;padding:2px 8px;border-radius:4px;cursor:pointer}
 
+/* Image Lightbox Modal */
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 10001;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.9);
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+.image-modal-content {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border: 2px solid var(--gold);
+  border-radius: 8px;
+  box-shadow: 0 0 40px rgba(201,168,76,0.3);
+}
+.image-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  background: none;
+  border: none;
+}
+.image-modal-close:hover {
+  color: var(--gold);
+  transform: scale(1.1);
+}
+
 @media(max-width:768px){
 .nav-links{display:none}
 .hamburger{display:flex}
@@ -205,6 +245,7 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
 .section{padding:30px 16px}
 .cart-item{flex-wrap:wrap}
 .gallery-thumb{width:50px;height:50px}
+.image-modal-close{top:15px;right:20px;font-size:30px}
 }
 @media(max-width:480px){
 .nav-brand{font-size:16px}
@@ -519,6 +560,12 @@ nav{position:sticky;top:0;z-index:1000;background:var(--card);backdrop-filter:bl
   </div>
 </div>
 
+<!-- ===== IMAGE LIGHTBOX MODAL ===== -->
+<div id="imageModal" class="image-modal" onclick="closeImageModal()">
+  <span class="image-modal-close" onclick="closeImageModal(); event.stopPropagation();">&times;</span>
+  <img class="image-modal-content" id="modalImg" alt="Enlarged product image">
+</div>
+
 <!-- ===== TOAST ===== -->
 <div class="toast" id="toast"><i class="fas fa-check-circle"></i> <span id="toastMsg">Success!</span></div>
 
@@ -607,15 +654,10 @@ let currentPage = 'home';
 let pageHistory = ['home'];
 
 function navigateTo(page, data = null) {
-    // Don't push if already on same page
     if (currentPage === page && !data) return;
-    
-    // Save current page to history
     if (currentPage !== page) {
         pageHistory.push(currentPage);
     }
-    
-    // Update URL hash
     if (page === 'home') {
         window.location.hash = '';
     } else if (page === 'product' && data) {
@@ -623,22 +665,15 @@ function navigateTo(page, data = null) {
     } else {
         window.location.hash = page;
     }
-    
-    // Perform navigation
     doNavigate(page, data);
 }
 
 function doNavigate(page, data = null) {
-    // Hide all pages
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    
-    // Show target page
     const target = document.getElementById(page + 'Page');
     if (target) {
         target.classList.add('active');
         currentPage = page;
-        
-        // Render page content
         if (page === 'cart') renderCartPage();
         else if (page === 'checkout') renderCheckoutPage();
         else if (page === 'wishlist') renderWishlistPage();
@@ -662,16 +697,12 @@ function doNavigate(page, data = null) {
             renderFeatured();
         }
     }
-    
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Handle browser back/forward buttons
 window.addEventListener('hashchange', function() {
     const hash = window.location.hash.replace('#', '');
-    
     if (!hash || hash === 'home' || hash === '') {
-        // Go to home
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById('homePage').classList.add('active');
         document.getElementById('adminPanelSection').classList.remove('show');
@@ -681,7 +712,6 @@ window.addEventListener('hashchange', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
     }
-    
     if (hash.startsWith('product-')) {
         const id = parseInt(hash.replace('product-', ''));
         const p = products.find(p => p.id === id);
@@ -699,8 +729,6 @@ window.addEventListener('hashchange', function() {
         }
         return;
     }
-    
-    // For other pages
     const pageNames = ['cart', 'checkout', 'wishlist', 'blog'];
     if (pageNames.includes(hash)) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -717,18 +745,9 @@ window.addEventListener('hashchange', function() {
     }
 });
 
-// Override old navigation functions
-function goHome() {
-    navigateTo('home');
-}
-
-function goToPage(page) {
-    navigateTo(page);
-}
-
-function viewProduct(id) {
-    navigateTo('product', id);
-}
+function goHome() { navigateTo('home'); }
+function goToPage(page) { navigateTo(page); }
+function viewProduct(id) { navigateTo('product', id); }
 
 // ============================================================
 // HERO SLIDER FUNCTIONS
@@ -789,6 +808,28 @@ function showToast(msg, type='success'){
   m.textContent=msg;t.classList.add('show');clearTimeout(t._timeout);
   t._timeout=setTimeout(()=>t.classList.remove('show'),3000);
 }
+
+// ============================================================
+// IMAGE LIGHTBOX
+// ============================================================
+function openImageModal(src) {
+  const modal = document.getElementById('imageModal');
+  const img = document.getElementById('modalImg');
+  if (img) img.src = src;
+  if (modal) modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden'; // prevent scroll
+}
+
+function closeImageModal() {
+  const modal = document.getElementById('imageModal');
+  if (modal) modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeImageModal();
+});
 
 // ============================================================
 // CART & WISHLIST
@@ -989,7 +1030,7 @@ function filterCat(cat,el){
 }
 
 // ============================================================
-// PRODUCT DETAIL (unchanged)
+// PRODUCT DETAIL
 // ============================================================
 function renderProductDetail(){
   const p=currentProduct;
@@ -1009,7 +1050,9 @@ function renderProductDetail(){
     </div>
     <div class="product-detail">
       <div>
-        <div class="gallery-main"><img id="mainGalleryImg" src="${images[0]}" onerror="this.src='https://placehold.co/600x600/1a1a1a/gold?text=${p.name}'"></div>
+        <div class="gallery-main" id="galleryMain">
+          <img id="mainGalleryImg" src="${images[0]}" onerror="this.src='https://placehold.co/600x600/1a1a1a/gold?text=${p.name}'">
+        </div>
         <div class="gallery-thumbs">
           ${images.map((img,i)=>`<div class="gallery-thumb ${i===0?'active':''}" onclick="changeGalleryImage(${i})"><img src="${img}" onerror="this.src='https://placehold.co/100x100/1a1a1a/gold'"></div>`).join('')}
         </div>
@@ -1064,6 +1107,17 @@ function renderProductDetail(){
       </div>
     </div>
   `;
+
+  // Attach click event to the main image for lightbox
+  const mainImg = document.getElementById('mainGalleryImg');
+  if (mainImg) {
+    mainImg.addEventListener('click', function(e) {
+      e.stopPropagation();
+      openImageModal(this.src);
+    });
+  }
+
+  // Also attach to the gallery main container if needed (but img click is enough)
 }
 
 function selectShirtSize(size){
@@ -1086,6 +1140,11 @@ function selectColor(index){
   document.querySelectorAll('.color-dot').forEach((el,i)=>el.classList.toggle('active',i===index));
   const mainImg=document.getElementById('mainGalleryImg');
   if(mainImg&&currentVariant.image)mainImg.src=currentVariant.image;
+  // Update modal image if modal is open
+  const modalImg = document.getElementById('modalImg');
+  if (document.getElementById('imageModal').style.display === 'flex' && modalImg) {
+    modalImg.src = currentVariant.image;
+  }
   const hs=currentVariant.sale>0;
   const fp=getFinalPrice(currentProduct.originalPrice,currentVariant.sale,currentProduct.coupon);
   const priceDiv=document.querySelector('.product-detail [style*="font-size:28px"]');
@@ -1099,7 +1158,15 @@ function changeQty(d){
 }
 function changeGalleryImage(index){
   const images=currentProduct.images||[currentVariant.image];
-  document.getElementById('mainGalleryImg').src=images[index];
+  const mainImg=document.getElementById('mainGalleryImg');
+  if(mainImg){
+    mainImg.src=images[index];
+    // Update modal image if modal is open
+    const modalImg = document.getElementById('modalImg');
+    if (document.getElementById('imageModal').style.display === 'flex' && modalImg) {
+      modalImg.src = images[index];
+    }
+  }
   document.querySelectorAll('.gallery-thumb').forEach((el,i)=>el.classList.toggle('active',i===index));
 }
 function addToCart(){
@@ -1365,7 +1432,6 @@ async function saveEditedProduct(){ const id=parseInt(document.getElementById('e
 // INIT
 // ============================================================
 window.addEventListener('load',function(){
-  // Check if there's a hash on load
   const hash = window.location.hash.replace('#', '');
   if (hash && hash !== 'home') {
     if (hash.startsWith('product-')) {
