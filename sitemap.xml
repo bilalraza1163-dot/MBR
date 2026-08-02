@@ -1,11 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/css" href="https://www.xml-sitemaps.com/css/sitemap.css"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<!--  created with sitemap generator https://octopus.do  -->
 
-  <url>
-       <loc>https://bilalraza1163-dot.github.io/MBR/</loc>
-       <lastmod>2026-08-02T19:17:10+00:00</lastmod>
-       <changefreq>daily</changefreq>
-       <priority>1.0000</priority>
-  </url>
+    <url>
+        <loc>https://bilalraza1163-dot.github.io/mbr/</loc>
+        <lastmod>2026-08-02</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://bilalraza1163-dot.github.io/mbr//mbr</loc>
+        <lastmod>2026-08-02</lastmod>
+        <changefreq>always</changefreq>
+        <priority>0.5</priority>
+    </url>
 </urlset>
